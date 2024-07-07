@@ -1,15 +1,17 @@
-import { ModeToggle } from './components/mode-toggle'
-import { Button } from './components/ui/button'
-import { ThemeProvider } from './providers/theme-provider'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Navbar from './components/navbar'
 
 const App = () => {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div>
-        <Button>hello</Button>
-        <ModeToggle />
+    <Router>
+      <Navbar />
+      <div className='font-mono transition-colors duration-300'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
       </div>
-    </ThemeProvider>
+    </Router>
   )
 }
 
