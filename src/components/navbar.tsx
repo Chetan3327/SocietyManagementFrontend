@@ -34,6 +34,14 @@ const routeList = [
     href: "/contact-us",
     label: "Contact Us",
   },
+  {
+    href: "/jobs",
+    label: "Openings",
+  },
+  {
+    href: "/coordinators",
+    label: "Coordinators",
+  },
 ];
 
 const Navbar = () => {
@@ -46,12 +54,12 @@ const Navbar = () => {
 
           {/* logo */}
           <NavigationMenuItem className="font-bold flex">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="ml-2 font-bold text-xl flex items-center"
             >
               LOGO
-            </a>
+            </Link>
           </NavigationMenuItem>
 
           {/* mobile */}
