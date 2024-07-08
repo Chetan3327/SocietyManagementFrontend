@@ -42,6 +42,10 @@ const routeList = [
     href: "/coordinators",
     label: "Coordinators",
   },
+  {
+    href: "/testimonials",
+    label: "Testimonials",
+  },
 ];
 
 const Navbar = () => {
