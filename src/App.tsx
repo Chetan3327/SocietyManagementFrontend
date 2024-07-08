@@ -4,6 +4,7 @@ import Navbar from './components/navbar'
 import Openings from './pages/Openings'
 import Coordinators from './pages/Coordinators'
 import Testimonials from './pages/Testimonials'
+import Roles from './pages/Roles'
 
 const App = () => {
   return (
@@ -12,7 +13,8 @@ const App = () => {
       <div className='font-mono transition-colors duration-300'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/jobs' element={<Openings />} />
+          <Route path='/openings' element={<Openings />} />
+          <Route path='/roles' element={<Roles />} />
           <Route path='/coordinators' element={<Coordinators />} />
           <Route path='/testimonials' element={<Testimonials />} />
         </Routes>

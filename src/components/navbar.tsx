@@ -35,7 +35,7 @@ const routeList = [
     label: "Contact Us",
   },
   {
-    href: "/jobs",
+    href: "/openings",
     label: "Openings",
   },
   {
