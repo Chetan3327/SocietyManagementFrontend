@@ -38,6 +38,7 @@ const Roles = () => {
               <Separator />
             </CardHeader>
             <CardContent>
+              <h2 className="font-bold">Responsibilities ans Qualifications: </h2>
               <ol>
                 {responsibilities.map((responsibility, idx) => {
                   return(<li key={idx}>{responsibility}</li>)
