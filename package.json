@@ -21,11 +21,8 @@
     "@radix-ui/react-toast": "^1.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-<<<<<<< HEAD
     "date-fns": "^3.6.0",
-=======
     "embla-carousel-react": "^8.1.6",
->>>>>>> 695f8349098ec49fb363f16b4afc368560a24fa2
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
