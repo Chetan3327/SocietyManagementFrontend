@@ -34,27 +34,15 @@ const routeList = [
     href: "/contact-us",
     label: "Contact Us",
   },
-  {
-    href: "/openings",
-    label: "Openings",
-  },
-  {
-    href: "/coordinators",
-    label: "Coordinators",
-  },
-  {
-    href: "/testimonials",
-    label: "Testimonials",
-  },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mb-10">
       <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
+        <NavigationMenuList className="container h-14 px-4 w-screen flex  items-center justify-between">
 
           {/* logo */}
           <NavigationMenuItem className="font-bold flex">
@@ -62,7 +50,11 @@ const Navbar = () => {
               to="/"
               className="ml-2 font-bold text-xl flex items-center"
             >
-              LOGO
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RzOQ_E52YXYZQ4Vwrbnbs_HaBhq0ZEvXrQ&s"
+                className="h-12 navbar-img"
+                alt="BPIT Logo"
+              />
             </Link>
           </NavigationMenuItem>
 
@@ -95,12 +87,16 @@ const Navbar = () => {
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      style={{width: '100%'}}
+                      style={{ width: '100%' }}
                       className={buttonVariants({ variant: "ghost" })}
                     >
                       {label}
                     </a>
                   ))}
+
+                  <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
+                  </Link>
+
                 </nav>
               </SheetContent>
             </Sheet>
@@ -119,12 +115,16 @@ const Navbar = () => {
                 {route.label}
               </Link>
             ))}
-          </nav>
 
-          {/* auth */}
-          <div className="hidden md:flex gap-2">
-            <ModeToggle />
-          </div>
+            {/* auth */}
+            <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
+            </Link>
+
+            <div className="hidden md:flex gap-2 md:ml-5">
+              <ModeToggle />
+            </div>
+
+          </nav>
         </NavigationMenuList>
       </NavigationMenu>
     </header>
