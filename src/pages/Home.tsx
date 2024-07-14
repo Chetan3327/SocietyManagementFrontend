@@ -1,7 +1,9 @@
+import { Homepart2 } from "../components/Page-Components/Homepart2"
+
 const Home = () => {
   return (
     <div>
-      Home Page
+      <Homepart2/>
     </div>
   )
 }
