@@ -30,14 +30,8 @@ const EvaluationCard = ({head,arr}:{head:string,arr:Data[]}) => {
                           )})
                          }
                         </ul>
-
-                     
-                    
-
                      </CardDescription>
-
                   )
-
                 })
             }
           </CardContent>
