@@ -138,7 +138,7 @@ const News = () => {
           
           <div className="flex justify-center mb-5">
             <Link
-              to='/' className="border border-gray-800 bg-gray-800 py-3 px-12 text-white  rounded w-"
+              to='/all-news' className="border border-gray-800 bg-gray-800 py-3 px-12 text-white  rounded w-"
             >View all news</Link>
           </div>
 

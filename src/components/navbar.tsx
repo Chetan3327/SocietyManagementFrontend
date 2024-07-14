@@ -23,8 +23,12 @@ const routeList = [
     label: "Home",
   },
   {
-    href: "/about",
+    href: "/about-us",
     label: "About",
+  },
+  {
+    href: "/vision",
+    label: "Our vision",
   },
   {
     href: "/students",
@@ -33,6 +37,14 @@ const routeList = [
   {
     href: "/contact-us",
     label: "Contact Us",
+  },
+  {
+    href: "/testimonials",
+    label: "Testimonials",
+  },
+  {
+    href: "/query",
+    label: "Send a Query",
   },
 ];
 

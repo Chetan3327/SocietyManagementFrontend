@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 const Home = () => {
   return (
     <>
-      <div className="relative w-full mx-auto mt-10 ">
+      <div className="relative w-full mx-auto">
         <img
           className="h-screen md:h-80 w-full"
           src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
@@ -23,7 +23,7 @@ const Home = () => {
               <p className="text-zinc-300 text-lg lg:text-xl  mx-auto ">tracking contributions and fostering growth</p>
             </div>
             <div className="mt-14 flex flex-col ">
-              <Link to='/' className="bg-yellow-600 text-white text-xl rounded-full px-4 py-1 lg:ml-8 text-center">View Existing Socities</Link>
+              <Link to='/societies' className="bg-yellow-600 text-white text-xl rounded-full px-4 py-1 lg:ml-8 text-center">View Existing Socities</Link>
               <Link to='/' className="bg-yellow-600 text-white text-xl rounded-full px-4 py-1 mt-4 lg:ml-8 text-center">View Upcoming Events</Link>
             </div>
           </div>

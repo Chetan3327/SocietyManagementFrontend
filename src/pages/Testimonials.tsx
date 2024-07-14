@@ -36,11 +36,11 @@ const Testimonials = () => {
   return (
     <div className="container py-24 sm:py-32 space-y-8">
       <h2 className="text-3xl lg:text-4xl font-bold">
-        Testimonials
+        Discover the True Impact Through Honest Testimonials
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map(({ name, image, degree, year, description }) => (
-          <Card key={name}>
+          <Card key={name} className="bg-gradient-to-b from-gray-100 to-gray-300">
             <CardContent className="flex pt-5 items-center gap-10">
               <div>
                 <img

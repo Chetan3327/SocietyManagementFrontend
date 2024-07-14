@@ -23,7 +23,6 @@ const technicalSocieties = [
 const classes = 'w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded'
 
 const SocietyQueryForm = () => {
-
     type formData = z.infer<typeof schema>
     const { control, handleSubmit, formState: { errors } } = useForm<formData>({
         resolver: zodResolver(schema)
@@ -32,7 +31,7 @@ const SocietyQueryForm = () => {
         console.log(data)
     }
     return (
-        <div className='max-w-lg mx-auto mt-8 p-4 '>
+        <div className='max-w-lg mx-auto mt-8 p-4 border rounded-md'>
             <h2 className='text-3xl font-semibold text-center mb-6'>Society Query Form</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='mb-4'>
