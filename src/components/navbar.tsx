@@ -64,7 +64,7 @@ const Navbar = () => {
             >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RzOQ_E52YXYZQ4Vwrbnbs_HaBhq0ZEvXrQ&s"
-                className="h-12 navbar-img"
+                className="h-12 navbar-img transition transform duration-500 ease-in-out hover:scale-110"
                 alt="BPIT Logo"
               />
             </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
                     </a>
                   ))}
 
-                  <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
+                  <Link to="/" className="bg-gray-200 text-purple-800 px-4 py-2 rounded ">Login
                   </Link>
 
                 </nav>
@@ -129,10 +129,10 @@ const Navbar = () => {
             ))}
 
             {/* auth */}
-            <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
+            <Link to="/" className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125">Login
             </Link>
 
-            <div className="hidden md:flex gap-2 md:ml-5">
+            <div className="hidden md:flex gap-2 md:ml-5 transition transform duration-300 ease-in-out hover:scale-110">
               <ModeToggle />
             </div>
 
