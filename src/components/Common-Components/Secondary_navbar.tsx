@@ -21,7 +21,7 @@ const navItems =[
         label : "Members",
     },
     {
-        href : "/",
+        href : "/news",
         label : "News",
     },{
         href : "/",
@@ -33,14 +33,14 @@ const navItems =[
     },
  
     {
-        href : "/",
+        href : "/coordinators",
         label : "Coordinators",
     },{
-        href : "/",
+        href : "/openings",
         label : "Openings",
     },
     {
-        href : "/",
+        href : "/testimonials",
         label : "Testimonials",
     },
 

@@ -13,6 +13,7 @@ import News from './components/Page-Components/News'
 import AllNews from './components/Page-Components/AllNews'
 import SocietyQueryForm from './components/Page-Components/SocietyQueryForm'
 import Evaluation from './pages/Evaluation'
+import Gallery from './pages/Gallery'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='/all-news' element={<AllNews />} />
           <Route path='/query' element={<SocietyQueryForm />} />
           <Route path='/evaluation' element={<Evaluation />} />
+          <Route path='/gallery' element={<Gallery />} />
         </Routes>
       </div>
     </Router>
