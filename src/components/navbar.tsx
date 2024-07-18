@@ -10,12 +10,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Menu } from "lucide-react";
 import { ModeToggle } from "./mode-toggle.jsx";
 import { buttonVariants } from "./ui/button";
 import { Link } from "react-router-dom";
+
+import msalInstance from "./msalConfig";
 
 const routeList = [
   {
@@ -50,6 +52,43 @@ const routeList = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [account, setAccount] = useState(null);
+
+  const initializeMsal = async () => {
+    try {
+      await msalInstance.initialize();
+    } catch (error) {
+      console.error("MSAL initialization failed:", error);
+    }
+  };
+  
+  const handleLogin = async () => {
+    try {
+      await initializeMsal();
+      const loginResponse = await msalInstance.loginPopup({
+        scopes: ["user.read"],
+      });
+      setAccount(loginResponse.account);
+      // Store user details
+      localStorage.setItem("msalAccount", JSON.stringify(loginResponse.account));
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+  
+  const handleLogout = () => {
+    msalInstance.logoutPopup();
+    setAccount(null);
+    localStorage.removeItem("msalAccount");
+  };
+
+  // Check if user is already logged in
+  useEffect(() => {
+    const storedAccount = JSON.parse(localStorage.getItem("msalAccount"));
+    if (storedAccount) {
+      setAccount(storedAccount);
+    }
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mb-10">
@@ -64,7 +103,7 @@ const Navbar = () => {
             >
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RzOQ_E52YXYZQ4Vwrbnbs_HaBhq0ZEvXrQ&s"
-                className="h-12 navbar-img"
+                className="h-12 navbar-img transition transform duration-500 ease-in-out hover:scale-110"
                 alt="BPIT Logo"
               />
             </Link>
@@ -106,7 +145,7 @@ const Navbar = () => {
                     </a>
                   ))}
 
-                  <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
+                  <Link to="/" className="bg-gray-200 text-purple-800 px-4 py-2 rounded ">Login
                   </Link>
 
                 </nav>
@@ -128,11 +167,34 @@ const Navbar = () => {
               </Link>
             ))}
 
-            {/* auth */}
-            <Link to="/" className="bg-gray-200 text-purple-600 px-4 py-2 rounded ">Login
-            </Link>
-
-            <div className="hidden md:flex gap-2 md:ml-5">
+<nav>
+      <ul>
+        {account ? (
+          <li>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
+            >
+              Logout
+            </button>
+          </li>
+        ) : (
+          <li>
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
+            >
+              Login
+            </button>
+          </li>
+        )}
+      </ul>
+    </nav>
+            
+            
+            <div className="hidden md:flex gap-2 md:ml-5 transition transform duration-300 ease-in-out hover:scale-110">
               <ModeToggle />
             </div>
 
