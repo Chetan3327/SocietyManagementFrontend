@@ -17,18 +17,18 @@ const navItems =[
         label : "Events",
     },
     {
-        href : "/",
+        href : "/members",
         label : "Members",
     },
     {
         href : "/news",
         label : "News",
     },{
-        href : "/",
+        href : "/societygallery",
         label : "Gallery",
     },
     {
-        href : "/",
+        href : "/contact-us",
         label : "Contacts",
     },
  

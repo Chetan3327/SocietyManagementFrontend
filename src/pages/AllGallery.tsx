@@ -1,20 +1,12 @@
-import { Camera,ThumbsUp } from "lucide-react";
-
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card";
+  import { Camera,ThumbsUp } from "lucide-react";
 import women from "../assets/Society_Img/wibd.jpg";
 import anveshan from "../assets/Society_Img/anveshan.jpg";
 import avaran from "../assets/Society_Img/avaran.jpg";
@@ -81,31 +73,13 @@ const event: Events[] = [
     society: "Anveshan",
   },
 ];
-
-function Gallery() {
+ const AllGallery = () => {
   return (
-    <div>
-      <header className="text-2xl bg-slate-100 p-2 flex gap-4 justify-center items-center">
-        <h1>College Society Photo Gallery</h1>
-        <Camera fill="black" size={24} />
-      </header>
-
-      <div className="flex justify-center py-8">
-        <Carousel
-          className="w-9/12"
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-        >
-          <CarouselPrevious />
-          <CarouselContent>
-            {event.map(({ image, society }, index: number) => (
-              <CarouselItem
-                key={index}
-                className="md:basis-1/2 lg:basis-1/3"
-              >
-                <Link to="/societygallery">
+    <>
+       <h1 className="font-bold text-4xl text-center bg-muted p-2">Gallery</h1>
+       <div className="flex flex-wrap w-full p-2 justify-around">
+       {event.map(({ image, society }, index: number) => (
+                <Link to="/societygallery" key={index} className="w-full md:w-2/6">
                   <Card className="border-none shadow-sm">
                     <CardHeader className="p-3">
                       <CardTitle>Latest Posts</CardTitle>
@@ -150,19 +124,11 @@ function Gallery() {
                     </CardContent>
                   </Card>
                 </Link>
-              </CarouselItem>
             ))}
-          </CarouselContent>
-
-          <CarouselNext />
-        </Carousel>
-      </div>
-      
-      <div className="flex justify-center">
-      <Link to="/allgallery" className="p-3 bg-muted font-semibold rounded-lg shadow-sm">View All</Link>
-      </div>
-    </div>
-  );
+          
+       </div>
+    </>
+  )
 }
 
-export default Gallery;
+export default AllGallery;

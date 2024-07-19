@@ -18,6 +18,9 @@ import ContactUs from './pages/ContactUs'
 import Footer from './components/Common-Components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import Society from './pages/Society'
+import SocietyGallery from './pages/SocietyGallery'
+import SocietMembers from './components/Page-Components/SocietMembers'
+import AllGallery from './pages/AllGallery'
 
 const App = () => {
   return (
@@ -32,6 +35,7 @@ const App = () => {
           <Route path='/coordinators' element={<Coordinators />} />
           <Route path='/testimonials' element={<Testimonials />} />
           <Route path='/create' element={<SocietyForm />} />
+          <Route path='/members' element={<SocietMembers />} />
           <Route path='/societies' element={<Allsocities />} />
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/vision' element={<Vision />} />
@@ -40,7 +44,10 @@ const App = () => {
           <Route path='/query' element={<SocietyQueryForm />} />
           <Route path='/evaluation' element={<Evaluation />} />
           <Route path='/gallery' element={<Gallery />} />
+          <Route path='/allgallery' element={<AllGallery />} />
           <Route path='/society' element={<Society />} />
+          <Route path='/societygallery' element={<SocietyGallery />} />
+
         </Routes>
       </div>
       <Footer />
