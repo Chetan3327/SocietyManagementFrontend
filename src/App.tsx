@@ -14,6 +14,7 @@ import AllNews from './components/Page-Components/AllNews'
 import SocietyQueryForm from './components/Page-Components/SocietyQueryForm'
 import Evaluation from './pages/Evaluation'
 import Gallery from './pages/Gallery'
+import ContactUs from './pages/ContactUs'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
       <div className='font-mono transition-colors duration-300'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/contact-us' element={<ContactUs />} />
           <Route path='/openings' element={<Openings />} />
           <Route path='/roles' element={<Roles />} />
           <Route path='/coordinators' element={<Coordinators />} />
