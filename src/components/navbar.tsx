@@ -33,10 +33,6 @@ const routeList = [
     label: "Our vision",
   },
   {
-    href: "/students",
-    label: "Students",
-  },
-  {
     href: "/contact-us",
     label: "Contact Us",
   },

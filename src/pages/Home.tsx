@@ -189,10 +189,10 @@ const Home = () => {
                       Quod ipsum facilis cupiditate. Facere, sed error. Qui
                       voluptatem expedita quae modi! 
                     </p>
-                    <button className="bg-muted px-1 w-fit font-bold mt-5 rounded-lg">
-                      <ArrowRight className="inline-block text-muted-goreground text-sm" />
+                    <Link className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg" to="/gallery">
+                      <ArrowRight className="inline-block text-muted-goreground text-xs" />
                       View More
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -260,8 +260,8 @@ const Home = () => {
           <CardContent className="flex gap-5 justify-center flex-wrap">
             <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Events</button>
             <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Core Members</button>
-            <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Contact Us</button>
-            <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Gallery</button>
+            <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to="/contact-us">Contact Us</Link>
+            <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to='/Gallery'>Gallery</Link>
 
 
           </CardContent>
