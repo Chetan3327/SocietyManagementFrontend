@@ -15,6 +15,9 @@ import SocietyQueryForm from './components/Page-Components/SocietyQueryForm'
 import Evaluation from './pages/Evaluation'
 import Gallery from './pages/Gallery'
 import ContactUs from './pages/ContactUs'
+import Footer from './components/Common-Components/Footer'
+import ScrollToTop from './components/ScrollToTop'
+import Society from './pages/Society'
 
 const App = () => {
   return (
@@ -37,8 +40,11 @@ const App = () => {
           <Route path='/query' element={<SocietyQueryForm />} />
           <Route path='/evaluation' element={<Evaluation />} />
           <Route path='/gallery' element={<Gallery />} />
+          <Route path='/society' element={<Society />} />
         </Routes>
       </div>
+      <Footer />
+      <ScrollToTop />
     </Router>
   )
 }
