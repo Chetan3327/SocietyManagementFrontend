@@ -18,6 +18,7 @@ import { buttonVariants } from "./ui/button";
 import { Link } from "react-router-dom";
 
 import msalInstance from "./msalConfig";
+import {AccountInfo} from "@azure/msal-browser";
 
 const routeList = [
   {
@@ -52,7 +53,7 @@ const routeList = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [account, setAccount] = useState(null);
+  const [account, setAccount] = useState<AccountInfo | null>(null);
 
   const initializeMsal = async () => {
     try {
@@ -84,9 +85,15 @@ const Navbar = () => {
 
   // Check if user is already logged in
   useEffect(() => {
-    const storedAccount = JSON.parse(localStorage.getItem("msalAccount"));
-    if (storedAccount) {
-      setAccount(storedAccount);
+    const storedAccount = localStorage.getItem("msalAccount");
+    if (storedAccount !== null) {
+      // storedAccount is guaranteed to be a string here
+      try {
+        const parsedAccount = JSON.parse(storedAccount);
+        setAccount(parsedAccount);
+      } catch (error) {
+        console.error("Error parsing stored account:", error);
+      }
     }
   }, []);
 
