@@ -15,9 +15,6 @@ import {
     TableHeader,
     TableHead
 } from '@/components/ui/table'
-import { useState } from "react";
-import { Search } from "lucide-react";
-
 
 const senior_council = [
     {
