@@ -27,7 +27,7 @@ const routeList = [
   },
   {
     href: "/about-us",
-    label: "About",
+    label: "About Us",
   },
   {
     href: "/vision",
