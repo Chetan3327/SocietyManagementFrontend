@@ -119,10 +119,10 @@ const Home = () => {
 
       <div>
       <div className="w-full flex flex-col items-center">
-        <div className="w-3/6 text-center py-2 bg-gray-100 mb-2 rounded-lg font-bold text-xl">
+        <div className="w-3/6 text-center py-2 bg-gray-100 mb-2 rounded-lg font-bold text-xl text-black">
           Achievements
         </div>
-        <Card className="w-8/12 mt-5 shadow-2xl shadow-gray-300 border border-t-gray-300 border-l-gray-300 border-t-4 border-l-4 py-3 px-6 h-fit">
+        <Card className="w-full lg:w-8/12 mt-5 shadow-md shadow-gray-300 border border-t-gray-300 border-l-gray-300 border-t-4 border-l-4 py-3 px-6 h-fit">
           <CardContent>
             <h1 className="font-bold mb-4">
               Unvelling The Triumphs of Our{" "}
@@ -144,7 +144,7 @@ const Home = () => {
               assumenda perspiciatis, mollitia consequuntur rem eos!
             </p>
 
-            <div className="border border-2 border-black shadow-2xl shadow-gray-200  rounded-lg relative mt-5 h-fit hidden md:block">
+            <div className="border border-2 border-black shadow-md shadow-gray-200  rounded-lg relative mt-5 h-fit hidden md:block">
               <img
                 src={bpit}
                 alt="bpit"
@@ -206,7 +206,7 @@ const Home = () => {
         <h1 >namespace(Formely NSCC)</h1>
           
         </div>
-        <div className="text-black text-2xl self-start relative left-12 md:left-44">
+        <div className=" text-2xl self-start relative left-12 md:left-44">
              Student <span className="text-red-700">Stories</span>
         </div>
         <Carousel
@@ -227,7 +227,7 @@ const Home = () => {
                       <section className="w-2/3">
                         <p className="text-5xl font-bold">&quot;</p>
 
-                        <p className="text-black">{desc}.</p>
+                        <p>{desc}.</p>
                         <div className="flex flex-col md:flex-row gap-4 md;gap-0 justify-between mt-3">
                           <div>
                             <h1>{name}</h1>
@@ -253,7 +253,7 @@ const Home = () => {
       </div>
 
       <div className="w-full my-5 flex justify-center">
-        <Card className="w-9/12 shadow-2xl shadow-gray-300 border border-gray-300  border-4">
+        <Card className="w-9/12 shadow-md shadow-gray-300 border border-gray-300  border-4">
           <CardTitle className="text-center py-5">
           <h1>You can also search for</h1>
           </CardTitle>

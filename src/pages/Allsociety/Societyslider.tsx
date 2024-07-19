@@ -30,7 +30,7 @@ function Societyslider({title,arr}:{title:string,arr:Society[]}) {
                     <img
                       src={image}
                       alt="societyimg"
-                      className="rounded-xl w-full h-auto"
+                      className="rounded-xl w-full h-36"
                     />
                   </CardContent>
                   <CardTitle className="text-center rounded-lg py-1 bg-muted my-2 border-2 border-black">
