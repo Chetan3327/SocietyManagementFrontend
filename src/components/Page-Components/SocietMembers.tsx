@@ -172,7 +172,7 @@ const SocietMembers = () => {
 
     return (
         <>
-            <div className="relative mt-10 mx-auto w-full">
+            <div className="relative mx-auto w-full">
                 <img
                     className="w-full h-80 blur-sm"
                     src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
@@ -180,12 +180,12 @@ const SocietMembers = () => {
                 />
                 <div className="absolute inset-0 py-20 lg:py-28 ">
 
-                    <h2 className="text-white text-center text-4xl text-bold">MEMBER SPOTLIGHTS </h2>
-                    <p className="text-white text-center text-xl">DETAILED INSIGHTS INTO LEARN ABOUT THE TALENTED INDIVIDUALS WHO DRIVE OUR MISSION <br /> FORWARD, PARTICIPATION AND ACHIEVEMENTS</p>
+                    <h2 className="text-black text-center text-4xl font-extrabold">MEMBER SPOTLIGHTS </h2>
+                    <p className="text-white text-center text-xl font-extrabold">DETAILED INSIGHTS INTO LEARN ABOUT THE TALENTED INDIVIDUALS WHO DRIVE OUR MISSION <br /> FORWARD, PARTICIPATION AND ACHIEVEMENTS</p>
                 </div>
             </div>
 
-            <div className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-400 mx-6 md:mx-20 mt-20 rounded">
+            <div className="py-8 px-4 sm:px-6 lg:px-8 bg-gray-300 mx-6 md:mx-20 mt-20 rounded">
                 <h1 className="text-white text-5xl font-bold mb-4">Get to know our team</h1>
                 <p className="text-white">Learn about the talented Individuals who <br /> drive our mission forward</p>
 

@@ -31,16 +31,16 @@ const routeList = [
   },
   {
     href: "/vision",
-    label: "Our vision",
+    label: "Our Vision",
   },
-  {
-    href: "/contact-us",
-    label: "Contact Us",
-  },
-  {
-    href: "/testimonials",
-    label: "Testimonials",
-  },
+  // {
+  //   href: "/contact-us",
+  //   label: "Contact Us",
+  // },
+  // {
+  //   href: "/testimonials",
+  //   label: "Testimonials",
+  // },
   {
     href: "/query",
     label: "Send a Query",
@@ -94,7 +94,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mb-10">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex  items-center justify-between">
 
