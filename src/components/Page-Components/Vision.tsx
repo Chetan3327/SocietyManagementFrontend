@@ -25,7 +25,7 @@ const visions: Vision[] = [
 const Vision = () => {
     return (
       <>
-      <div className="relative mt-10 mx-auto w-full">
+      <div className="relative mt-0 mx-auto w-full">
                 <img
                     className="w-full h-80 blur-sm"
                     src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
