@@ -24,6 +24,19 @@ const visions: Vision[] = [
 
 const Vision = () => {
     return (
+      <>
+      <div className="relative mt-10 mx-auto w-full">
+                <img
+                    className="w-full h-80 blur-sm"
+                    src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Member spotlight intro"
+                />
+                <div className="absolute inset-0 py-20 lg:py-28 ">
+
+                    <h2 className="text-black text-center text-4xl text-bold">DREAM, BELIEVE, ACHIEVE: OUR VISION AND MISSION </h2>
+                    <p className="text-white text-center my-5 text-xl">Empowering connections, fostering growth <br /> our vision drives tomorrow's leaders. Our mission fuels today's innovation.</p>
+                </div>
+        </div>
       <div className="relative min-h-screen flex items-center justify-center">
         <div className=" absolute inset-0 bg-no-repeat bg-cover bg-center blur-sm"
             style={{ backgroundImage: `url(${about_us})` }}
@@ -54,6 +67,7 @@ const Vision = () => {
         </div>
       </div>
    </div>
+  </>
     )
 }
 

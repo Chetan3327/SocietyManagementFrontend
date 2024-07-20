@@ -36,7 +36,19 @@ let latestNews: newsItem[] = [
 
 const AllNews = () => {
   return (
-    <div className="container pt-10">
+    <div className="container space-y-3">
+      <div className="relative mx-auto w-full">
+                <img
+                    className="w-full h-80 blur-sm"
+                    src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Member spotlight intro"
+                />
+                <div className="absolute inset-0 py-20 lg:py-28 ">
+
+                    <h2 className="text-black text-center text-4xl font-extrabold">GUIDING HANDS: OUR FACULTY COORDINATORS </h2>
+                    <p className="text-white text-center my-5 text-xl font-extrabold">Meet our dedicated faculty coordinators committed to guiding and supporting our students..</p>
+                </div>
+        </div>
       <h2 className="text-3xl lg:text-5xl font-bold text-center pb-10">
         ALL NEWS
       </h2>

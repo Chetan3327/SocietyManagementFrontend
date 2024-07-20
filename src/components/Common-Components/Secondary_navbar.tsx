@@ -21,6 +21,10 @@ const navItems =[
         label : "Members",
     },
     {
+        href : "/evaluation",
+        label : "Member Evaluation",
+    },
+    {
         href : "/news",
         label : "News",
     },{
@@ -29,7 +33,7 @@ const navItems =[
     },
     {
         href : "/contact-us",
-        label : "Contacts",
+        label : "Contact Us",
     },
  
     {
@@ -56,7 +60,7 @@ return(
                    <NavigationMenuItem key={index}>
                        <a
                          href={navItem.href}
-                         className={`px-6 py-2 text-gray-90 text-xl font-medium text-center ${buttonVariants({variant:"ghost"})}`}
+                         className={`px-6 py-2 text-gray-90 text-s font-semibold text-center ${buttonVariants({variant:"ghost"})}`}
                        >
                           {navItem.label}
                        </a>
