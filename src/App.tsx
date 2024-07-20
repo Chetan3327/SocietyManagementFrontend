@@ -21,6 +21,7 @@ import Society from './pages/Society'
 import SocietyGallery from './pages/SocietyGallery'
 import SocietMembers from './components/Page-Components/SocietMembers'
 import AllGallery from './pages/AllGallery'
+import Secondary_navbar from './components/Common-Components/Secondary_navbar'
 
 const App = () => {
   return (
@@ -47,7 +48,7 @@ const App = () => {
           <Route path='/allgallery' element={<AllGallery />} />
           <Route path='/society' element={<Society />} />
           <Route path='/societygallery' element={<SocietyGallery />} />
-
+          <Route path='/snavbar' element={<Secondary_navbar />} />
         </Routes>
       </div>
       <Footer />

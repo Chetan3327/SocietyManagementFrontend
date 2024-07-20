@@ -48,9 +48,9 @@ const navItems =[
 
 const Secondary_navbar = () => {
 return(
-    <div className="relative top-10">
+    <div className=" ">
       <NavigationMenu className="mx-auto">
-         <NavigationMenuList className="container w-screen flex flex-wrap px-4 py-3 bg-gray-200 text-gray-900 ">
+         <NavigationMenuList className=" w-screen flex flex-wrap px-4 py-3 bg-gray-200 text-gray-900 ">
            {
             navItems.map((navItem : {href :string , label: string} , index)=>(
                    <NavigationMenuItem key={index}>
