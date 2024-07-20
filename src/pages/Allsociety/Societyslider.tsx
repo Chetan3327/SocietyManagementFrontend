@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Society } from "./Allsocities";
+import { Link } from "react-router-dom";
 
 
 function Societyslider({title,arr}:{title:string,arr:Society[]}) {
@@ -25,7 +26,8 @@ function Societyslider({title,arr}:{title:string,arr:Society[]}) {
           <CarouselContent>
             {arr.map(({ image, society }, index: number) => (
               <CarouselItem key={index} className="lg:basis-1/6 md:basis-1/4 sm:basis-1/2 ">
-                <Card className="border-none shadow-sm bg-sky-50">
+              <Link to='/society' >
+              <Card className="border-none shadow-sm bg-sky-50">
                   <CardContent className="p-0">
                     <img
                       src={image}
@@ -37,6 +39,8 @@ function Societyslider({title,arr}:{title:string,arr:Society[]}) {
                     {society}
                   </CardTitle>
                 </Card>
+              </Link>
+              
               </CarouselItem>
             ))}
           </CarouselContent>
