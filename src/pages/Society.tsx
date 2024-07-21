@@ -126,7 +126,7 @@ const Society = () => {
           <Card>
             <CardHeader>
               <div className="flex">
-                <img className="rounded-md border-2 border-black mr-10" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
+                <img className="rounded-md border-2 border-black mr-2" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
                 <div className="flex flex-col gap-5 mt-10">
                   <div className="flex gap-5">
                     <Github />
@@ -154,7 +154,7 @@ const Society = () => {
           <Card>
             <CardHeader>
               <div className="flex">
-                <img className="rounded-md border-2 border-black mr-10" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
+                <img className="rounded-md border-2 border-black mr-2" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
                 <div className="flex flex-col gap-5 mt-10">
                   <div className="flex gap-5">
                     <Github />
@@ -182,7 +182,7 @@ const Society = () => {
           <Card>
             <CardHeader>
               <div className="flex">
-                <img className="rounded-md border-2 border-black mr-10" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
+                <img className="rounded-md border-2 border-black mr-2" width={200} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s" alt="" />
                 <div className="flex flex-col gap-5 mt-10">
                   <div className="flex gap-5">
                     <Github />
