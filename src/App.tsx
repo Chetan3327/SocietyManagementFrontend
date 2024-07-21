@@ -22,6 +22,8 @@ import SocietyGallery from './pages/SocietyGallery'
 import SocietMembers from './components/Page-Components/SocietMembers'
 import AllGallery from './pages/AllGallery'
 import Secondary_navbar from './components/Common-Components/Secondary_navbar'
+import StudentLogin from './pages/StudentLogin'
+import Events from './components/Page-Components/Events/Events'
 
 const App = () => {
   return (
@@ -49,6 +51,8 @@ const App = () => {
           <Route path='/society' element={<Society />} />
           <Route path='/societygallery' element={<SocietyGallery />} />
           <Route path='/snavbar' element={<Secondary_navbar />} />
+          <Route path='/slogin' element={<StudentLogin />} />
+          <Route path='/events' element={<Events />} />
         </Routes>
       </div>
       <Footer />

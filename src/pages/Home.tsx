@@ -58,7 +58,7 @@ const Home = () => {
             </div>
             <div className="mt-14 flex flex-col gap-3">
               <Link to='/societies' className="text-white text-xl bg-yellow-500 rounded-full px-4 py-1 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110">View Existing Socities</Link>
-              <Link to='/' className="bg-yellow-500 text-white text-xl rounded-full px-4 py-1 mt-4 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110">View Upcoming Events</Link>
+              <Link to='/events' className="bg-yellow-500 text-white text-xl rounded-full px-4 py-1 mt-4 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110">View Upcoming Events</Link>
             </div>
           </div>
         </div>
