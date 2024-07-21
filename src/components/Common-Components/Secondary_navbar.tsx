@@ -32,8 +32,8 @@ const navItems =[
         label : "Gallery",
     },
     {
-        href : "/contact-us",
-        label : "Contact Us",
+        href : "/query",
+        label : "Send a Query",
     },
  
     {

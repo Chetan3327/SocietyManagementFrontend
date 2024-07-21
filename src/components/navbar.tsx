@@ -42,8 +42,8 @@ const routeList = [
   //   label: "Testimonials",
   // },
   {
-    href: "/query",
-    label: "Send a Query",
+    href: "/contact-us",
+    label: "Contact Us",
   },
 ];
 

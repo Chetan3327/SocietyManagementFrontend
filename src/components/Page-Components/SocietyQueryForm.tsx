@@ -5,19 +5,26 @@ import { z } from 'zod'
 const schema = z.object({
     StudentName: z.string().nonempty('Student name is required'),
     StudentEnrollmentNumber: z.string().length(11, 'Invalid enrollment number'),
-    StudentBatch: z.string().length(4, 'Invalid batch'),
-    SocietyName: z.string().nonempty('Society name is must'),
+    StudentBatch: z.string().nonempty('Invalid batch'),
+    Branch: z.string().nonempty('Branch name is must'),
     Query: z.string().nonempty('This field is required')
 })
 
-const technicalSocieties = [
-    "WIBD",
-    "Namespace",
-    "GDSC",
-    "IEEE",
-    "#Define",
-    "WIE",
-    "Anveshan",
+const Branch = [
+    "CSE",
+    "IT",
+    "CSE-DS",
+    "ECE",
+    "EEE",
+];
+
+const Batch = [
+    "2020-2024",
+    "2021-2025",
+    "2022-2026",
+    "2023-2027",
+    "2024-2028",
+    "2025-2029",
 ];
 
 const classes = 'w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded'
@@ -103,22 +110,26 @@ const SocietyQueryForm = () => {
 
                 <div className='mb-4'>
                     <label className='block text-md font-medium  '>Batch</label>
-                    <input className={`${classes}`} type='text'
-                        {...control.register('StudentBatch')} placeholder='Enter your batch'
-                    />
-                    {errors.StudentBatch && <span className='text-red-500'>{errors.StudentBatch.message}</span>}
-                </div>
-
-                <div className='mb-4'>
-                    <label className='block text-md font-medium  '>Society Name</label>
-                    <select {...control.register('SocietyName')} className={`${classes}`} >
+                    <select {...control.register('StudentBatch')} className={`${classes}`} >
                         {
-                            technicalSocieties.map((soc, index) => (
+                            Batch.map((soc, index) => (
                                 <option value={soc} key={index}>{soc}</option>
                             ))
                         }
                     </select>
-                    {errors.SocietyName && <span className='text-red-500'>{errors.SocietyName.message}</span>}
+                    {errors.StudentBatch && <span className='text-red-500'>{errors.StudentBatch.message}</span>}
+                </div>
+
+                <div className='mb-4'>
+                    <label className='block text-md font-medium  '>Branch</label>
+                    <select {...control.register('Branch')} className={`${classes}`} >
+                        {
+                            Branch.map((soc, index) => (
+                                <option value={soc} key={index}>{soc}</option>
+                            ))
+                        }
+                    </select>
+                    {errors.Branch && <span className='text-red-500'>{errors.Branch.message}</span>}
                 </div>
 
                 <div className='mb-4'>
