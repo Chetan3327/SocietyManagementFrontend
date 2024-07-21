@@ -16,6 +16,8 @@ import Evaluation from './pages/Evaluation'
 import Gallery from './pages/Gallery'
 import ContactUs from './pages/ContactUs'
 import Footer from './components/Common-Components/Footer'
+import FeedbackButton from './components/Common-Components/FeedbackButton'
+import FeedbackForm from './components/Common-Components/FeedbackForm'
 import ScrollToTop from './components/ScrollToTop'
 import Society from './pages/Society'
 import SocietyGallery from './pages/SocietyGallery'
@@ -24,6 +26,8 @@ import AllGallery from './pages/AllGallery'
 import Secondary_navbar from './components/Common-Components/Secondary_navbar'
 import StudentLogin from './pages/StudentLogin'
 import Events from './components/Page-Components/Events/Events'
+import Societyjoiningform from './pages/Societyjoiningform'
+import Societyjoiningrequst from './pages/Societyjoiningrequst';
 
 const App = () => {
   return (
@@ -54,8 +58,12 @@ const App = () => {
           <Route path='/snavbar' element={<Secondary_navbar />} />
           <Route path='/slogin' element={<StudentLogin />} />
           <Route path='/events' element={<Events />} />
+          <Route path='/societyjoinform' element={<Societyjoiningform />} />
+          <Route path='/societyjoinrequest' element={<Societyjoiningrequst />} />
+          <Route path='/feedbackform' element={<FeedbackForm />} />
         </Routes>
       </div>
+      <FeedbackButton/>
       <Footer />
       <ScrollToTop />
     </Router>
