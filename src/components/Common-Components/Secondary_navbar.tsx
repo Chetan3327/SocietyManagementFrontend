@@ -13,7 +13,7 @@ const navItems =[
     },
     
     {
-        href : "/",
+        href : "/events",
         label : "Events",
     },
     {

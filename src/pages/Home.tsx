@@ -258,8 +258,10 @@ const Home = () => {
           <h1>You can also search for</h1>
           </CardTitle>
           <CardContent className="flex gap-5 justify-center flex-wrap">
-            <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Events</button>
-            <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Core Members</button>
+            {/* <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Upcoming Events</button>
+            <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Core Members</button> */}
+            <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to="/events">Upcoming Events</Link>
+            {/* <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to='/Gallery'>CMembers</Link> */}
             <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to="/contact-us">Contact Us</Link>
             <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to='/Gallery'>Gallery</Link>
 
