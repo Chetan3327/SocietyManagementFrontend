@@ -15,6 +15,8 @@ const navItems = [
     {
         href: "/",
         label: "Events",
+        href : "/events",
+        label : "Events",
     },
     {
         href: "/members",
