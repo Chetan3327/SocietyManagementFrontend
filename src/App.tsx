@@ -29,6 +29,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
+      <Secondary_navbar />
       <div className='font-mono transition-colors duration-300'>
         <Routes>
           <Route path='/' element={<Home />} />
