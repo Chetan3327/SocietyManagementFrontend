@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/seperator";
 import { ArrowRight, Bell, Calendar, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import latestnews from '../assets/latestnews.png';
 import drishti from '../assets/drishti-hero.png';
-import Secondary_navbar from "@/components/Common-Components/Secondary_navbar";
+import { useParams } from "react-router-dom";
 
 type Review = {
   desc: string;
@@ -40,12 +40,16 @@ const reviews: Review[] = [
 
 
 const Society = () => {
+  const {name} = useParams<{name: string}>()
+  
   return (
     <div>
+      
       <div className="w-full flex justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
+      
         <div className="ml-20 pt-10">
-          <h3 className="text-3xl text-purple-700 font-bold">Welcome to Rotaract Club of BPIT:</h3>
-          <h2 className="text-3xl text-red-500 font-bold">Drishti</h2>
+          <h3 className="text-3xl text-purple-700 font-bold">Welcome to</h3>
+          <h2 className="text-3xl text-red-500 font-bold">{name}</h2>
 
           <p className="text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, possimus?</p>
           <p className="text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, possimus?</p>
