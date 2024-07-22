@@ -1,6 +1,3 @@
-import { EventCard, EventCardDetailed, PastEventCard, EventCardType, EventCardDetailedType } from "./EventCard";
-import pen_hand from '../../../assets/pen_hand.jpeg'
-import latest_new from '../../../assets/latestnews.png'  //dummy img
 import {
     Carousel,
     CarouselContent,
@@ -8,10 +5,13 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import latest_new from '../../../assets/latestnews.png'; //dummy img
+import pen_hand from '../../../assets/pen_hand.jpeg';
+import { EventCard, EventCardDetailed, EventCardDetailedType, EventCardType, PastEventCard } from "./EventCard";
 
 const schema = z.object({
     date: z.date(),
@@ -89,7 +89,7 @@ const Events = () => {
     let [pastEvents, setPastEvents] = useState(cardEvents)
 
     type formData = z.infer<typeof schema>
-    const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    const { register, handleSubmit} = useForm<formData>({
         resolver: zodResolver(schema)
     })
     const onSubmit = (data: formData) => {

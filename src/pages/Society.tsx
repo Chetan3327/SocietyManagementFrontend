@@ -11,9 +11,8 @@ import GetInTouchForm from "@/components/Page-Components/GetInTouchForm";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/seperator";
 import { ArrowRight, Bell, Calendar, Github, Linkedin, Mail, Twitter } from "lucide-react";
-import latestnews from '../assets/latestnews.png';
 import drishti from '../assets/drishti-hero.png';
-import Secondary_navbar from "@/components/Common-Components/Secondary_navbar";
+import latestnews from '../assets/latestnews.png';
 
 type Review = {
   desc: string;

@@ -1,9 +1,11 @@
 import {
-    Card , CardContent , CardDescription , CardFooter , CardTitle , CardHeader
+  Card, CardContent,
+  CardFooter,
+  CardHeader
 } from '@/components/ui/card'
 
-import { Clock , MapPin , Calendar } from 'lucide-react'
-import { Link } from 'react-router-dom' 
+import { Calendar, Clock, MapPin } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 
 
@@ -181,4 +183,4 @@ const PastEventCard = ({props}:{props : EventCardType}) =>{
     </div>
   )
 }
-export {EventCard , EventCardDetailed , PastEventCard , EventCardType , EventCardDetailedType} 
+export { EventCard, EventCardDetailed, EventCardDetailedType, EventCardType, PastEventCard }

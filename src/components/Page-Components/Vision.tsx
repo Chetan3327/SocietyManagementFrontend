@@ -1,5 +1,4 @@
 import about_us from '../../assets/about_us_bg.jpg';
-import { Button } from '../ui/button';
 import { Card, CardContent } from "../ui/card";
 
 interface Vision {
