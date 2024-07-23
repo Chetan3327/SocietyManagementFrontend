@@ -28,13 +28,12 @@ import StudentLogin from './pages/StudentLogin'
 import Events from './components/Page-Components/Events/Events'
 import Societyjoiningform from './pages/Societyjoiningform'
 import Societyjoiningrequst from './pages/Societyjoiningrequst';
-import SingleSociety from './pages/SingleSociety'
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      {/* <Secondary_navbar /> */}
+      <Secondary_navbar />
       <div className='font-mono transition-colors duration-300'>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -54,7 +53,7 @@ const App = () => {
           <Route path='/evaluation' element={<Evaluation />} />
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/allgallery' element={<AllGallery />} />
-          <Route path='/society/:name' element={<SingleSociety />} />
+          <Route path='/society' element={<Society />} />
           <Route path='/societygallery' element={<SocietyGallery />} />
           <Route path='/snavbar' element={<Secondary_navbar />} />
           <Route path='/slogin' element={<StudentLogin />} />

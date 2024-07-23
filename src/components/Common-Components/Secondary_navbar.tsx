@@ -50,27 +50,27 @@ const navItems = [
     },
 ];
 
-// const filtered = navItems.filter((navItem) => navItem.href !== '/');
-// const routes = filtered.map((navItem) => navItem.href);
-// routes.push('/society');
+const filtered = navItems.filter((navItem) => navItem.href !== '/');
+const routes = filtered.map((navItem) => navItem.href);
+routes.push('/society');
 
 const SecondaryNavbar = () => {
-    // const location = useLocation();
-    // const [isVisible, setIsVisible] = useState(false);
+    const location = useLocation();
+    const [isVisible, setIsVisible] = useState(false);
 
-    // useEffect(() => {
-    //     const checkRoute = () => {
-    //         const pathname = location.pathname;
-    //         const route = pathname.split('/').pop();
-    //         setIsVisible(routes.includes('/' + route));
-    //     };
+    useEffect(() => {
+        const checkRoute = () => {
+            const pathname = location.pathname;
+            const route = pathname.split('/').pop();
+            setIsVisible(routes.includes('/' + route));
+        };
 
-    //     checkRoute();
-    // }, [location.pathname]);
+        checkRoute();
+    }, [location.pathname]);
 
-    // if (!isVisible) {
-    //     return null;
-    // }
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <div className="flex">
