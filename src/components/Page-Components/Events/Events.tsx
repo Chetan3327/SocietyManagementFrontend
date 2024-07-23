@@ -8,13 +8,13 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import {  z } from 'zod';
 import latest_new from '../../../assets/latestnews.png'; //dummy img
 import pen_hand from '../../../assets/pen_hand.jpeg';
 import { EventCard, EventCardDetailed, EventCardDetailedType, EventCardType, PastEventCard } from "./EventCard";
 
 const schema = z.object({
-    date: z.date(),
+    // date: z.date(),
     title: z.string(),
 })
 
@@ -93,103 +93,107 @@ const Events = () => {
         resolver: zodResolver(schema)
     })
     const onSubmit = (data: formData) => {
-        console.log(data)
-        const { date, title } = data
-        console.log(date, title)
+     //   console.log(data.date)
+        // if (data.date) {
+        // const  filteredEvents  = cardEvents.filter((event)=>{
+        //     console.log(event.date)
+        //     return event.date <= data.date})
+        //   setPastEvents(filteredEvents);
+        // };
 
-        if (date) {
-            pastEvents = pastEvents.filter((event) => event.date >= date)
+if (data.title.length > 0) {
+    const filteredEvents = cardEvents.filter(event => 
+        event.title.toLowerCase().includes(data.title.toLowerCase())
+    );
+    setPastEvents(filteredEvents);
 
-        }
-        if (title.length > 0) {
 
-            pastEvents = pastEvents.filter((event) => event.title.includes(title))
+}
 
-        }
-        console.log(pastEvents)
-        setPastEvents(pastEvents)
-    }
+    };
 
-    return (
+
+return (
+    <div>
+        <div className="relative w-full mx-auto">
+            <img
+                className="w-full h-80 blur-sm"
+                src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                alt="Events page"
+            />
+            <div className="absolute inset-0 py-20 lg:py-28">
+                <h2 className="text-white text-center text-4xl font-extrabold">DISCOVER OUR EVENTS</h2>
+                <p className="text-white text-center text-xl font-extrabold ">Welcome to our events page  . Stay informed about all the activities and oppurtunities hosetd by socities .<br />
+                    A wide range of events are organised to inspire,educate and connect
+                </p>
+            </div>
+        </div>
+
+        <div className="py-8 px-4 sm:px-6 lg:px-8 mx-6 md:mx-20 mt-20 rounded" >
+            <h2 className="bg-gray-100 text-gray-900 w-full text-3xl text-center py-4 mb-10">Upcoming events</h2>
+
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}>
+                <CarouselPrevious />
+                <CarouselContent>
+                    {
+                        cardEvents.map((event, index) => (
+                            <CarouselItem className="lg:basis-1/3 sm:basis-1/2" >
+                                <EventCard props={event} key={index} />
+                            </CarouselItem>
+                        ))
+                    }
+                </CarouselContent>
+                <CarouselNext />
+            </Carousel>
+
+
+        </div>
+
         <div>
-            <div className="relative w-full mx-auto">
-                <img
-                    className="w-full h-80 blur-sm"
-                    src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                    alt="Events page"
-                />
-                <div className="absolute inset-0 py-20 lg:py-28">
-                    <h2 className="text-white text-center text-4xl font-extrabold">DISCOVER OUR EVENTS</h2>
-                    <p className="text-white text-center text-xl font-extrabold ">Welcome to our events page  . Stay informed about all the activities and oppurtunities hosetd by socities .<br />
-                        A wide range of events are organised to inspire,educate and connect
-                    </p>
-                </div>
-            </div>
+            {
+                detailedEvents.map((event, index) => (
+                    <EventCardDetailed props={event} key={index} />
+                ))
+            }
+        </div>
 
-            <div className="py-8 px-4 sm:px-6 lg:px-8 mx-6 md:mx-20 mt-20 rounded" >
-                <h2 className="bg-gray-100 text-gray-900 w-full text-3xl text-center py-4 mb-10">Upcoming events</h2>
-
-                <Carousel
-                    opts={{
-                        align: "start",
-                        loop: true,
-                    }}>
-                    <CarouselPrevious />
-                    <CarouselContent>
-                        {
-                            cardEvents.map((event) => (
-                                <CarouselItem className="lg:basis-1/3 sm:basis-1/2" >
-                                    <EventCard props={event} />
-                                </CarouselItem>
-                            ))
-                        }
-                    </CarouselContent>
-                    <CarouselNext />
-                </Carousel>
-
-
-            </div>
-
-            <div>
-                {
-                    detailedEvents.map((event) => (
-                        <EventCardDetailed props={event} />
-                    ))
-                }
-            </div>
-
-            <div className="py-8 px-4 sm:px-6 lg:px-8 mx-6 md:mx-20 mt-20 rounded" >
-                <h2 className="bg-gray-100 text-gray-900 w-full text-3xl text-center py-4 mb-10">Past events</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="bg-gray-300 py-4 px-2 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0">
-
-                        <input
+        <div className="py-8 px-4 sm:px-6 lg:px-8 mx-6 md:mx-20 mt-20 rounded" >
+            <h2 className="bg-gray-100 text-gray-900 w-full text-3xl text-center py-4 mb-10">Past events</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="bg-gray-300 py-4 px-2 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0">
+{/* 
+                     <input
                             {...register('date')}
                             type="date" placeholder="DD/MM/YYYY"
                             className=" bg-white p-2 px-4 rounded text-gray-500" id="date-search"
-                        />
-                        <input
-                            {...register('title')}
-                            type="text" placeholder="Search title "
-                            className=" bg-white p-2 px-8 rounded" id="date-search"
-                        />
-                        <button type="submit" className="text-white bg-blue-500 p-2  rounded text-md px-8">
-                            Search
-                        </button>
-                    </div>
-                </form>
+                        />  */}
+                    <input
+                        {...register('title')}
+                        type="text" placeholder="Search title "
+                        className=" bg-white p-2 px-6 w-full rounded lg:mr-2" id="date-search"
+                    />
+                    <button type="submit" onClick={() => { console.log("hello") }} className="text-white bg-blue-500 p-2  rounded text-md px-8">
+                        Search
 
-                <div>
-                    {
-                        pastEvents.map((event) => (
-                            <PastEventCard props={event} />
-                        ))
-                    }
+                    </button>
                 </div>
+            </form>
+          
+            <div>
+                {
+                    pastEvents.map((event, index) => (
+                        <PastEventCard props={event} key={index} />
+                    ))
+                }
             </div>
-
         </div>
-    )
+
+    </div>
+)
 }
 
 export default Events;

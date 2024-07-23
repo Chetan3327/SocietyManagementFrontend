@@ -100,8 +100,8 @@ const EventCardDetailed = ({props}:{props:EventCardDetailedType}) => {
          className='ml-4'
          >
           {
-            props.judgingCriteria.map((judge)=>(
-              <li>{judge}</li>
+            props.judgingCriteria.map((judge,index)=>(
+              <li key={index}>{judge}</li>
             ))
           }
          </ul>
@@ -124,8 +124,8 @@ const EventCardDetailed = ({props}:{props:EventCardDetailedType}) => {
           }
          }>
           {
-            props.prizes.map((prize)=>(
-              <li>{prize}</li>
+            props.prizes.map((prize , index)=>(
+              <li key={index}>{prize}</li>
             ))
           }
          </ul>
@@ -139,8 +139,8 @@ const EventCardDetailed = ({props}:{props:EventCardDetailedType}) => {
          }
          >
           {
-            props.additionalDetails.map((detail)=>(
-              <li>{detail}</li>
+            props.additionalDetails.map((detail , index)=>(
+              <li key={index}>{detail}</li>
             ))
           }
          </ul>
