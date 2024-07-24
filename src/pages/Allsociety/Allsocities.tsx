@@ -1,97 +1,46 @@
-import women from "../../assets/Society_Img/wibd.jpg";
-import anveshan from "../../assets/Society_Img/anveshan.jpg";
-import avaran from "../../assets/Society_Img/avaran.jpg";
-import chromavita from "../../assets/Society_Img/chromavita.jpg";
-import gdsc from "../../assets/Society_Img/gdsc.jpg";
-import hash_define from "../../assets/Society_Img/hash_define.jpg";
-import ieee_wie from "../../assets/Society_Img/ieee_wie.jpg";
-import ieee from "../../assets/Society_Img/ieee.jpg";
-import kalam from "../../assets/Society_Img/kalam.jpg";
-import namespace from "../../assets/Society_Img/namespace.jpg";
-import opticlick from "../../assets/Society_Img/opticlick.jpg";
-import drishti from "../../assets/Society_Img/drishti.jpeg";
-import electronauts from "../../assets/Society_Img/electronauts.jpg";
-import octave from "../../assets/Society_Img/octave.jpg";
-import panache from "../../assets/Society_Img/panache.jpg";
-import mavericks from "../../assets/Society_Img/mavericks.jpg";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 import Societyslider from "./Societyslider";
 
 export type Society = {
   image: string;
   society: string;
+  SocietyID: number,
+  SocietyType: 'Technical' | 'Non-Tech',
+  society_name: string,
+  society_head: string,
+  society_coordinator: string,
+  date_of_registration: string,
+  society_description: string
 };
 
-const nontechnical: Society[] = [
-  {
-    image: opticlick,
-    society: "Photography",
-  },
-  {
-    image: mavericks,
-    society: "Dance",
-  },
-  {
-    image: octave,
-    society: "Music",
-  },
-  {
-    image: panache,
-    society: "Fashion",
-  },
-  {
-    image: avaran,
-    society: "Drama",
-  },
-  {
-    image: kalam,
-    society: "Literary",
-  },
-  {
-    image: chromavita,
-    society: "Art",
-  },
-  {
-    image: drishti,
-    society: "SocialWork",
-  },
-];
-
-const technical: Society[] = [
-  {
-    image: women,
-    society: "WIBD",
-  },
-  {
-    image: namespace,
-    society: "Namespace",
-  },
-  {
-    image: gdsc,
-    society: "GDSC",
-  },
-  {
-    image: ieee,
-    society: "IEEE",
-  },
-  {
-    image: hash_define,
-    society: "#Define",
-  },
-  {
-    image: ieee_wie,
-    society: "WIE",
-  },
-
-  {
-    image: anveshan,
-    society: "Anveshan",
-  },
-  {
-    image: electronauts,
-    society: "Electronauts",
-  },
-];
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 function Allsocities() {
+  const [nontechnical, setNontechnical] = useState<Society[]>([]);
+  const [technical, setTechnical] = useState<Society[]>([]);
+  useEffect(() => {
+    const getAllSocities = async () => {
+      try {
+        const {data} = await axios.get(`${BACKEND_URL}/societies`)
+        console.log(data)
+        const nontechnicalSocieties: Society[] = [];
+        const technicalSocieties: Society[] = [];
+        data.forEach((society: Society) => {
+          if (society.SocietyType === "Non-Tech") {
+            nontechnicalSocieties.push(society);
+          } else if (society.SocietyType === "Technical") {
+            technicalSocieties.push(society);
+          }
+        });
+        console.log(nontechnicalSocieties)
+        setNontechnical(nontechnicalSocieties);
+        setTechnical(technicalSocieties);
+      } catch (error) {
+        console.error("Failed to fetch societies:", error);
+      }
+    }
+    getAllSocities()
+  }, [])
   return (
     <div className="bg-sky-50">
       <Societyslider title={"Non-Technical Society"} arr={nontechnical} />

@@ -62,7 +62,7 @@ const SecondaryNavbar = () => {
         const checkRoute = () => {
             const pathname = location.pathname;
             const route = pathname.split('/').pop();
-            setIsVisible(routes.includes('/' + route));
+            setIsVisible(routes.includes('/' + route) || pathname === '/society/1');
         };
 
         checkRoute();

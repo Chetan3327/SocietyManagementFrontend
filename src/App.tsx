@@ -47,13 +47,13 @@ const App = () => {
           <Route path='/societies' element={<Allsocities />} />
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='/vision' element={<Vision />} />
-          <Route path='/news' element={<News />} />
+          <Route path='/news/:id' element={<News />} />
           <Route path='/all-news' element={<AllNews />} />
           <Route path='/query' element={<SocietyQueryForm />} />
           <Route path='/evaluation' element={<Evaluation />} />
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/allgallery' element={<AllGallery />} />
-          <Route path='/society' element={<Society />} />
+          <Route path='/society/:id' element={<Society />} />
           <Route path='/societygallery' element={<SocietyGallery />} />
           <Route path='/snavbar' element={<Secondary_navbar />} />
           <Route path='/slogin' element={<StudentLogin />} />

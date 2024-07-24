@@ -24,10 +24,10 @@ function Societyslider({title,arr}:{title:string,arr:Society[]}) {
         >
           <CarouselPrevious />
           <CarouselContent>
-            {arr.map(({ image, society }, index: number) => (
+            {arr.map(({ image, society, SocietyID }, index: number) => (
               <CarouselItem key={index} className="lg:basis-1/6 md:basis-1/4 sm:basis-1/2 ">
               {/* <Link to={`/society/${society}`} > */}
-              <Link to='/society'>
+              <Link to={`/society/${SocietyID}`}>
               <Card className="border-none shadow-sm bg-sky-50">
                   <CardContent className="p-0">
                     <img
