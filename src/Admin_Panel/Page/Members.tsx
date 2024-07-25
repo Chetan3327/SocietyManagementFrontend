@@ -1,7 +1,7 @@
 import Member_Cards from "../Page_Components/Members/Member_Cards";
 import Member_Table from "../Page_Components/Members/Member_Table";
 
-const Members = () => {
+const Admin_Members = () => {
   return (
     <>
       <Member_Cards />
@@ -10,4 +10,4 @@ const Members = () => {
   );
 };
 
-export default Members;
+export default Admin_Members;
