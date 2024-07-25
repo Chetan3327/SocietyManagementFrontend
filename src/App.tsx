@@ -34,12 +34,23 @@ import Events from "./components/Page-Components/Events/Events";
 import Societyjoiningform from "./pages/Societyjoiningform";
 import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import CreateEventForm from "./components/Page-Components/CreateEventForm";
-import Members from "./Admin_Panel/Page/Members";
+// import Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
+import Admin_Members from "./Admin_Panel/Page/Members";
 
 const App = () => {
   const location = useLocation();
   console.log(location);
+  const Locations = location.pathname.split("/");
+
+  if (Locations[1].toLowerCase() === "admin") {
+    return (
+      <Routes>
+        <Route path="/admin/news" element={<Admin_News />} />
+        <Route path="/admin/members" element={<Admin_Members />} />
+      </Routes>
+    );
+  }
 
   return (
     <>
