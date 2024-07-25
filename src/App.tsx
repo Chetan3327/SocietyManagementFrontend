@@ -28,6 +28,7 @@ import StudentLogin from './pages/StudentLogin'
 import Events from './components/Page-Components/Events/Events'
 import Societyjoiningform from './pages/Societyjoiningform'
 import Societyjoiningrequst from './pages/Societyjoiningrequst';
+import CreateEventForm from './components/Page-Components/CreateEventForm'
 
 const App = () => {
   return (
@@ -61,6 +62,7 @@ const App = () => {
           <Route path='/societyjoinform' element={<Societyjoiningform />} />
           <Route path='/societyjoinrequest' element={<Societyjoiningrequst />} />
           <Route path='/feedbackform' element={<FeedbackForm />} />
+          <Route path='/create-event' element={<CreateEventForm />} />
         </Routes>
       </div>
       <FeedbackButton/>

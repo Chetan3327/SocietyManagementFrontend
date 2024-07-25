@@ -8,7 +8,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
-import {  z } from 'zod';
+import { z } from 'zod';
 import latest_new from '../../../assets/latestnews.png'; //dummy img
 import pen_hand from '../../../assets/pen_hand.jpeg';
 import { EventCard, EventCardDetailed, EventCardDetailedType, EventCardType, PastEventCard } from "./EventCard";
