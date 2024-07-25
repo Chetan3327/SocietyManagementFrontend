@@ -73,7 +73,7 @@ const Society = () => {
     const fetchSocietyData = async () => {
       try {
         const { data } = await axios.get(`${BACKEND_URL}/societies/${id}`);
-        setSociety(data);
+        setSociety(data[0]);
       } catch (error) {
         console.error("Failed to fetch societies:", error);
       }

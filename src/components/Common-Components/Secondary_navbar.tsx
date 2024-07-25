@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { buttonVariants } from "../ui/button";
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from "../ui/button";
 
 const navItems = [
     {
-        href: "/",
+        href: "/about-us",
         label: "About",
     },
     {
@@ -57,7 +57,7 @@ routes.push('/society');
 const SecondaryNavbar = () => {
     const location = useLocation();
     const [isVisible, setIsVisible] = useState(false);
-
+    const navigate = useNavigate()
     useEffect(() => {
         const checkRoute = () => {
             const pathname = location.pathname;
@@ -78,12 +78,7 @@ const SecondaryNavbar = () => {
                 <NavigationMenuList className="w-screen flex flex-wrap px-4 py-3 bg-gray-200 text-gray-900">
                     {navItems.map((navItem, index) => (
                         <NavigationMenuItem key={index}>
-                            <a
-                                href={navItem.href}
-                                className={`px-6 py-2 text-gray-90 text-s font-semibold text-center ${buttonVariants({ variant: "ghost" })}`}
-                            >
-                                {navItem.label}
-                            </a>
+                            <Button onClick={() => navigate(navItem.href)} variant={'ghost'}>{navItem.label}</Button>
                         </NavigationMenuItem>
                     ))}
                 </NavigationMenuList>
