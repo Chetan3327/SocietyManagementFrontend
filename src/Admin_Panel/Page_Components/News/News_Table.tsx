@@ -7,6 +7,38 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { Card } from "../../../components/ui/card";
+const news=[
+  {
+    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    Date:"13/09/2024",
+    society:"Anveshan",
+    type:"Update"               
+  },
+  {
+    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    Date:"13/09/2024",
+    society:"Anveshan",
+    type:"Update"               
+  },
+  {
+    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    Date:"13/09/2024",
+    society:"Anveshan",
+    type:"Update"               
+  },
+  {
+    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    Date:"13/09/2024",
+    society:"Anveshan",
+    type:"Update"               
+  },
+  {
+    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    Date:"13/09/2024",
+    society:"Anveshan",
+    type:"Update"               
+  },
+]
 const News_Table = () => {
   return (
     <Card className="m-7 p-0 h-96 w-10/12 overflow-y-auto">
@@ -32,22 +64,17 @@ const News_Table = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {Array.from({ length: 5 }).map((_, index: number) => {
+          {news.map((data, index: number) => {
             return (
               <TableRow key={index}>
                 <TableCell className="border-muted border-2">{index}</TableCell>
                 <TableCell className="text-center border-muted border-2">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Perspiciatis quod consequatur vero voluptatem excepturi
-                  debitis quidem minima totam illum tenetur, ut laudantium quia
-                  quibusdam dolores dignissimos dolorum at architecto! Illo
-                  quidem possimus dolorem nemo repudiandae ex dolore illum
-                  perferendis? Ad!
+                 {data.detail}
                 </TableCell>
                 <TableCell className="p-0 h-full">
-                  <TableCell className="text-center ">13/09/2024</TableCell>
-                  <TableCell className="text-center ">Anveshan</TableCell>
-                  <TableCell className="text-center ">Update</TableCell>
+                  <TableCell className="text-center ">{data.Date}</TableCell>
+                  <TableCell className="text-center ">{data.society}</TableCell>
+                  <TableCell className="text-center ">{data.type}</TableCell>
                 </TableCell>
               </TableRow>
             );
