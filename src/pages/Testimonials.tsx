@@ -1,3 +1,5 @@
+import TestimonialCard from "@/components/Page-Components/TestimonialCard";
+import TestimonialSlider from "@/components/Page-Components/TestimonialSlider";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 type Testimonial = {
@@ -59,34 +61,7 @@ const Testimonials = () => {
           </div>
         </div>
 
-        <h2 className="text-3xl lg:text-4xl font-bold text-center">
-          Discover the True Impact Through Honest Testimonials
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map(({ name, image, degree, year, description }) => (
-            <Card
-              key={name}
-              className="bg-gradient-to-b from-gray-100 to-gray-300"
-            >
-              <CardContent className="flex pt-5 items-center gap-10">
-                <div>
-                  <img
-                    src={image}
-                    alt="Job Section"
-                    className="w-[60px] lg:w-[120px] rounded-full"
-                  />
-                </div>
-                <div>
-                  <p className="font-bold">{name}</p>
-                  <p className="text-muted-foreground">{degree}</p>
-                  <p className="text-muted-foreground">{year}</p>
-                </div>
-              </CardContent>
-
-              <CardFooter>{description}</CardFooter>
-            </Card>
-          ))}
-        </div>
+        <TestimonialCard />
       </div>
     </>
   );

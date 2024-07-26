@@ -1,4 +1,4 @@
-import { Camera,ThumbsUp } from "lucide-react";
+import { Camera, ThumbsUp } from "lucide-react";
 
 import {
   Carousel,
@@ -27,8 +27,6 @@ import kalam from "../assets/Society_Img/kalam.jpg";
 import namespace from "../assets/Society_Img/namespace.jpg";
 import opticlick from "../assets/Society_Img/opticlick.jpg";
 import { Link } from "react-router-dom";
-
-
 
 type Events = {
   image: string;
@@ -101,10 +99,7 @@ function Gallery() {
           <CarouselPrevious />
           <CarouselContent>
             {event.map(({ image, society }, index: number) => (
-              <CarouselItem
-                key={index}
-                className="md:basis-1/2 lg:basis-1/3"
-              >
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <Link to="/societygallery">
                   <Card className="border-none shadow-sm">
                     <CardHeader className="p-3">
@@ -139,11 +134,17 @@ function Gallery() {
                             <span className="rounded-full w-8 h-8 mr-2 bg-muted inline-block">
                               {" "}
                             </span>
-                            <span className="text-black font-semibold">{society}</span>
+                            <span className="text-black font-semibold">
+                              {society}
+                            </span>
                           </div>
                           <div className="flex items-center gap-5 mt-2 px-1">
-                            <span><Camera fill="black" size={24} /></span>
-                            <span><ThumbsUp fill="yellow" size={20}/></span>
+                            <span>
+                              <Camera fill="black" size={24} />
+                            </span>
+                            <span>
+                              <ThumbsUp fill="yellow" size={20} />
+                            </span>
                           </div>
                         </CardFooter>
                       </Card>
@@ -157,9 +158,14 @@ function Gallery() {
           <CarouselNext />
         </Carousel>
       </div>
-      
+
       <div className="flex justify-center">
-      <Link to="/allgallery" className="p-3 bg-muted font-semibold rounded-lg shadow-sm">View All</Link>
+        <Link
+          to="/allgallery"
+          className="p-3 bg-muted font-semibold rounded-lg shadow-sm"
+        >
+          View All
+        </Link>
       </div>
     </div>
   );
