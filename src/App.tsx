@@ -5,6 +5,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Navbar from "./components/navbar";
 import Openings from "./pages/Openings";
 import Coordinators from "./pages/Coordinators";
@@ -37,6 +39,7 @@ import CreateEventForm from "./components/Page-Components/CreateEventForm";
 // import Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Members from "./Admin_Panel/Page/Members";
+import SocietyMembers from "./pages/Society_Members";
 
 const App = () => {
   const location = useLocation();
@@ -55,8 +58,9 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Secondary_navbar />
+
       <div className="font-mono transition-colors duration-300">
+        <Secondary_navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/contact-us" element={<ContactUs />} />
@@ -81,6 +85,8 @@ const App = () => {
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
+          <Route path="/members/:id" element={<Evaluation />} />
+          <Route path="/Societymembers/:id" element={<SocietyMembers />} />
           <Route
             path="/societyjoinrequest"
             element={<Societyjoiningrequst />}
