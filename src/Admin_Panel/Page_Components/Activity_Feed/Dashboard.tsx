@@ -1,4 +1,4 @@
-import PieChart from './PieChart'
+import PieChart from './DashboardPieChart'
 import student from '../../../assets/student.jpg'
 import { formatDistanceToNow } from 'date-fns'
 import { ChevronRight } from 'lucide-react'
