@@ -82,7 +82,9 @@ const SocietyGallery = () => {
           <CarouselContent>
             {gallery.map(({ img }, index: number) => (
               <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
-                <img src={img} alt="bpit" className="object-fit h-40" />
+                <Link to="/gallery/:Societyid/:ImageId">
+                  <img src={img} alt="bpit" className="object-fit h-40" />
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>

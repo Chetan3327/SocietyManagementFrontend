@@ -58,7 +58,7 @@ const EventCard = ({ props }: { props: EventCardType }) => {
       </CardContent>
       <CardFooter>
         <Link
-          to={props.registrationLink}
+          to="/create-event/:societyid/:eventid"
           className=" bg-blue-500 text-white px-6 py-2 w-full text-center text-md rounded-full "
         >
           Click here to register

@@ -40,6 +40,7 @@ import CreateEventForm from "./components/Page-Components/CreateEventForm";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Members from "./Admin_Panel/Page/Members";
 import SocietyMembers from "./pages/Society_Members";
+import ViewPhoto from "./pages/ViewPhoto";
 
 const App = () => {
   const location = useLocation();
@@ -87,12 +88,16 @@ const App = () => {
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
           <Route path="/members/:id" element={<Evaluation />} />
           <Route path="/Societymembers/:id" element={<SocietyMembers />} />
+          <Route path="/gallery/:Societyid/:ImageId" element={<ViewPhoto />} />
           <Route
             path="/societyjoinrequest"
             element={<Societyjoiningrequst />}
           />
           <Route path="/feedbackform" element={<FeedbackForm />} />
-          <Route path="/create-event" element={<CreateEventForm />} />
+          <Route
+            path="/create-event/:societyid/:eventid"
+            element={<CreateEventForm />}
+          />
         </Routes>
       </div>
       <FeedbackButton />
