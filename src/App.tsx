@@ -42,6 +42,7 @@ import Admin_Members from "./Admin_Panel/Page/Members";
 import Admin_Queries from "./Admin_Panel/Page/Queries";
 import SocietyMembers from "./pages/Society_Members";
 import ViewPhoto from "./pages/ViewPhoto";
+import Become_Member_Form from "./pages/Become_Member_Form";
 
 const App = () => {
   const location = useLocation();
@@ -66,6 +67,8 @@ const App = () => {
         <Secondary_navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/BecomeMember" element={<Become_Member_Form />} />
+
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/openings" element={<Openings />} />
           <Route path="/roles" element={<Roles />} />

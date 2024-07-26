@@ -36,10 +36,7 @@ const navItems = [
     href: "/societygallery",
     label: "Gallery",
   },
-  {
-    href: "/query",
-    label: "Send a Query",
-  },
+
   {
     href: "/coordinators",
     label: "Coordinators",
