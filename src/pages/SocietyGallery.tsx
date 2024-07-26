@@ -16,6 +16,7 @@ import pen from "../assets/pen_hand.jpeg";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ChevronRight, Star } from "lucide-react";
+import GalleryGrid from "./GallaryGrid";
 type Gallery = {
   img: string;
 };
@@ -42,6 +43,29 @@ const gallery: Gallery[] = [
     img: bpit,
   },
 ];
+const galleryItems: any = [
+  {
+    id: 1,
+    src: "https://media.springernature.com/lw703/springer-static/image/art%3A10.1038%2F528452a/MediaObjects/41586_2015_Article_BF528452a_Figg_HTML.jpg",
+    alt: "Image 1",
+  },
+  {
+    id: 2,
+    src: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
+    alt: "Image 2",
+  },
+  {
+    id: 3,
+    src: "https://avatars.mds.yandex.net/i?id=b507a2b8d9382967a186c654f1eeaa74-5262078-images-taas-consumers&n=27&h=480&w=480",
+    alt: "Image 3",
+  },
+  {
+    id: 4,
+    src: "https://cdn.pixabay.com/photo/2023/11/09/19/36/zoo-8378189_640.jpg",
+    alt: "Image 4",
+  },
+  // Add more items as needed
+];
 const SocietyGallery = () => {
   return (
     <>
@@ -58,7 +82,7 @@ const SocietyGallery = () => {
           <CarouselContent>
             {gallery.map(({ img }, index: number) => (
               <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
-                <img src={img} alt="bpit" className="object-fit h-40"/>
+                <img src={img} alt="bpit" className="object-fit h-40" />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -66,46 +90,11 @@ const SocietyGallery = () => {
           <CarouselNext />
         </Carousel>
 
-        <h1 className="text-center w-10/12 align-center bg-violet-500 text-white mt-5 p-3 text-xl">Photo Album</h1>
-
-        <Card className=" w-11/12 md:w-10/12 mt-5 p-0 bg-muted">
-            <CardContent className="flex flex-col lg:flex-row gap-6 justify-center items-center px-2 py-1">
-                <img src={hall} alt="bpit" className="object-fit lg:w-1/4 h-56 w-full"/>
-                <div className="lg:w-1/4 w-full flex flex-col items-center justify-center" >
-                    <h1 className="text-xl font-bold">Event Details</h1>
-                    <p className="text-sm"><img src={eyes} alt="eyes" className="w-5 h-5 inline" />Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora reiciendis nesciunt iusto, ipsam minima sunt eos..</p>
-                </div>
-                <div className="px-2 lg:w-2/5 w-full">
-                    <div className="flex justify-between">
-                        <div>
-                            <h1 className="font-bold text-lg">Student Reviews</h1>
-                            <h5 className="text-sm">What others are saying</h5>
-                        </div>
-                        <Link to="/" className=" p-1 h-fit border border-black border-2"> Write a Review <ChevronRight className="inline-block text-sm "/> </Link>
-                    </div>
-                    <div className="bg-gray-200 px-3 py-1 pb-5 mt-3">
-                        <div className="flex justify-between my-2 ">
-                        <div className="flex gap-2 items-center justify-center">
-                        <span className="rounded-full w-8 h-8 mr-2 bg-gray-300 inline-block">
-                              {" "}
-                            </span>
-                            <h1>John doe</h1>
-                        </div>
-                        <div className="flex gap-1">
-                        {Array.from({ length: 5 }).map((_) => (
-                                <Star fill="yellow" className="text-base" />
-                            ))}
-                        </div>
-                        </div>
-                        <p className="text-xs font-bold">Great experience with the society!!</p>
-                        <img src={pen} alt="write" className="w-5 h-5"/>
-
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
+        <h1 className="text-center w-10/12 align-center bg-violet-500 text-white mt-5 p-3 text-xl">
+          Photo Album
+        </h1>
+        <GalleryGrid items={galleryItems} />
       </div>
-    
     </>
   );
 };
