@@ -25,26 +25,24 @@ const routeList = [
     href: "/",
     label: "Home",
   },
-  {
-    href: "/about-us",
-    label: "About Us",
-  },
+
   {
     href: "/vision",
     label: "Our Vision",
   },
-  // {
-  //   href: "/contact-us",
-  //   label: "Contact Us",
-  // },
-  // {
-  //   href: "/testimonials",
-  //   label: "Testimonials",
-  // },
   {
-    href: "/contact-us",
+    href: "/BecomeMember",
+    label: "Join a Society",
+  },
+  {
+    href: "/query",
     label: "Contact Us",
   },
+  {
+    href: "/about-us",
+    label: "About us",
+  },
+
   {
     href: "/all-news",
     label: "News",

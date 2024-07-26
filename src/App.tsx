@@ -36,12 +36,12 @@ import Events from "./components/Page-Components/Events/Events";
 import Societyjoiningform from "./pages/Societyjoiningform";
 import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import CreateEventForm from "./components/Page-Components/CreateEventForm";
-// import Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Members from "./Admin_Panel/Page/Members";
 import Admin_Queries from "./Admin_Panel/Page/Queries";
 import SocietyMembers from "./pages/Society_Members";
 import ViewPhoto from "./pages/ViewPhoto";
+import Become_Member_Form from "./pages/Become_Member_Form";
 
 const App = () => {
   const location = useLocation();
@@ -58,14 +58,17 @@ const App = () => {
     );
   }
 
+  const showSecondaryNavbar =
+    Locations[1] !== "about-us" || location.pathname.includes("society");
+
   return (
     <>
       <Navbar />
-
       <div className="font-mono transition-colors duration-300">
-        <Secondary_navbar />
+        {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/BecomeMember" element={<Become_Member_Form />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/openings" element={<Openings />} />
           <Route path="/roles" element={<Roles />} />
@@ -74,7 +77,6 @@ const App = () => {
           <Route path="/create" element={<SocietyForm />} />
           <Route path="/members" element={<SocietMembers />} />
           <Route path="/societies" element={<Allsocities />} />
-          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/news/:id" element={<News />} />
           <Route path="/all-news" element={<AllNews />} />
@@ -84,7 +86,6 @@ const App = () => {
           <Route path="/allgallery" element={<AllGallery />} />
           <Route path="/society/:id" element={<Society />} />
           <Route path="/societygallery" element={<SocietyGallery />} />
-          <Route path="/snavbar" element={<Secondary_navbar />} />
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
@@ -100,6 +101,7 @@ const App = () => {
             path="/create-event/:societyid/:eventid"
             element={<CreateEventForm />}
           />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </div>
       <FeedbackButton />

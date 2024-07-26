@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Societyslider from "./Societyslider";
 
@@ -14,15 +13,62 @@ export type Society = {
   society_description: string;
 };
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const fakeData: Society[] = [
+  {
+    image: "https://via.placeholder.com/150",
+    society: "Coding Club",
+    SocietyID: 1,
+    SocietyType: "Technical",
+    society_name: "Coding Club",
+    society_head: "Alice Johnson",
+    society_coordinator: "Bob Smith",
+    date_of_registration: "2022-01-15",
+    society_description: "A club for coding enthusiasts.",
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    society: "Robotics Club",
+    SocietyID: 2,
+    SocietyType: "Technical",
+    society_name: "Robotics Club",
+    society_head: "Charlie Brown",
+    society_coordinator: "Dave Lee",
+    date_of_registration: "2021-11-22",
+    society_description: "A club for robotics enthusiasts.",
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    society: "Drama Club",
+    SocietyID: 3,
+    SocietyType: "Non-Tech",
+    society_name: "Drama Club",
+    society_head: "Eve Adams",
+    society_coordinator: "Frank White",
+    date_of_registration: "2020-05-30",
+    society_description: "A club for drama and theater enthusiasts.",
+  },
+  {
+    image: "https://via.placeholder.com/150",
+    society: "Music Club",
+    SocietyID: 4,
+    SocietyType: "Non-Tech",
+    society_name: "Music Club",
+    society_head: "Grace Green",
+    society_coordinator: "Hank Black",
+    date_of_registration: "2019-09-18",
+    society_description: "A club for music lovers.",
+  },
+];
+
 function Allsocities() {
   const [nontechnical, setNontechnical] = useState<Society[]>([]);
   const [technical, setTechnical] = useState<Society[]>([]);
+
   useEffect(() => {
     const getAllSocities = async () => {
       try {
-        const { data } = await axios.get(`${BACKEND_URL}/societies`);
-        console.log(data);
+        // Simulate fetching data
+        const data = fakeData;
         const nontechnicalSocieties: Society[] = [];
         const technicalSocieties: Society[] = [];
         data.forEach((society: Society) => {
@@ -32,7 +78,6 @@ function Allsocities() {
             technicalSocieties.push(society);
           }
         });
-        console.log(nontechnicalSocieties);
         setNontechnical(nontechnicalSocieties);
         setTechnical(technicalSocieties);
       } catch (error) {
@@ -41,6 +86,7 @@ function Allsocities() {
     };
     getAllSocities();
   }, []);
+
   return (
     <div className="bg-sky-50">
       <Societyslider title={"Non-Technical Society"} arr={nontechnical} />

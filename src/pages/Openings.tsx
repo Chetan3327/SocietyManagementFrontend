@@ -1,74 +1,124 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHeader,
+  TableHead,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button"; // Adjust import based on your button library
 
-type Section = {
-  title: string;
-  description: string;
-  image: string;
-  route: string;
+interface SocietyRole {
+  roleID: number;
+  roleType: string;
+  roleName: string;
+  roleDescription: string;
+  lastDateToApply: string;
+  responsibilities: string;
+  linkBySociety: string;
+  societyID: number;
 }
 
-const sections: Section[] = [
+const roles: SocietyRole[] = [
   {
-    title: "Technical Roles",
-    description: "If you believe you are technically proficient, these roles are for you!!",
-    image: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg",
-    route: '/roles'
+    roleID: 1,
+    roleType: "Executive",
+    roleName: "President",
+    roleDescription: "Leads the society and oversees all operations.",
+    lastDateToApply: "2024-08-01",
+    responsibilities:
+      "Chair meetings, represent the society, make strategic decisions.",
+    linkBySociety: "https://example.com/president",
+    societyID: 101,
   },
-  {
-    title: "Non-Technical Roles",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.",
-    image: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg",
-    route: '/roles'
-  },
-  {
-    title: "Become a Member",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing eliti sed.",
-    image: "https://img.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_23-2150010125.jpg",
-    route: '/roles'
-  }
+  // Add more role objects as needed
 ];
 
-const Openings = () => {
-  const router = useNavigate()
+const tableClass = "text-center text-gray-800 text-xl border-x";
+
+const RoleCard: React.FC<{ role: SocietyRole }> = ({ role }) => {
   return (
-    <div className="container py-24 sm:py-0 space-y-20">
-      <div className="relative mx-auto w-full">
-                <img
-                    className="w-full h-80 blur-sm"
-                    src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                    alt="Member spotlight intro"
-                />
-                <div className="absolute inset-0 py-20 lg:py-28 ">
+    <div className="flex flex-col space-y-2">
+      <h3 className="text-lg font-semibold">{role.roleName}</h3>
+      <p className="text-sm text-gray-600">{role.roleDescription}</p>
+      <p className="text-sm text-gray-600">
+        Responsibilities: {role.responsibilities}
+      </p>
+      <p className="text-sm text-gray-600">
+        Last Date to Apply: {role.lastDateToApply}
+      </p>
+      <a href={role.linkBySociety} className="text-blue-500 hover:underline">
+        More Info
+      </a>
+    </div>
+  );
+};
 
-                    <h2 className="text-black text-center text-4xl font-extrabold uppercase">Join Our Dynamic Team Today !</h2>
-                    <p className="text-white text-center my-5 text-xl font-extrabold uppercase">Explore our current openings and take the first step towards an enriching and rewarding college experience.</p>
-                </div>
+const SocietyRoles: React.FC = () => {
+  return (
+    <div>
+      <div className="py-8 px-6 lg:px-20 bg-white mt-10">
+        <div className="flex flex-col">
+          <h2 className="font-bold text-center text-4xl mb-4 text-gray-800">
+            SOCIETY ROLES
+          </h2>
+          <Button className="bg-blue-500 text-white py-1 px-3 rounded w-min mx-auto mb-4">
+            <Link to="/BecomeMember">Become a Member</Link>
+          </Button>
         </div>
-      <h2 className="text-3xl lg:text-4xl font-bold text-center">
-        Openings
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sections.map(({ title, description, image, route }) => (
-          <Card className="cursor-pointer" onClick={() => router(route)} key={title}>
-            <CardHeader>
-              <img
-                src={image}
-                alt="Job Section"
-                className="w-[200px] lg:w-[300px] mx-auto rounded-md"
-              />
-            </CardHeader>
+        <div className="overflow-auto max-h-96">
+          <Table className="bg-white border-t border-x shadow-lg table-auto">
+            <TableHeader>
+              <TableRow>
+                <TableHead rowSpan={2} className={tableClass}>
+                  S No.
+                </TableHead>
+                <TableHead rowSpan={2} className={tableClass}>
+                  Society Roles
+                </TableHead>
+                <TableHead colSpan={4} className={tableClass}>
+                  Role Details
+                </TableHead>
+              </TableRow>
+              <TableRow>
+                <TableHead className={tableClass}>Role Type</TableHead>
+                <TableHead className={tableClass}>Role Name</TableHead>
+                <TableHead className={tableClass}>Last Date to Apply</TableHead>
+                <TableHead className={tableClass}>Responsibilities</TableHead>
+              </TableRow>
+            </TableHeader>
 
-            <CardContent className="font-bold text-2xl">{title}</CardContent>
-
-            <CardFooter>
-              {description}
-            </CardFooter>
-          </Card>
-        ))}
+            <TableBody>
+              {roles.map((role, index) => (
+                <TableRow key={role.roleID}>
+                  <TableCell className="text-center border-x text-gray-800">
+                    {index + 1}.
+                  </TableCell>
+                  <TableCell className="border-x">
+                    <RoleCard role={role} />
+                  </TableCell>
+                  <TableCell className="text-center border-x text-lg text-gray-800">
+                    {role.roleType}
+                  </TableCell>
+                  <TableCell className="text-center border-x text-lg text-gray-800">
+                    {role.roleName}
+                  </TableCell>
+                  <TableCell className="text-center border-x text-lg text-gray-800">
+                    {role.lastDateToApply}
+                  </TableCell>
+                  <TableCell className="text-center border-x text-lg text-gray-800">
+                    {role.responsibilities}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Openings
+export default SocietyRoles;
