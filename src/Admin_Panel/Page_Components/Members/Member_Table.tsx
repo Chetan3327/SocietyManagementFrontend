@@ -1,5 +1,6 @@
 import { Info, UserRoundPlus, UserRoundX } from "lucide-react";
 import { Card, CardContent } from "../../../components/ui/card";
+import student from '../../../assets/studentpic.jpeg'
 import {
   Table,
   TableBody,
@@ -9,12 +10,63 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 
+const member=[
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+  {
+    img:student,
+    name:"John Doe",
+    branch:"CSE-B",
+    contact:"0115897556",
+    email:"shivani_1234@gmail.com"
+  },
+]
 const Member_Table = () => {
   return (
     <>
       <Card className="m-4 mt-7">
         <CardContent className="p-2">
-          <div className="flex justify-between items-center px-3 w-full ">
+          <div className="flex flex-wrap gap-2 justify-between items-center px-3 w-full ">
             <input
               type="text"
               placeholder="Filter Search"
@@ -35,8 +87,8 @@ const Member_Table = () => {
           </div>
         </CardContent>
       </Card>
-      <Card className="p-0 m-4 mt-7">
-        <CardContent className="p-0 ">
+      <Card className="p-0 m-4 mt-7 h-80 overflow-y-auto">
+        <CardContent className="p-0 overflow-y-auto">
           <Table>
             <TableHeader>
               <TableRow className="text-blue-700">
@@ -58,23 +110,23 @@ const Member_Table = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {Array.from({ length: 5 }).map((_, index: number) => {
+              {member.map((member, index: number) => {
                 return (
                   <TableRow key={index} className="border-none">
                     <TableCell>
                       <div className="flex gap-5 items-center justify-end">
                         <img
-                          src="https://images.pexels.com/photos/1462630/pexels-photo-1462630.jpeg?auto=compress&cs=tinysrgb&w=400"
+                          src={member.img}
                           alt="student"
                           className="h-8 w-8 rounded-full"
                         />
-                        <h1 className="font-bold">John doe</h1>
+                        <h1 className="font-bold">{member.name}</h1>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center">CSE-B</TableCell>
-                    <TableCell className="text-center">0115897556</TableCell>
+                    <TableCell className="text-center">{member.branch}</TableCell>
+                    <TableCell className="text-center">{member.contact}</TableCell>
                     <TableCell className="text-center">
-                      shivani_1234@gmail.com
+                      {member.email}
                     </TableCell>
                     <TableCell className="flex justify-center">
                       <button className="border-2 w-fit px-5 py-1 rounded-full">

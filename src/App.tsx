@@ -39,6 +39,7 @@ import CreateEventForm from "./components/Page-Components/CreateEventForm";
 // import Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Members from "./Admin_Panel/Page/Members";
+import Admin_Queries from "./Admin_Panel/Page/Queries";
 import SocietyMembers from "./pages/Society_Members";
 import ViewPhoto from "./pages/ViewPhoto";
 
@@ -52,6 +53,7 @@ const App = () => {
       <Routes>
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/members" element={<Admin_Members />} />
+        <Route path="/admin/queries" element={<Admin_Queries />} />
       </Routes>
     );
   }
