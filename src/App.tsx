@@ -43,6 +43,11 @@ import SocietyMembers from "./pages/Society_Members";
 import ViewPhoto from "./pages/ViewPhoto";
 import Become_Member_Form from "./pages/Become_Member_Form";
 import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
+import LoginPage from "./pages/Login";
+import SignupPage from "./pages/SignUp";
+import ResetPasswordPage from "./pages/ResetPassword";
+import OTP from "./pages/OTP";
+import ChangePassword from "./pages/ChangePassword";
 
 const App = () => {
   const location = useLocation();
@@ -65,7 +70,11 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
+      {Locations[1].toLowerCase() !== "login" &&
+        Locations[1].toLowerCase() !== "signup" &&
+        Locations[1].toLowerCase() !== "reset-password" &&
+        Locations[1].toLowerCase() !== "verify-email" &&
+        Locations[1].toLowerCase() !== "changepassword" && <Navbar />}
       <div className="font-mono transition-colors duration-300">
         {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
@@ -94,11 +103,17 @@ const App = () => {
           <Route path="/members/:id" element={<Evaluation />} />
           <Route path="/Societymembers/:id" element={<SocietyMembers />} />
           <Route path="/gallery/:Societyid/:ImageId" element={<ViewPhoto />} />
+          <Route path="/ChangePassword" element={<ChangePassword />} />
           <Route
             path="/societyjoinrequest"
             element={<Societyjoiningrequst />}
           />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+
           <Route path="/feedbackform" element={<FeedbackForm />} />
+          <Route path="/verify-email" element={<OTP />} />
           <Route
             path="/create-event/:societyid/:eventid"
             element={<CreateEventForm />}
@@ -106,8 +121,15 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </div>
-      <FeedbackButton />
-      <Footer />
+      {Locations[1].toLowerCase() !== "login" &&
+        Locations[1].toLowerCase() !== "signup" &&
+        Locations[1].toLowerCase() !== "verify-email" &&
+        Locations[1].toLowerCase() !== "reset-password" &&
+        Locations[1].toLowerCase() !== "changepassword" &&
+        Locations[1].toLowerCase() !== "verify-email" && <FeedbackButton /> && (
+          <Footer />
+        )}
+
       <ScrollToTop />
     </>
   );
