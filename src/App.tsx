@@ -42,6 +42,7 @@ import Admin_Queries from "./Admin_Panel/Page/Queries";
 import SocietyMembers from "./pages/Society_Members";
 import ViewPhoto from "./pages/ViewPhoto";
 import Become_Member_Form from "./pages/Become_Member_Form";
+import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
 
 const App = () => {
   const location = useLocation();
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
+        <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );
   }

@@ -74,10 +74,10 @@ const Home = () => {
                 View Existing Socities
               </Link>
               <Link
-                to="/events"
+                to="/create"
                 className="bg-yellow-500 text-white text-xl rounded-full px-4 py-1 mt-4 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110"
               >
-                View Upcoming Events
+                Create Society
               </Link>
             </div>
           </div>
@@ -105,7 +105,7 @@ const Home = () => {
               experience.import HighlightText from
               './../components/ui/HighlightText';
             </p>
-            <Link to="/news">
+            <Link to="/all-news">
               <Button className="mt-16 text-lg transition transform duration-300 ease-in-out hover:scale-110 bg-blue-500">
                 <ArrowRight /> Explore More
               </Button>
