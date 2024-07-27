@@ -3,7 +3,7 @@ import { Chart, ArcElement, Tooltip, Legend, plugins } from 'chart.js';
 
 Chart.register(ArcElement, Tooltip, Legend)
 
-const PieChart = () => {
+const DashboardPieChart = () => {
     const resolvedQueries = 16;
     const unResolvedQueries = 2;
     const data = {
@@ -59,4 +59,4 @@ const PieChart = () => {
     )
 }
 
-export default PieChart; 
+export default DashboardPieChart;
