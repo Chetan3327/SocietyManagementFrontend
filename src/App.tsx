@@ -5,6 +5,8 @@ import {
   useLocation,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Navbar from "./components/navbar";
 import Openings from "./pages/Openings";
 import Coordinators from "./pages/Coordinators";
@@ -34,9 +36,13 @@ import Events from "./components/Page-Components/Events/Events";
 import Societyjoiningform from "./pages/Societyjoiningform";
 import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import CreateEventForm from "./components/Page-Components/CreateEventForm";
-// import Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Members from "./Admin_Panel/Page/Members";
+import Admin_Queries from "./Admin_Panel/Page/Queries";
+import SocietyMembers from "./pages/Society_Members";
+import ViewPhoto from "./pages/ViewPhoto";
+import Become_Member_Form from "./pages/Become_Member_Form";
+import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
 
 const App = () => {
   const location = useLocation();
@@ -48,17 +54,23 @@ const App = () => {
       <Routes>
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/members" element={<Admin_Members />} />
+        <Route path="/admin/queries" element={<Admin_Queries />} />
+        <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );
   }
 
+  const showSecondaryNavbar =
+    Locations[1] !== "about-us" || location.pathname.includes("society");
+
   return (
     <>
       <Navbar />
-      <Secondary_navbar />
       <div className="font-mono transition-colors duration-300">
+        {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/BecomeMember" element={<Become_Member_Form />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/openings" element={<Openings />} />
           <Route path="/roles" element={<Roles />} />
@@ -67,7 +79,6 @@ const App = () => {
           <Route path="/create" element={<SocietyForm />} />
           <Route path="/members" element={<SocietMembers />} />
           <Route path="/societies" element={<Allsocities />} />
-          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/news/:id" element={<News />} />
           <Route path="/all-news" element={<AllNews />} />
@@ -77,16 +88,22 @@ const App = () => {
           <Route path="/allgallery" element={<AllGallery />} />
           <Route path="/society/:id" element={<Society />} />
           <Route path="/societygallery" element={<SocietyGallery />} />
-          <Route path="/snavbar" element={<Secondary_navbar />} />
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
+          <Route path="/members/:id" element={<Evaluation />} />
+          <Route path="/Societymembers/:id" element={<SocietyMembers />} />
+          <Route path="/gallery/:Societyid/:ImageId" element={<ViewPhoto />} />
           <Route
             path="/societyjoinrequest"
             element={<Societyjoiningrequst />}
           />
           <Route path="/feedbackform" element={<FeedbackForm />} />
-          <Route path="/create-event" element={<CreateEventForm />} />
+          <Route
+            path="/create-event/:societyid/:eventid"
+            element={<CreateEventForm />}
+          />
+          <Route path="/about-us" element={<AboutUs />} />
         </Routes>
       </div>
       <FeedbackButton />

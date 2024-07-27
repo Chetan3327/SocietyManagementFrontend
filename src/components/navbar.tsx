@@ -18,32 +18,34 @@ import { buttonVariants } from "./ui/button";
 import { Link } from "react-router-dom";
 
 import msalInstance from "./msalConfig";
-import {AccountInfo} from "@azure/msal-browser";
+import { AccountInfo } from "@azure/msal-browser";
 
 const routeList = [
   {
     href: "/",
     label: "Home",
   },
-  {
-    href: "/about-us",
-    label: "About Us",
-  },
+
   {
     href: "/vision",
     label: "Our Vision",
   },
-  // {
-  //   href: "/contact-us",
-  //   label: "Contact Us",
-  // },
-  // {
-  //   href: "/testimonials",
-  //   label: "Testimonials",
-  // },
   {
-    href: "/contact-us",
+    href: "/BecomeMember",
+    label: "Join a Society",
+  },
+  {
+    href: "/query",
     label: "Contact Us",
+  },
+  {
+    href: "/about-us",
+    label: "About us",
+  },
+
+  {
+    href: "/all-news",
+    label: "News",
   },
 ];
 
@@ -58,7 +60,7 @@ const Navbar = () => {
       console.error("MSAL initialization failed:", error);
     }
   };
-  
+
   const handleLogin = async () => {
     try {
       await initializeMsal();
@@ -67,12 +69,15 @@ const Navbar = () => {
       });
       setAccount(loginResponse.account);
       // Store user details
-      localStorage.setItem("msalAccount", JSON.stringify(loginResponse.account));
+      localStorage.setItem(
+        "msalAccount",
+        JSON.stringify(loginResponse.account)
+      );
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
-  
+
   const handleLogout = () => {
     msalInstance.logoutPopup();
     setAccount(null);
@@ -97,13 +102,9 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex  items-center justify-between">
-
           {/* logo */}
           <NavigationMenuItem className="font-bold flex">
-            <Link
-              to="/"
-              className="ml-2 font-bold text-xl flex items-center"
-            >
+            <Link to="/" className="ml-2 font-bold text-xl flex items-center">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RzOQ_E52YXYZQ4Vwrbnbs_HaBhq0ZEvXrQ&s"
                 className="h-12 navbar-img transition transform duration-500 ease-in-out hover:scale-110"
@@ -116,10 +117,7 @@ const Navbar = () => {
           <span className="flex md:hidden">
             <ModeToggle />
 
-            <Sheet
-              open={isOpen}
-              onOpenChange={setIsOpen}
-            >
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu
                   className="flex md:hidden h-5 w-5"
@@ -131,26 +129,27 @@ const Navbar = () => {
 
               <SheetContent side={"left"}>
                 <SheetHeader>
-                  <SheetTitle className="font-bold text-xl">
-                    Name
-                  </SheetTitle>
+                  <SheetTitle className="font-bold text-xl">Name</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col justify-center items-center gap-2 mt-4">
                   {routeList.map(({ href, label }) => (
-                    <a
+                    <Link
                       key={label}
-                      href={href}
+                      to={href}
                       onClick={() => setIsOpen(false)}
-                      style={{ width: '100%' }}
+                      style={{ width: "100%" }}
                       className={buttonVariants({ variant: "ghost" })}
                     >
                       {label}
-                    </a>
+                    </Link>
                   ))}
 
-                  <Link to="/" className="bg-gray-200 text-purple-800 px-4 py-2 rounded ">Login
+                  <Link
+                    to="/"
+                    className="bg-gray-200 text-purple-800 px-4 py-2 rounded "
+                  >
+                    Login
                   </Link>
-
                 </nav>
               </SheetContent>
             </Sheet>
@@ -170,37 +169,35 @@ const Navbar = () => {
               </Link>
             ))}
 
-<nav>
-      <ul>
-        {account ? (
-          <li>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
-            >
-              Logout
-            </button>
-          </li>
-        ) : (
-          <li>
-            <button
-              type="button"
-              onClick={handleLogin}
-              className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
-            >
-              Login
-            </button>
-          </li>
-        )}
-      </ul>
-    </nav>
-            
-            
+            <nav>
+              <ul>
+                {account ? (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                ) : (
+                  <li>
+                    <button
+                      type="button"
+                      onClick={handleLogin}
+                      className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
+                    >
+                      Login
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </nav>
+
             <div className="hidden md:flex gap-2 md:ml-5 transition transform duration-300 ease-in-out hover:scale-110">
               <ModeToggle />
             </div>
-
           </nav>
         </NavigationMenuList>
       </NavigationMenu>
@@ -208,4 +205,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;

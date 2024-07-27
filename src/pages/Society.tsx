@@ -4,7 +4,7 @@ import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "@/components/ui/card";
 import {
   Carousel,
@@ -14,20 +14,18 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Separator } from "@/components/ui/seperator";
-import axios from "axios";
 import {
   ArrowRight,
   Calendar,
   Github,
   Linkedin,
   Mail,
-  Twitter
+  Twitter,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import drishti from "../assets/drishti-hero.png";
 import latestnews from "../assets/latestnews.png";
-
 
 type NewsItem = {
   NewsID: string;
@@ -62,23 +60,71 @@ type Society = {
   Testimonials: Testimonial[];
 };
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const fakeData: Society = {
+  SocietyName: "Tech Society",
+  SocietyHead: "John Doe",
+  SocietyDescription: "A society dedicated to tech enthusiasts.",
+  News: [
+    {
+      NewsID: "1",
+      Title: "Tech Conference 2024",
+      Author: "Jane Smith",
+    },
+    {
+      NewsID: "2",
+      Title: "AI Workshop",
+      Author: "Alex Johnson",
+    },
+  ],
+  StudentProfiles: [
+    {
+      EnrollmentNo: "123",
+      FirstName: "Alice",
+      LastName: "Williams",
+      ProfilePicture: "https://via.placeholder.com/200",
+      GithubProfile: "https://github.com/alice",
+      LinkedInProfile: "https://linkedin.com/in/alice",
+      TwitterProfile: "https://twitter.com/alice",
+      DomainExpertise: "Web Development",
+      SocietyPosition: "President",
+      Email: "alice@example.com",
+    },
+    {
+      EnrollmentNo: "456",
+      FirstName: "Bob",
+      LastName: "Brown",
+      ProfilePicture: "https://via.placeholder.com/200",
+      GithubProfile: "https://github.com/bob",
+      LinkedInProfile: "https://linkedin.com/in/bob",
+      TwitterProfile: "https://twitter.com/bob",
+      DomainExpertise: "Machine Learning",
+      SocietyPosition: "Vice President",
+      Email: "bob@example.com",
+    },
+  ],
+  Testimonials: [
+    {
+      EnrollmentNo: "123",
+      TestimonialDescription:
+        "Being part of this society has been a great experience.",
+    },
+    {
+      EnrollmentNo: "456",
+      TestimonialDescription: "I've learned so much and made many friends.",
+    },
+  ],
+};
 
 const Society = () => {
-  const navigate = useNavigate()
-  const [society, setSociety] = useState<Society|null>(null);
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [society, setSociety] = useState<Society | null>(null);
 
   useEffect(() => {
-    const fetchSocietyData = async () => {
-      try {
-        const { data } = await axios.get(`${BACKEND_URL}/societies/${id}`);
-        setSociety(data[0]);
-      } catch (error) {
-        console.error("Failed to fetch societies:", error);
-      }
-    };
-    fetchSocietyData();
+    // Simulate fetching data
+    setTimeout(() => {
+      setSociety(fakeData);
+    }, 1000);
   }, [id]);
 
   if (!society) return <div>Loading...</div>;
@@ -145,7 +191,10 @@ const Society = () => {
               ))}
             </CardContent>
             <CardFooter className="flex justify-center">
-              <Button onClick={() => navigate(`/news/${id}`)} className="bg-yellow-600">
+              <Button
+                onClick={() => navigate(`/news/${id}`)}
+                className="bg-yellow-600"
+              >
                 <ArrowRight /> View More
               </Button>
             </CardFooter>
