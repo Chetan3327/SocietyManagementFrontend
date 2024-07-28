@@ -93,9 +93,7 @@ const SocietyDetailsTable = () => {
                 </div>
                 {errors.name && <span className='text-red-500'>{errors.name.message}</span>}
             </form>
-
-                <h2 className="font-bold text-bold text-center text-4xl mb-4 text-gray-800 mt-10">MEMBERS</h2>
-                <div className="overflow-auto max-h-96">
+                <div className="overflow-auto max-h-96 mt-10">
                     <Table className=" bg-white border-t border-x shadow-lg table-auto ">
                       <TableHeader>
                         <TableRow>
