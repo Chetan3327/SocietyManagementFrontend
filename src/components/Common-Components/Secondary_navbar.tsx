@@ -3,87 +3,85 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
+import { Link, useLocation } from "react-router-dom";
+
 
 const navItems = [
   {
-    href: "/about-us",
-    label: "About",
+    href: "",
+    label: "Home",
   },
   {
-    href: "/events",
+    href: "events",
     label: "Events",
   },
   {
-    href: "/members",
+    href: "members",
     label: "Our Team",
   },
   {
-    href: "/Societymembers/:id",
+    href: "Societymembers",
     label: "Members",
   },
   {
-    href: "/evaluation",
-    label: "Evolution",
+    href: "evaluation",
+    label: "Evalution",
   },
   {
-    href: "/news/:id",
+    href: "news",
     label: "News",
   },
   {
-    href: "/societygallery",
+    href: "societygallery",
     label: "Gallery",
   },
 
   {
-    href: "/coordinators",
+    href: "coordinators",
     label: "Coordinators",
   },
   {
-    href: "/openings",
+    href: "openings",
     label: "Openings",
   },
   {
-    href: "/testimonials",
+    href: "testimonials",
     label: "Testimonials",
   },
 ];
 
-const filtered = navItems.filter((navItem) => navItem.href !== "/");
-const routes = filtered.map((navItem) => navItem.href);
-routes.push("/society");
 
 const SecondaryNavbar = () => {
+  let id: string | undefined;
   const location = useLocation();
-  const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const checkRoute = () => {
-      const pathname = location.pathname;
-      const route = pathname.split("/").pop();
-      setIsVisible(routes.includes("/" + route) || pathname === "/society/1");
-    };
+  const pathname = location.pathname;
+  const route = pathname.split("/");
+  console.log(route)
+  id=route[2]
+  console.log(id);
 
-    checkRoute();
-  }, [location.pathname]);
 
-  if (!isVisible) {
-    return null;
-  }
 
   return (
     <div className="flex">
       <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="w-screen flex flex-wrap px-4 py-3 bg-gray-200 text-gray-900">
-          {navItems.map((navItem, index) => (
-            <NavigationMenuItem key={index}>
-              <Button onClick={() => navigate(navItem.href)} variant={"ghost"}>
-                {navItem.label}
-              </Button>
-            </NavigationMenuItem>
-          ))}
+        <NavigationMenuList className="w-screen flex justify-between flex-wrap px-4 py-3 bg-gray-200 text-gray-900">
+          {navItems.map((navItem, index) => {
+  
+            if(navItem.label==="Home"){
+              return(
+                <NavigationMenuItem key={index}>
+                  <Link to={`/society/${id}`}>{navItem.label}</Link>
+                </NavigationMenuItem>
+              )
+            }else{
+              return(
+                <NavigationMenuItem key={index}>
+                  <Link to={`/society/${id}/${navItem.href}`}>{navItem.label}</Link>
+                </NavigationMenuItem>
+              )
+            }
+})}
         </NavigationMenuList>
       </NavigationMenu>
     </div>
