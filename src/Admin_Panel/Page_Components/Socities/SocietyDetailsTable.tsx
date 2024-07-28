@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Trash2Icon , PenIcon } from 'lucide-react';
 
 const originalData = [
     {
@@ -80,23 +81,18 @@ const SocietyDetailsTable = () => {
     <div className="py-8 px-6 lg:px-20 bg-white mt-10 ">
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="bg-gray-300 py-4 px-2 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0">
-
-    
-                    <input
+                   <input
                         {...register('name')}
                         type="text" placeholder="Search society "
                         className=" bg-white p-2 px-6 w-full rounded lg:mr-2" id="date-search"
                         
                     />
-
                     <button type="submit"  className="text-white bg-blue-500 p-2  rounded text-md px-8">
                         Search
-
                     </button>
                 </div>
                 {errors.name && <span className='text-red-500'>{errors.name.message}</span>}
             </form>
-
 
                 <h2 className="font-bold text-bold text-center text-4xl mb-4 text-gray-800 mt-10">MEMBERS</h2>
                 <div className="overflow-auto max-h-96">
@@ -106,6 +102,7 @@ const SocietyDetailsTable = () => {
                             <TableHead rowSpan={2} className={tableClass}>S.NO.</TableHead>
                             <TableHead rowSpan={2} className={tableClass}>List of socities</TableHead>
                             <TableHead colSpan={6} className={tableClass}>Society Details</TableHead>
+                            <TableHead rowSpan={2} className={tableClass}>Action</TableHead>
                         </TableRow>
                         <TableRow>
                         <TableHead className={tableClass} >Date Of Establishment</TableHead>
@@ -127,6 +124,12 @@ const SocietyDetailsTable = () => {
                                     <TableCell className="text-center border-x text-md text-gray-800" >{details.Coordinators}</TableCell>
                                     <TableCell className="text-center border-x text-md text-gray-800" >{details.NumberOfMembers}</TableCell>
                                     <TableCell className="text-center border-x text-md text-gray-800" >{details.Category}</TableCell>
+                                    <TableCell>
+                                        <div className='flex space-x-2'>
+                                            <Trash2Icon color='red'/>
+                                            <PenIcon color='green'/>
+                                        </div>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
