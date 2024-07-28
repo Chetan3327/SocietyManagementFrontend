@@ -48,6 +48,7 @@ import SignupPage from "./pages/SignUp";
 import ResetPasswordPage from "./pages/ResetPassword";
 import OTP from "./pages/OTP";
 import ChangePassword from "./pages/ChangePassword";
+import Admin_Coordinators from "./Admin_Panel/Page/Coordinators";
 
 const App = () => {
   const location = useLocation();
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
+        <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
         <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );
