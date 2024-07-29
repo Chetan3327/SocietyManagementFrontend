@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-// import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS (if needed)
+import axios, { AxiosResponse } from "axios";
+import OTP from "./OTP";
 
 const styles = {
   container: {
@@ -130,9 +130,12 @@ const SignupPage: React.FC = () => {
   const [batchYear, setBatchYear] = useState<string>("");
   const [enrollmentNo, setEnrollmentNo] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [EnteredOTP, setEnteredOTP] = useState<string>("");
+
+  const [OTPSent, setOTPsent] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -142,25 +145,45 @@ const SignupPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://societybackend-go.onrender.com/signup",
-        {
-          FirstName: firstName,
-          LastName: lastName,
-          Password: password,
-          Branch: branch,
-          BatchYear: batchYear,
-          Email: email,
-          EnrollmentNo: enrollmentNo,
-        }
-      );
-      console.log(response);
-      console.log("Working signup");
+      if (!OTPSent) {
+        const response: AxiosResponse = await axios.post(
+          "https://societybackend-go.onrender.com/signup",
+          {
+            FirstName: firstName,
+            LastName: lastName,
+            Password: password,
+            Branch: branch,
+            BatchYear: batchYear,
+            Email: email,
+            EnrollmentNo: enrollmentNo,
+          }
+        );
 
-      if (response.status === 200) {
-        navigate("/verify-email");
-        setSuccess("OTP Sent Succesfully");
-        setError("");
+        if (response.status === 200) {
+          setOTPsent(true);
+          setSuccess("OTP Sent Successfully");
+          setError("");
+        }
+      } else {
+        const response: AxiosResponse = await axios.post(
+          "https://societybackend-go.onrender.com/signup",
+          {
+            FirstName: firstName,
+            LastName: lastName,
+            Password: password,
+            Branch: branch,
+            BatchYear: batchYear,
+            Email: email,
+            EnrollmentNo: enrollmentNo,
+            OTP: EnteredOTP,
+          }
+        );
+
+        if (response.status === 200) {
+          setSuccess("Signup Successful");
+          setError("");
+          navigate("/ChangePassword");
+        }
       }
     } catch (error) {
       setError("Failed to register. Please try again.");
@@ -173,194 +196,268 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.leftSide}>
-        <div style={styles.formWrapper}>
-          <img
-            src="https://bpitindia.com/wp-content/uploads/2023/04/logo1-1.png" // Replace with your logo URL
-            alt="Logo"
-            style={styles.logo}
-          />
-          <h1 style={styles.title}>Sign Up</h1>
+    <>
+      {!OTPSent ? (
+        <div style={styles.container}>
+          <div style={styles.leftSide}>
+            <div style={styles.formWrapper}>
+              <img
+                src="https://bpitindia.com/wp-content/uploads/2023/04/logo1-1.png" // Replace with your logo URL
+                alt="Logo"
+                style={styles.logo}
+              />
+              <h1 style={styles.title}>Sign Up</h1>
 
-          {error && (
-            <p style={{ ...styles.message, ...styles.error }}>{error}</p>
-          )}
-          {success && (
-            <p style={{ ...styles.message, ...styles.success }}>{success}</p>
-          )}
+              {error && (
+                <p style={{ ...styles.message, ...styles.error }}>{error}</p>
+              )}
+              {success && (
+                <p style={{ ...styles.message, ...styles.success }}>
+                  {success}
+                </p>
+              )}
 
-          <form style={styles.form} onSubmit={handleSubmit}>
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-user" style={styles.icon}></i>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Enter your first name"
-                  style={styles.input}
-                  required
-                />
-              </div>
+              <form style={styles.form}>
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-user" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Enter your first name"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-user" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="Enter your last name"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-envelope" style={styles.icon}></i>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-lock" style={styles.icon}></i>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your password"
+                      style={styles.input}
+                      required
+                    />
+                    <i
+                      className={`fas ${
+                        showPassword ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                      style={styles.icon}
+                      onClick={togglePasswordVisibility}
+                    ></i>
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-lock" style={styles.icon}></i>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Confirm your password"
+                      style={styles.input}
+                      required
+                    />
+                    <i
+                      className={`fas ${
+                        showPassword ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                      style={styles.icon}
+                      onClick={togglePasswordVisibility}
+                    ></i>
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-building" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="branch"
+                      name="branch"
+                      value={branch}
+                      onChange={(e) => setBranch(e.target.value)}
+                      placeholder="Enter your branch"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-calendar" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="batchYear"
+                      name="batchYear"
+                      value={batchYear}
+                      onChange={(e) => setBatchYear(e.target.value)}
+                      placeholder="Enter your batch year"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-id-badge" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="enrollmentNo"
+                      name="enrollmentNo"
+                      value={enrollmentNo}
+                      onChange={(e) => setEnrollmentNo(e.target.value)}
+                      placeholder="Enter your enrollment number"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  style={styles.button}
+                  onClick={handleSubmit}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.buttonHover.backgroundColor)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.button.backgroundColor)
+                  }
+                >
+                  Sign Up
+                </button>
+
+                <div style={styles.links}>
+                  <Link to="/login" style={styles.link}>
+                    Already have an account? Log In
+                  </Link>
+                </div>
+              </form>
             </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-user" style={styles.icon}></i>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Enter your last name"
-                  style={styles.input}
-                  required
-                />
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-envelope" style={styles.icon}></i>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  style={styles.input}
-                  required
-                />
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-lock" style={styles.icon}></i>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  style={styles.input}
-                  required
-                />
-                <i
-                  className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
-                  style={styles.icon}
-                  onClick={togglePasswordVisibility}
-                ></i>
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-lock" style={styles.icon}></i>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm your password"
-                  style={styles.input}
-                  required
-                />
-                <i
-                  className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
-                  style={styles.icon}
-                  onClick={togglePasswordVisibility}
-                ></i>
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-building" style={styles.icon}></i>
-                <input
-                  type="text"
-                  id="branch"
-                  name="branch"
-                  value={branch}
-                  onChange={(e) => setBranch(e.target.value)}
-                  placeholder="Enter your branch"
-                  style={styles.input}
-                  required
-                />
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-calendar" style={styles.icon}></i>
-                <input
-                  type="text"
-                  id="batchYear"
-                  name="batchYear"
-                  value={batchYear}
-                  onChange={(e) => setBatchYear(e.target.value)}
-                  placeholder="Enter your batch year"
-                  style={styles.input}
-                  required
-                />
-              </div>
-            </div>
-
-            <div style={styles.fieldContainer}>
-              <div style={styles.inputContainer}>
-                <i className="fas fa-id-badge" style={styles.icon}></i>
-                <input
-                  type="text"
-                  id="enrollmentNo"
-                  name="enrollmentNo"
-                  value={enrollmentNo}
-                  onChange={(e) => setEnrollmentNo(e.target.value)}
-                  placeholder="Enter your enrollment number"
-                  style={styles.input}
-                  required
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              style={styles.button}
-              onClick={(e) => handleSubmit(e)}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  styles.buttonHover.backgroundColor)
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  styles.button.backgroundColor)
-              }
-            >
-              Sign Up
-            </button>
-
-            <div style={styles.links}>
-              <Link to="/login" style={styles.link}>
-                Already have an account? Log In
-              </Link>
-            </div>
-          </form>
+          </div>
+          <div style={styles.rightSide}>
+            <img
+              src="https://img.freepik.com/premium-vector/3d-account-login-password-form_165488-4522.jpg"
+              alt="Signup Background"
+              style={styles.image}
+            />
+          </div>
         </div>
-      </div>
-      <div style={styles.rightSide}>
-        <img
-          src="https://img.freepik.com/premium-vector/3d-account-login-password-form_165488-4522.jpg"
-          alt="Signup Background"
-          style={styles.image}
-        />
-      </div>
-    </div>
+      ) : (
+        <div style={styles.container}>
+          <div style={styles.leftSide}>
+            <div style={styles.formWrapper}>
+              <img
+                src="https://bbijtm.bpitindia.ac.in/images/logo-websitebg.png" // Replace with your logo URL
+                alt="Logo"
+                style={styles.logo}
+              />
+              <h1 style={styles.title}>Enter OTP</h1>
+              <p className="my-8">
+                OTP has been sent to your email, please check!
+              </p>
+              {error && (
+                <p style={{ ...styles.message, ...styles.error }}>{error}</p>
+              )}
+              {success && (
+                <p style={{ ...styles.message, ...styles.success }}>
+                  {success}
+                </p>
+              )}
+              <form style={styles.form} onSubmit={handleSubmit}>
+                <div style={styles.fieldContainer}>
+                  <div style={styles.inputContainer}>
+                    <i className="fas fa-envelope" style={styles.icon}></i>
+                    <input
+                      type="text"
+                      id="otp"
+                      name="otp"
+                      value={EnteredOTP}
+                      onChange={(e) => setEnteredOTP(e.target.value)}
+                      placeholder="Enter OTP"
+                      style={styles.input}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  style={styles.button}
+                  onClick={handleSubmit}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.buttonHover.backgroundColor)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.button.backgroundColor)
+                  }
+                >
+                  Submit OTP
+                </button>
+              </form>
+            </div>
+          </div>
+          <div style={styles.rightSide}>
+            <img
+              src="https://cdn3d.iconscout.com/3d/premium/thumb/reset-password-9964677-8341655.png?f=webp"
+              alt="Reset Password Background"
+              style={styles.image}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

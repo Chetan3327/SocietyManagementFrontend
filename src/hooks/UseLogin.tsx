@@ -1,29 +1,40 @@
-import { useState, FormEvent } from "react";
-import axios from "@/AxiosWrapper";
+import { useState } from "react";
+import axios from "axios";
+
 const useLogin = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post("/login", { email, password });
-      setSuccess("Login successful!");
-      setError("");
-      // Redirect or handle success as needed
-      // window.location.href = '/dashboard';
-    } catch (error) {
-      setError("Failed to log in. Please try again.");
-      setSuccess("");
-    }
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://societybackend-go.onrender.com/login",
+        {
+          Email: email,
+          Password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      setSuccess("Login successful!");
+      setError("");
+      console.log(response.data);
+      // Handle successful login (e.g., save token, redirect, etc.)
+    } catch (err) {
+      setError("Login failed. Please check your credentials.");
+      setSuccess("");
+      console.error(err);
+    }
   };
 
   return {

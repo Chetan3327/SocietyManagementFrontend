@@ -1,7 +1,6 @@
 import React from "react";
 import useLogin from "@/hooks/UseLogin";
 import { Link } from "react-router-dom";
-// import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
 
 const styles = {
   container: {
@@ -139,7 +138,7 @@ const LoginPage: React.FC = () => {
           className="flex flex-col justify-center"
         >
           <img
-            src="https://bpitindia.com/wp-content/uploads/2023/04/logo1-1.png" // Replace with your logo URL
+            src="https://bpitindia.com/wp-content/uploads/2023/04/logo1-1.png"
             alt="Logo"
             style={styles.logo}
           />
@@ -150,7 +149,7 @@ const LoginPage: React.FC = () => {
           {success && (
             <p style={{ color: "green", textAlign: "center" }}>{success}</p>
           )}
-          <form style={styles.form} onSubmit={handleSubmit}>
+          <form style={styles.form}>
             <div style={styles.fieldContainer}>
               <div style={styles.inputContainer}>
                 <i className="fas fa-envelope" style={styles.icon}></i>
@@ -188,21 +187,10 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
 
-            <div style={styles.rememberMeContainer}>
-              <input
-                type="checkbox"
-                id="rememberMe"
-                name="rememberMe"
-                style={styles.rememberMeCheckbox}
-              />
-              <label htmlFor="rememberMe" style={styles.rememberMeLabel}>
-                Remember me
-              </label>
-            </div>
-
             <button
               type="submit"
               style={styles.button}
+              onClick={(e) => handleSubmit(e)}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor =
                   styles.buttonHover.backgroundColor)
@@ -212,7 +200,7 @@ const LoginPage: React.FC = () => {
                   styles.button.backgroundColor)
               }
             >
-              Log In
+              Login
             </button>
 
             <div style={styles.links}>
