@@ -9,7 +9,7 @@ const Member_Cards = () => {
   return (
     <>
       <Card className="p-2 m-4 mt-5">
-        <CardContent className="p-3 w-full flex-col gap-2 md:flex-row grow justify-center md:gap-10">
+        <CardContent className="p-3 w-full flex flex-row gap-2 justify-center md:gap-10">
           <Card className="p-6 bg-blue-800 w-full md:w-4/12 text-white flex flex-col gap-8 ">
             <div className="p-2 flex justify-between gap-10 ">
               <section>

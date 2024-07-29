@@ -97,11 +97,11 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/allgallery" element={<AllGallery />} />
           {/* <Route path="/society/:id" element={<Society />}  */}
-          {/* <Route path="/societygallery/:id" element={<SocietyGallery />} /> */}
+          <Route path="/societygallery" element={<SocietyGallery />} />
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
-          {/* <Route path="/members/:id" element={<Evaluation />} /> */}
+          <Route path="/members/:id" element={<Evaluation />} />
           {/* <Route path="/Societymembers/:id" element={<SocietyMembers />} /> */}
           <Route path="/gallery/:Societyid/:ImageId" element={<ViewPhoto />} />
           <Route path="/ChangePassword" element={<ChangePassword />} />
@@ -122,9 +122,8 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs />} />
 
           <Route path="/society/:id" element={<Society />}>
-          <Route path="Societymembers" element={<SocietyMembers />} />
+            <Route path="Societymembers" element={<SocietyMembers />} />
             <Route path="societygallery" element={<SocietyGallery />} />
-            <Route path="members" element={<Evaluation />} />
             <Route path="events" element={<Events />} />
             <Route path="news" element={<News />} />
             <Route path="openings" element={<Openings />} />
@@ -132,6 +131,7 @@ const App = () => {
             <Route path="testimonials" element={<Testimonials />} />
             <Route path="news" element={<News />} />
             <Route path="evaluation" element={<Evaluation />} />
+            <Route path="members" element={<SocietMembers />} />
           </Route>
         </Routes>
       </div>
