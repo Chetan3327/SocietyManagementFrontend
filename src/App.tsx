@@ -1,54 +1,53 @@
 import {
   Route,
-  BrowserRouter as Router,
   Routes,
-  useLocation,
+  useLocation
 } from "react-router-dom";
-import Home from "./pages/Home";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Navbar from "./components/navbar";
-import Openings from "./pages/Openings";
-import Coordinators from "./pages/Coordinators";
-import Testimonials from "./pages/Testimonials";
-import Roles from "./pages/Roles";
-import SocietyForm from "./pages/SocietyForm";
-import Allsocities from "./pages/Allsociety/Allsocities";
-import AboutUs from "./components/Page-Components/AboutUs";
-import Vision from "./components/Page-Components/Vision";
-import News from "./components/Page-Components/News";
-import AllNews from "./components/Page-Components/AllNews";
-import SocietyQueryForm from "./components/Page-Components/SocietyQueryForm";
-import Evaluation from "./pages/Evaluation";
-import Gallery from "./pages/Gallery";
-import ContactUs from "./pages/ContactUs";
-import Footer from "./components/Common-Components/Footer";
+import "slick-carousel/slick/slick.css";
+import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
+import Admin_Coordinators from "./Admin_Panel/Page/Coordinators";
+import Admin_Members from "./Admin_Panel/Page/Members";
+import Admin_News from "./Admin_Panel/Page/News";
+import Admin_Queries from "./Admin_Panel/Page/Queries";
 import FeedbackButton from "./components/Common-Components/FeedbackButton";
 import FeedbackForm from "./components/Common-Components/FeedbackForm";
-import ScrollToTop from "./components/ScrollToTop";
-import Society from "./pages/Society";
-import SocietyGallery from "./pages/SocietyGallery";
-import SocietMembers from "./components/Page-Components/SocietMembers";
-import AllGallery from "./pages/AllGallery";
+import Footer from "./components/Common-Components/Footer";
 import Secondary_navbar from "./components/Common-Components/Secondary_navbar";
-import StudentLogin from "./pages/StudentLogin";
+import Navbar from "./components/navbar";
+import AboutUs from "./components/Page-Components/AboutUs";
+import AllNews from "./components/Page-Components/AllNews";
+import CreateEventForm from "./components/Page-Components/CreateEventForm";
 import Events from "./components/Page-Components/Events/Events";
+import News from "./components/Page-Components/News";
+import SocietMembers from "./components/Page-Components/SocietMembers";
+import SocietyQueryForm from "./components/Page-Components/SocietyQueryForm";
+import Vision from "./components/Page-Components/Vision";
+import ScrollToTop from "./components/ScrollToTop";
+import AllGallery from "./pages/AllGallery";
+import Allsocities from "./pages/Allsociety/Allsocities";
+import Become_Member_Form from "./pages/Become_Member_Form";
+import ChangePassword from "./pages/ChangePassword";
+import ContactUs from "./pages/ContactUs";
+import Coordinators from "./pages/Coordinators";
+import Evaluation from "./pages/Evaluation";
+import Gallery from "./pages/Gallery";
+import Home from "./pages/Home";
+import LoginPage from "./pages/Login";
+import Openings from "./pages/Openings";
+import OTP from "./pages/OTP";
+import ResetPasswordPage from "./pages/ResetPassword";
+import Roles from "./pages/Roles";
+import SignupPage from "./pages/SignUp";
+import Society from "./pages/Society";
+import SocietyMembers from "./pages/Society_Members";
+import SocietyForm from "./pages/SocietyForm";
+import SocietyGallery from "./pages/SocietyGallery";
 import Societyjoiningform from "./pages/Societyjoiningform";
 import Societyjoiningrequst from "./pages/Societyjoiningrequst";
-import CreateEventForm from "./components/Page-Components/CreateEventForm";
-import Admin_News from "./Admin_Panel/Page/News";
-import Admin_Members from "./Admin_Panel/Page/Members";
-import Admin_Queries from "./Admin_Panel/Page/Queries";
-import SocietyMembers from "./pages/Society_Members";
+import StudentLogin from "./pages/StudentLogin";
+import Testimonials from "./pages/Testimonials";
 import ViewPhoto from "./pages/ViewPhoto";
-import Become_Member_Form from "./pages/Become_Member_Form";
-import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
-import LoginPage from "./pages/Login";
-import SignupPage from "./pages/SignUp";
-import ResetPasswordPage from "./pages/ResetPassword";
-import OTP from "./pages/OTP";
-import ChangePassword from "./pages/ChangePassword";
-import Admin_Coordinators from "./Admin_Panel/Page/Coordinators";
 
 const App = () => {
   const location = useLocation();

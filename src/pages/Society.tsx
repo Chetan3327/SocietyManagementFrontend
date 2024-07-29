@@ -1,5 +1,4 @@
 // import GetInTouchForm from "@/components/Page-Components/GetInTouchForm";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -22,6 +21,7 @@ import {
 //   Mail,
 //   Twitter,
 // } from "lucide-react";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import drishti from "../assets/drishti-hero.png";
@@ -53,7 +53,7 @@ import latestnews from "../assets/latestnews.png";
 
 type Society = {
   SocietyName: string;
-  Societytype:string;
+  SocietyType:string;
   SocietyHead: string;
   SocietyDescription: string;
   DateOfRegistration: string;
@@ -62,91 +62,42 @@ type Society = {
   // Testimonials: Testimonial[];
 };
 
-const fakeData: Society = {
-  SocietyName: "Namespace",
-  SocietyHead: "John Doe",
-  Societytype:"Technical",
-  DateOfRegistration:"2019",
-  SocietyDescription: "A society dedicated to tech enthusiasts.   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure corrupti fugit architecto corporis similique aliquam voluptas tempora ducimus inventore quia!",
-  // News: [
-  //   {
-  //     NewsID: "1",
-  //     Title: "Tech Conference 2024",
-  //     Author: "Jane Smith",
-  //   },
-  //   {
-  //     NewsID: "2",
-  //     Title: "AI Workshop",
-  //     Author: "Alex Johnson",
-  //   },
-  // ],
-  // StudentProfiles: [
-  //   {
-  //     EnrollmentNo: "123",
-  //     FirstName: "Alice",
-  //     LastName: "Williams",
-  //     ProfilePicture: "https://via.placeholder.com/200",
-  //     GithubProfile: "https://github.com/alice",
-  //     LinkedInProfile: "https://linkedin.com/in/alice",
-  //     TwitterProfile: "https://twitter.com/alice",
-  //     DomainExpertise: "Web Development",
-  //     SocietyPosition: "President",
-  //     Email: "alice@example.com",
-  //   },
-  //   {
-  //     EnrollmentNo: "456",
-  //     FirstName: "Bob",
-  //     LastName: "Brown",
-  //     ProfilePicture: "https://via.placeholder.com/200",
-  //     GithubProfile: "https://github.com/bob",
-  //     LinkedInProfile: "https://linkedin.com/in/bob",
-  //     TwitterProfile: "https://twitter.com/bob",
-  //     DomainExpertise: "Machine Learning",
-  //     SocietyPosition: "Vice President",
-  //     Email: "bob@example.com",
-  //   },
-  // ],
-  // Testimonials: [
-  //   {
-  //     EnrollmentNo: "123",
-  //     TestimonialDescription:
-  //       "Being part of this society has been a great experience.",
-  //   },
-  //   {
-  //     EnrollmentNo: "456",
-  //     TestimonialDescription: "I've learned so much and made many friends.",
-  //   },
-  // ],
+const formatDate = (dateString: string): string => {
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
 };
 
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const Society = () => {
   const { id } = useParams();
   const [society, setSociety] = useState<Society | null>(null);
   const location = useLocation();
   console.log(location)
+
   useEffect(() => {
-    setTimeout(() => {
-      setSociety(fakeData);
-    }, 1000);
-  }, [id]);
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/societies/${id}`)
+      console.log('data', res.data[0])
+      setSociety(res.data[0])
+    }
+    fetchsociety()
+  }, [])
 
   if (!society) return <div>Loading...</div>;
   const path = location.pathname === `/society/${id}`
   return (
     <div>
-   
       <Outlet/>
       {path && (
         <div>
       <div className="w-full flex justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
         <div className="ml-20 pt-10">
           <h3 className="text-3xl text-purple-700 font-bold">
-            Welcome to {society.SocietyName}:  {society.Societytype} Society
+            Welcome to {society.SocietyName}:  {society.SocietyType} Society
           </h3>
-          <h2 className="text-3xl text-red-500 font-bold">
-            {society.SocietyHead}
-          </h2>
-          <p className="text-muted-foreground">Building a Legacy Since {society.DateOfRegistration}</p>
+          <p className="text-muted-foreground">Building a Legacy Since {formatDate(society.DateOfRegistration)}</p>
         </div>
         <div>
           <img src={drishti} alt="" />
@@ -169,7 +120,6 @@ const Society = () => {
                 <p>{society.SocietyDescription}</p>
               </CardContent>
               <CardFooter className="flex justify-center">
-                <Button className="bg-yellow-500">Read More</Button>
               </CardFooter>
             </Card>
           </div>
