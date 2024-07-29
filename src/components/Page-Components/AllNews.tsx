@@ -1,7 +1,7 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
 
 type NewsItem = {
   title: string;
@@ -11,52 +11,18 @@ type NewsItem = {
 };
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-let dummynews: NewsItem[] = [
-  {
-    title: "Hello there, testing purpose heading",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "2024-07-26",
-    societyName: "Author Name",
-  },
-  {
-    title: "Hello there, testing purpose heading",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "2024-07-26",
-    societyName: "Author Name",
-  },
-  // Add more news items if needed
-];
-
 const AllNews = () => {
-  const [latestNews, setLatestNews] = useState<NewsItem[]>([]);
-
+  const [news, setNews] = useState(null)
   useEffect(() => {
-    // Set dummynews to state
-    setLatestNews(dummynews);
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/news`)
+      console.log('data', res.data)
+      setNews(res.data)
+    }
+    fetchsociety()
+  }, [])
+  if (!news) return <div>Loading...</div>;
 
-    // Uncomment the below code to fetch news from backend
-    // const fetchNews = async () => {
-    //   try {
-    //     const res = await axios.get(`${BACKEND_URL}/news`);
-    //     const newsData = res.data;
-
-    //     const formattedNews = newsData.map((news: any) => ({
-    //       title: news.Title,
-    //       description: news.Description,
-    //       date: news.DateOfNews,
-    //       societyName: news.SocietyName,
-    //     }));
-
-    //     setLatestNews(formattedNews);
-    //   } catch (error) {
-    //     console.error("Failed to fetch news:", error);
-    //   }
-    // };
-
-    // fetchNews();
-  }, []);
 
   return (
     <div className="container space-y-3">
@@ -80,23 +46,23 @@ const AllNews = () => {
         ALL NEWS
       </h2>
       <div className="flex flex-col gap-y-4">
-        {latestNews.map(({ title, description, date, societyName }, index) => (
+        {news.map(({ Title, Description, DateOfNews, SocietyName }, index) => (
           <Card
             key={index}
             className="hover:border-gray-900 border-md hover:transition-all hover:scale-105 hover:duration-1000 border-2 border-black border-opacity-50"
           >
             <CardContent className="pt-5 gap-10">
               <div>
-                <h2 className="font-bold text-xl text-center">{title}</h2>
+                <h2 className="font-bold text-xl text-center">{Title}</h2>
                 <p className="text-muted-foreground text-center pt-3">
-                  by {societyName}
+                  by {SocietyName}
                 </p>
               </div>
               <div className="mt-4">
-                <p>{description}</p>
+                <p>{Description}</p>
               </div>
               <p className="opacity-70 text-center my-4">
-                Published on {format(new Date(date), "MMMM dd, yyyy")}
+                Published on {format(new Date(DateOfNews), "MMMM dd, yyyy")}
               </p>
             </CardContent>
           </Card>

@@ -1,13 +1,6 @@
 import { Camera, ThumbsUp } from "lucide-react";
 
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
   Card,
   CardContent,
   CardDescription,
@@ -15,18 +8,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import women from "../assets/Society_Img/wibd.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Link } from "react-router-dom";
 import anveshan from "../assets/Society_Img/anveshan.jpg";
 import avaran from "../assets/Society_Img/avaran.jpg";
 import chromavita from "../assets/Society_Img/chromavita.jpg";
 import gdsc from "../assets/Society_Img/gdsc.jpg";
 import hash_define from "../assets/Society_Img/hash_define.jpg";
-import ieee_wie from "../assets/Society_Img/ieee_wie.jpg";
 import ieee from "../assets/Society_Img/ieee.jpg";
+import ieee_wie from "../assets/Society_Img/ieee_wie.jpg";
 import kalam from "../assets/Society_Img/kalam.jpg";
 import namespace from "../assets/Society_Img/namespace.jpg";
 import opticlick from "../assets/Society_Img/opticlick.jpg";
-import { Link } from "react-router-dom";
+import women from "../assets/Society_Img/wibd.jpg";
 
 type Events = {
   image: string;

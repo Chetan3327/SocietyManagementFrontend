@@ -78,7 +78,7 @@ const Society = () => {
 
   useEffect(() => {
     const fetchsociety = async () => {
-      const res = await axios.get(`${BACKEND_URL}/societies/${id}`)
+      const res = await axios.get(`${BACKEND_URL}/news/${id}`)
       console.log('data', res.data[0])
       setSociety(res.data[0])
     }

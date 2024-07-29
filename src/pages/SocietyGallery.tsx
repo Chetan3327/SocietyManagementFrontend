@@ -5,18 +5,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import bpit from "../assets/bpit.jpeg";
 import bpit1 from "../assets/bpit1.jpeg";
 import bpit2 from "../assets/bpit2.jpeg";
 import bpit3 from "../assets/bpit3.jpeg";
 import bpit4 from "../assets/bpit4.jpeg";
-import hall from "../assets/hall.jpeg";
-import eyes from "../assets/eyes.jpeg";
-import pen from "../assets/pen_hand.jpeg";
-import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { ChevronRight, Star } from "lucide-react";
-import GalleryGrid from "./GallaryGrid";
 type Gallery = {
   img: string;
 };
@@ -66,7 +62,20 @@ const galleryItems: any = [
   },
   // Add more items as needed
 ];
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const SocietyGallery = () => {
+  const { id } = useParams();
+  const [gallery, setGallery] = useState(null)
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/galleries/${id}`)
+      console.log('data', res.data)
+      setGallery(res.data)
+    }
+    fetchsociety()
+  }, [])
+
+  if (!gallery) return <div>Loading...</div>;
   return (
     <>
       <h1 className="text-center text-2xl bg-violet-100 p-3">Namespace</h1>
@@ -80,10 +89,10 @@ const SocietyGallery = () => {
         >
           <CarouselPrevious />
           <CarouselContent>
-            {gallery.map(({ img }, index: number) => (
+            {gallery.map(({ SocietyID, GalleryID, Image }, index: number) => (
               <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/5">
-                <Link to="/gallery/:Societyid/:ImageId">
-                  <img src={img} alt="bpit" className="object-fit h-40" />
+                <Link to={`/gallery/${SocietyID}/${GalleryID}`}>
+                  <img src={Image} alt="bpit" className="object-fit h-40" />
                 </Link>
               </CarouselItem>
             ))}
@@ -91,11 +100,6 @@ const SocietyGallery = () => {
 
           <CarouselNext />
         </Carousel>
-
-        <h1 className="text-center w-10/12 align-center bg-violet-500 text-white mt-5 p-3 text-xl">
-          Photo Album
-        </h1>
-        <GalleryGrid items={galleryItems} />
       </div>
     </>
   );
