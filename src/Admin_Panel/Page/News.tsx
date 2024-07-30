@@ -1,7 +1,10 @@
 import { BookCopy, Filter } from "lucide-react";
 import News_Table from "../Page_Components/News/News_Table";
+import Sidebar from "../Page_Components/Sidebar/Sidebar";
 const Admin_News = () => {
   return (
+    <div className="flex gap-3">
+      <Sidebar/>
     <div className=" flex flex-col w-full justify-center mt-6 items-center">
       <div className="w-10/12 flex justify-between items-center p-2">
         <button className="px-3 flex gap-6 py-1 bg-blue-700 text-white border-2 items-center rounded-lg">
@@ -12,6 +15,7 @@ const Admin_News = () => {
       </div>
 
       <News_Table />
+    </div>
     </div>
   );
 };

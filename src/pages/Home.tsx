@@ -21,17 +21,17 @@ type Review = {
 
 const reviews: Review[] = [
   {
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero.",
+    desc: "Being part of the Namespace Society has been a transformative experience for me. It provided me with hands-on opportunities to work on cutting-edge tech projects and collaborate with like-minded peers who share my passion for technology. The workshops and hackathons organized by the society have equipped me with invaluable skills and insights, preparing me for a successful career in the tech industry. Namespace is more than just a society; it's a family where innovation and creativity thrive.",
     name: "Rishabh Kumar",
     batch: "IT-B,2019-2023",
   },
   {
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero.",
+    desc: "Namespace Society was instrumental in my personal and professional growth during my college years. The mentorship from senior members and guidance from industry experts introduced me to new technologies and inspired me to pursue a career in tech. The collaborative environment fostered by the society encouraged me to take on leadership roles, and the friendships I made have lasted beyond graduation. Namespace Society truly embodies the spirit of innovation and learning.",
     name: "Rishabh Kumar",
     batch: "IT-B,2019-2023",
   },
   {
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero. Laboriosam minus odit, perferendis dolorem quas, assumenda officia odio magnam animi veniam sint ipsa quos incidunt maiores tempora possimus, corporis est vero.",
+    desc: "As a freshman, I was initially intimidated by the fast-paced world of technology, but joining the Namespace Society was the best decision I made. The welcoming atmosphere and the supportive community made it easy to dive in and start exploring. From participating in coding competitions to attending insightful talks by industry leaders, every experience has been incredibly enriching. Namespace Society has ignited my passion for tech and motivated me to push my boundaries",
     name: "Rishabh Kumar",
     batch: "IT-B,2019-2023",
   },
@@ -39,7 +39,7 @@ const reviews: Review[] = [
 
 const Home = () => {
   return (
-    <>
+    <div className ="w-full overflow-x-hidden">
       <div className="relative w-full mx-auto">
         <img
           className="h-screen md:h-80 w-full"
@@ -99,11 +99,8 @@ const Home = () => {
               <p className="text-lg">Stay Informed and Engaged</p>
             </div>
             <p className="mt-14 text-xl">
-              Welcome to our news and announcements section. Here you'll find
-              the latest updates , important notices and information about
-              upcoming events . Stay connectedand make the most of your society
-              experience.import HighlightText from
-              './../components/ui/HighlightText';
+            Welcome to the News and Announcements Section of Our College Society! Stay informed about the latest happenings and developments within our vibrant community. This is your go-to source for updates on our society’s events, initiatives, and achievements.
+
             </p>
             <Link to="/all-news">
               <Button className="mt-16 text-lg transition transform duration-300 ease-in-out hover:scale-110 bg-blue-500">
@@ -122,9 +119,7 @@ const Home = () => {
               <p className="text-lg">Our dedicated faculty coordinators</p>
             </div>
             <p className="mt-14 text-xl">
-              Meet our committed faculty coordinators who are dedicated to guide
-              and support our socities. They play a crucial role in fostering a
-              collaborative and enriching environment.
+            The Faculty Coordinators of our society play a pivotal role in bridging the gap between students and the academic world, providing guidance, mentorship, and support to ensure the smooth functioning of our activities. They bring a wealth of experience and expertise, enriching our society with valuable insights and innovative ideas. 
             </p>
             <Link to="/coordinators">
               <Button className="mt-16 text-lg transition transform duration-300 ease-in-out hover:scale-110 bg-blue-500">
@@ -158,18 +153,7 @@ const Home = () => {
               </h1>
 
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Molestias nesciunt, tenetur deleniti exercitationem atque saepe
-                aut corporis eum repellat, quidem aliquam sint dolorem nemo
-                dignissimos commodi earum modi! Esse corporis dolore sunt amet
-                eius neque non provident aut tempora fuga beatae itaque eligendi
-                ipsam similique iure, hic numquam? Sed veniam illum unde et amet
-                pariatur sequi illo, atque eligendi. Laborum doloribus adipisci
-                vel dignissimos et laboriosam repellat architecto! Harum rerum
-                expedita iusto dolor doloremque tenetur quidem cupiditate facere
-                inventore, neque soluta adipisci aspernatur illo laudantium
-                doloribus maxime? At distinctio ab id dignissimos dolorum, non,
-                assumenda perspiciatis, mollitia consequuntur rem eos!
+              Welcome to the Achievements section of our society, where we proudly showcase the remarkable accomplishments of our talented members. Our society has been at the forefront of innovation and excellence, consistently pushing boundaries and setting new standards in various fields. Over the years, our members have achieved numerous accolades, from winning prestigious competitions and hackathons to publishing groundbreaking research papers and leading impactful community projects. Each achievement reflects the dedication, creativity, and hard work of our society's members, as well as the collaborative spirit that drives us forward. We celebrate not only individual successes but also collective milestones that inspire others and contribute to our mission of fostering growth, learning, and leadership. Explore this section to learn more about the significant achievements that highlight our society's journey toward excellence.
               </p>
 
               <div className="border border-2 border-black shadow-md shadow-gray-200  rounded-lg relative mt-5 h-fit hidden md:block">
@@ -318,7 +302,7 @@ const Home = () => {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

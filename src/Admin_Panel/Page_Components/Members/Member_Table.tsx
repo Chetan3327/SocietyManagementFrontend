@@ -1,4 +1,4 @@
-import { Info, UserRoundPlus, UserRoundX } from "lucide-react";
+import { Edit, Info,  Trash, UserRoundPlus, UserRoundX } from "lucide-react";
 import { Card, CardContent } from "../../../components/ui/card";
 import student from '../../../assets/studentpic.jpeg'
 import {
@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../../components/ui/table";
+import { Button } from "@/components/ui/button";
 
 const member=[
   {
@@ -64,7 +65,7 @@ const member=[
 const Member_Table = () => {
   return (
     <>
-      <Card className="m-4 mt-7">
+      <Card className=" mt-7">
         <CardContent className="p-2">
           <div className="flex flex-wrap gap-2 justify-between items-center px-3 w-full ">
             <input
@@ -107,6 +108,9 @@ const Member_Table = () => {
                 <TableHead className="font-bold text-center text-xl">
                   Society Contribution
                 </TableHead>
+                <TableHead className="font-bold text-center text-xl">
+                  Edit/Delete
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -123,15 +127,21 @@ const Member_Table = () => {
                         <h1 className="font-bold">{member.name}</h1>
                       </div>
                     </TableCell>
+                    
                     <TableCell className="text-center">{member.branch}</TableCell>
                     <TableCell className="text-center">{member.contact}</TableCell>
                     <TableCell className="text-center">
                       {member.email}
                     </TableCell>
-                    <TableCell className="flex justify-center">
-                      <button className="border-2 w-fit px-5 py-1 rounded-full">
+                    
+                    <TableCell >
+                      <Button className="border-2 w-fit px-5 py-1 rounded-full">
                         View Details
-                      </button>
+                      </Button>
+                    </TableCell>
+                    <TableCell className="flex justify-center gap-2">
+                      <Button ><Edit /></Button>
+                      <Button ><Trash /></Button>
                     </TableCell>
                   </TableRow>
                 );
