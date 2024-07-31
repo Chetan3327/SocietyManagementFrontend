@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import Question from "../Page_Components/Queries/Question";
 import Mostques from "../Page_Components/Queries/Mostques";
 import Querypie from "../Page_Components/Queries/Querypie";
+import Sidebar from "../Page_Components/Sidebar/Sidebar";
 const query = ["All Queries", "Answered Queries", "Unanswered Queries"];
 const Queries = () => {
   return (
+    <div className="flex gap-2">
+      <Sidebar/>
     <div className="w-full h-screen flex gap-10 flex-col items-center ">
       <Card className="p-3 m-2 w-10/12 mt-5">
         <CardContent className="flex justify-around items-center p-2">
@@ -27,6 +30,7 @@ const Queries = () => {
             <Mostques/>
         </div>
       </Card>
+    </div>
     </div>
   );
 };

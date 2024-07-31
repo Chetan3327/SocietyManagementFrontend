@@ -7,6 +7,8 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { Card } from "../../../components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash } from "lucide-react";
 const news=[
   {
     detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
@@ -61,6 +63,8 @@ const News_Table = () => {
                 <TableHead className="font-bold  text-xl">Category</TableHead>
               </TableRow>
             </TableHead>
+            
+            <TableHead className="font-bold text-center text-xl border-muted border-2">Edit/Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -75,6 +79,13 @@ const News_Table = () => {
                   <TableCell className="text-center ">{data.Date}</TableCell>
                   <TableCell className="text-center ">{data.society}</TableCell>
                   <TableCell className="text-center ">{data.type}</TableCell>
+                 
+                </TableCell>
+                <TableCell className=" border-muted border-2 ">
+                  <div className="flex flex-row justify-center  gap-2">
+                      <Button ><Edit /></Button>
+                      <Button ><Trash /></Button>
+                      </div>
                 </TableCell>
               </TableRow>
             );

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Ensure react-router-dom is installed
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom"; // Ensure react-router-dom is installed
 import {
   Table,
   TableBody,
@@ -9,6 +9,7 @@ import {
   TableHead,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button"; // Adjust import based on your button library
+import axios from "axios";
 
 // Replace 'student' with actual import if it's an image file
 const student = "path-to-student-image.jpg";
@@ -46,21 +47,34 @@ const MemberCard: React.FC<{ props: MemberType }> = ({ props }) => {
   return (
     <div className="flex items-center space-x-4">
       <img
-        src={props.image}
-        alt={props.name}
+        src={props.ProfilePicture}
+        alt={props.FirstName}
         className="w-16 h-16 rounded-full"
       />
       <div>
-        <h3 className="text-lg font-semibold">{props.name}</h3>
-        <p className="text-sm text-gray-600">{props.email}</p>
-        <p className="text-sm text-gray-600">{props.linkedin}</p>
-        <p className="text-sm text-gray-600">{props.x}</p>
+        <h3 className="text-lg font-semibold">{props.FirstName}</h3>
+        <p className="text-sm text-gray-600">{props.Email}</p>
+        <p className="text-sm text-gray-600">{props.LinkedInProfile}</p>
+        <p className="text-sm text-gray-600">{props.TwitterProfile}</p>
       </div>
     </div>
   );
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const SocietyMembers: React.FC = () => {
+  const { id } = useParams();
+  const [members, setMembers] = useState(null)
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/societies/members/${id}`)
+      console.log('data', res.data)
+      setMembers(res.data)
+    }
+    fetchsociety()
+  }, [])
+
+  if (!members) return <div>Loading...</div>;
   return (
     <div>
       <div className="py-8 px-6 lg:px-20 bg-white mt-10">
@@ -102,16 +116,16 @@ const SocietyMembers: React.FC = () => {
                     <MemberCard props={member} />
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {member.batch}
+                    {member.BatchYear}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {member.enrollmentNumber}
+                    {member.EnrollmentNo}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {member.branch}
+                    {member.Branch}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {member.skills}
+                    {member.DomainExpertise}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
                     <Button className="bg-blue-500 text-white py-1 px-3 rounded">

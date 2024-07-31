@@ -10,7 +10,7 @@ interface Testimonial {
 }
 
 // Define the component
-const TestimonialCard: React.FC = () => {
+const TestimonialCard: React.FC = ({Testimonials}) => {
   // Array of testimonials
   const testimonials: Testimonial[] = [
     {
@@ -60,16 +60,16 @@ const TestimonialCard: React.FC = () => {
           </div>
           <TestimonialSlider />
           <div className="">
-            {testimonials.map(({ name, imgSrc, text }, index) => (
+            {Testimonials.map(({ FirstName, ProfilePicture, TestimonialDescription }, index) => (
               <div key={index} className="">
                 <div className=" mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
                   <div className=" flex mb-4 items-center">
                     <div className="overflow-hidden rounded-full w-10 h-10 bg-gray-50 border border-gray-200">
-                      <img src={imgSrc} alt={name} />
+                      <img src={ProfilePicture} alt={FirstName} />
                     </div>
                     <div className="flex-grow pl-3">
                       <h6 className="font-bold text-sm uppercase text-gray-600">
-                        {name}
+                        {FirstName}
                       </h6>
                     </div>
                   </div>
@@ -78,7 +78,7 @@ const TestimonialCard: React.FC = () => {
                       <span className="text-lg leading-none italic font-bold text-gray-400 mr-1">
                         "
                       </span>
-                      {text}
+                      {TestimonialDescription}
                       <span className="text-lg leading-none italic font-bold text-gray-400 ml-1">
                         "
                       </span>

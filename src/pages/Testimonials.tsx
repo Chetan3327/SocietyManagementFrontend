@@ -1,6 +1,9 @@
 import TestimonialCard from "@/components/Page-Components/TestimonialCard";
 import TestimonialSlider from "@/components/Page-Components/TestimonialSlider";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 type Testimonial = {
   name: string;
@@ -39,8 +42,21 @@ const testimonials: Testimonial[] = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
   },
 ];
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const Testimonials = () => {
+  const [Testimonials, settestimonials ] = useState(null)
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/testimonials/society/${id}`)
+      console.log('data', res.data)
+      settestimonials(res.data)
+    }
+    fetchsociety()
+  }, [])
+
+  if (!Testimonials) return <div>Loading...</div>;
+
   return (
     <>
       <div className="container py-24 sm:py-0 space-y-20">
@@ -61,7 +77,7 @@ const Testimonials = () => {
           </div>
         </div>
 
-        <TestimonialCard />
+        <TestimonialCard Testimonials={Testimonials} />
       </div>
     </>
   );

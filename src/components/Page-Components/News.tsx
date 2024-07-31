@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import { Calendar } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 type newsItem = {
   title: string;
@@ -104,8 +104,20 @@ latestNews = latestNews.length > 3 ? latestNews.slice(0, 3) : latestNews;
 filteredNews =
   filteredNews.length > 3 ? filteredNews.slice(0, 2) : filteredNews;
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const News = () => {
+  const { id } = useParams();
   const [filteredDate, setFilteredDate] = useState<Date | null>(null);
+  const [news, setNews] = useState(null)
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/news/${id}`)
+      console.log('data', res.data)
+      setNews(res.data)
+    }
+    fetchsociety()
+  }, [])
+  if (!news) return <div>Loading...</div>;
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilteredDate(event.target.value ? new Date(event.target.value) : null);
@@ -115,6 +127,7 @@ const News = () => {
     ? filteredNews.filter((news) => news.date >= filteredDate)
     : filteredNews;
   const emptyFilteredNews = filteredNewsItems.length === 0;
+
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       <div
@@ -168,22 +181,17 @@ const News = () => {
           <div className="flex flex-col justify-center">
             <div className=" lg:mr-4 mb-4 lg:mb-0">
               <h3 className="text-2xl font-bold mb-4">Latest news </h3>
-              {latestNews.map((newsItem: newsItem, index) => (
-                <div key={index} className="flex items-start mb-4">
+              {news.map((newsItem: newsItem) => (
+                <div key={newsItem.NewsID} className="flex items-start mb-4">
                   <Calendar />
                   <div className="ml-2 mr-2">
-                    <h4 className="font-bold">{newsItem.title}</h4>
-                    <p className="text-sm mb-2">{newsItem.description}</p>
+                    <h4 className="font-bold">{newsItem.Title}</h4>
+                    <p className="text-sm mb-2">{newsItem.Description}</p>
                     <p className="text-sm font-semibold opacity-85">
-                      {newsItem.date}
+                      {newsItem.DateOfNews}
                     </p>
-                    <p className="text-gray-500 text-sm">{newsItem.author}</p>
+                    <p className="text-gray-500 text-sm">{newsItem.Author}</p>
                   </div>
-                  {/* <div className="">
-                    <span className="block text-gray-500">
-                      {formatDistanceToNow(newsItem.date)} ago
-                    </span>
-                  </div> */}
                 </div>
               ))}
             </div>

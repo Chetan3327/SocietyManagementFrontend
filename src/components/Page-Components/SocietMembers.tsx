@@ -1,4 +1,5 @@
-import { CoreTeamCard, MemberCard } from "./SocietyMembersCard";
+import { useState, useEffect } from "react";
+import { CoreTeamCard } from "./SocietyMembersCard";
 import {
   Carousel,
   CarouselContent,
@@ -6,7 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import student from "../../assets/student.jpg";
 import {
   Table,
   TableBody,
@@ -15,166 +15,60 @@ import {
   TableHeader,
   TableHead,
 } from "@/components/ui/table";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "../ui/button";
-
-const senior_council = [
-  {
-    name: "Shivani Sharma",
-    domain: "Open source & data science",
-    position: "president",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    about:
-      " officiis delectus alias eum, distinctio corrupti laborum iusto necessitatibus maiores quisquam inventore!",
-    image: student,
-  },
-  {
-    name: "Shivani Sharma",
-    domain: "Open source & data science",
-    position: "president",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    about:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, impedit aliquid! Recusandae neque quas voluptas voluptatum in incidunt officiis delectus alias eum, distinctio corrupti laborum iusto necessitatibus maiores quisquam inventore!",
-    image: student,
-  },
-  {
-    name: "Shivani Sharma",
-    domain: "Open source & data science",
-    position: "president",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    about:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, impedit aliquid! Recusandae neque quas voluptas voluptatum in incidunt officiis delectus alias eum, distinctio corrupti laborum iusto necessitatibus maiores quisquam inventore!",
-    image: student,
-  },
-  {
-    name: "Shivani Sharma",
-    domain: "Open source & data science",
-    position: "president",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    about:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, impedit aliquid! Recusandae neque quas voluptas voluptatum in incidunt officiis delectus alias eum, distinctio corrupti laborum iusto necessitatibus maiores quisquam inventore!",
-    image: student,
-  },
-];
-
-const members = [
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "04320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-  {
-    name: "Shivani Sharma",
-    image: student,
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "12320802722",
-    branch: "CSE",
-    skills: "proficient in pyhton and mysql",
-  },
-];
+import axios from "axios";
 
 const tableClass = "text-center text-gray-800 text-xl border-x";
 
-type memberType = {
-  name: string;
-  image: string;
-  linkedin: string;
-  x: string;
-  email: string;
-  batch: string;
-  enrollmentNumber: string;
-  branch: string;
-  skills: string;
+type MemberType = {
+  BatchYear: number;
+  Branch: string;
+  DomainExpertise: string;
+  Email: string;
+  EnrollmentNo: number;
+  FirstName: string;
+  GithubProfile: string;
+  LastName: string;
+  LinkedInProfile: string;
+  MobileNo: string;
+  ProfilePicture: string;
+  SocietyID: number;
+  SocietyPosition: string;
+  StudentAchievements: string | null;
+  StudentContributions: string;
+  StudentMarking: string | null;
+  Testimonials: string | null;
+  TwitterProfile: string;
+  MemberType: string;
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const SocietMembers = () => {
+  const { id } = useParams<{ id: string }>();
+  const [members, setMembers] = useState<MemberType[]>([]);
+  const [seniorCouncil, setSeniorCouncil] = useState<MemberType[]>([]);
+  const [juniorCouncil, setJuniorCouncil] = useState<MemberType[]>([]);
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        console.log(`${BACKEND_URL}/societies/members/${id}`)
+        const res = await axios.get(`${BACKEND_URL}/societies/members/${id}`);
+        const fetchedMembers: MemberType[] = res.data;
+        setMembers(fetchedMembers);
+        const seniors = fetchedMembers.filter(member => member.MemberType=== "Senior Council");
+        const juniors = fetchedMembers.filter(member => member.MemberType=== "Junior Council");
+        console.log(juniors)
+        setSeniorCouncil(seniors);
+        setJuniorCouncil(juniors);
+      } catch (error) {
+        console.error("Error fetching members:", error);
+      }
+    };
+    fetchMembers();
+  }, [id]);
+
   return (
     <>
       <div className="relative mx-auto w-full">
@@ -185,11 +79,11 @@ const SocietMembers = () => {
         />
         <div className="absolute inset-0 py-20 lg:py-28 ">
           <h2 className="text-black text-center text-4xl font-extrabold">
-            MEMBER SPOTLIGHTS{" "}
+            MEMBER SPOTLIGHTS
           </h2>
           <p className="text-white text-center text-xl font-extrabold">
             DETAILED INSIGHTS INTO LEARN ABOUT THE TALENTED INDIVIDUALS WHO
-            DRIVE OUR MISSION <br /> FORWARD, PARTICIPATION AND ACHIEVEMENTS
+            DRIVE OUR MISSION FORWARD, PARTICIPATION AND ACHIEVEMENTS
           </p>
         </div>
       </div>
@@ -199,19 +93,17 @@ const SocietMembers = () => {
           Get to know our team
         </h1>
         <p className="text-white">
-          Learn about the talented Individuals who <br /> drive our mission
-          forward
+          Learn about the talented Individuals who drive our mission forward
         </p>
 
         <div>
-          <div className="flex  w-full ">
-            <span className="text-white text-3xl font-bold pb-4 mr-2 mt-4 ">
+          <div className="flex w-full">
+            <span className="text-white text-3xl font-bold pb-4 mr-2 mt-4">
               Senior council
-            </span>{" "}
+            </span>
             <div className="mt-8 flex-grow border-t border-white"></div>
           </div>
           <Carousel
-            //   className="w-10/12 ml-20"
             opts={{
               align: "start",
               loop: true,
@@ -219,7 +111,7 @@ const SocietMembers = () => {
           >
             <CarouselPrevious />
             <CarouselContent>
-              {senior_council.map((member, index) => (
+              {seniorCouncil.map((member, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <CoreTeamCard props={member} />
                 </CarouselItem>
@@ -230,14 +122,13 @@ const SocietMembers = () => {
         </div>
 
         <div className="mt-10">
-          <div className="flex  w-full ">
-            <span className="text-white text-3xl font-bold pb-4 mr-2 mt-4 ">
+          <div className="flex w-full">
+            <span className="text-white text-3xl font-bold pb-4 mr-2 mt-4">
               Junior council
-            </span>{" "}
+            </span>
             <div className="mt-8 flex-grow border-t border-white"></div>
           </div>
           <Carousel
-            //   className="w-10/12 ml-20"
             opts={{
               align: "start",
               loop: true,
@@ -245,7 +136,7 @@ const SocietMembers = () => {
           >
             <CarouselPrevious />
             <CarouselContent>
-              {senior_council.map((member, index) => (
+              {juniorCouncil.map((member, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <CoreTeamCard props={member} />
                 </CarouselItem>
