@@ -63,9 +63,9 @@ const SecondaryNavbar = () => {
 
 
   return (
-    <div className="flex">
-      <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="w-screen flex justify-between flex-wrap px-4 py-3 bg-gray-200 text-gray-900">
+    <div className="flex w-full overflow-x-hidden">
+      <NavigationMenu className="w-full">
+        <NavigationMenuList className="w-screen overflow-x-hidden  px-5 flex justify-between flex-wrap  py-3 bg-gray-200 text-gray-900">
           {navItems.map((navItem, index) => {
   
             if(navItem.label==="Home"){

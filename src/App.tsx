@@ -6,10 +6,12 @@ import {
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import Activity_Feed from "./Admin_Panel/Page/Activity_Feed";
+import Admin_Setting from "./Admin_Panel/Page_Components/Settings/Settings";
 import Admin_Coordinators from "./Admin_Panel/Page/Coordinators";
 import Admin_Members from "./Admin_Panel/Page/Members";
 import Admin_News from "./Admin_Panel/Page/News";
 import Admin_Queries from "./Admin_Panel/Page/Queries";
+import Admin_Society from "./Admin_Panel/Page/SocietyActivity";
 import FeedbackButton from "./components/Common-Components/FeedbackButton";
 import FeedbackForm from "./components/Common-Components/FeedbackForm";
 import Footer from "./components/Common-Components/Footer";
@@ -62,6 +64,8 @@ const App = () => {
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
+        <Route path="/admin/setting" element={<Admin_Setting />} />
+        <Route path="/admin/society" element={<Admin_Society />} />
         <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );

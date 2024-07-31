@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import Sidebar from '../Sidebar/Sidebar'
 
 const ProfileSchema = z.object({
     FirstName: z.string().nonempty('This field is required'),
@@ -31,6 +32,8 @@ const Settings = () => {
         console.log(data)
     }
     return (
+        <div className="flex gap-2 w-screen overflow-x-hidden">
+            <Sidebar/>
         <div>
             <h1 className='text-2xl font-semibold mt-10 lg:pl-10 pl-4'>Account Settings</h1>
             <div >
@@ -116,6 +119,7 @@ const Settings = () => {
                     </div>
                 </form>
             </div>
+        </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {
     Table,
     TableBody,
@@ -78,9 +78,9 @@ const SocietyDetailsTable = () => {
 }
     }
   return (
-    <div className="py-8 px-6 lg:px-20 bg-white mt-10 ">
+    <div className=" bg-white mt-10 w-screen overflow-x-hidden">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="bg-gray-300 py-4 px-2 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0">
+                <div className="bg-gray-300 w-9/12 py-4 px-2 flex flex-col lg:flex-row  space-y-4 lg:space-y-0">
                    <input
                         {...register('name')}
                         type="text" placeholder="Search society "
@@ -93,8 +93,8 @@ const SocietyDetailsTable = () => {
                 </div>
                 {errors.name && <span className='text-red-500'>{errors.name.message}</span>}
             </form>
-                <div className="overflow-auto max-h-96 mt-10">
-                    <Table className=" bg-white border-t border-x shadow-lg table-auto ">
+                <div className="overflow-auto h-96 mt-10 w-9/12">
+                    <Table className=" bg-white border-t border-x w-full shadow-lg table-auto ">
                       <TableHeader>
                         <TableRow>
                             <TableHead rowSpan={2} className={tableClass}>S.NO.</TableHead>
