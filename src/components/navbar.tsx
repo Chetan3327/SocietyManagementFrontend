@@ -185,7 +185,7 @@ const Navbar = () => {
                   <li>
                     <button
                       type="button"
-                      onClick={handleLogin}
+                      // onClick={handleLogin}
                       className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
                     >
                       <Link to="/login">Login</Link>
