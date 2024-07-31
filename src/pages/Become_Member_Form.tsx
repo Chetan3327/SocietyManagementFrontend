@@ -39,7 +39,7 @@ const Become_Member_Form: React.FC = () => {
   };
 
   return (
-    <div className="py-8 px-6 lg:px-20 bg-white mt-10 w-7/12 mx-auto">
+    <div className="py-8 px-6 lg:px-20 bg-white mt-10 w-7/12 mx-auto text-black">
       <h2 className="font-bold text-center text-4xl mb-4 text-gray-800">
         Become a Member
       </h2>

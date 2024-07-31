@@ -95,8 +95,8 @@ const Home = () => {
           </div>
           <div className="">
             <div className="text-center bg-gray-200 py-2 transition transform duration-300 ease-in-out hover:scale-105">
-              <h2 className="text-4xl font-semibold">News And Announcements</h2>
-              <p className="text-lg">Stay Informed and Engaged</p>
+              <h2 className="text-4xl font-semibold text-black">News And Announcements</h2>
+              <p className="text-lg text-black">Stay Informed and Engaged</p>
             </div>
             <p className="mt-14 text-xl">
             Welcome to the News and Announcements Section of Our College Society! Stay informed about the latest happenings and developments within our vibrant community. This is your go-to source for updates on our society’s events, initiatives, and achievements.
@@ -115,8 +115,8 @@ const Home = () => {
         <div className=" grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="order-2 lg:order-1">
             <div className="text-center bg-gray-200 py-2 transform duration-300 ease-in-out hover:scale-105">
-              <h2 className="text-4xl font-semibold">Faculty Coordinators</h2>
-              <p className="text-lg">Our dedicated faculty coordinators</p>
+              <h2 className="text-4xl font-semibold text-black">Faculty Coordinators</h2>
+              <p className="text-lg text-black">Our dedicated faculty coordinators</p>
             </div>
             <p className="mt-14 text-xl">
             The Faculty Coordinators of our society play a pivotal role in bridging the gap between students and the academic world, providing guidance, mentorship, and support to ensure the smooth functioning of our activities. They bring a wealth of experience and expertise, enriching our society with valuable insights and innovative ideas. 

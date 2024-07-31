@@ -6,7 +6,6 @@ const styles = {
   container: {
     display: "flex",
     height: "100vh",
-    overflow: "hidden",
   },
   leftSide: {
     flex: "1",
@@ -131,7 +130,7 @@ const LoginPage: React.FC = () => {
   } = useLogin();
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="flex-col md:flex-row">
       <div style={styles.leftSide}>
         <div
           style={styles.formContainer}

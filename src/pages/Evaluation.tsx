@@ -65,7 +65,7 @@ const TabComponentStudent: React.FC = () => {
   const [github, setGithub] = useState<string>("");
 
   return (
-    <div className="tab-container flex flex-col">
+    <div className="tab-container flex flex-col text-black">
       <div className="content-wrapper w-10/12 mx-auto">
         <div className="content-container w-full">
           <img
