@@ -199,11 +199,9 @@ const Home = () => {
                         className="w-full rounded-lg mb-3"
                       />
                       <p className="text-white text-xs">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Earum saepe ipsam magni iure quisquam deleniti
-                        neque na Lorem ipsum dolor sit, amet consectetur
-                        adipisicing elit. Quod ipsum facilis cupiditate. Facere,
-                        sed error. Qui voluptatem expedita quae modi!
+                      We celebrate these achievements as milestones of our society's journey and look forward to
+                      continuing our efforts to make a difference in the college community. Thank you to all our members,
+                      supporters, and partners for your contributions and dedication.
                       </p>
                       <Link
                         className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg"
@@ -222,7 +220,7 @@ const Home = () => {
 
         <div className="w-full bg-muted  flex flex-col justify-center items-center mt-12  ">
           <div className=" bottom-full lg:botton-96 left-1/4 bg-blue-800 text-white px-5 rounded-full text-xl relative py-2">
-            <h1>namespace(Formely NSCC)</h1>
+            <h1>Namespace(Formely NSCC)</h1>
           </div>
           <div className=" text-2xl self-start relative left-12 md:left-44">
             Student <span className="text-red-700">Stories</span>
@@ -250,9 +248,16 @@ const Home = () => {
                               <h1>{name}</h1>
                               <h1>{batch}</h1>
                             </div>
-                            <button className="w-36 text-center bg-gray-200 text-black">
+                            {/* <button className="w-36 text-center bg-gray-200 text-black">
                               View More
-                            </button>
+                            </button> */}
+                            <Link
+                              className="w-36 text-center bg-gray-200 text-black mt-2 pt-2 transition transform duration-500 ease-in-out hover:scale-110"
+                              to="/society/:id/testimonials"
+                            >
+                            {/* <ArrowRight className="inline-block text-muted-goreground text-xs" /> */}
+                              View More
+                            </Link>
                           </div>
                         </section>
                         <img
@@ -285,13 +290,14 @@ const Home = () => {
               >
                 Upcoming Events
               </Link>
-              {/* <Link className="px-5 py-1 rounded-full bg-blue-800 text-white" to='/Gallery'>CMembers</Link> */}
+          
               <Link
                 className="px-5 py-1 rounded-full bg-blue-800 text-white"
                 to="/query"
               >
-                Contact Us
+                Inquire with the Society
               </Link>
+              
               <Link
                 className="px-5 py-1 rounded-full bg-blue-800 text-white"
                 to="/Gallery"

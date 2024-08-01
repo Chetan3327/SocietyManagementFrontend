@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-950 text-white p-6 shadow-md mt-10">
@@ -20,26 +22,43 @@ const Footer = () => {
                 Links
               </h2>
               <ul className="font-medium">
+
                 <li className="hover:underline">
-                  <a href="#" className="hover:underline ">
+                  <Link
+                    className="hover:underline"
+                    to="/"
+                  >
                     Home
-                  </a>
+                  </Link>
                 </li>
+
                 <li>
-                  <a href="#" className="hover:underline">
-                    About
-                  </a>
+                  <Link
+                    className="hover:underline"
+                    to="/about-us"
+                  >
+                    About Us
+                  </Link>
                 </li>
+
                 <li>
-                  <a href="#" className="hover:underline">
-                    Students
-                  </a>
+                  <Link
+                    className="hover:underline"
+                    to="/vision"
+                  >
+                    Vision
+                  </Link>
                 </li>
+
                 <li>
-                  <a href="#" className="hover:underline">
+                <Link
+                    className="hover:underline"
+                    to="/contact-us"
+                  >
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
+
               </ul>
             </div>
             <div>
@@ -49,7 +68,7 @@ const Footer = () => {
               <ul className="text-gray-500  font-medium">
                 <li className="m-4">
                   <a
-                    href="https://www.linkedin.com"
+                    href="https://www.linkedin.com/school/bhagwan-parshuram-institute-of-technology/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -62,7 +81,7 @@ const Footer = () => {
                 </li>
                 <li className="m-4">
                   <a
-                    href="https://www.instagram.com"
+                    href="https://www.instagram.com/bpitindia/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

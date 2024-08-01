@@ -21,11 +21,33 @@ interface StudentProfile {
   // Assuming StudentAchievements, Testimonials, and StudentMarking are handled elsewhere
 }
 const societyOptions = [
-  { id: 1, name: "Society A" },
-  { id: 2, name: "Society B" },
-  { id: 3, name: "Society C" },
+  { id: 1, name: "Namespace" },
+  { id: 2, name: "Anveshan" },
+  { id: 3, name: "Hash Define" },
+  { id: 4, name: "WIBD" },
+  { id: 5, name: "GDSC" },
+  { id: 6, name: "WIE" },
+  { id: 7, name: "IEEE" },
+  { id: 8, name: "Electonauts" },
+  { id: 9, name: "Dhrishti" },
+  { id: 10, name: "Opti Click" },
+  { id: 11, name: "Avaran" },
+  { id: 12, name: "Octave" },
+  { id: 13, name: "Panache" },
+  { id: 14, name: "Mavericks" },
+  { id: 15, name: "Kalam" },
+  { id: 16, name: "Chromavita" },
   // Add more societies as needed
 ];
+
+const societyPositions = [
+  { id: 1, name: "President" },
+  { id: 2, name: "Vice President" },
+  { id: 3, name: "Tech Team Member" },
+  { id: 4, name: "Core Team Member" },
+  { id: 5, name: "Junior Council Member" },
+  { id: 6, name: "Senior Council Member" },
+]
 const Become_Member_Form: React.FC = () => {
   const {
     register,
@@ -39,6 +61,23 @@ const Become_Member_Form: React.FC = () => {
   };
 
   return (
+  <>
+    <div className="relative mt-0 mx-auto w-full">
+        <img
+          className="w-full h-80 blur-sm"
+          src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+          alt="Member spotlight intro"
+        />
+        <div className="absolute inset-0 py-20 lg:py-28">
+          <h2 className="text-white text-center text-4xl text-bold">
+            WANT TO BECOME A MEMBER OF THE SOCIETY OF YOUR CHOICE ?
+          </h2>
+          <p className="text-black font-bold text-center my-5 text-xl">
+            Fill the form and the Society will get back to you !! <br /> CONNECT AND
+            THRIVE
+          </p>
+        </div>
+      </div>
     <div className="py-8 px-6 lg:px-20 bg-white mt-10 w-7/12 mx-auto text-black">
       <h2 className="font-bold text-center text-4xl mb-4 text-gray-800">
         Become a Member
@@ -150,7 +189,7 @@ const Become_Member_Form: React.FC = () => {
             className="border p-2 w-full"
           >
             <option value="">Select Position</option>
-            {societyOptions.map((society) => (
+            {societyPositions.map((society) => (
               <option key={society.id} value={society.id}>
                 {society.name}
               </option>
@@ -160,13 +199,13 @@ const Become_Member_Form: React.FC = () => {
             <p className="text-red-600">Society is required.</p>
           )}
         </div>
-        <div>
+        {/* <div>
           <label>Student Contributions:</label>
           <textarea
             {...register("studentContributions")}
             className="border p-2 w-full"
           />
-        </div>
+        </div> */}
         <div>
           <label>Domain Expertise:</label>
           <textarea
@@ -208,6 +247,7 @@ const Become_Member_Form: React.FC = () => {
         </div>
       </form>
     </div>
+  </>
   );
 };
 

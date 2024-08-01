@@ -35,7 +35,7 @@ const routeList = [
     label: "Join a Society",
   },
   {
-    href: "/query",
+    href: "/contact-us",
     label: "Contact Us",
   },
   {

@@ -24,9 +24,22 @@ const batches = [
 ];
 
 const societyOptions = [
-  { id: 1, name: "Society A" },
-  { id: 2, name: "Society B" },
-  { id: 3, name: "Society C" },
+  { id: 1, name: "Namespace" },
+  { id: 2, name: "Anveshan" },
+  { id: 3, name: "Hash Define" },
+  { id: 3, name: "WIBD" },
+  { id: 3, name: "GDSC" },
+  { id: 3, name: "WIE" },
+  { id: 3, name: "IEEE" },
+  { id: 3, name: "Electonauts" },
+  { id: 3, name: "Dhrishti" },
+  { id: 3, name: "Opti Click" },
+  { id: 3, name: "Avaran" },
+  { id: 3, name: "Octave" },
+  { id: 3, name: "Panache" },
+  { id: 3, name: "Mavericks" },
+  { id: 3, name: "Kalam" },
+  { id: 3, name: "Chromavita" },
   // Add more societies as needed
 ];
 
