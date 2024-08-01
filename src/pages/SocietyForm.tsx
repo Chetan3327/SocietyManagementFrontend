@@ -13,6 +13,7 @@ const formval = z.object({
   Describe: z.string().nonempty("About is required"),
   Phone: z.string().nonempty("Phone no. is required"),
   Category: z.string().nonempty("Select any one category"),
+  dateOfRegistration : z.string().nonempty("Select Date"),
 });
 
 const SocietyForm = () => {
@@ -56,16 +57,10 @@ const SocietyForm = () => {
           <hr className="mb-6" />
           <div className="flex flex-col md:flex-row gap-10 mb-8">
             <p className="text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium doloremque iure laborum neque quasi illo in reiciendis
-              fugit assumenda eius dignissimos vel, architecto, vero quos quia.
-              Cum exercitationem in vero? Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Modi voluptas quibusdam odit autem fuga impedit
-              quis labore deserunt omnis illum molestias minus excepturi
-              explicabo facere odio suscipit reprehenderit consequuntur ab
-              necessitatibus molestiae quia eos quae, iusto ratione. Totam
-              molestiae sunt maiores fugiat, deleniti nulla eum vitae accusamus
-              aperiam autem consequatur!
+            Welcome to the College Society Registration Page! To register your new society and get started on campus, you need to prepare a comprehensive proposal 
+            outlining the mission and goals of your society, as well as planned events and activities.
+            Your application will be reviewed, and you might need to make some changes based on feedback. Once approved, your society will be officially recognized,
+            and you will gain access to college resources and support.
             </p>
             <img
               src="https://images.pexels.com/photos/1454360/pexels-photo-1454360.jpeg?auto=compress&cs=tinysrgb&w=400"
@@ -121,18 +116,18 @@ const SocietyForm = () => {
                       )}
                     </div>
                     <div>
-                      <label htmlFor="branch" className="mb-2 font-bold block">
+                      <label htmlFor="dateOfRegistration" className="mb-2 font-bold block">
                         Date of Registration
                       </label>
                       <input
-                        type="text"
-                        {...register("Branch")}
+                        type="date"
+                        {...register("dateOfRegistration")}
                         className="w-full border py-1 px-2 block rounded-lg"
-                        placeholder="Enter Branch..."
+                        placeholder="Select Date"
                       />
-                      {errors.Branch && (
+                      {errors.dateOfRegistration && (
                         <span className="text-red-500 block">
-                          {errors.Branch.message}
+                          {errors.dateOfRegistration.message}
                         </span>
                       )}
                     </div>
@@ -144,7 +139,7 @@ const SocietyForm = () => {
                         type="text"
                         {...register("email")}
                         className="w-full border py-1 px-2 block rounded-lg"
-                        placeholder="Enter Email..."
+                        placeholder="Enter Society's image link..."
                       />
                       {errors.email && (
                         <span className="text-red-500 block">
@@ -174,7 +169,7 @@ const SocietyForm = () => {
                         </span>
                       )}
                     </div>
-                    <div>
+                    {/* <div>
                       <label
                         htmlFor="enrollmentno"
                         className="mb-2 font-bold block"
@@ -192,10 +187,10 @@ const SocietyForm = () => {
                           {errors.Enrollment.message}
                         </span>
                       )}
-                    </div>
+                    </div> */}
                     <div>
                       <label htmlFor="phone" className="mb-2 font-bold block">
-                        Society Head Mobile
+                        Society Head Mobile No.
                       </label>
                       <input
                         type="text"

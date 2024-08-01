@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 type newsItem = {
   title: string;
   description: string;
-  date: string;
+  date: string; 
   author: string;
 };
 
