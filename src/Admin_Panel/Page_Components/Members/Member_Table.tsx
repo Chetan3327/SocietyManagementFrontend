@@ -1,6 +1,7 @@
-import { Edit, Info,  Trash, UserRoundPlus, UserRoundX } from "lucide-react";
+import { Edit,Trash, UserRoundPlus } from "lucide-react";
 import { Card, CardContent } from "../../../components/ui/card";
 import student from '../../../assets/studentpic.jpeg'
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -67,24 +68,18 @@ const Member_Table = () => {
     <>
       <Card className=" mt-7">
         <CardContent className="p-2">
-          <div className="flex flex-wrap gap-2 justify-between items-center px-3 w-full ">
+          <div className="flex gap-2 justify-around items-center px-3 w-full">
             <input
               type="text"
               placeholder="Filter Search"
-              className="bg-slate-100 w-56 outline-none px-5 rounded-full py-2"
+              className="bg-slate-100 w-96 outline-none px-5 rounded-full py-2"
             />
-            <button className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5">
-              <div>Update/Edit Information</div>
-              <Info />
-            </button>
-            <button className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5">
+           
+            <Link to="/admin/members/add" className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5">
               <UserRoundPlus fill="white" />
               <div>Add Members</div>
-            </button>
-            <button className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5">
-              <UserRoundX fill="white" />
-              <div>Remove Members</div>
-            </button>
+            </Link>
+           
           </div>
         </CardContent>
       </Card>

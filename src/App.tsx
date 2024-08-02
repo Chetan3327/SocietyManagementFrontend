@@ -50,7 +50,12 @@ import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import StudentLogin from "./pages/StudentLogin";
 import Testimonials from "./pages/Testimonials";
 import ViewPhoto from "./pages/ViewPhoto";
-import AddCoordinatorForm from "./Admin_Panel/Page_Components/Coordinators/AddCoordinatorForm";
+import AddCoordinatorForm from "./Admin_Panel/Page_Components/Coordinators/AddCoordinatorForm"; 
+import AddMembers from "./Admin_Panel/Page_Components/Members/AddMembers";
+import AddNews from "./Admin_Panel/Page_Components/News/AddNews";
+import CreateTestimonial from "./components/Page-Components/CreateTestimonial";
+import Admin_Events from "./Admin_Panel/Page/Events";
+import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
 
 const App = () => {
   const location = useLocation();
@@ -62,10 +67,14 @@ const App = () => {
     return (
       <Routes>
         <Route path="/admin/news" element={<Admin_News />} />
+        <Route path="/admin/events" element={<Admin_Events />} />
+        <Route path="/admin/news/add" element={<AddNews/>} />
+        <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
         <Route path="/admin/coordinators/addcoordinator" element={<AddCoordinatorForm />} />
+        <Route path="/admin/members/add" element={<AddMembers />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
         <Route path="/admin" element={<Activity_Feed />} />
@@ -93,6 +102,7 @@ const App = () => {
           <Route path="/coordinators" element={<Coordinators />} />
           {/* <Route path="/testimonials/:id" element={<Testimonials />} /> */}
           <Route path="/create" element={<SocietyForm />} />
+          <Route path="/createtestimonial" element={<CreateTestimonial />} />
           <Route path="/members" element={<SocietMembers />} />
           <Route path="/societies" element={<Allsocities />} />
           <Route path="/vision" element={<Vision />} />
