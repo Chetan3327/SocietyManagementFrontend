@@ -77,7 +77,7 @@ const AddMembers = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Conatct</label>
+            <label className="block text-md font-medium">Contact</label>
             <input
               placeholder="Enter your contact number"
               {...register("Contact")}

@@ -130,8 +130,11 @@ const Member_Table = () => {
                     </TableCell>
                     
                     <TableCell >
-                      <Button className="border-2 w-fit px-5 py-1 rounded-full">
+                      {/* <Button className="border-2 w-fit px-5 py-1 rounded-full">
                         View Details
+                      </Button> */}
+                      <Button className="border-2 w-fit px-5 py-1 rounded-full">
+                        <Link to="/members/:id">View Details</Link>
                       </Button>
                     </TableCell>
                     <TableCell className="flex justify-center gap-2">
