@@ -32,6 +32,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Events',
+    path: '/admin/events',
+    icon: <NotepadText />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Society',
     path: '/admin/society',
     icon: <EarthLock/>,
