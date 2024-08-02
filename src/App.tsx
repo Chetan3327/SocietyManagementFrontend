@@ -50,6 +50,7 @@ import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import StudentLogin from "./pages/StudentLogin";
 import Testimonials from "./pages/Testimonials";
 import ViewPhoto from "./pages/ViewPhoto";
+import AddCoordinatorForm from "./Admin_Panel/Page_Components/Coordinators/AddCoordinatorForm";
 
 const App = () => {
   const location = useLocation();
@@ -64,6 +65,7 @@ const App = () => {
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
+        <Route path="/admin/coordinators/addcoordinator" element={<AddCoordinatorForm />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
         <Route path="/admin" element={<Activity_Feed />} />

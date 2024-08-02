@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Edit, Filter, Trash, UserRoundPlus } from "lucide-react";
 import { Card, CardContent } from "../../../components/ui/card";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -61,10 +62,10 @@ const Coordinator_Table = () => {
               placeholder="Search"
               className="bg-slate-100 w-56 outline-none px-5 rounded-full py-2"
             />
-            <button className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5">
+            <Link className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5" to='/admin/coordinators/addcoordinator'>
               <UserRoundPlus fill="white" />
               <div>Form</div>
-            </button>
+            </Link>
           </div>
         </CardContent>
       </Card>
