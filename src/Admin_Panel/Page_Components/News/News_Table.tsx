@@ -35,15 +35,16 @@ const news=[
     society:"Anveshan",
     type:"Update"               
   },
+  
 ]
 const News_Table = () => {
   return (
-    <Card className="m-7 p-0 h-100 w-10/12 overflow-y-auto">
+    <Card className="m-7 p-0 h-96 w-10/12 overflow-y-auto">
       <Table className="border-none">
         <TableHeader>
           <TableRow className="text-blue-700">
             <TableHead className="font-bold  text-xl border-muted border-2 ">
-              S.NO.
+              SocietyID
             </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
               News
@@ -53,7 +54,7 @@ const News_Table = () => {
                 News Details
               </h1>
               <TableRow>
-                <TableHead className="font-bold  text-xl ">Date</TableHead>
+                <TableHead className="font-bold  text-xl">Date</TableHead>
                 <TableHead className="font-bold  text-xl ">Society</TableHead>
                 <TableHead className="font-bold  text-xl">Category</TableHead>
               </TableRow>
@@ -66,7 +67,7 @@ const News_Table = () => {
           {news.map((data, index: number) => {
             return (
               <TableRow key={index}>
-                <TableCell className="border-muted border-2">{index}</TableCell>
+                <TableCell className="border-muted border-2 text-center">{index}</TableCell>
                 <TableCell className="text-center border-muted border-2">
                  {data.detail}
                 </TableCell>

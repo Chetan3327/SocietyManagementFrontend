@@ -83,7 +83,7 @@ const Member_Table = () => {
           </div>
         </CardContent>
       </Card>
-      <Card className="p-0 m-4 mt-7 h-100 overflow-y-auto">
+      <Card className="p-0 m-4 mt-7 h-96 overflow-y-auto">
         <CardContent className="p-0 overflow-y-auto">
           <Table>
             <TableHeader>

@@ -2,12 +2,15 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Title } from 'chart.js';
 
 const schema = z.object({
     News : z.string().nonempty(" News is required"),
     Date : z.string().nonempty("Date is required"),
     Society : z.string().nonempty("society is required"),
-    Category : z.string().nonempty("Category is required"),
+    SocietyID : z.string().nonempty("SocietyID is required"),
+    NewsID : z.string().nonempty("NewsID is required"),
+    title : z.string().nonempty("News Title is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -41,13 +44,52 @@ const AddNews = () => {
           </h2>
         </div>
       </div>
-      <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
+      <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
           New News Form
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          
           <div className="mb-4">
-            <label className="block text-md font-medium">News</label>
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("SocietyID")}
+              placeholder="Enter Society ID"
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">News ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("NewsID")}
+              placeholder="Enter a unique NewsID"
+            />
+            {errors.NewsID && (
+              <span className="text-red-500">{errors.NewsID.message}</span>
+            )}
+          </div>
+          
+          <div className="mb-4">
+            <label className="block text-md font-medium">News Title</label>
+            <textarea
+              className={`${classes}`}
+              {...register("title")}
+              placeholder="Enter News Title"
+            ></textarea>
+            {errors.title && (
+              <span className="text-red-500">{errors.title.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">News Description</label>
             <textarea
               className={`${classes}`}
               {...register("News")}
@@ -60,13 +102,13 @@ const AddNews = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Date 
+            Date of News
             </label>
             <input
               className={`${classes}`}
               type="date"
               {...register("Date")}
-              placeholder="Enter Date"
+              placeholder="Enter Date of the news"
             />
             {errors.Date && (
               <span className="text-red-500">
@@ -76,33 +118,15 @@ const AddNews = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Society Name</label>
+            <label className="block text-md font-medium">Author Name</label>
             <input
-              placeholder="Enter Society Name"
+              placeholder="Author/Society of the News"
               {...register("Society")}
               type="text"
               className={`${classes}`}
             />
             {errors.Society && (
               <span className="text-red-500">{errors.Society.message}</span>
-            )}
-          </div>
-
-          
-          <div className="mb-4">
-            <label className="block text-md font-medium">
-            News Category
-            </label>
-            <input
-              className={`${classes}`}
-              type="text"
-              {...register("Category")}
-              placeholder="Enter category of the news"
-            />
-            {errors.Category && (
-              <span className="text-red-500">
-                {errors.Category.message}
-              </span>
             )}
           </div>
 

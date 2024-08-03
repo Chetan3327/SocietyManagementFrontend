@@ -75,7 +75,7 @@ const Coordinator_Table = () => {
             <TableHeader>
               <TableRow className="text-blue-700">
                 <TableHead className="text-right w-[100px] font-bold text-xl">
-                  ID
+                  CoordinatorID
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Coordinator Details
@@ -92,7 +92,7 @@ const Coordinator_Table = () => {
               {coordinators.map((coordinator, index) => {
                 return (
                   <TableRow key={index} className="border-none">
-                    <TableCell className="text-right">{coordinator.id}</TableCell>
+                    <TableCell className="text-center">{coordinator.id}</TableCell>
                     <TableCell className="text-center">
                       <div className="flex flex-col items-start">
                         {/* <img

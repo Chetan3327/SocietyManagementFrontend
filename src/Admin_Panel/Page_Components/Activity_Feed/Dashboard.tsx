@@ -3,6 +3,7 @@ import student from '../../../assets/student.jpg'
 import { formatDistanceToNow } from 'date-fns'
 import { ChevronRight } from 'lucide-react'
 import Sidebar from '../Sidebar/Sidebar'
+import { Link } from 'react-router-dom'
 
 const statsData = [
     {
@@ -102,7 +103,8 @@ const Dashboard = () => {
                                 </div>
                             ))
                         }
-                        <p className='text-blue-600'>See more activities</p>
+                        <Link to="/all-news" className='text-blue-600'>See more activities</Link>
+                        {/* <p className='text-blue-600'>See more activities</p> */}
                     </div>
                 </div>
                 <div>
