@@ -7,8 +7,8 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { Card } from "../../../components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Edit, Trash } from "lucide-react";
+import { Link } from "react-router-dom";
 const events = [
   {
     detail:
@@ -80,12 +80,12 @@ const Events_Table = () => {
                
                 <TableCell className=" border-muted border-2 ">
                   <div className="flex flex-row justify-center  gap-2">
-                    <Button>
+                    <Link to="/admin/events/update" className="text-blue-700">
                       <Edit />
-                    </Button>
-                    <Button>
+                    </Link>
+                    <Link to="/admin/events" className="text-red-700">
                       <Trash />
-                    </Button>
+                    </Link>
                   </div>
                 </TableCell>
               </TableRow>

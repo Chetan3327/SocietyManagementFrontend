@@ -7,7 +7,7 @@ import Sidebar from '../Page_Components/Sidebar/Sidebar'
 
 const SocietyActivity = () => {
   return (
-    <div className='flex gap-2 w-screen overflow-x-hidden'  >
+    <div className='flex gap-2 w-full overflow-x-hidden h-full.0.0.0.0.0.0.0.0.0.0'  >
       <Sidebar/>                       
     <div className='mt-10 '>
         <div className='flex flex-col w-9/12 overflow-x-hidden lg:flex-row mx-5'>
