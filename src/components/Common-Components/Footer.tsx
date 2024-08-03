@@ -7,12 +7,13 @@ const Footer = () => {
         <div className="md:flex md:justify-between items-start">
           <div>
             <div className="pb-4 md:mb-0">
-              Bhagwan Parshuram Insitute Of Technology , New Delhi
+              Bhagwan Parshuram Institute Of Technology , New Delhi <br/>
+              PSP-4, Dr. KN Katju Marg, Sector-17, Rohini, New Delhi-110089
             </div>
             <div className="font-semibold text-yellow-400 mb-2">Contact Us</div>
             <div className="mb-2">
-              <div>Email: abc@collegename.edu</div>
-              <div>Phone: +91 XXXXXXXXXX</div>
+              <div>Email: bpitindia@yahoo.com</div>
+              <div>Phone: 011-2757 1080</div>
             </div>
           </div>
 
