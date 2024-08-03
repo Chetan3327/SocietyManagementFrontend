@@ -44,6 +44,12 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
+    title: 'Testimonials',
+    path: '/admin/testimonials',
+    icon: <Users />,
+    cName: 'nav-text'
+  },
+  {
     title: 'Contact Us',
     path: '/contact-us',
     icon: <Contact />,

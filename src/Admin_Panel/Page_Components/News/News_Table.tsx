@@ -9,6 +9,7 @@ import {
 import { Card } from "../../../components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Edit, Trash } from "lucide-react";
+import { Link } from "react-router-dom";
 const news=[
   {
     detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
@@ -75,12 +76,12 @@ const News_Table = () => {
                   <TableCell className="text-center ">{data.type}</TableCell>
                  
                 </TableCell>
-                <TableCell className=" border-muted border-2 ">
-                  <div className="flex flex-row justify-center  gap-2">
-                      <Button ><Edit /></Button>
-                      <Button ><Trash /></Button>
-                      </div>
-                </TableCell>
+                <TableCell className="flex justify-center gap-5">
+                      <Link to="/admin/news/update">
+                           <Button className="text-blue-700"><Edit /></Button>
+                      </Link>
+                      <Button className="text-red-700"><Trash /></Button>
+                    </TableCell>
               </TableRow>
             );
           })}

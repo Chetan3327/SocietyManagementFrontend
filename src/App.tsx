@@ -50,12 +50,18 @@ import Societyjoiningrequst from "./pages/Societyjoiningrequst";
 import StudentLogin from "./pages/StudentLogin";
 import Testimonials from "./pages/Testimonials";
 import ViewPhoto from "./pages/ViewPhoto";
-import AddCoordinatorForm from "./Admin_Panel/Page_Components/Coordinators/AddCoordinatorForm"; 
+import AddCoordinator from "./Admin_Panel/Page_Components/Coordinators/AddCoordinator"; 
+import UpdateCoordinator from "./Admin_Panel/Page_Components/Coordinators/UpdateCoordinator"; 
 import AddMembers from "./Admin_Panel/Page_Components/Members/AddMembers";
 import AddNews from "./Admin_Panel/Page_Components/News/AddNews";
 import CreateTestimonial from "./components/Page-Components/CreateTestimonial";
 import Admin_Events from "./Admin_Panel/Page/Events";
 import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
+import UpdateMembers from "./Admin_Panel/Page_Components/Members/UpdateMembers";
+import UpdateNews from "./Admin_Panel/Page_Components/News/UpdateNews";
+import Admin_Testimonials from './Admin_Panel/Page/Testimonials'
+import AddTestimonial from "./Admin_Panel/Page_Components/Testimonials/AddTestimonial";
+import UpdateTestimonial from "./Admin_Panel/Page_Components/Testimonials/UpdateTestimonial";
 
 const App = () => {
   const location = useLocation();
@@ -67,16 +73,22 @@ const App = () => {
     return (
       <Routes>
         <Route path="/admin/news" element={<Admin_News />} />
-        <Route path="/admin/events" element={<Admin_Events />} />
         <Route path="/admin/news/add" element={<AddNews/>} />
+        <Route path="/admin/news/update" element={<UpdateNews/>} />
+        <Route path="/admin/events" element={<Admin_Events />} />
         <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
+        <Route path="/admin/members/add" element={<AddMembers />} />
+        <Route path="/admin/members/update" element={<UpdateMembers />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
-        <Route path="/admin/coordinators/addcoordinator" element={<AddCoordinatorForm />} />
-        <Route path="/admin/members/add" element={<AddMembers />} />
+        <Route path="/admin/coordinators/add" element={<AddCoordinator />} />
+        <Route path="/admin/coordinators/update" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+        <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
+        <Route path="/admin/testimonials/add" element={<AddTestimonial />} />
+        <Route path="/admin/testimonials/update" element={<UpdateTestimonial />} />
         <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );
@@ -84,13 +96,22 @@ const App = () => {
 
   const showSecondaryNavbar = Locations[1] === "society";
 
+  const showNavFooterFeedback = Locations[1].toLowerCase() !== "login" &&
+       Locations[1].toLowerCase() !== "signup" &&
+       Locations[1].toLowerCase() !== "reset-password" &&
+       Locations[1].toLowerCase() !== "verify-email" &&
+       Locations[1].toLowerCase() !== "changepassword"
+
   return (
     <>
-      {Locations[1].toLowerCase() !== "login" &&
+      {/* {Locations[1].toLowerCase() !== "login" &&
         Locations[1].toLowerCase() !== "signup" &&
         Locations[1].toLowerCase() !== "reset-password" &&
         Locations[1].toLowerCase() !== "verify-email" &&
-        Locations[1].toLowerCase() !== "changepassword" && <Navbar />}
+        Locations[1].toLowerCase() !== "changepassword" && <Navbar />} */}
+        {
+          showNavFooterFeedback && <Navbar />
+        }
       <div className="font-mono transition-colors duration-300">
         {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
@@ -151,15 +172,26 @@ const App = () => {
           </Route>
         </Routes>
       </div>
+      {/* {Locations[1].toLowerCase() !== "login" &&
+        Locations[1].toLowerCase() !== "signup" &&
+        Locations[1].toLowerCase() !== "verify-email" &&
+        Locations[1].toLowerCase() !== "reset-password" &&
+        Locations[1].toLowerCase() !== "changepassword" &&
+        Locations[1].toLowerCase() !== "verify-email"  && (
+          <Footer />
+        )}
       {Locations[1].toLowerCase() !== "login" &&
         Locations[1].toLowerCase() !== "signup" &&
         Locations[1].toLowerCase() !== "verify-email" &&
         Locations[1].toLowerCase() !== "reset-password" &&
         Locations[1].toLowerCase() !== "changepassword" &&
-        Locations[1].toLowerCase() !== "verify-email" && (
-          <Footer />
-        )}
-      <FeedbackButton /> 
+        Locations[1].toLowerCase() !== "verify-email" && ( <FeedbackButton />) } */}
+      {
+        showNavFooterFeedback && <Footer/>
+      }
+      {
+        showNavFooterFeedback && <FeedbackButton/>
+      }
       <ScrollToTop />
     </>
   );
