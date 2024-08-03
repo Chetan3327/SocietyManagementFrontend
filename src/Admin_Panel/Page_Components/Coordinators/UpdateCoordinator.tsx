@@ -12,7 +12,7 @@ const schema = z.object({
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
-const AddCoordinatorForm = () => {
+const UpdateCoordinatorForm = () => {
 
     const [submit , setSubmit] = useState(false)
     type formData = z.infer<typeof schema>
@@ -37,13 +37,13 @@ const AddCoordinatorForm = () => {
         />
         <div className="absolute inset-0 py-20 lg:py-28">
           <h2 className="text-white text-center text-4xl font-bold">
-            Add Coordinator Details
+          Update Coordinator Details
           </h2>
         </div>
       </div>
       <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
-          New Coordinator Form
+           Coordinator Details Update Form
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
@@ -118,4 +118,4 @@ const AddCoordinatorForm = () => {
   )
 }
 
-export default AddCoordinatorForm
+export default UpdateCoordinatorForm

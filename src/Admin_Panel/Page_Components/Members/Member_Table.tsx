@@ -137,9 +137,11 @@ const Member_Table = () => {
                         <Link to="/members/:id">View Details</Link>
                       </Button>
                     </TableCell>
-                    <TableCell className="flex justify-center gap-2">
-                      <Button ><Edit /></Button>
-                      <Button ><Trash /></Button>
+                    <TableCell className="flex justify-center gap-5">
+                      <Link to="/admin/members/update">
+                         <Button className="text-blue-700"><Edit /></Button>
+                      </Link>
+                      <Button className="text-red-700"><Trash /></Button>
                     </TableCell>
                   </TableRow>
                 );
