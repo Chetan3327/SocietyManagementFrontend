@@ -56,6 +56,8 @@ import AddNews from "./Admin_Panel/Page_Components/News/AddNews";
 import CreateTestimonial from "./components/Page-Components/CreateTestimonial";
 import Admin_Events from "./Admin_Panel/Page/Events";
 import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
+import UpdateEvents from "./Admin_Panel/Page_Components/Events/UpdateEvents";
+import UpdateSociety from "./Admin_Panel/Page_Components/Socities/UpdateSociety";
 
 const App = () => {
   const location = useLocation();
@@ -70,6 +72,8 @@ const App = () => {
         <Route path="/admin/events" element={<Admin_Events />} />
         <Route path="/admin/news/add" element={<AddNews/>} />
         <Route path="/admin/events/add" element={<AddEvents/>} />
+        <Route path="/admin/events/update" element={<UpdateEvents/>} />
+        <Route path="/admin/society/update" element={<UpdateSociety/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
