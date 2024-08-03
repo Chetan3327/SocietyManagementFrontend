@@ -62,7 +62,7 @@ const Coordinator_Table = () => {
               placeholder="Search"
               className="bg-slate-100 w-56 outline-none px-5 rounded-full py-2"
             />
-            <Link className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5" to='/admin/coordinators/addcoordinator'>
+            <Link className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5" to='/admin/coordinators/add'>
               <UserRoundPlus fill="white" />
               <div>Form</div>
             </Link>
@@ -107,7 +107,9 @@ const Coordinator_Table = () => {
                     </TableCell>
                     <TableCell className="text-center">{coordinator.societyId}</TableCell>
                     <TableCell className="flex justify-center gap-5">
+                      <Link to='/admin/coordinators/update'>
                       <Button className="text-blue-700"><Edit /></Button>
+                      </Link>
                       <Button className="text-red-700"><Trash /></Button>
                     </TableCell>
                   </TableRow>
