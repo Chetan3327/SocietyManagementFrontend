@@ -59,6 +59,9 @@ import Admin_Events from "./Admin_Panel/Page/Events";
 import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
 import UpdateMembers from "./Admin_Panel/Page_Components/Members/UpdateMembers";
 import UpdateNews from "./Admin_Panel/Page_Components/News/UpdateNews";
+import Admin_Testimonials from './Admin_Panel/Page/Testimonials'
+import AddTestimonial from "./Admin_Panel/Page_Components/Testimonials/AddTestimonial";
+import UpdateTestimonial from "./Admin_Panel/Page_Components/Testimonials/UpdateTestimonial";
 
 const App = () => {
   const location = useLocation();
@@ -83,6 +86,9 @@ const App = () => {
         <Route path="/admin/coordinators/update" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+        <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
+        <Route path="/admin/testimonials/add" element={<AddTestimonial />} />
+        <Route path="/admin/testimonials/update" element={<UpdateTestimonial />} />
         <Route path="/admin" element={<Activity_Feed />} />
       </Routes>
     );
