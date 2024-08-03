@@ -156,10 +156,10 @@ const App = () => {
         Locations[1].toLowerCase() !== "verify-email" &&
         Locations[1].toLowerCase() !== "reset-password" &&
         Locations[1].toLowerCase() !== "changepassword" &&
-        Locations[1].toLowerCase() !== "verify-email" && <FeedbackButton /> && (
+        Locations[1].toLowerCase() !== "verify-email" && (
           <Footer />
         )}
-
+      <FeedbackButton /> 
       <ScrollToTop />
     </>
   );

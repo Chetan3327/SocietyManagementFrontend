@@ -8,7 +8,7 @@ const DashboardPieChart = () => {
     const unResolvedQueries = 2;
     const data = {
         labels: [
-            'resolvedQueries', ' unResolvedQueries'
+            '   Resolved Queries', 'Unresolved Queries'
         ],
         datasets: [
             {
