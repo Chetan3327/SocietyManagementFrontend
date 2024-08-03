@@ -6,7 +6,7 @@ import OTP from "./OTP";
 const styles = {
   container: {
     display: "flex",
-    height: "100vh",
+    height: "130vh",
   },
   leftSide: {
     flex: "1",

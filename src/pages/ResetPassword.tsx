@@ -159,7 +159,7 @@ const ResetPasswordPage: React.FC = () => {
       <div style={styles.leftSide}>
         <div style={styles.formContainer}>
           <img
-            src="https://your-logo-url.com/logo.png" // Replace with your logo URL
+            src="https://bbijtm.bpitindia.ac.in/images/logo-websitebg.png" // Replace with your logo URL
             alt="Logo"
             style={styles.logo}
           />
@@ -253,7 +253,8 @@ const ResetPasswordPage: React.FC = () => {
                   styles.button.backgroundColor)
               }
             >
-              <Link to="/verify-email">Reset Password</Link>
+              {/* <Link to="/verify-email">Reset Password</Link> */}
+              Reset Password
             </button>
           </form>
         </div>
