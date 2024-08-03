@@ -50,13 +50,20 @@ const activityData = [
         author: 'Adam Smith',
         title: ' New opening treasurer posted by Society D'
     },
+    {
+        img: student,
+        date: new Date(),
+        author: 'Adam Smith',
+        title: ' New opening treasurer posted by Society D'
+    },
+    
 ]
 
-const filteredActivityData = activityData.length > 3 ? activityData.slice(0, 3) : activityData
+const filteredActivityData = activityData.length > 6 ? activityData.slice(0, 6) : activityData
 
 const Dashboard = () => {
     return (
-        <div className='flex  gap-3 w-screen '>
+        <div className='flex gap-3 w-screen '>
               <Sidebar/>
         <div>
             <div className="flex flex-col lg:flex-row lg:justify-around mt-10 lg:space-x-4  space-y-4 text-center mx-2">
