@@ -157,6 +157,7 @@ const Become_Member_Form: React.FC = () => {
           />
           {errors.email && <p className="text-red-600">Email is required.</p>}
         </div>
+
         <div>
           <label>Profile Picture:</label>
           <input
@@ -165,6 +166,7 @@ const Become_Member_Form: React.FC = () => {
             className="border p-2 w-full"
           />
         </div>
+        
         <div>
           <label>Society:</label>
           <select

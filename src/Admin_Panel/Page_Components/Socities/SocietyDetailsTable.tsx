@@ -20,8 +20,8 @@ const originalData = [
     Description:
       " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit natus corporis, reiciendis laboriosam consequatur suscipit et in ipsa ea illo totam! Libero, praesentium? Reiciendis aliquid, rem quasi inventore optio sint. ",
     SocietyHead: "John doe",
-    Coordinators: "John Doe",
-    NumberOfMembers: 303,
+    // Coordinators: "John Doe",
+    // NumberOfMembers: 303,
     Category: "Non Tech",
   },
   {
@@ -30,8 +30,8 @@ const originalData = [
     Description:
       " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit natus corporis, reiciendis laboriosam consequatur suscipit et in ipsa ea illo totam! Libero, praesentium? Reiciendis aliquid, rem quasi inventore optio sint. ",
     SocietyHead: "John doe",
-    Coordinators: "John Doe",
-    NumberOfMembers: 303,
+    // Coordinators: "John Doe",
+    // NumberOfMembers: 303,
     Category: "Non Tech",
   },
   {
@@ -40,8 +40,8 @@ const originalData = [
     Description:
       " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit natus corporis, reiciendis laboriosam consequatur suscipit et in ipsa ea illo totam! Libero, praesentium? Reiciendis aliquid, rem quasi inventore optio sint. ",
     SocietyHead: "John doe",
-    Coordinators: "John Doe",
-    NumberOfMembers: 303,
+    // Coordinators: "John Doe",
+    // NumberOfMembers: 303,
     Category: "Non Tech",
   },
   {
@@ -50,8 +50,8 @@ const originalData = [
     Description:
       " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit natus corporis, reiciendis laboriosam consequatur suscipit et in ipsa ea illo totam! Libero, praesentium? Reiciendis aliquid, rem quasi inventore optio sint. ",
     SocietyHead: "John doe",
-    Coordinators: "John Doe",
-    NumberOfMembers: 303,
+    // Coordinators: "John Doe",
+    // NumberOfMembers: 303,
     Category: "Non Tech",
   },
 ];
@@ -110,12 +110,12 @@ const SocietyDetailsTable = () => {
           <TableHeader>
             <TableRow>
               <TableHead rowSpan={2} className={tableClass}>
-                S.NO.
+                SocietyID
               </TableHead>
               <TableHead rowSpan={2} className={tableClass}>
-                List of socities
+                Name of Society
               </TableHead>
-              <TableHead colSpan={6} className={tableClass}>
+              <TableHead colSpan={4} className={tableClass}>
                 Society Details
               </TableHead>
               <TableHead rowSpan={2} className={tableClass}>
@@ -128,9 +128,9 @@ const SocietyDetailsTable = () => {
               </TableHead>
               <TableHead className={tableClass}>Description</TableHead>
               <TableHead className={tableClass}>Society Head</TableHead>
-              <TableHead className={tableClass}> Coordinators</TableHead>
-              <TableHead className={tableClass}>Number Of Members</TableHead>
-              <TableHead className={tableClass}> Category</TableHead>
+              {/* <TableHead className={tableClass}> Coordinators</TableHead> */}
+              {/* <TableHead className={tableClass}>Number Of Members</TableHead> */}
+              <TableHead className={tableClass}> Society Type</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -151,12 +151,12 @@ const SocietyDetailsTable = () => {
                 <TableCell className="text-center border-x text-md text-gray-800">
                   {details.SocietyHead}
                 </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                {/* <TableCell className="text-center border-x text-md text-gray-800">
                   {details.Coordinators}
-                </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                </TableCell> */}
+                {/* <TableCell className="text-center border-x text-md text-gray-800">
                   {details.NumberOfMembers}
-                </TableCell>
+                </TableCell> */}
                 <TableCell className="text-center border-x text-md text-gray-800">
                   {details.Category}
                 </TableCell>

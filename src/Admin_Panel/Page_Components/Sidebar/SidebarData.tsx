@@ -25,12 +25,12 @@ export const SidebarData = [
     icon: <Users />,
     cName: 'nav-text'
   },
-  {
-    title: 'Queries',
-    path: '/admin/queries',
-    icon: <NotepadText />,
-    cName: 'nav-text'
-  },
+  // {
+  //   title: 'Queries',
+  //   path: '/admin/queries',
+  //   icon: <NotepadText />,
+  //   cName: 'nav-text'
+  // },
   {
     title: 'Events',
     path: '/admin/events',
