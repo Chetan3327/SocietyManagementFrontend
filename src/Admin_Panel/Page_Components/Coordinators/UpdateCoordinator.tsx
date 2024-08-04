@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -17,7 +17,7 @@ const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md t
 
 const UpdateCoordinatorForm = () => {
 
-    const [submit , setSubmit] = useState(false)
+    const [_ , setSubmit] = useState(false)
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({

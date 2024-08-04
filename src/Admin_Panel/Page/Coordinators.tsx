@@ -3,9 +3,9 @@ import Sidebar from "../Page_Components/Sidebar/Sidebar";
 
 const Admin_Coordinators = () => {
   return (
-    <div className="flex gap-3">
+    <div className="md:flex md:gap-3">
       <Sidebar/>
-      <div>
+      <div className="h-screen">
          <Coordinators_Table />
       </div>
      

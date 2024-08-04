@@ -68,7 +68,7 @@ const Member_Table = () => {
     <>
       <Card className=" mt-7">
         <CardContent className="p-2">
-          <div className="flex gap-2 justify-around items-center px-3 w-full">
+          <div className="flex gap-2 justify-around items-center px-3 w-screen w-full flex-wrap md:flex-nowrap">
             <input
               type="text"
               placeholder="Filter Search"

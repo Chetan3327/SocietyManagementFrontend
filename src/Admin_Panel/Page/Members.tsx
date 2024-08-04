@@ -4,9 +4,9 @@ import Sidebar from "../Page_Components/Sidebar/Sidebar";
 
 const Admin_Members = () => {
   return (
-    <div className="flex">
+    <div className="md:flex">
       <Sidebar/>
-       <div className="p-5">
+       <div className="p-1 md:p-5">
       <Member_Cards />
       <Member_Table />
       </div>

@@ -9,6 +9,7 @@ import {
 import { Card } from "../../../components/ui/card";
 import { Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 const events = [
   {
     detail:
@@ -43,7 +44,7 @@ const events = [
 ];
 const Events_Table = () => {
   return (
-    <Card className="m-7 p-0 h-96 w-10/12 overflow-y-auto">
+    <Card className="m-7 p-0 h-screen md:h-96 w-10/12 overflow-y-auto">
       <Table className="border-none">
         <TableHeader>
           <TableRow className="text-blue-700">
@@ -74,19 +75,22 @@ const Events_Table = () => {
                 <TableCell className="text-center border-muted border-2">
                   {data.detail}
                 </TableCell>
-                  <TableCell className="text-center border-muted border-2">{data.Date}</TableCell>
-                  <TableCell className="text-center border-muted border-2">{data.society}</TableCell>
-                  
-               
-                <TableCell className=" border-muted border-2 ">
-                  <div className="flex flex-row justify-center  gap-2">
-                    <Link to="/admin/events/update" className="text-blue-700">
+                <TableCell className="text-center border-muted border-2">
+                  {data.Date}
+                </TableCell>
+                <TableCell className="text-center border-muted border-2">
+                  {data.society}
+                </TableCell>
+
+                <TableCell className="flex justify-center gap-5">
+                  <Link to="/admin/events/update">
+                    <Button className="text-blue-700">
                       <Edit />
-                    </Link>
-                    <Link to="/admin/events" className="text-red-700">
-                      <Trash />
-                    </Link>
-                  </div>
+                    </Button>
+                  </Link>
+                  <Button className="text-red-700">
+                    <Trash />
+                  </Button>
                 </TableCell>
               </TableRow>
             );

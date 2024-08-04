@@ -4,7 +4,6 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    position: relative;
   }
   
   .menu-bars {
@@ -15,13 +14,8 @@
   
   .nav-menu {
     background-color: #060b26;
-
     width: 300px;
     height: 180vh;
-
-    
-   
-
     display: flex;
     justify-content: center;
     position: relative;
@@ -76,3 +70,17 @@
   span {
     margin-left: 16px;
   }
+
+@media screen and (max-width:600px){
+  .menu-bars{
+    margin-left: 0.5rem;
+  }
+  .nav-menu {
+    position: absolute;
+    z-index: 100;
+
+  }
+  .nav-menu.active{
+    left:0px;
+  }
+}

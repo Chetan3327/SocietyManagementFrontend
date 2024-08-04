@@ -55,7 +55,7 @@ const Coordinator_Table = () => {
     <>  
       <Card className="m-4 mt-7">
         <CardContent className="p-2">
-          <div className="flex flex-wrap gap-2 justify-between items-center px-3 w-full ">
+          <div className="flex flex-wrap gap-2 justify-center md:justify-between items-center px-3 w-full ">
             <Button>Filter Search <Filter className="ml-4" /></Button>
             <Input
               type="text"
@@ -69,7 +69,7 @@ const Coordinator_Table = () => {
           </div>
         </CardContent>
       </Card>
-      <Card className="p-0 m-4 mt-7 h-80 overflow-y-auto">
+      <Card className="p-0 m-4 mt-7 h-screen md:h-96 overflow-y-auto">
         <CardContent className="p-0 overflow-y-auto">
           <Table>
             <TableHeader>

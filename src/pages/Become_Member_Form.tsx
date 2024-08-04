@@ -72,13 +72,13 @@ const Become_Member_Form: React.FC = () => {
           <h2 className="text-white text-center text-4xl text-bold">
             WANT TO BECOME A MEMBER OF THE SOCIETY OF YOUR CHOICE ?
           </h2>
-          <p className="text-black font-bold text-center my-5 text-xl">
+          <p className="font-bold text-center my-5 text-xl">
             Fill the form and the Society will get back to you !! <br /> CONNECT AND
             THRIVE
           </p>
         </div>
       </div>
-    <div className="py-8 px-6 lg:px-20 bg-white mt-10 w-7/12 mx-auto text-black">
+    <div className="py-8 px-6 lg:px-20 bg-white mt-10 w-full  md:w-7/12 mx-auto text-black">
       <h2 className="font-bold text-center text-4xl mb-4 text-gray-800">
         Become a Member
       </h2>

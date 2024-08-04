@@ -1,4 +1,3 @@
-import React from 'react'
 import { Chart, CategoryScale , LinearScale , BarElement , Title , Tooltip , Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
@@ -43,11 +42,12 @@ const BarChart = () => {
         title:{
             display : true ,
             text : 'Events Conducted By Socities',
+            
         }
        }
     }
    return (
-        <div className='w-full h-80'>
+        <div className='w-full h-fit md:h-80'>
             <Bar data={data} options={options} />
         </div>
     )

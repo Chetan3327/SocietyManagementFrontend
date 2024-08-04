@@ -1,4 +1,3 @@
-import React from 'react'
 import BarChart from '../Page_Components/Socities/BarChart'
 import SocietyPieChart from '../Page_Components/Socities/SocietyPieChart'
 import SocietyDetailsTable from '../Page_Components/Socities/SocietyDetailsTable'

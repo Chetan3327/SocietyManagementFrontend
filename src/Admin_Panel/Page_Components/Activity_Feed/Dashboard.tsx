@@ -64,14 +64,14 @@ const filteredActivityData = activityData.length > 6 ? activityData.slice(0, 6) 
 
 const Dashboard = () => {
     return (
-        <div className='flex gap-3 w-screen '>
+        <div className='md:flex md:gap-3 w-screen overflow-x-hidden'>
               <Sidebar/>
-        <div>
+        <div className='w-screen overflow-x-hidden'>
             <div className="flex flex-col lg:flex-row lg:justify-around mt-10 lg:space-x-4  space-y-4 text-center mx-2">
                 {
                     statsData.map((dataField, index) => (
                         <div key={index} className="bg-gray-200 px-2 lg:px-4 py-8 rounded-lg">
-                            <h3 className="text-4xl font-bold">{dataField.count}</h3>
+                            <h3 className="text-4xl font-bold text-black">{dataField.count}</h3>
                             <h5 className="text-gray-700">{dataField.field}</h5>
                         </div>
                     ))
