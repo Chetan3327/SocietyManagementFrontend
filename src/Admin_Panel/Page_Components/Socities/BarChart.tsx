@@ -43,11 +43,12 @@ const BarChart = () => {
         title:{
             display : true ,
             text : 'Events Conducted By Socities',
+            
         }
        }
     }
    return (
-        <div className='w-full h-80'>
+        <div className='w-full h-fit md:h-80'>
             <Bar data={data} options={options} />
         </div>
     )

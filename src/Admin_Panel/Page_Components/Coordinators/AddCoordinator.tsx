@@ -2,6 +2,7 @@ import React , {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useToast } from "@/components/ui/use-toast";
 
 const schema = z.object({
     CoordinatorName : z.string().nonempty("Coordinator name is required"),
@@ -16,7 +17,7 @@ const schema = z.object({
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
 const AddCoordinator = () => {
-
+  const { toast } = useToast()
     const [submit , setSubmit] = useState(false)
     type formData = z.infer<typeof schema>
 

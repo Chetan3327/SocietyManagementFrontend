@@ -52,29 +52,29 @@ const Society = () => {
       {path && (
         <div>
       <div className="w-full overflow-x-hidden flex justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
-        <div className="ml-20 pt-10">
+        <div className="md:ml-20 pl-5 md:pl-1 pt-10">
           <h3 className="text-3xl text-purple-700 font-bold">
             Welcome to {society.SocietyName}:  {society.SocietyType} Society
           </h3>
           <p className="text-muted-foreground">Building a Legacy Since {formatDate(society.DateOfRegistration)}</p>
         </div>
         <div>
-          <img src={drishti} alt="" />
+          <img src={drishti} alt="society" className="h-full" />
         </div>
       </div>
 
       <div className="w-full px-20 flex justify-center py-10 gap-7">
-        <div className="flex justify-center gap-7 p-10 rounded-md border-4">
+        <div className="flex justify-center gap-7 p-4 md:p-10 rounded-md border-4">
           <div>
             <img src={latestnews} width={600} alt="" />
           </div>
           <div>
-            <Card className="rounded-lg space-y-3 border-0">
+            <Card className="rounded-lg md:space-y-3 border-0">
               <CardHeader className="text-center">
-                <h2 className="font-bold text-4xl">Who We Are</h2>
+                <h2 className="font-bold text-2xl md:text-4xl">Who We Are</h2>
                 <hr className="h-[4px] text-black" />
               </CardHeader>
-              <CardContent className="my-10">
+              <CardContent className="md:my-10">
                 <h1 className="text-xl font-medium">Guided by Excellence: {society.SocietyHead}</h1>
                 <p>{society.SocietyDescription}</p>
               </CardContent>

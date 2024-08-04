@@ -11,7 +11,7 @@ function Sidebar() {
 
   return (
     <>
-        <div className='navbar'>
+        <div className='navbar dark:bg-black'>
           <Link to='#' className='menu-bars'>
             <Menu onClick={showSidebar} />
           </Link>

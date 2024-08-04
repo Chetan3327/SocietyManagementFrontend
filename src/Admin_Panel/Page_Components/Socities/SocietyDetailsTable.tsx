@@ -10,8 +10,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Trash,Edit } from "lucide-react";
+import { Trash, Edit } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const originalData = [
   {
@@ -60,7 +61,7 @@ const schema = z.object({
   name: z.string().nonempty("Society name is required"),
 });
 
-const tableClass = "text-center text-gray-800 text-xl border-x";
+const tableClass = "text-center text-xl border-x";
 
 const SocietyDetailsTable = () => {
   let [societyData, setSocietyData] = useState(originalData);
@@ -84,7 +85,7 @@ const SocietyDetailsTable = () => {
     }
   };
   return (
-    <div className=" bg-white mt-10 w-screen overflow-x-hidden">
+    <div className="mt-10 w-screen overflow-x-hidden">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-gray-300 w-9/12 py-4 px-2 flex flex-col lg:flex-row  space-y-4 lg:space-y-0">
           <input
@@ -106,7 +107,7 @@ const SocietyDetailsTable = () => {
         )}
       </form>
       <div className="overflow-auto h-96 mt-10 w-9/12">
-        <Table className=" bg-white border-t border-x w-full shadow-lg table-auto ">
+        <Table className="border-t border-x w-full shadow-lg table-auto ">
           <TableHeader>
             <TableRow>
               <TableHead rowSpan={2} className={tableClass}>
@@ -136,19 +137,19 @@ const SocietyDetailsTable = () => {
           <TableBody>
             {societyData.map((details, index: number) => (
               <TableRow key={index}>
-                <TableCell className="text-center border-x text-gray-800">
+                <TableCell className="text-center border-x ">
                   {index + 1}.
                 </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                <TableCell className="text-center border-x text-md ">
                   {details.SocietyName}
                 </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                <TableCell className="text-center border-x text-md ">
                   {details.DateOfEstablishment.toDateString()}
                 </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                <TableCell className="text-center border-x text-md ">
                   {details.Description}
                 </TableCell>
-                <TableCell className="text-center border-x text-md text-gray-800">
+                <TableCell className="text-center border-x text-md">
                   {details.SocietyHead}
                 </TableCell>
                 {/* <TableCell className="text-center border-x text-md text-gray-800">
@@ -157,18 +158,18 @@ const SocietyDetailsTable = () => {
                 {/* <TableCell className="text-center border-x text-md text-gray-800">
                   {details.NumberOfMembers}
                 </TableCell> */}
-                <TableCell className="text-center border-x text-md text-gray-800">
+                <TableCell className="text-center border-x text-md ">
                   {details.Category}
                 </TableCell>
-                <TableCell>
-                  <div className="flex space-x-2">
-                    <Link to="/admin/society/update" className="text-blue-700">
+                <TableCell className="flex justify-center gap-5">
+                  <Link to="/admin/society/update">
+                    <Button className="text-blue-700">
                       <Edit />
-                    </Link>
-                    <Link to="/admin/society" className="text-red-700">
-                      <Trash />
-                    </Link>
-                  </div>
+                    </Button>
+                  </Link>
+                  <Button className="text-red-700">
+                    <Trash />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

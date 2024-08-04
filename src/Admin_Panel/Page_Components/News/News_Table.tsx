@@ -39,18 +39,18 @@ const news=[
 ]
 const News_Table = () => {
   return (
-    <Card className="m-7 p-0 h-96 w-10/12 overflow-y-auto">
+    <Card className="m-7 p-0 h-screen md:h-96 w-10/12 overflow-y-auto">
       <Table className="border-none">
         <TableHeader>
           <TableRow className="text-blue-700">
-            <TableHead className="font-bold  text-xl border-muted border-2 ">
+            <TableHead className="font-bold  text-xl  ">
               SocietyID
             </TableHead>
-            <TableHead className="font-bold text-center text-xl border-muted border-2">
+            <TableHead className="font-bold text-center text-xl ">
               News
             </TableHead>
-            <TableHead className="font-bold text-center text-xl border-muted border-2 p-0">
-              <h1 className="font-bold text-center text-xl border-muted border-2">
+            <TableHead className="font-bold text-center text-xl 2 p-0">
+              <h1 className="font-bold text-center text-xl ">
                 News Details
               </h1>
               <TableRow>
@@ -60,15 +60,15 @@ const News_Table = () => {
               </TableRow>
             </TableHead>
             
-            <TableHead className="font-bold text-center text-xl border-muted border-2">Edit/Delete</TableHead>
+            <TableHead className="font-bold text-center text-xl ">Edit/Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {news.map((data, index: number) => {
             return (
               <TableRow key={index}>
-                <TableCell className="border-muted border-2 text-center">{index}</TableCell>
-                <TableCell className="text-center border-muted border-2">
+                <TableCell >{index}</TableCell>
+                <TableCell className="text-center ">
                  {data.detail}
                 </TableCell>
                 <TableCell className="p-0 h-full">
@@ -77,7 +77,7 @@ const News_Table = () => {
                   <TableCell className="text-center ">{data.type}</TableCell>
                  
                 </TableCell>
-                <TableCell className="flex justify-center gap-5 ">
+                <TableCell className="flex h-full justify-center items-center gap-5 ">
                       <Link to="/admin/news/update">
                            <Button className="text-blue-700"><Edit /></Button>
                       </Link>
