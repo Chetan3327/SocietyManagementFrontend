@@ -4,10 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const schema = z.object({
-    CoordinatorName : z.string().nonempty("Coordinator name is required"),
-    CoordinatorPosition : z.string().nonempty("Coordinator position is required"),
-    CoordinatorDescription : z.string().nonempty("This field is required"),
-    SocietyName : z.string().nonempty("Society name is required"),
+  CoordinatorName : z.string().nonempty("Coordinator name is required"),
+  CoordinatorPosition : z.string().nonempty("Coordinator position is required"),
+  CoordinatorDescription : z.string().nonempty("This field is required"),
+  Image : z.string().nonempty("Coordinator Image is required"),
+  SocietyID : z.string().nonempty("SocietyID is required"),
+  CoordinatorID : z.string().nonempty("CoordinatorID is required"),
+  CoordinatorEmail : z.string().nonempty("CoordinatorEmail is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -46,6 +49,33 @@ const UpdateCoordinatorForm = () => {
            Coordinator Details Update Form
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("SocietyID")}
+              placeholder="Enter Society ID"
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Coordinator ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("CoordinatorID")}
+              placeholder="Enter Coordinator ID"
+            />
+            {errors.CoordinatorID && (
+              <span className="text-red-500">{errors.CoordinatorID.message}</span>
+            )}
+          </div>
+
           <div className="mb-4">
             <label className="block text-md font-medium">Coordinator Name</label>
             <input
@@ -61,7 +91,7 @@ const UpdateCoordinatorForm = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Coordinator Position
+            Coordinator Designation
             </label>
             <input
               className={`${classes}`}
@@ -72,6 +102,23 @@ const UpdateCoordinatorForm = () => {
             {errors.CoordinatorPosition && (
               <span className="text-red-500">
                 {errors.CoordinatorPosition.message}
+              </span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">
+            Coordinator Email
+            </label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("CoordinatorEmail")}
+              placeholder="Enter Coordinator Email"
+            />
+            {errors.CoordinatorEmail && (
+              <span className="text-red-500">
+                {errors.CoordinatorEmail.message}
               </span>
             )}
           </div>
@@ -91,19 +138,19 @@ const UpdateCoordinatorForm = () => {
           
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Society Name
+            Coordinator Image
             </label>
             <input
               className={`${classes}`}
               type="text"
-              {...register("SocietyName")}
-              placeholder="Enter society name"
+              {...register("Image")}
+              placeholder="Enter coordinator's image link"
             />
-            {errors.SocietyName && (
+            {/* {errors.Image && (
               <span className="text-red-500">
-                {errors.SocietyName.message}
+                {errors.Image.message}
               </span>
-            )}
+            )} */}
           </div>
 
           <button
