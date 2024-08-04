@@ -5,47 +5,47 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 type Coordinator = {
-  name: string;
-  title: string;
-  email: string;
-  description: string;
-  image: string;
+  CoordinatorDesignation: string;
+  CoordinatorName: string;
+  CoordinatorEmail: string;
+  CoordinatorDetails: string;
+  Image: string;
 };
 
-const coordinators: Coordinator[] = [
-  {
-    name: "Dr. Shweta Taneja",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    email: "abxXYZ12@gmail.com",
-    description:
-      "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
-  },
-  {
-    name: "Dr. Shweta Taneja",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    email: "abXXYZ12@gmail.com",
-    description:
-      "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
-  },
-  {
-    name: "Dr. Shweta Taneja",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    email: "abxXYZ12@gmail.com",
-    description:
-      "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
-  },
-];
+// const coordinators: Coordinator[] = [
+//   {
+//     name: "Dr. Shweta Taneja",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     email: "abxXYZ12@gmail.com",
+//     description:
+//       "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
+//   },
+//   {
+//     name: "Dr. Shweta Taneja",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     email: "abXXYZ12@gmail.com",
+//     description:
+//       "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
+//   },
+//   {
+//     name: "Dr. Shweta Taneja",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     email: "abxXYZ12@gmail.com",
+//     description:
+//       "Dr. Shweta Taneja serves as Facalty coordinator for Hash Define.",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs12SHC36eFS4JYDUiE9IjJyaj6q97gCsy9A&s",
+//   },
+// ];
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const Coordinators = () => {
   const { id } = useParams();
-  const [coordinators, setCoordinators] = useState(null)
+  const [coordinators, setCoordinators] = useState<Coordinator[]>([])
   useEffect(() => {
     const fetchsociety = async () => {
       const res = await axios.get(`${BACKEND_URL}/coordinator/${id}`)
@@ -79,7 +79,7 @@ const Coordinators = () => {
           Coordinators
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {coordinators.map(({ CoordinatorDesignation, CoordinatorName, CoordinatorEmail, CoordinatorDetails, Image }) => (
+          {coordinators.map(({ CoordinatorDesignation, CoordinatorName, CoordinatorEmail, CoordinatorDetails, Image } : { CoordinatorDesignation : string, CoordinatorName : string, CoordinatorEmail : string, CoordinatorDetails : string, Image : string} ) => (
             <Card
               key={CoordinatorDesignation}
               className="text-center bg-[#e6e6e6] dark:bg-[#3f3f3f]"

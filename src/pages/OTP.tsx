@@ -250,11 +250,11 @@ const OTP: React.FC = () => {
               style={styles.button}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor =
-                  styles.buttonHover.backgroundColor)
+                  styles.buttonHover.backgroundColor || "#005a9e")
               }
               onMouseOut={(e) =>
                 (e.currentTarget.style.backgroundColor =
-                  styles.button.backgroundColor)
+                  styles.button.backgroundColor || "#0078d4" )
               }
             >
               <Link to="/ChangePassword">Submit OTP</Link>
