@@ -77,7 +77,7 @@ const News_Table = () => {
                   <TableCell className="text-center ">{data.type}</TableCell>
                  
                 </TableCell>
-                <TableCell className="flex justify-center gap-5">
+                <TableCell className="flex justify-center gap-5 ">
                       <Link to="/admin/news/update">
                            <Button className="text-blue-700"><Edit /></Button>
                       </Link>

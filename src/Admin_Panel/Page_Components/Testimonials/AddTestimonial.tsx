@@ -7,6 +7,9 @@ const schema = z.object({
     Name : z.string().nonempty(" Name is required"),
     Image : z.string().nonempty("image is required"),
     Testimonial : z.string().nonempty("teatimonail is required"),
+    EnrollmentNo : z.string().nonempty("EnrollmentNo is required"),
+    TestimonialID : z.string().nonempty("TestimonialID is required"),
+    SocietyID : z.string().nonempty("SocietyID is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -40,42 +43,52 @@ const CreateTestimonial = () => {
           </h2>
         </div>
       </div>
-      <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
+      <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
             Create Testimonial Form
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label className="block text-md font-medium">Name</label>
+
+        <div className="mb-4">
+            <label className="block text-md font-medium">Enrollment No</label>
             <input
               className={`${classes}`}
               type="text"
-              {...register("Name")}
-              placeholder="Enter Name"
+              {...register("EnrollmentNo")}
+              placeholder="Enter Student's Enrollment No"
             />
-            {errors.Name && (
-              <span className="text-red-500">{errors.Name.message}</span>
+            {errors.EnrollmentNo && (
+              <span className="text-red-500">{errors.EnrollmentNo.message}</span>
             )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">
-             Image
-            </label>
+            <label className="block text-md font-medium">Testimonial ID</label>
             <input
               className={`${classes}`}
-              type="file"
-              {...register("Image")}
+              type="text"
+              {...register("TestimonialID")}
+              placeholder="Enter Testimonial ID"
             />
-            {errors.Image && (
-              <span className="text-red-500">
-                {errors.Image.message}
-              </span>
+            {errors.TestimonialID && (
+              <span className="text-red-500">{errors.TestimonialID.message}</span>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("SocietyID")}
+              placeholder="Enter Society ID"
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
             )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Enter your Reviews</label>
+            <label className="block text-md font-medium">Testimonial Description</label>
             <textarea
               placeholder="Enter your reviews"
               {...register("Testimonial")}

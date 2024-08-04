@@ -94,7 +94,7 @@ const Coordinator_Table = () => {
                   <TableRow key={index} className="border-none">
                     <TableCell className="text-center">{coordinator.id}</TableCell>
                     <TableCell className="text-center">
-                      <div className="flex flex-col items-start">
+                      <div className="flex flex-col">
                         {/* <img
                           src={coordinator.img || coordinatorpic}
                           alt="coordinator"
