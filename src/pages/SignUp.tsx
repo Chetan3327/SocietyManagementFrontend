@@ -11,7 +11,7 @@ const styles = {
   leftSide: {
     flex: "1",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as 'column',
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(255, 255, 255, 0.9)",
@@ -38,33 +38,33 @@ const styles = {
     borderRadius: "8px",
     boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)",
     backgroundColor: "#fff",
-    position: "relative",
+    position: "relative" as "relative",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as "column",
     alignItems: "center",
   },
   logo: {
-    position: "absolute",
+    position: "absolute" as "absolute",
     top: "10px",
     left: "10px",
     width: "50px",
     height: "50px",
-    objectFit: "contain",
+    objectFit: "contain" as "contain",
   },
   title: {
     margin: "0",
     fontSize: "24px",
     color: "#333",
-    textAlign: "center",
+    textAlign: "center" as "center",
     marginBottom: "20px",
   },
   form: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as "column",
     width: "100%",
   },
   fieldContainer: {
-    position: "relative",
+    position: "relative" as "relative",
     marginBottom: "15px",
   },
   inputContainer: {
@@ -99,7 +99,7 @@ const styles = {
   },
   links: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as "column",
     alignItems: "center",
   },
   link: {
@@ -108,7 +108,7 @@ const styles = {
     marginTop: "10px",
   },
   message: {
-    textAlign: "center",
+    textAlign: "center" as "center",
     marginBottom: "20px",
   },
   error: {

@@ -3,8 +3,8 @@
 import React, { useState, ChangeEvent } from "react";
 import "./Tab_Component_student.css";
 import EvaluationCard from "@/components/Page-Components/EvaluationCard";
-import Testimonials from "./Testimonials";
-import TestimonialCard from "@/components/Page-Components/Testimonials";
+// import Testimonials from "./Testimonials";
+// import TestimonialCard from "@/components/Page-Components/Testimonials";
 
 interface WorkExperience {
   title: string;

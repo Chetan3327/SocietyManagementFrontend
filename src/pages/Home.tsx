@@ -187,7 +187,7 @@ const Home = () => {
                         <h1 className="text-white font-bold  lg:text-lg text-xs">
                           <span className="font-extrabold lg:text-2xl text-xs">
                             2nd
-                          </span>{" "}
+                          </span>
                           Prize in XXX Hackathon organized at BVCOE
                         </h1>
                       </div>

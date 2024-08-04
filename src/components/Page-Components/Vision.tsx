@@ -47,9 +47,9 @@ const Vision = () => {
             {/* <Button className='absolute right-5' variant='outline'>Learn More</Button> */}
             <h2 className="text-4xl font-semibold text-center mb-5 mt-4">Our Vision and Mission</h2>
             <div className="text-gray-800 space-y-3">
-              {visions.map(({heading, content, image}) => {
+              {visions.map(({heading, content, image},index) => {
                 return (
-                  <Card>
+                  <Card key={index}>
                     <CardContent className='flex gap-15 items-center'>
                       <div>
                         <img src={image} width={500} />

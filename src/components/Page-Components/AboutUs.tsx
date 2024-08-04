@@ -53,8 +53,8 @@ const AboutUs = () => {
                   </p>
 
                      <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mt-5">
-                        <Link to="/" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">View more
-                        </Link>
+                        {/* <Link to="/" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">View more
+                        </Link> */}
                         <Link to="/vision" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">Vision & Mission
                         </Link>
                     </div>
