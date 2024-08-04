@@ -4,9 +4,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const schema = z.object({
-    Events : z.string().nonempty("Events is required"),
-    Date : z.string().nonempty("Date is required"),
-    Society : z.string().nonempty("society is required"),
+  Events : z.string().nonempty("Events is required"),
+  Date : z.string().nonempty("Date is required"),
+  Society : z.string().nonempty("society is required"),
+  SocietyID : z.string().nonempty("societyID is required"),
+  EventID : z.string().nonempty("EventID is required"),
+  title : z.string().nonempty("title is required"),
+  EventType : z.string().nonempty("EventType is required"),
+  EventMode : z.string().nonempty("EventMode is required"),
+  EventLocation : z.string().nonempty("EventLocation is required"),
+  Link : z.string().nonempty("Link is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -45,12 +52,51 @@ const UpdateEvents = () => {
           Update Details
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+
           <div className="mb-4">
-            <label className="block text-md font-medium">Events</label>
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("SocietyID")}
+              placeholder="Enter Society ID"
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Event ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("EventID")}
+              placeholder="Enter a unique EventID"
+            />
+            {errors.EventID && (
+              <span className="text-red-500">{errors.EventID.message}</span>
+            )}
+          </div>
+          
+          <div className="mb-4">
+            <label className="block text-md font-medium">Event Title</label>
+            <textarea
+              className={`${classes}`}
+              {...register("title")}
+              placeholder="Enter Event's Title"
+            ></textarea>
+            {errors.title && (
+              <span className="text-red-500">{errors.title.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Event Description</label>
             <textarea
               className={`${classes}`}
               {...register("Events")}
-              placeholder="Enter Events description"
+              placeholder="Enter Event's description"
             ></textarea>
             {errors.Events && (
               <span className="text-red-500">{errors.Events.message}</span>
@@ -58,8 +104,60 @@ const UpdateEvents = () => {
           </div>
 
           <div className="mb-4">
+            <label className="block text-md font-medium">Event Type</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("EventType")}
+              placeholder="Enter the Event's Type, ex, competition,.. "
+            />
+            {errors.EventType && (
+              <span className="text-red-500">{errors.EventType.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Mode Of Event</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("EventMode")}
+              placeholder="Online, Offline,..."
+            />
+            {errors.EventMode && (
+              <span className="text-red-500">{errors.EventMode.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Event Location</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("EventLocation")}
+              placeholder="Seminar Hall, Google Meet,..."
+            />
+            {errors.EventLocation && (
+              <span className="text-red-500">{errors.EventLocation.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Event's Link</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("Link")}
+              placeholder="Enter the Event's Link, if any"
+            />
+            {errors.Link && (
+              <span className="text-red-500">{errors.Link.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
             <label className="block text-md font-medium">
-            Date 
+            Event's Date 
             </label>
             <input
               className={`${classes}`}
@@ -73,22 +171,6 @@ const UpdateEvents = () => {
               </span>
             )}
           </div>
-
-          <div className="mb-4">
-            <label className="block text-md font-medium">Society Name</label>
-            <input
-              placeholder="Enter Society Name"
-              {...register("Society")}
-              type="text"
-              className={`${classes}`}
-            />
-            {errors.Society && (
-              <span className="text-red-500">{errors.Society.message}</span>
-            )}
-          </div>
-
-          
-    
 
           <button
             type="submit"
