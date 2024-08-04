@@ -1,4 +1,3 @@
-import React from 'react'
 import { Edit, Trash, UserRoundPlus } from "lucide-react";
 import student from '../../../assets/studentpic.jpeg'
 import { Link } from "react-router-dom";

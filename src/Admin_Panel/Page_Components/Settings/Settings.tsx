@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -19,7 +19,7 @@ const ProfileSchema = z.object({
 
 const Settings = () => {
 
-    const [submit, setSubmit] = useState(false)
+    const [_, setSubmit] = useState(false)
     type ProfileData = z.infer<typeof ProfileSchema>
 
 

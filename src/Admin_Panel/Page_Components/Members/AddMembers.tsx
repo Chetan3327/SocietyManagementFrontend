@@ -36,7 +36,7 @@ const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md t
 
 const AddMembers = () => {
 
-    const [submit , setSubmit] = useState(false)
+    const [_ , setSubmit] = useState(false)
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -77,7 +77,7 @@ const AddMembers = () => {
               {...register("EnrollmentNo")}
               placeholder="Enter Enrollment No"
             />
-            {errors.Name && (
+            {errors.EnrollmentNo && (
               <span className="text-red-500">{errors.EnrollmentNo.message}</span>
             )}
           </div>
