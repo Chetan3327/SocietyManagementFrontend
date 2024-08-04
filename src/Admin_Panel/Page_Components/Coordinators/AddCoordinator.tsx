@@ -7,7 +7,10 @@ const schema = z.object({
     CoordinatorName : z.string().nonempty("Coordinator name is required"),
     CoordinatorPosition : z.string().nonempty("Coordinator position is required"),
     CoordinatorDescription : z.string().nonempty("This field is required"),
-    SocietyName : z.string().nonempty("Society name is required"),
+    Image : z.string().nonempty("Coordinator Image is required"),
+    SocietyID : z.string().nonempty("SocietyID is required"),
+    CoordinatorID : z.string().nonempty("CoordinatorID is required"),
+    CoordinatorEmail : z.string().nonempty("CoordinatorEmail is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -41,11 +44,38 @@ const AddCoordinator = () => {
           </h2>
         </div>
       </div>
-      <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
+      <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
           New Coordinator Form
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("SocietyID")}
+              placeholder="Enter Society ID"
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Coordinator ID</label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("CoordinatorID")}
+              placeholder="Enter Coordinator ID"
+            />
+            {errors.CoordinatorID && (
+              <span className="text-red-500">{errors.CoordinatorID.message}</span>
+            )}
+          </div>
+
           <div className="mb-4">
             <label className="block text-md font-medium">Coordinator Name</label>
             <input
@@ -61,7 +91,7 @@ const AddCoordinator = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Coordinator Position
+            Coordinator Designation
             </label>
             <input
               className={`${classes}`}
@@ -72,6 +102,23 @@ const AddCoordinator = () => {
             {errors.CoordinatorPosition && (
               <span className="text-red-500">
                 {errors.CoordinatorPosition.message}
+              </span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">
+            Coordinator Email
+            </label>
+            <input
+              className={`${classes}`}
+              type="text"
+              {...register("CoordinatorEmail")}
+              placeholder="Enter Coordinator Email"
+            />
+            {errors.CoordinatorEmail && (
+              <span className="text-red-500">
+                {errors.CoordinatorEmail.message}
               </span>
             )}
           </div>
@@ -91,19 +138,19 @@ const AddCoordinator = () => {
           
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Society Name
+            Coordinator Image
             </label>
             <input
               className={`${classes}`}
               type="text"
-              {...register("SocietyName")}
-              placeholder="Enter society name"
+              {...register("Image")}
+              placeholder="Enter coordinator's image link"
             />
-            {errors.SocietyName && (
+            {/* {errors.Image && (
               <span className="text-red-500">
-                {errors.SocietyName.message}
+                {errors.Image.message}
               </span>
-            )}
+            )} */}
           </div>
 
           <button
