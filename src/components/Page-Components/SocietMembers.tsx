@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { CoreTeamCard } from "./SocietyMembersCard";
 import {
   Carousel,
   CarouselContent,
@@ -7,19 +5,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableHeader,
-  TableHead,
-} from "@/components/ui/table";
-import { Link, useParams } from "react-router-dom";
-import { Button } from "../ui/button";
 import axios from "axios";
-
-const tableClass = "text-center text-gray-800 text-xl border-x";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { CoreTeamCard, MemberCard } from "./SocietyMembersCard";
 
 type MemberType = {
   BatchYear: number;
@@ -45,29 +34,28 @@ type MemberType = {
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const SocietMembers = () => {
+const SocietyMembers = () => {
   const { id } = useParams<{ id: string }>();
   const [members, setMembers] = useState<MemberType[]>([]);
   const [seniorCouncil, setSeniorCouncil] = useState<MemberType[]>([]);
   const [juniorCouncil, setJuniorCouncil] = useState<MemberType[]>([]);
+
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        console.log(`${BACKEND_URL}/societies/members/${id}`)
         const res = await axios.get(`${BACKEND_URL}/societies/members/${id}`);
         const fetchedMembers: MemberType[] = res.data;
         setMembers(fetchedMembers);
-        const seniors = fetchedMembers.filter(member => member.MemberType=== "Senior Council");
-        const juniors = fetchedMembers.filter(member => member.MemberType=== "Junior Council");
-        console.log(juniors)
-        setSeniorCouncil(seniors);
-        setJuniorCouncil(juniors);
+        setSeniorCouncil(fetchedMembers.filter(member => member.MemberType === "Senior Council"));
+        setJuniorCouncil(fetchedMembers.filter(member => member.MemberType === "Junior Council"));
       } catch (error) {
         console.error("Error fetching members:", error);
       }
     };
     fetchMembers();
   }, [id]);
+
+  if (!members.length) return <div>Loading...</div>;
 
   return (
     <>
@@ -77,7 +65,7 @@ const SocietMembers = () => {
           src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
           alt="Member spotlight intro"
         />
-        <div className="absolute inset-0 py-20 lg:py-28 ">
+        <div className="absolute inset-0 py-20 lg:py-28">
           <h2 className="text-black text-center text-4xl font-extrabold">
             MEMBER SPOTLIGHTS
           </h2>
@@ -113,7 +101,19 @@ const SocietMembers = () => {
             <CarouselContent>
               {seniorCouncil.map((member, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <CoreTeamCard props={member} />
+                  <CoreTeamCard
+                    props={{
+                      name: `${member.FirstName} ${member.LastName}`,
+                      position: member.SocietyPosition,
+                      domain: member.DomainExpertise,
+                      github: member.GithubProfile,
+                      linkedin: member.LinkedInProfile,
+                      x: member.TwitterProfile,
+                      email: member.Email,
+                      about: member.StudentContributions,
+                      image: member.ProfilePicture,
+                    }}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -138,7 +138,19 @@ const SocietMembers = () => {
             <CarouselContent>
               {juniorCouncil.map((member, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <CoreTeamCard props={member} />
+                  <MemberCard
+                    props={{
+                      name: `${member.FirstName} ${member.LastName}`,
+                      image: member.ProfilePicture,
+                      linkedin: member.LinkedInProfile,
+                      x: member.TwitterProfile,
+                      email: member.Email,
+                      batch: member.BatchYear.toString(),
+                      enrollmentNumber: member.EnrollmentNo.toString(),
+                      branch: member.Branch,
+                      skills: member.DomainExpertise,
+                    }}
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -150,4 +162,4 @@ const SocietMembers = () => {
   );
 };
 
-export default SocietMembers;
+export default SocietyMembers;
