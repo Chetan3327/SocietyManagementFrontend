@@ -124,11 +124,47 @@ const styles = {
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<string>("");
     const navigate = useNavigate();
+    const [role, setRole] = useState('');
+    
+    const RoleSelector = () => {
+    
+      return (
+        <div style={styles.fieldContainer}>
+          <div style={styles.inputContainer}>
+            <i className="fas fa-lock" style={styles.icon}></i>
+            <select
+              id="role"
+              name="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              style={styles.select}
+              required
+            >
+              <option value="">Select your role</option>
+              <option value="society-head">Society Head</option>
+              <option value="college-admin">College Admin</option>
+            </select>
+          </div>
+        </div>
+      );
+    };
 
     const handleSubmit =  (e: FormEvent) => {
         e.preventDefault();
-        navigate('/admin')
+        navigate('/admin/home')
+        // Check if role is either 'society-head' or 'college-admin'
+    if (role === 'Society Head' || role === 'College Admin') {
+      // Simulate login check
+      if (userName === 'user' && password === 'pass') {
+        navigate('/admin/home');
+      } else {
+        setError('Login unsuccessful. Please try again.');
+      }
+    } else {
+      setError('Invalid role. Please select a valid role.');
+    }
       };
+
 
       return (
         <>
@@ -141,7 +177,7 @@ const styles = {
                     alt="Logo"
                     style={styles.logo}
                   />
-                  <h1 style={styles.title}>Sign Up</h1>
+                  <h1 style={styles.title}>Log In</h1>
     
                   {error && (
                     <p style={{ ...styles.message, ...styles.error }}>{error}</p>
@@ -153,6 +189,7 @@ const styles = {
                   )}
     
                   <form style={styles.form} onSubmit={handleSubmit}>
+
                     <div style={styles.fieldContainer}>
                       <div style={styles.inputContainer}>
                         <i className="fas fa-user" style={styles.icon}></i>
@@ -184,6 +221,10 @@ const styles = {
                         />
                       </div>
                     </div>
+
+                    <div>
+                      <RoleSelector />
+                    </div>
     
                     <button
                       type="submit"
@@ -198,7 +239,7 @@ const styles = {
                           styles.button.backgroundColor)
                       }
                     >
-                      Sign Up
+                      Log In
                     </button>
                   </form>
                 </div>
