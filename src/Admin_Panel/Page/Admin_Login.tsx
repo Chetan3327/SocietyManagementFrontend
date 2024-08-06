@@ -125,8 +125,9 @@ const styles = {
     const [success, setSuccess] = useState<string>("");
     const navigate = useNavigate();
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleSubmit =  (e: FormEvent) => {
         e.preventDefault();
+        navigate('/admin')
       };
 
       return (
@@ -151,7 +152,7 @@ const styles = {
                     </p>
                   )}
     
-                  <form style={styles.form}>
+                  <form style={styles.form} onSubmit={handleSubmit}>
                     <div style={styles.fieldContainer}>
                       <div style={styles.inputContainer}>
                         <i className="fas fa-user" style={styles.icon}></i>
@@ -187,7 +188,7 @@ const styles = {
                     <button
                       type="submit"
                       style={styles.button}
-                      onClick={handleSubmit}
+                      
                       onMouseOver={(e) =>
                         (e.currentTarget.style.backgroundColor =
                           styles.buttonHover.backgroundColor)

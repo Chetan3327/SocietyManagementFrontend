@@ -57,7 +57,7 @@ export const SidebarData = [
   },
   {
     title: 'Login',
-    path: '/login',
+    path: '/admin/login',
     icon: <LogIn/>,
     cName: 'nav-text'
   },
