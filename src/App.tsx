@@ -78,7 +78,7 @@ const App = () => {
   if (Locations[1].toLowerCase() === "admin") {
     return (
       <Routes>
-        <Route path="/admin/login" element={<Admin_Login />} />
+        <Route path="/admin" element={<Admin_Login />} />
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/news/add" element={<AddNews/>} />
         <Route path="/admin/news/update" element={<UpdateNews/>} />
@@ -98,7 +98,7 @@ const App = () => {
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
         <Route path="/admin/testimonials/add" element={<AddTestimonial />} />
         <Route path="/admin/testimonials/update" element={<UpdateTestimonial />} />
-        <Route path="/admin" element={<Activity_Feed />} />
+        <Route path="/admin/home" element={<Activity_Feed />} />
       </Routes>
     );
   }
