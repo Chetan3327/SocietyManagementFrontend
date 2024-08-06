@@ -66,6 +66,7 @@ import UpdateNews from "./Admin_Panel/Page_Components/News/UpdateNews";
 import Admin_Testimonials from './Admin_Panel/Page/Testimonials'
 import AddTestimonial from "./Admin_Panel/Page_Components/Testimonials/AddTestimonial";
 import UpdateTestimonial from "./Admin_Panel/Page_Components/Testimonials/UpdateTestimonial";
+import Admin_Login from "./Admin_Panel/Page/Admin_Login";
 
 
 const App = () => {
@@ -77,6 +78,7 @@ const App = () => {
   if (Locations[1].toLowerCase() === "admin") {
     return (
       <Routes>
+        <Route path="/admin/login" element={<Admin_Login />} />
         <Route path="/admin/news" element={<Admin_News />} />
         <Route path="/admin/news/add" element={<AddNews/>} />
         <Route path="/admin/news/update" element={<UpdateNews/>} />
