@@ -63,9 +63,23 @@ import UpdateSociety from "./Admin_Panel/Page_Components/Socities/UpdateSociety"
 
 import UpdateMembers from "./Admin_Panel/Page_Components/Members/UpdateMembers";
 import UpdateNews from "./Admin_Panel/Page_Components/News/UpdateNews";
+
 import Admin_Testimonials from './Admin_Panel/Page/Testimonials'
 import AddTestimonial from "./Admin_Panel/Page_Components/Testimonials/AddTestimonial";
 import UpdateTestimonial from "./Admin_Panel/Page_Components/Testimonials/UpdateTestimonial";
+
+import Admin_Achievements from './Admin_Panel/Page/Achievemnts';
+import AddAchievements from "./Admin_Panel/Page_Components/SocietyAchievements/AddAchievements";
+import UpdateAchievements from "./Admin_Panel/Page_Components/SocietyAchievements/UpdateAchievements";
+
+import Admin_Gallery from './Admin_Panel/Page/Gallery';
+import AddGallery from "./Admin_Panel/Page_Components/Gallery/AddGallery";
+import UpdateGallery from "./Admin_Panel/Page_Components/Gallery/UpdateGallery";
+
+import Admin_Roles from './Admin_Panel/Page/Roles'
+import AddRoles from './Admin_Panel/Page_Components/Roles/AddRoles'
+import UpdateRoles from './Admin_Panel/Page_Components/Roles/UpdateRoles'
+
 import Admin_Login from "./Admin_Panel/Page/Admin_Login";
 
 
@@ -95,9 +109,23 @@ const App = () => {
         <Route path="/admin/coordinators/update" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
         <Route path="/admin/testimonials/add" element={<AddTestimonial />} />
         <Route path="/admin/testimonials/update" element={<UpdateTestimonial />} />
+
+        <Route path="/admin/societyAchievements" element={<Admin_Achievements />} />
+        <Route path="/admin/societyAchievements/add" element={<AddAchievements />} />
+        <Route path="/admin/societyAchievements/update" element={<UpdateAchievements />} />
+
+        <Route path="/admin/gallery" element={<Admin_Gallery />} />
+        <Route path="/admin/gallery/add" element={<AddGallery />} />
+        <Route path="/admin/gallery/update" element={<UpdateGallery />} />
+
+        <Route path="/admin/roles" element={<Admin_Roles />} />
+        <Route path="/admin/roles/add" element={<AddRoles />} />
+        <Route path="/admin/roles/update" element={<UpdateRoles />} />
+
         <Route path="/admin/home" element={<Activity_Feed />} />
       </Routes>
     );

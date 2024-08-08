@@ -16,51 +16,65 @@ const member=[
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2022-26",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"ECE",
+    batch:"2023-27",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2021-25",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2022-26",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2023-27",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2022-26",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
   {
     img:student,
     name:"John Doe",
-    branch:"CSE-B",
-    contact:"0115897556",
-    email:"shivani_1234@gmail.com"
+    branch:"CSE",
+    batch:"2022-26",
+    enrollment:"0115897556",
+    email:"shivani_1234@gmail.com",
+    societyID: "anveshan089"
   },
 ]
 const Member_Table = () => {
@@ -68,7 +82,7 @@ const Member_Table = () => {
     <>
       <Card className=" mt-7">
         <CardContent className="p-2">
-          <div className="flex gap-2 justify-around items-center px-3 w-screen w-full flex-wrap md:flex-nowrap">
+          <div className="flex gap-2 justify-around items-center px-3 w-full flex-wrap md:flex-nowrap">
             <input
               type="text"
               placeholder="Filter Search"
@@ -83,7 +97,7 @@ const Member_Table = () => {
           </div>
         </CardContent>
       </Card>
-      <Card className="p-0 m-4 mt-7 h-96 overflow-y-auto">
+      <Card className="p-0 -m-20 mt-7 h-96 overflow-y-auto">
         <CardContent className="p-0 overflow-y-auto">
           <Table>
             <TableHeader>
@@ -92,16 +106,22 @@ const Member_Table = () => {
                   Name
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
-                  Branch & Year
+                  Branch
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
-                  Contact
+                  Batch
+                </TableHead>
+                <TableHead className="font-bold text-center text-xl">
+                  EnrollmentNo.
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Email
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
-                  Society Contribution
+                  SocietyID
+                </TableHead>
+                <TableHead className="font-bold text-center text-xl">
+                  Student's Contribution
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Edit/Delete
@@ -113,7 +133,7 @@ const Member_Table = () => {
                 return (
                   <TableRow key={index} className="border-none">
                     <TableCell>
-                      <div className="flex gap-5 items-center justify-end">
+                      <div className="flex gap-1 items-center justify-end">
                         <img
                           src={member.img}
                           alt="student"
@@ -124,15 +144,11 @@ const Member_Table = () => {
                     </TableCell>
                     
                     <TableCell className="text-center">{member.branch}</TableCell>
-                    <TableCell className="text-center">{member.contact}</TableCell>
-                    <TableCell className="text-center">
-                      {member.email}
-                    </TableCell>
-                    
+                    <TableCell className="text-center">{member.batch}</TableCell>
+                    <TableCell className="text-center">{member.enrollment}</TableCell>
+                    <TableCell className="text-center">{member.email}</TableCell>
+                    <TableCell className="text-center">{member.societyID}</TableCell>
                     <TableCell >
-                      {/* <Button className="border-2 w-fit px-5 py-1 rounded-full">
-                        View Details
-                      </Button> */}
                       <Button className="border-2 w-fit px-5 py-1 rounded-full">
                         <Link to="/members/:id">View Details</Link>
                       </Button>

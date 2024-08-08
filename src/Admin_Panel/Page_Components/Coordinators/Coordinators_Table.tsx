@@ -64,7 +64,7 @@ const Coordinator_Table = () => {
             />
             <Link className="bg-blue-700 px-4 py-2 rounded-full text-white flex gap-5" to='/admin/coordinators/add'>
               <UserRoundPlus fill="white" />
-              <div>Form</div>
+              <div>Create Coordinator Form</div>
             </Link>
           </div>
         </CardContent>
