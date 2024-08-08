@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios, { AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
+// import axios, { AxiosResponse } from "axios";
 
 const styles = {
     container: {
@@ -137,7 +137,7 @@ const styles = {
               name="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              style={styles.select}
+              // style={styles.select}
               required
             >
               <option value="">Select your role</option>
@@ -151,6 +151,7 @@ const styles = {
 
     const handleSubmit =  (e: FormEvent) => {
         e.preventDefault();
+        setSuccess("")
         navigate('/admin/home')
         // Check if role is either 'society-head' or 'college-admin'
     if (role === 'Society Head' || role === 'College Admin') {

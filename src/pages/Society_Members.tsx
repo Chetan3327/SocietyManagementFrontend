@@ -12,34 +12,35 @@ import { Button } from "@/components/ui/button"; // Adjust import based on your 
 import axios from "axios";
 
 // Replace 'student' with actual import if it's an image file
-const student = "path-to-student-image.jpg";
+// const student = "path-to-student-image.jpg";
 
 interface MemberType {
-  name: string;
-  image: string;
-  linkedin: string;
-  x: string;
-  email: string;
-  batch: string;
-  enrollmentNumber: string;
-  branch: string;
-  skills: string;
+  FirstName: string;
+  ProfilePicture: string;
+  LinkedInProfile: string;
+  TwitterProfile: string;
+  Email: string;
+  BatchYear: string;
+  EnrollmentNo: string;
+  Branch: string;
+  DomainExpertise: string;
+  
 }
 
-const members: MemberType[] = [
-  {
-    name: "Shivani Sharma",
-    image: "https://cdn.pixabay.com/photo/2023/11/09/19/36/zoo-8378189_640.jpg",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
-    email: "jyotiahuja@gmail.com",
-    batch: "2022-2026",
-    enrollmentNumber: "04320802722",
-    branch: "CSE",
-    skills: "proficient in python and mysql",
-  },
-  // Add more member objects as needed
-];
+// const members: MemberType[] = [
+//   {
+//     name: "Shivani Sharma",
+//     image: "https://cdn.pixabay.com/photo/2023/11/09/19/36/zoo-8378189_640.jpg",
+//     linkedin: "https://linkedin.com",
+//     x: "https://x.com",
+//     email: "jyotiahuja@gmail.com",
+//     batch: "2022-2026",
+//     enrollmentNumber: "04320802722",
+//     branch: "CSE",
+//     skills: "proficient in python and mysql",
+//   },
+//   // Add more member objects as needed
+// ];
 
 const tableClass = "text-center text-gray-800 text-xl border-x";
 
@@ -64,7 +65,7 @@ const MemberCard: React.FC<{ props: MemberType }> = ({ props }) => {
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const SocietyMembers: React.FC = () => {
   const { id } = useParams();
-  const [members, setMembers] = useState(null)
+  const [members, setMembers] = useState([])
   useEffect(() => {
     const fetchsociety = async () => {
       const res = await axios.get(`${BACKEND_URL}/societies/members/${id}`)
@@ -107,7 +108,7 @@ const SocietyMembers: React.FC = () => {
             </TableHeader>
 
             <TableBody>
-              {members.map((member, index) => (
+              {members.map((member :MemberType, index : number) => (
                 <TableRow key={index}>
                   <TableCell className="text-center border-x text-gray-800">
                     {index + 1}.

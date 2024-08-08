@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 type newsItem = {
   title: string;
   description: string;
-  date: string; 
+  date: Date; 
   author: string;
 };
 
@@ -15,56 +15,56 @@ let latestNews: newsItem[] = [
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+    date: new Date("26/07/2024"),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "26/07/2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "July 26, 2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "July 26, 2024",
+      date: new Date(),
     author: "author name ",
   },
 ];
@@ -74,31 +74,39 @@ let filteredNews: newsItem[] = [
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: "July 26, 2024",
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: new Date(),
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: new Date(),
+      date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-    date: new Date(),
+      date: new Date(),
     author: "author name ",
   },
 ];
+type NewsFetchedType = {
+  NewsID : string ,
+  Title: string;
+  Description: string,
+  DateOfNews: Date,
+Author: string,
+SocietyID : string
+}
 
 latestNews = latestNews.length > 3 ? latestNews.slice(0, 3) : latestNews;
 filteredNews =
@@ -108,7 +116,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const News = () => {
   const { id } = useParams();
   const [filteredDate, setFilteredDate] = useState<Date | null>(null);
-  const [news, setNews] = useState(null)
+  const [news, setNews] = useState([])
   useEffect(() => {
     const fetchsociety = async () => {
       const res = await axios.get(`${BACKEND_URL}/news/${id}`)
@@ -126,7 +134,7 @@ const News = () => {
   const filteredNewsItems = filteredDate
     ? filteredNews.filter((news) => news.date >= filteredDate)
     : filteredNews;
-  const emptyFilteredNews = filteredNewsItems.length === 0;
+ // const emptyFilteredNews = filteredNewsItems.length === 0;
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -181,14 +189,14 @@ const News = () => {
           <div className="flex flex-col justify-center">
             <div className=" lg:mr-4 mb-4 lg:mb-0">
               <h3 className="text-2xl font-bold mb-4">Latest news </h3>
-              {news.map((newsItem: newsItem) => (
+              {news.map((newsItem : NewsFetchedType) => (
                 <div key={newsItem.NewsID} className="flex items-start mb-4">
                   <Calendar />
                   <div className="ml-2 mr-2">
                     <h4 className="font-bold">{newsItem.Title}</h4>
                     <p className="text-sm mb-2">{newsItem.Description}</p>
                     <p className="text-sm font-semibold opacity-85">
-                      {newsItem.DateOfNews}
+                      {(newsItem.DateOfNews).toISOString()}
                     </p>
                     <p className="text-gray-500 text-sm">{newsItem.Author}</p>
                   </div>

@@ -164,9 +164,7 @@ const SocietyQueryForm: React.FC = () => {
               {...register("Query")}
               className={`${classes}`}
             ></textarea>
-            {errors.Query && (
-              <span className="text-red-500">{errors.Query.message}</span>
-            )}
+            {errors.Query && <span className="text-red-500">{errors.Query.message}</span>}
           </div>
 
           <button

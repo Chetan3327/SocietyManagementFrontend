@@ -5,9 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -17,9 +15,9 @@ import {
   EventCardType,
 } from "./EventCard";
 
-const schema = z.object({
-  title: z.string().optional(),
-});
+// const schema = z.object({
+//   title: z.string().optional(),
+// });
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

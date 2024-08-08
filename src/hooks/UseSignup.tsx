@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Axios from "@/AxiosWrapper";
+ import axios from "@/AxiosWrapper";
 const useSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

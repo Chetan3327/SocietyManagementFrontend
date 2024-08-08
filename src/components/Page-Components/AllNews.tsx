@@ -3,16 +3,16 @@ import axios from "axios";
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
-type NewsItem = {
-  title: string;
-  description: string;
-  date: string;
-  societyName: string;
-};
+// type NewsItem = {
+//   title: string;
+//   description: string;
+//   date: string;
+//   societyName: string;
+// };
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const AllNews = () => {
-  const [news, setNews] = useState(null)
+  const [news, setNews] = useState([])
   useEffect(() => {
     const fetchsociety = async () => {
       const res = await axios.get(`${BACKEND_URL}/news`)
