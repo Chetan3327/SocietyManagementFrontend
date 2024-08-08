@@ -10,29 +10,38 @@ import { Card } from "../../../components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
+
 const news=[
-  {
-    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+  { 
+    id: '1',
+    detail:"Upcoming Hackathon",
     Date:"13/09/2024",
     society:"Anveshan",
+    newsID: '71526',
     type:"Update"               
   },
   {
-    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    id: '2',
+    detail:"Upcoming Hackathon",
     Date:"13/09/2024",
     society:"Anveshan",
+    newsID: '71526',
     type:"Update"               
   },
   {
-    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    id: '3',
+    detail:"Upcoming Hackathon",
     Date:"13/09/2024",
     society:"Anveshan",
+    newsID: '71526',
     type:"Update"               
   },
   {
-    detail:"Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+    id: '4',
+    detail:"Upcoming Hackathon",
     Date:"13/09/2024",
     society:"Anveshan",
+    newsID: '71526',
     type:"Update"               
   },
   
@@ -46,6 +55,9 @@ const News_Table = () => {
             <TableHead className="font-bold  text-xl  ">
               SocietyID
             </TableHead>
+            <TableHead className="font-bold  text-xl  ">
+              NewsID
+            </TableHead>
             <TableHead className="font-bold text-center text-xl ">
               News
             </TableHead>
@@ -54,9 +66,9 @@ const News_Table = () => {
                 News Details
               </h1>
               <TableRow>
-                <TableHead className="font-bold  text-xl">Date</TableHead>
-                <TableHead className="font-bold  text-xl ">Society</TableHead>
-                <TableHead className="font-bold  text-xl">Category</TableHead>
+                <TableHead className="font-bold text-xl">Date</TableHead>
+                <TableHead className="font-bold text-xl ">Society</TableHead>
+                <TableHead className="font-bold text-xl">Category</TableHead>
               </TableRow>
             </TableHead>
             
@@ -64,20 +76,21 @@ const News_Table = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {news.map((data, index: number) => {
+          {news.map((news, index: number) => {
             return (
               <TableRow key={index}>
-                <TableCell >{index}</TableCell>
+                <TableCell className="text-center">{news.id}</TableCell>
+                <TableCell className="text-center">{news.newsID}</TableCell>
                 <TableCell className="text-center ">
-                 {data.detail}
+                 {news.detail}
                 </TableCell>
                 <TableCell className="p-0 h-full">
-                  <TableCell className="text-center ">{data.Date}</TableCell>
-                  <TableCell className="text-center ">{data.society}</TableCell>
-                  <TableCell className="text-center ">{data.type}</TableCell>
+                  <TableCell className="text-center ">{news.Date}</TableCell>
+                  <TableCell className="text-center ">{news.society}</TableCell>
+                  <TableCell className="text-center ">{news.type}</TableCell>
                  
                 </TableCell>
-                <TableCell className="flex h-full justify-center items-center gap-5 ">
+                <TableCell className="flex h-full justify-center items-center pt-8 gap-5 ">
                       <Link to="/admin/news/update">
                            <Button className="text-blue-700"><Edit /></Button>
                       </Link>
