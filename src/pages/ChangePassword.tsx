@@ -118,7 +118,7 @@ const styles: { [key: string]: React.CSSProperties } = {
 };
 
 const ChangePassword: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
+  const [email] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -134,7 +134,7 @@ const ChangePassword: React.FC = () => {
     }
 
     try {
-      const response = await Axios.post("/reset-password", {
+       await Axios.post("/reset-password", {
         email,
         newPassword,
       });

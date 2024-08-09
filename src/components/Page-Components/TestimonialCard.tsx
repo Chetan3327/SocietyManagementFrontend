@@ -3,14 +3,14 @@ import TestimonialSlider from "./TestimonialSlider";
 // import '@import url("https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css")';
 
 // Define the type for a single testimonial
-interface Testimonial {
-  name: string;
-  imgSrc: string;
-  text: string;
-}
+// interface Testimonial {
+//   name: string;
+//   imgSrc: string;
+//   text: string;
+// }
 
 // Define the component
-const TestimonialCard: React.FC = ({Testimonials}) => {
+const TestimonialCard: React.FC<any> = ({Testimonials}) => {
   // Array of testimonials
   // const testimonials: Testimonial[] = [
   //   {
@@ -60,7 +60,7 @@ const TestimonialCard: React.FC = ({Testimonials}) => {
           </div>
           <TestimonialSlider />
           <div className="">
-            {Testimonials.map(({ FirstName, ProfilePicture, TestimonialDescription }, index) => (
+            {Testimonials.map(({ FirstName, ProfilePicture, TestimonialDescription }:{FirstName:string, ProfilePicture:string, TestimonialDescription:string}, index:number) => (
               <div key={index} className="">
                 <div className=" mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
                   <div className=" flex mb-4 items-center">

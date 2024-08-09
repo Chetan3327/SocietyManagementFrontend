@@ -47,18 +47,13 @@ const classes =
   "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
 const SocietyQueryForm: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
+  type formData = z.infer<typeof schema>
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+      resolver: zodResolver(schema)
+  })
+  const onSubmit = (data: formData) => {
+      console.log(data)
+  }
   return (
     <>
       <div className="relative mt-0 mx-auto w-full">
@@ -90,9 +85,7 @@ const SocietyQueryForm: React.FC = () => {
               {...register("StudentName")}
               placeholder="Enter your name"
             />
-            {errors.StudentName && (
-              <span className="text-red-500">{errors.StudentName.message}</span>
-            )}
+           {errors.StudentName && <span className='text-red-500'>{errors.StudentName.message}</span>}
           </div>
 
           <div className="mb-4">

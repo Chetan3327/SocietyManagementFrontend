@@ -9,7 +9,7 @@ const useSignup = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!termsAccepted) {
@@ -18,7 +18,7 @@ const useSignup = () => {
     }
 
     try {
-      const response = await axios.post("/signup", { name, email, password });
+      await axios.post("/signup", { name, email, password });
       setSuccess("Signup successful!");
       setError("");
       // Redirect or handle success as needed

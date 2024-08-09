@@ -1,6 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import Axios from "@/AxiosWrapper";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -119,9 +119,9 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const ResetPasswordPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [newPassword] = useState<string>("");
+  const [confirmPassword] = useState<string>("");
+  // const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
 
@@ -134,7 +134,7 @@ const ResetPasswordPage: React.FC = () => {
     }
 
     try {
-      const response = await Axios.post("/reset-password", {
+      await Axios.post("/reset-password", {
         email,
         newPassword,
       });
@@ -150,9 +150,9 @@ const ResetPasswordPage: React.FC = () => {
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   return (
     <div style={styles.container} className="flex-col md:flex-row">
