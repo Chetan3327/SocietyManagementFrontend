@@ -11,18 +11,18 @@ const schema = z.object({
   EventDateTime: z.string().nonempty("Event Date and Time is required"),
 });
 
-const eventTypes = [
-  "Workshop",
-  "Seminar",
-  "Meetup",
-  "Hackathon",
-  "Competition",
-];
+// const eventTypes = [
+//   "Workshop",
+//   "Seminar",
+//   "Meetup",
+//   "Hackathon",
+//   "Competition",
+// ];
 
-const modesOfEvent = ["Online", "Offline", "Hybrid"];
+// const modesOfEvent = ["Online", "Offline", "Hybrid"];
 
-const classes =
-  "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded bg-gray-200";
+// const classes =
+//   "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded bg-gray-200";
 
 const CreateEventForm = () => {
   type formData = z.infer<typeof schema>;
@@ -61,7 +61,7 @@ const CreateEventForm = () => {
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
               type="text"
               id="Title"
-              placeholder="Enter Your Name"
+              placeholder="Enter Your Name" 
             />
           </div>
 

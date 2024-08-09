@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
-import OTP from "./OTP";
+// import OTP from "./OTP";
 
 const styles = {
   container: {

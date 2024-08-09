@@ -12,38 +12,38 @@ interface Testimonial {
 // Define the component
 const TestimonialCard: React.FC = ({Testimonials}) => {
   // Array of testimonials
-  const testimonials: Testimonial[] = [
-    {
-      name: "Kenzie Edgar",
-      imgSrc: "https://i.pravatar.cc/100?img=1",
-      text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt ratione dolor exercitationem minima quas itaque saepe quasi architecto vel! Accusantium, vero sint recusandae cum tempora nemo commodi soluta deleniti.`,
-    },
-    {
-      name: "Stevie Tifft",
-      imgSrc: "https://i.pravatar.cc/100?img=2",
-      text: `Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Dolore quod necessitatibus, labore sapiente, est, dignissimos ullam error ipsam sint quam tempora vel.`,
-    },
-    {
-      name: "Tommie Ewart",
-      imgSrc: "https://i.pravatar.cc/100?img=3",
-      text: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, obcaecati ullam excepturi dicta error deleniti sequi.`,
-    },
-    {
-      name: "Charlie Howse",
-      imgSrc: "https://i.pravatar.cc/100?img=4",
-      text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto inventore voluptatum nostrum atque, corrupti, vitae esse id accusamus dignissimos neque reprehenderit natus, hic sequi itaque dicta nisi voluptatem! Culpa, iusto.`,
-    },
-    {
-      name: "Nevada Herbertson",
-      imgSrc: "https://i.pravatar.cc/100?img=5",
-      text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatem porro obcaecati dicta, quibusdam sunt ipsum, laboriosam nostrum facere exercitationem pariatur deserunt tempora molestiae assumenda nesciunt alias eius? Illo, autem!`,
-    },
-    {
-      name: "Kris Stanton",
-      imgSrc: "https://i.pravatar.cc/100?img=6",
-      text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem iusto, explicabo, cupiditate quas totam!`,
-    },
-  ];
+  // const testimonials: Testimonial[] = [
+  //   {
+  //     name: "Kenzie Edgar",
+  //     imgSrc: "https://i.pravatar.cc/100?img=1",
+  //     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sunt ratione dolor exercitationem minima quas itaque saepe quasi architecto vel! Accusantium, vero sint recusandae cum tempora nemo commodi soluta deleniti.`,
+  //   },
+  //   {
+  //     name: "Stevie Tifft",
+  //     imgSrc: "https://i.pravatar.cc/100?img=2",
+  //     text: `Lorem ipsum, dolor sit amet, consectetur adipisicing elit. Dolore quod necessitatibus, labore sapiente, est, dignissimos ullam error ipsam sint quam tempora vel.`,
+  //   },
+  //   {
+  //     name: "Tommie Ewart",
+  //     imgSrc: "https://i.pravatar.cc/100?img=3",
+  //     text: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, obcaecati ullam excepturi dicta error deleniti sequi.`,
+  //   },
+  //   {
+  //     name: "Charlie Howse",
+  //     imgSrc: "https://i.pravatar.cc/100?img=4",
+  //     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto inventore voluptatum nostrum atque, corrupti, vitae esse id accusamus dignissimos neque reprehenderit natus, hic sequi itaque dicta nisi voluptatem! Culpa, iusto.`,
+  //   },
+  //   {
+  //     name: "Nevada Herbertson",
+  //     imgSrc: "https://i.pravatar.cc/100?img=5",
+  //     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, voluptatem porro obcaecati dicta, quibusdam sunt ipsum, laboriosam nostrum facere exercitationem pariatur deserunt tempora molestiae assumenda nesciunt alias eius? Illo, autem!`,
+  //   },
+  //   {
+  //     name: "Kris Stanton",
+  //     imgSrc: "https://i.pravatar.cc/100?img=6",
+  //     text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem iusto, explicabo, cupiditate quas totam!`,
+  //   },
+  // ];
 
   return (
     <div className="min-w-screen min-h-screen bg-gray-50 flex items-center justify-center py-5">

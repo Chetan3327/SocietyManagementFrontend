@@ -61,22 +61,22 @@ const Navbar = () => {
     }
   };
 
-  const handleLogin = async () => {
-    try {
-      await initializeMsal();
-      const loginResponse = await msalInstance.loginPopup({
-        scopes: ["user.read"],
-      });
-      setAccount(loginResponse.account);
-      // Store user details
-      localStorage.setItem(
-        "msalAccount",
-        JSON.stringify(loginResponse.account)
-      );
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
+  // const handleLogin = async () => {
+  //   try {
+  //     await initializeMsal();
+  //     const loginResponse = await msalInstance.loginPopup({
+  //       scopes: ["user.read"],
+  //     });
+  //     setAccount(loginResponse.account);
+  //     // Store user details
+  //     localStorage.setItem(
+  //       "msalAccount",
+  //       JSON.stringify(loginResponse.account)
+  //     );
+  //   } catch (error) {
+  //     console.error("Login failed:", error);
+  //   }
+  // };
 
   const handleLogout = () => {
     msalInstance.logoutPopup();

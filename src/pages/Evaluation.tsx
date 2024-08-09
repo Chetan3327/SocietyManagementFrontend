@@ -1,34 +1,34 @@
 // src/components/TabComponentStudent.tsx
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import "./Tab_Component_student.css";
 import EvaluationCard from "@/components/Page-Components/EvaluationCard";
 // import Testimonials from "./Testimonials";
 // import TestimonialCard from "@/components/Page-Components/Testimonials";
 
-interface WorkExperience {
-  title: string;
-  company: string;
-  location: string;
-  duration: string;
-}
+// interface WorkExperience {
+//   title: string;
+//   company: string;
+//   location: string;
+//   duration: string;
+// }
 
-interface Award {
-  title: string;
-  details: string;
-}
+// interface Award {
+//   title: string;
+//   details: string;
+// }
 
-interface Certificate {
-  title: string;
-  details: string;
-}
+// interface Certificate {
+//   title: string;
+//   details: string;
+// }
 
-interface Project {
-  title: string;
-  description: string;
-  deployedLink: string;
-  githubLink: string;
-}
+// interface Project {
+//   title: string;
+//   description: string;
+//   deployedLink: string;
+//   githubLink: string;
+// }
 
 const TabComponentStudent: React.FC = () => {
   type Data = {
@@ -49,20 +49,22 @@ const TabComponentStudent: React.FC = () => {
     // You can add more achievement entries if needed
   ];
 
-  const [activeTab, setActiveTab] = useState<
-    "personal" | "Work Experience" | "achievements" | "projects"
-  >("personal");
+  // const [activeTab, setActiveTab] = useState<
+  //   "personal" | "Work Experience" | "achievements" | "projects"
+  // >("personal");
 
   const [fullName, setFullName] = useState<string>("");
-  const [dob, setDob] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
+ // const [dob, setDob] = useState<string>("");
+ // const [gender, setGender] = useState<string>("");
+  const [enrollmentNumber, setEnrollmentNumber] = useState<string>("");
   const [batch, setBatch] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
   const [contact, setContact] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [currentAddress, setCurrentAddress] = useState<string>("");
+  const [societyPosition, setSocietyPosition] = useState<string>("");
   const [linkedIn, setLinkedIn] = useState<string>("");
   const [github, setGithub] = useState<string>("");
+  const [twitter, setTwitter] = useState<string>("");
 
   return (
     <div className="tab-container flex flex-col text-black">
@@ -76,36 +78,34 @@ const TabComponentStudent: React.FC = () => {
 
           <div className="content mt-8">
             <div className="form-group">
-              <label>First Name</label>
+              <label>Full Name</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border  border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={fullName}
+                placeholder="Enter full name"
+                value={fullName} onChange={(e)=>{setFullName(e.target.value)}}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Last Name</label>
               <input
                 disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
                 placeholder="Loading ..."
-                value={fullName}
+                value={fullName}  onChange={(e)=>{setFullName(e.target.value)}}
               />
-            </div>
+            </div> */}
             <div className="form-group">
               <label>Enrollment Number</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={gender}
+                placeholder="Enter Enrollment Number"
+                value={enrollmentNumber}   onChange={(e)=>{setEnrollmentNumber(e.target.value)}}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>User id</label>
               <input
                 disabled
@@ -114,54 +114,59 @@ const TabComponentStudent: React.FC = () => {
                 placeholder="Loading ..."
                 value={gender}
               />
-            </div>
+            </div> */}
             <div className="form-group">
               <label>Batch Year</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={gender}
+                placeholder="Enter Batch Year"
+                value={batch}  onChange={(e)=>{setBatch(e.target.value)}}
+              />
+            </div>
+            <div className="form-group">
+              <label>Branch</label>
+              <input
+                className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
+                type="text"
+                placeholder="Enter Branch Year"
+                value={branch}  onChange={(e)=>{setBranch(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Contact</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={contact}
+                placeholder="Enter contact"
+                value={contact}  onChange={(e)=>{setContact(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Email</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="email"
-                placeholder="Loading ..."
-                value={email}
+                placeholder="Enter Email"
+                value={email}  onChange={(e)=>{setEmail(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Society Position</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={currentAddress}
+                placeholder="Enter Your Society Position"
+                value={societyPosition}  onChange={(e)=>{setSocietyPosition(e.target.value)}}
               />
             </div>
             <div className="form-group">
-              <label>DomainExpertise</label>
+              <label>Linkedin</label>
               <input
-                disabled
+
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
+                placeholder="Enter linkedin profile"
                 value={linkedIn}
                 onChange={(e) => setLinkedIn(e.target.value)}
               />
@@ -169,31 +174,19 @@ const TabComponentStudent: React.FC = () => {
             <div className="form-group">
               <label>GitHub</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={github}
-              />
-            </div>
-            <div className="form-group">
-              <label>Linkedin Profile</label>
-              <input
-                disabled
-                className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
-                placeholder="Loading ..."
-                value={github}
+                placeholder="Enter github profile"
+                value={github} onChange={(e)=>{setGithub(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Twitter Profile</label>
               <input
-                disabled
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={github}
+                placeholder="Enter twitter profile"
+                value={twitter} onChange={(e)=>{setTwitter(e.target.value)}}
               />
             </div>
           </div>
