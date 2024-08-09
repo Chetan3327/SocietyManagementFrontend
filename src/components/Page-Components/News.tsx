@@ -115,7 +115,7 @@ filteredNews =
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const News = () => {
   const { id } = useParams();
-  const [filteredDate, setFilteredDate] = useState<Date | null>(null);
+  const [_ , setFilteredDate] = useState<Date | null>(null);
   const [news, setNews] = useState([])
   useEffect(() => {
     const fetchsociety = async () => {
@@ -131,9 +131,9 @@ const News = () => {
     setFilteredDate(event.target.value ? new Date(event.target.value) : null);
   };
 
-  const filteredNewsItems = filteredDate
-    ? filteredNews.filter((news) => news.date >= filteredDate)
-    : filteredNews;
+  // const filteredNewsItems = filteredDate
+  //   ? filteredNews.filter((news) => news.date >= filteredDate)
+  //   : filteredNews;
  // const emptyFilteredNews = filteredNewsItems.length === 0;
 
   return (

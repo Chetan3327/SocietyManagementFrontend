@@ -53,7 +53,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [account, setAccount] = useState<AccountInfo | null>(null);
 
-  const initializeMsal = async () => {
+  async () => {
     try {
       await msalInstance.initialize();
     } catch (error) {

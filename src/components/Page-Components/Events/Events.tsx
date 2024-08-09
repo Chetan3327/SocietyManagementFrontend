@@ -6,7 +6,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
-import { z } from "zod";
+// import { z } from "zod";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {

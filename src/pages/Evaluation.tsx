@@ -29,13 +29,13 @@ import EvaluationCard from "@/components/Page-Components/EvaluationCard";
 //   deployedLink: string;
 //   githubLink: string;
 // }
-
+export type Data = {
+  heading: string;
+  date: string;
+  points: string[];
+};
 const TabComponentStudent: React.FC = () => {
-  type Data = {
-    heading: string;
-    date: string;
-    points: string[];
-  };
+
 
   const achievements: Data[] = [
     {

@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 // import OTP from "./OTP";
@@ -136,7 +136,7 @@ const SignupPage: React.FC = () => {
   const [success, setSuccess] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e:React.SyntheticEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError("Passwords do not match");

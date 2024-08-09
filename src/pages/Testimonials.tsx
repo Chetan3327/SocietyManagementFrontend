@@ -5,13 +5,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-type Testimonial = {
-  name: string;
-  degree: string;
-  year: string;
-  description: string;
-  image: string;
-};
+// type Testimonial = {
+//   name: string;
+//   degree: string;
+//   year: string;
+//   description: string;
+//   image: string;
+// };
 
 // const testimonials: Testimonial[] = [
 //   {

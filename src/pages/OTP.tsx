@@ -120,8 +120,8 @@ const styles: { [key: string]: React.CSSProperties } = {
 
 const OTP: React.FC = () => {
   const [email, setEmail] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [newPassword] = useState<string>("");
+  const [confirmPassword] = useState<string>("");
  // const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
@@ -135,7 +135,7 @@ const OTP: React.FC = () => {
     }
 
     try {
-      const response = await Axios.post("/reset-password", {
+       await Axios.post("/reset-password", {
         email,
         newPassword,
       });

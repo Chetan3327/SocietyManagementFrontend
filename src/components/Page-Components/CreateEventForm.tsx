@@ -28,9 +28,8 @@ const CreateEventForm = () => {
   type formData = z.infer<typeof schema>;
 
   const {
-    register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<formData>({
     resolver: zodResolver(schema),
   });

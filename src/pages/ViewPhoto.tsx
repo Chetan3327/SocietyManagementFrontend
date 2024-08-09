@@ -1,8 +1,8 @@
-import Slider from "react-slick";
+import Slider, { CustomArrowProps } from "react-slick";
 import { Settings } from "react-slick";
 import React from "react";
 
-const NextArrow = (props) => {
+const NextArrow = (props: CustomArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
@@ -13,7 +13,7 @@ const NextArrow = (props) => {
   );
 };
 
-const PrevArrow = (props) => {
+const PrevArrow = (props: CustomArrowProps) => {
   const { className, style, onClick } = props;
   return (
     <div
