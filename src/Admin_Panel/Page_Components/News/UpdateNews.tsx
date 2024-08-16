@@ -2,17 +2,19 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
 
 const schema = z.object({
-  News : z.string().nonempty(" News is required"),
-  Date : z.string().nonempty("Date is required"),
-  Society : z.string().nonempty("society is required"),
-  SocietyID : z.string().nonempty("SocietyID is required"),
-  NewsID : z.string().nonempty("NewsID is required"),
-  title : z.string().nonempty("News Title is required"),
+  Description : z.string().nonempty(" News description is required"),
+  DateOfNews : z.date(),
+  Author : z.string().nonempty("Author is required"),
+  SocietyID : z.number(),
+  NewsID : z.number(),
+  Title : z.string().nonempty("News Title is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UpdateNews = () => {
 
@@ -23,9 +25,17 @@ const UpdateNews = () => {
         resolver: zodResolver(schema)
     })
 
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
+    const onSubmit =  (data : formData) => {
+         axios.put(`${BACKEND_URL}/admin/news/${data.NewsID}`,data).then((response)=>{
+           console.log(response)
+           setSubmit(true)
+           console.log(data)
+         }).catch((error)=>{
+          setSubmit(false)
+            console.log(error)
+
+         })
+       
     }
 
 
@@ -53,9 +63,9 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
+              type='number'
               {...register("SocietyID")}
-              placeholder="Enter Society ID"
+              placeholder="Enter Society ID" required
             />
             {errors.SocietyID && (
               <span className="text-red-500">{errors.SocietyID.message}</span>
@@ -66,9 +76,9 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">News ID</label>
             <input
               className={`${classes}`}
-              type="text"
+              type='number'
               {...register("NewsID")}
-              placeholder="Enter a unique NewsID"
+              placeholder="Enter a unique NewsID"  required
             />
             {errors.NewsID && (
               <span className="text-red-500">{errors.NewsID.message}</span>
@@ -79,11 +89,11 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">News Title</label>
             <textarea
               className={`${classes}`}
-              {...register("title")}
+              {...register("Title")}
               placeholder="Enter News Title"
             ></textarea>
-            {errors.title && (
-              <span className="text-red-500">{errors.title.message}</span>
+            {errors.Title && (
+              <span className="text-red-500">{errors.Title.message}</span>
             )}
           </div>
 
@@ -91,11 +101,11 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">News Description</label>
             <textarea
               className={`${classes}`}
-              {...register("News")}
+              {...register("Description")}
               placeholder="Enter News description"
             ></textarea>
-            {errors.News && (
-              <span className="text-red-500">{errors.News.message}</span>
+            {errors.Description && (
+              <span className="text-red-500">{errors.Description.message}</span>
             )}
           </div>
 
@@ -106,12 +116,12 @@ const UpdateNews = () => {
             <input
               className={`${classes}`}
               type="date"
-              {...register("Date")}
+              {...register("DateOfNews")}
               placeholder="Enter Date of the news"
             />
-            {errors.Date && (
+            {errors.DateOfNews && (
               <span className="text-red-500">
-                {errors.Date.message}
+                {errors.DateOfNews.message}
               </span>
             )}
           </div>
@@ -120,12 +130,12 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">Author Name</label>
             <input
               placeholder="Author/Society of the News"
-              {...register("Society")}
+              {...register("Author")}
               type="text"
               className={`${classes}`}
             />
-            {errors.Society && (
-              <span className="text-red-500">{errors.Society.message}</span>
+            {errors.Author && (
+              <span className="text-red-500">{errors.Author.message}</span>
             )}
           </div>
 
@@ -135,6 +145,7 @@ const UpdateNews = () => {
           >
             Submit
           </button>
+          
         </form>
       </div>
     </>
