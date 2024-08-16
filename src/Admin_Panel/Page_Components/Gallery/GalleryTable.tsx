@@ -12,45 +12,85 @@ import {
 import { Card, CardContent } from "../../../components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import { useState , useEffect } from "react";
+import axios from "axios";
+// import { format } from "date-fns";
+import { useParams } from "react-router-dom";
 
-const galleries = [
-    {
-        id: '1',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '2',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '3',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '4',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '5',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '6',
-        galleryID: '9250',
-        image: 'link',
-    },
-    {
-        id: '7',
-        galleryID: '9250',
-        image: 'link',
-    },
-]
+type GalleryType = {
+    SocietyID : number ,
+    GalleryID : number ,
+    Image : string
+}
+
+// const galleries = [
+//     {
+//         id: '1',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '2',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '3',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '4',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '5',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '6',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+//     {
+//         id: '7',
+//         galleryID: '9250',
+//         image: 'link',
+//     },
+// ]
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Gallery_table = () => {
+
+    const [galleries , setGalleries] = useState([])
+    const params = useParams()
+    console.log(params)
+  
+    let fetchAllGalleries ;
+    useEffect(()=>{
+         fetchAllGalleries = async()=>{
+          let res ;
+          if(params.societyID){
+            res =  await axios.get(`${BACKEND_URL}/admin/gallery/${params.societyID}`)
+          }else{
+            res =  await axios.get(`${BACKEND_URL}/admin/gallery`)
+          }
+           
+          console.log('data',res.data)
+          setGalleries(res.data)
+        }
+        fetchAllGalleries()
+    },[])
+  
+    if(galleries.length<=0){
+     return (
+      <div className="text-3xl font-bold">Loading data</div>
+     ) 
+    }
+    
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -88,14 +128,16 @@ const Gallery_table = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {galleries.map((galleries, index) => {
+                            {galleries.map((galleries : GalleryType, index) => {
                                 return (
                                     <TableRow key={index} className="border-none">
                                         <TableCell className="text-center">
-                                            <h1 className="font-bold">{galleries.id}</h1>
+                                            <h1 className="font-bold">{galleries.SocietyID}</h1>
                                         </TableCell>
-                                        <TableCell className="text-center">{galleries.galleryID}</TableCell>
-                                        <TableCell className="text-center">{galleries.image}</TableCell>
+                                        <TableCell className="text-center">{galleries.GalleryID}</TableCell>
+                                        <TableCell className="text-center">
+                                            <a href={`${galleries.Image}`}>View Image</a>
+                                        </TableCell>
                                         <TableCell className="flex justify-center gap-5">
                                             <Link to='/admin/gallery/update'>
                                                 <Button className="text-blue-700"><Edit /></Button>

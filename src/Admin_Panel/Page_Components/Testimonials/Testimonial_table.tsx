@@ -1,5 +1,5 @@
 import { Edit, Trash, UserRoundPlus } from "lucide-react";
-import student from '../../../assets/studentpic.jpeg'
+// import student from '../../../assets/studentpic.jpeg'
 import { Link } from "react-router-dom";
 import {
     Table,
@@ -12,30 +12,70 @@ import {
 import { Card, CardContent } from "../../../components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import { useState , useEffect } from "react";
+import axios from "axios";
+// import { format } from "date-fns";
+import { useParams } from "react-router-dom";
 
-const testimonials = [
-    {
-        img: student,
-        name: 'John Doe',
-        review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        img: student,
-        name: 'Ravi Tiwari',
-        review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        img: student,
-        name: 'John Doe',
-        review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        img: student,
-        name: 'John Doe',
-        review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-]
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+type TestimonialType={
+    TestimonialID : number ,
+    SocietyID : number ,
+    EnrollmentNo : number ,
+    TestimonialDescription : string ,
+}
+
+// const testimonials = [
+//     {
+//         img: student,
+//         name: 'John Doe',
+//         review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         img: student,
+//         name: 'Ravi Tiwari',
+//         review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         img: student,
+//         name: 'John Doe',
+//         review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         img: student,
+//         name: 'John Doe',
+//         review: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+// ]
+
 const Testimonial_table = () => {
+    const [testimonials , setTestimonials] = useState([])
+    const params = useParams()
+    console.log(params)
+  
+    let fetchAllTestimonials ;
+    useEffect(()=>{
+         fetchAllTestimonials = async()=>{
+          let res ;
+          if(params.societyID){
+            res =  await axios.get(`${BACKEND_URL}/admin/testimonials/${params.societyID}`)
+          }else{
+            res =  await axios.get(`${BACKEND_URL}/admin/testimonials`)
+          }
+           
+          console.log('data',res.data)
+          setTestimonials(res.data)
+        }
+        fetchAllTestimonials()
+    },[])
+  
+    if(testimonials.length<=0){
+     return (
+      <div className="text-3xl font-bold">Loading data</div>
+     ) 
+    }
+
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -62,10 +102,10 @@ const Testimonial_table = () => {
                                     TestimonialID
                                 </TableHead>
                                 <TableHead className="font-bold text-center text-xl">
-                                    Picture
+                                    SocietyID
                                 </TableHead>
                                 <TableHead className="font-bold text-center text-xl">
-                                    Name
+                                    Enrollment Number
                                 </TableHead>
                                 <TableHead className="font-bold text-center text-xl">
                                     Review
@@ -76,20 +116,15 @@ const Testimonial_table = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {testimonials.map((testimonial, index) => {
+                            {testimonials.map((testimonial :  TestimonialType, index) => {
                                 return (
                                     <TableRow key={index} className="border-none">
-                                        <TableCell className="text-center">{index + 1}</TableCell>
-                                        <TableCell>
-                                            <img
-                                                src={testimonial.img}
-                                                alt='img' className='w-20 h-20 rounded-full'
-                                            />
-                                        </TableCell>
+                                        <TableCell className="text-center">{testimonial.TestimonialID}</TableCell>
+                                        <TableCell className="text-center">{testimonial.SocietyID}</TableCell>
                                         <TableCell className="text-center">
-                                            <h1 className="font-bold">{testimonial.name}</h1>
+                                            <h1 className="font-bold">{testimonial.EnrollmentNo}</h1>
                                         </TableCell>
-                                        <TableCell className="text-center">{testimonial.review}</TableCell>
+                                        <TableCell className="text-center">{testimonial.TestimonialDescription}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
                                             <Link to='/admin/testimonials/update'>
                                                 <Button className="text-blue-700"><Edit /></Button>

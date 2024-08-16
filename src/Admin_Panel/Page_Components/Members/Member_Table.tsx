@@ -11,6 +11,16 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { Button } from "@/components/ui/button";
+import { useState , useEffect } from "react";
+import axios from "axios";
+// import { format } from "date-fns";
+import { useParams } from "react-router-dom";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+// type MemberType = {
+
+// }
 
 const member=[
   {
@@ -78,6 +88,32 @@ const member=[
   },
 ]
 const Member_Table = () => {
+  const [news , setNews] = useState([])
+  const params = useParams()
+  console.log(params)
+
+  let fetchAllNews ;
+  useEffect(()=>{
+       fetchAllNews = async()=>{
+        let res ;
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/news/${params.societyID}`)
+        }else{
+          res =  await axios.get(`${BACKEND_URL}/admin/news`)
+        }
+         
+        console.log('data',res.data)
+        setNews(res.data)
+      }
+      fetchAllNews()
+  },[])
+
+  if(news.length<=0){
+   return (
+    <div className="text-3xl font-bold">Loading data</div>
+   ) 
+  }
+
   return (
     <>
       <Card className=" mt-7">

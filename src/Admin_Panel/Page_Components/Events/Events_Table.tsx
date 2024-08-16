@@ -10,39 +10,83 @@ import { Card } from "../../../components/ui/card";
 import { Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-const events = [
-  {
-    detail:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-    Date: "13/09/2024",
-    society: "Anveshan",
-  },
-  {
-    detail:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-    Date: "13/09/2024",
-    society: "Anveshan",
-  },
-  {
-    detail:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-    Date: "13/09/2024",
-    society: "Anveshan",
-  },
-  {
-    detail:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-    Date: "13/09/2024",
-    society: "Anveshan",
-  },
-  {
-    detail:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
-    Date: "13/09/2024",
-    society: "Anveshan",
-  },
-];
+import { useState , useEffect } from "react";
+import axios from "axios";
+//import { format } from "date-fns";
+import { useParams } from "react-router-dom";
+
+type EventType = {
+  SocietyId : number,
+  EventId : number,
+  Title : string,
+  Description : string,
+  EventType : string,
+  ModeOfEvent : string,
+  Location : string,
+  LinkToEvent : string,
+  EventDateTime : Date
+}
+// const events = [
+//   {
+//     detail:
+//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+//     Date: "13/09/2024",
+//     society: "Anveshan",
+//   },
+//   {
+//     detail:
+//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+//     Date: "13/09/2024",
+//     society: "Anveshan",
+//   },
+//   {
+//     detail:
+//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+//     Date: "13/09/2024",
+//     society: "Anveshan",
+//   },
+//   {
+//     detail:
+//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+//     Date: "13/09/2024",
+//     society: "Anveshan",
+//   },
+//   {
+//     detail:
+//       "Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+//     Date: "13/09/2024",
+//     society: "Anveshan",
+//   },
+// ];
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Events_Table = () => {
+  const [events , setEvents] = useState([])
+  const params = useParams()
+  console.log(params)
+
+  let fetchAllEvents ;
+  useEffect(()=>{
+       fetchAllEvents = async()=>{
+        let res ;
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/events/${params.societyID}`)
+        }else{
+          res =  await axios.get(`${BACKEND_URL}/admin/events`)
+        }
+         
+        console.log('data',res.data)
+        setEvents(res.data)
+      }
+      fetchAllEvents()
+  },[])
+
+  if(events.length<=0){
+   return (
+    <div className="text-3xl font-bold">Loading data</div>
+   ) 
+  }
   return (
     <Card className="m-7 p-0 h-screen md:h-96 w-10/12 overflow-y-auto">
       <Table className="border-none">
@@ -52,34 +96,44 @@ const Events_Table = () => {
               Event ID
             </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
-              Event
+              SocietyID
             </TableHead>
-
+            <TableHead className="font-bold text-center text-xl border-muted border-2">
+              Title
+            </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
               Date
             </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
-              Society
+              Description
             </TableHead>
-
+            <TableHead className="font-bold text-center text-xl border-muted border-2">
+              Link to event
+            </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
               Edit/Delete
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {events.map((data, index: number) => {
+          {events.map((data : EventType, index: number) => {
             return (
               <TableRow key={index}>
-                <TableCell className="border-muted border-2">{index}</TableCell>
+                <TableCell className="border-muted border-2">{data.EventId}</TableCell>
                 <TableCell className="text-center border-muted border-2">
-                  {data.detail}
+                  {data.SocietyId}
                 </TableCell>
                 <TableCell className="text-center border-muted border-2">
-                  {data.Date}
+                  {data.Title}
                 </TableCell>
                 <TableCell className="text-center border-muted border-2">
-                  {data.society}
+                {data.EventDateTime.toLocaleDateString()}
+                </TableCell>
+                <TableCell className="text-center border-muted border-2">
+                  {data.Description}
+                </TableCell>
+                <TableCell className="text-center border-muted border-2">
+                  <a href={`${data.LinkToEvent}`}>View More About Event</a>
                 </TableCell>
 
                 <TableCell className="flex justify-center gap-5">
