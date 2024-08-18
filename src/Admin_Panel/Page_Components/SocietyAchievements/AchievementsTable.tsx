@@ -68,9 +68,9 @@ const Achievemnts_table = () => {
          fetchAllAchievements = async()=>{
           let res ;
           if(params.societyID){
-            res =  await axios.get(`${BACKEND_URL}/admin/achievemnts/${params.societyID}`)
+            res =  await axios.get(`${BACKEND_URL}/admin/achievements/${params.societyID}`)
           }else{
-            res =  await axios.get(`${BACKEND_URL}/admin/achievemnts`)
+            res =  await axios.get(`${BACKEND_URL}/admin/achievements`)
           }
            
           console.log('data',res.data)

@@ -77,9 +77,9 @@ const Coordinator_Table = () => {
        fetchAllCoordinators = async()=>{
         let res ;
         if(params.societyID){
-          res =  await axios.get(`${BACKEND_URL}/admin/coordinators/${params.societyID}`)
+          res =  await axios.get(`${BACKEND_URL}/admin/coordinator/${params.societyID}`)
         }else{
-          res =  await axios.get(`${BACKEND_URL}/admin/coordinators`)
+          res =  await axios.get(`${BACKEND_URL}/admin/coordinator`)
         }
          
         console.log('data',res.data)
