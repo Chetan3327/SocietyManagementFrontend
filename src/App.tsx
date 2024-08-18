@@ -94,9 +94,11 @@ const App = () => {
       <Routes>
         <Route path="/admin" element={<Admin_Login />} />
         <Route path="/admin/news" element={<Admin_News />} />
+        <Route path="/admin/news/:societyID" element={<Admin_News />} />
         <Route path="/admin/news/add" element={<AddNews/>} />
         <Route path="/admin/news/update" element={<UpdateNews/>} />
         <Route path="/admin/events" element={<Admin_Events />} />
+        <Route path="/admin/events/:societyID" element={<Admin_Events />} />
         <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/events/update" element={<UpdateEvents/>} />
         <Route path="/admin/society/update" element={<UpdateSociety/>} />
@@ -105,20 +107,24 @@ const App = () => {
         <Route path="/admin/members/update" element={<UpdateMembers />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
+        <Route path="/admin/coordinators/:societyID" element={<Admin_Coordinators />} />
         <Route path="/admin/coordinators/add" element={<AddCoordinator />} />
         <Route path="/admin/coordinators/update" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
 
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
+        <Route path="/admin/testimonials/:societyID" element={<Admin_Testimonials />} />
         <Route path="/admin/testimonials/add" element={<AddTestimonial />} />
         <Route path="/admin/testimonials/update" element={<UpdateTestimonial />} />
 
         <Route path="/admin/societyAchievements" element={<Admin_Achievements />} />
+        <Route path="/admin/societyAchievements/:societyID" element={<Admin_Achievements />} />
         <Route path="/admin/societyAchievements/add" element={<AddAchievements />} />
         <Route path="/admin/societyAchievements/update" element={<UpdateAchievements />} />
 
         <Route path="/admin/gallery" element={<Admin_Gallery />} />
+        <Route path="/admin/gallery/:societyID" element={<Admin_Gallery />} />
         <Route path="/admin/gallery/add" element={<AddGallery />} />
         <Route path="/admin/gallery/update" element={<UpdateGallery />} />
 

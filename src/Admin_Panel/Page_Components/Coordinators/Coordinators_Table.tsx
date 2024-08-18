@@ -11,46 +11,89 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import { Input } from "@/components/ui/input";
+import { useState , useEffect } from "react";
+import axios from "axios";
+//import { format } from "date-fns";
+import { useParams } from "react-router-dom";
 
-const coordinators = [
-  {
-    id: 1,
-    name: "Adam Smith",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
-    societyId: "#0542"
-  },
-  {
-    id: 2,
-    name: "Adam Smith",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
-    societyId: "#0541"
-  },
-  {
-    id: 3,
-    name: "Adam Smith",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
-    societyId: "#0543"
-  },
-  {
-    id: 4,
-    name: "Adam Smith",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
-    societyId: "#0544"
-  },
-  {
-    id: 5,
-    name: "Adam Smith",
-    title: "ASSOCIATE PROFESSOR & HOD CSE",
-    details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
-    societyId: "#0545"
-  }
-];
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+type CoordinatorType = {
+  SocietyID : number,
+  CoordinatorID : number,
+  CoordinatorName : string,
+  CoordinatorDesignation : string,
+  CoordinatorEmail : string,
+  CoordinatorDetails : string,
+  image : string
+}
+
+// const coordinators = [
+//   {
+//     id: 1,
+//     name: "Adam Smith",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
+//     societyId: "#0542"
+//   },
+//   {
+//     id: 2,
+//     name: "Adam Smith",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
+//     societyId: "#0541"
+//   },
+//   {
+//     id: 3,
+//     name: "Adam Smith",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
+//     societyId: "#0543"
+//   },
+//   {
+//     id: 4,
+//     name: "Adam Smith",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
+//     societyId: "#0544"
+//   },
+//   {
+//     id: 5,
+//     name: "Adam Smith",
+//     title: "ASSOCIATE PROFESSOR & HOD CSE",
+//     details: "Dr. Shweta Tanaja serves as the Faculty Coordinator for Hash Define.",
+//     societyId: "#0545"
+//   }
+// ];
 
 const Coordinator_Table = () => {
+
+  const [coordinators , setCoordinators] = useState([])
+  const params = useParams()
+  console.log(params)
+
+  let fetchAllCoordinators ;
+  useEffect(()=>{
+       fetchAllCoordinators = async()=>{
+        let res ;
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/coordinators/${params.societyID}`)
+        }else{
+          res =  await axios.get(`${BACKEND_URL}/admin/coordinators`)
+        }
+         
+        console.log('data',res.data)
+        setCoordinators(res.data)
+      }
+      fetchAllCoordinators()
+  },[])
+
+  if(coordinators.length<=0){
+   return (
+    <div className="text-3xl font-bold">Loading data</div>
+   ) 
+  }
+
   return (
     <>  
       <Card className="m-4 mt-7">
@@ -77,11 +120,11 @@ const Coordinator_Table = () => {
                 <TableHead className="text-right w-[100px] font-bold text-xl">
                   CoordinatorID
                 </TableHead>
-                <TableHead className="font-bold text-center text-xl">
-                  Coordinator Details
+                <TableHead className="text-right w-[100px] font-bold text-xl">
+                  SocietyID
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
-                  Society Id
+                  Coordinator Details
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Actions
@@ -89,10 +132,11 @@ const Coordinator_Table = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {coordinators.map((coordinator, index) => {
+              {coordinators.map((coordinator : CoordinatorType, index) => {
                 return (
                   <TableRow key={index} className="border-none">
-                    <TableCell className="text-center">{coordinator.id}</TableCell>
+                    <TableCell className="text-center">{coordinator.CoordinatorID}</TableCell>
+                    <TableCell className="text-center">{coordinator.SocietyID}</TableCell>
                     <TableCell className="text-center">
                       <div className="flex flex-col">
                         {/* <img
@@ -100,12 +144,12 @@ const Coordinator_Table = () => {
                           alt="coordinator"
                           className="h-8 w-8 rounded-full mb-2"
                         /> */}
-                        <h1 className="font-bold">{coordinator.name}</h1>
-                        <p>{coordinator.title}</p>
-                        <p>{coordinator.details}</p>
+                        <h1 className="font-bold">{coordinator.CoordinatorName}</h1>
+                        <p>{coordinator.CoordinatorDesignation}</p>
+                        <a href={`mailto:${coordinator.CoordinatorEmail}`} className="">Email</a>
+                        <p>{coordinator.CoordinatorDetails}</p>
                       </div>
                     </TableCell>
-                    <TableCell className="text-center">{coordinator.societyId}</TableCell>
                     <TableCell className="flex justify-center gap-5">
                       <Link to='/admin/coordinators/update'>
                       <Button className="text-blue-700"><Edit /></Button>

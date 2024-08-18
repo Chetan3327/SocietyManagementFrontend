@@ -12,38 +12,79 @@ import {
 import { Card, CardContent } from "../../../components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import { useState , useEffect } from "react";
+import axios from "axios";
+import { format } from "date-fns";
+import { useParams } from "react-router-dom";
 
-const achievemnts = [
-    {
-        id: '1',
-        achievementID: "1001",
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
-        date: '28 june'
-    },
-    {
-        id: '2',
-        achievementID: "1001",
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
-        date: '28 june'
-    },
-    {
-        id: '2',
-        achievementID: "1001",
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
-        date: '28 june'
-    },
-    {
-        id: '4',
-        achievementID: "1001",
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
-        date: '28 june'
-    },
-]
+type AchievementType = {
+    SocietyID : number ,
+    SocietyAchievementID : number ,
+    Title : string ,
+    Description : string ,
+    DateAchieved : Date 
+}
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+// const achievemnts = [
+//     {
+//         id: '1',
+//         achievementID: "1001",
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
+//         date: '28 june'
+//     },
+//     {
+//         id: '2',
+//         achievementID: "1001",
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
+//         date: '28 june'
+//     },
+//     {
+//         id: '2',
+//         achievementID: "1001",
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
+//         date: '28 june'
+//     },
+//     {
+//         id: '4',
+//         achievementID: "1001",
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis',
+//         date: '28 june'
+//     },
+// ]
+
 const Achievemnts_table = () => {
+
+    const [achievemnts , setAchievements] = useState([])
+    const params = useParams()
+    console.log(params)
+  
+    let fetchAllAchievements ;
+    useEffect(()=>{
+         fetchAllAchievements = async()=>{
+          let res ;
+          if(params.societyID){
+            res =  await axios.get(`${BACKEND_URL}/admin/achievemnts/${params.societyID}`)
+          }else{
+            res =  await axios.get(`${BACKEND_URL}/admin/achievemnts`)
+          }
+           
+          console.log('data',res.data)
+          setAchievements(res.data)
+        }
+        fetchAllAchievements()
+    },[])
+  
+    if(achievemnts.length<=0){
+     return (
+      <div className="text-3xl font-bold">Loading data</div>
+     ) 
+    }
+
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -87,16 +128,16 @@ const Achievemnts_table = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {achievemnts.map((achievemnts, index) => {
+                            {achievemnts.map((achievemnt : AchievementType, index) => {
                                 return (
                                     <TableRow key={index} className="border-none">
-                                        <TableCell className="text-center">{index + 1}</TableCell>
-                                        <TableCell className="text-center">{achievemnts.achievementID}</TableCell>
+                                        <TableCell className="text-center">{achievemnt.SocietyID}</TableCell>
+                                        <TableCell className="text-center">{achievemnt.SocietyAchievementID}</TableCell>
                                         <TableCell className="text-center">
-                                            <h1 className="font-bold">{achievemnts.title}</h1>
+                                            <h1 className="font-bold">{achievemnt.Title}</h1>
                                         </TableCell>
-                                        <TableCell className="text-center">{achievemnts.description}</TableCell>
-                                        <TableCell className="text-center">{achievemnts.date}</TableCell>
+                                        <TableCell className="text-center">{achievemnt.Description}</TableCell>
+                                        <TableCell className="text-center">{format(new Date(achievemnt.DateAchieved), "MMMM dd, yyyy")}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
                                             <Link to='/admin/societyAchievements/update'>
                                                 <Button className="text-blue-700"><Edit /></Button>

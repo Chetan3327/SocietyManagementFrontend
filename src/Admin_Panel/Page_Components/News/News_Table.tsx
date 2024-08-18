@@ -12,6 +12,8 @@ import { Edit, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState , useEffect } from "react";
 import axios from "axios";
+import { format } from "date-fns";
+import { useParams } from "react-router-dom";
 
 // news in backend 
 type newsType = {
@@ -74,11 +76,19 @@ type newsType = {
 const News_Table = () => {
 
   const [news , setNews] = useState([])
+  const params = useParams()
+  console.log(params)
 
   let fetchAllNews ;
   useEffect(()=>{
        fetchAllNews = async()=>{
-        const res =  await axios.get(`${BACKEND_URL}/admin/news`)
+        let res ;
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/news/${params.societyID}`)
+        }else{
+          res =  await axios.get(`${BACKEND_URL}/admin/news`)
+        }
+         
         console.log('data',res.data)
         setNews(res.data)
       }
@@ -141,7 +151,7 @@ const News_Table = () => {
                  {news.Title}
                 </TableCell>
                 <TableCell className="p-0 h-full">
-                  <TableCell className="text-center ">{news.DateOfNews.toISOString()}</TableCell>
+                  <TableCell className="text-center ">{format(new Date(news.DateOfNews), "MMMM dd, yyyy")}</TableCell>
                   <TableCell className="text-center ">{news.Description}</TableCell>
                   <TableCell className="text-center ">{news.Author}</TableCell>
                  
