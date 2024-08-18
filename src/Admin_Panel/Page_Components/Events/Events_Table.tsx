@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useState , useEffect } from "react";
 import axios from "axios";
-//import { format } from "date-fns";
+import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 
 type EventType = {
@@ -127,7 +127,7 @@ const Events_Table = () => {
                   {data.Title}
                 </TableCell>
                 <TableCell className="text-center border-muted border-2">
-                {data.EventDateTime.toLocaleDateString()}
+                {format(new Date(data.EventDateTime), "MMMM dd, yyyy")}
                 </TableCell>
                 <TableCell className="text-center border-muted border-2">
                   {data.Description}
