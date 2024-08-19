@@ -1,30 +1,69 @@
-import  {useState} from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const schema = z.object({
-    Date : z.string().nonempty("Date is required"),
-    Achievement : z.string().nonempty("Achievement is required"),
-    AchievementID : z.string().nonempty("AchievementID is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
-    Description : z.string().nonempty("Description is required"),
+  DateAchieved: z.date(),
+  SocietyAchievementID: z.number(),
+  SocietyID: z.number(),
+  Title: z.string().nonempty("Title is required"),
+  Description: z.string().nonempty("Description is required"),
 })
+
+// type AchievementType = {
+//   SocietyID : number ,
+//   SocietyAchievementID : number ,
+//   Title : string ,
+//   Description : string ,
+//   DateAchieved : Date 
+// }
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
-const CreateAchievement = () => {
+const UpdateAchievement = () => {
 
-    const [_ , setSubmit] = useState(false)
-    type formData = z.infer<typeof schema>
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)  
+  let { achievementID } = useParams()
+  const ACHIEVEMENTID: number | null = achievementID ? parseInt(achievementID, 10) : null;
+
+  if (ACHIEVEMENTID === null) {
+    return (
+      <div className="text-2xl font-semibold">Invalid  id</div>
+    )
+  }
+
+  type formData = z.infer<typeof schema>
+
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+    console.log('in submit')
+    console.log(data)
+    axios.put(`${BACKEND_URL}/achievements/${ACHIEVEMENTID}`, data).then((response) => {
+      console.log(response)
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      setTimeout(() => {
+        navigate('/admin/societyAchievements/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
-
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
-    }
+  }
 
 
   return (
@@ -37,26 +76,29 @@ const CreateAchievement = () => {
         />
         <div className="absolute inset-0 py-20 lg:py-28">
           <h2 className="text-white text-center text-4xl font-bold">
-            Update Society Achievement Details
+            Create Society Achievement
           </h2>
         </div>
       </div>
-      <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
+      <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
-            Update Society Achievement Form
+          Create Society Achievement Form
         </h2>
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Achievement updated successfully ! Redirecting to all achievements page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="mb-4">
+          <div className="mb-4">
             <label className="block text-md font-medium">Achievement ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("AchievementID")}
+              type="number"
+              {...register("SocietyAchievementID", { valueAsNumber: true })}
               placeholder="Enter Testimonial ID"
             />
-            {errors.AchievementID && (
-              <span className="text-red-500">{errors.AchievementID.message}</span>
+            {errors.SocietyAchievementID && (
+              <span className="text-red-500">{errors.SocietyAchievementID.message}</span>
             )}
           </div>
 
@@ -64,8 +106,8 @@ const CreateAchievement = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
@@ -74,14 +116,15 @@ const CreateAchievement = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Achievement Title</label>
-            <textarea
-              placeholder="Enter the achievement title"
-              {...register("Achievement")}
+            <label className="block text-md font-medium">Society ID</label>
+            <input
               className={`${classes}`}
-            ></textarea>
-            {errors.AchievementID && (
-              <span className="text-red-500">{errors.AchievementID.message}</span>
+              type="text"
+              {...register("Title")}
+              placeholder="Enter Society ID"
+            />
+            {errors.Title && (
+              <span className="text-red-500">{errors.Title.message}</span>
             )}
           </div>
 
@@ -99,17 +142,17 @@ const CreateAchievement = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Date of Achievement
+              Date of Achievement
             </label>
             <input
               className={`${classes}`}
               type="date"
-              {...register("Date")}
+              {...register("DateAchieved", { valueAsDate: true })}
               placeholder="Enter Date of the achievement"
             />
-            {errors.Date && (
+            {errors.DateAchieved && (
               <span className="text-red-500">
-                {errors.Date.message}
+                {errors.DateAchieved.message}
               </span>
             )}
           </div>
@@ -118,7 +161,7 @@ const CreateAchievement = () => {
             type="submit"
             className="w-full px-2 py-3 mb-4 text-xl bg-gray-800 text-white"
           >
-            Update
+            Submit
           </button>
         </form>
       </div>
@@ -126,4 +169,4 @@ const CreateAchievement = () => {
   )
 }
 
-export default CreateAchievement
+export default UpdateAchievement

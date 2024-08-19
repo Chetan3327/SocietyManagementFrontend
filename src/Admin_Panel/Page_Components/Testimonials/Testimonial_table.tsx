@@ -76,6 +76,20 @@ const Testimonial_table = () => {
      ) 
     }
 
+    const handleDelete = async(testimonialsID : number)=>{
+    
+        await axios.delete(`${BACKEND_URL}/testimonials/${testimonialsID}`).then(
+          res => {
+            console.log(res)
+            setTestimonials(testimonials.filter((testimonial : TestimonialType)=> testimonial.TestimonialID !== testimonialsID))
+          }
+        ).catch(
+          err => {
+            console.log(err)
+          }
+        )
+    }
+
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -126,10 +140,10 @@ const Testimonial_table = () => {
                                         </TableCell>
                                         <TableCell className="text-center">{testimonial.TestimonialDescription}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to='/admin/testimonials/update'>
+                                            <Link to={`/admin/testimonials/update/${testimonial.TestimonialID}`}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
-                                            <Button className="text-red-700"><Trash /></Button>
+                                            <Button className="text-red-700"  onClick={()=>handleDelete(testimonial.TestimonialID)}><Trash /></Button>
                                         </TableCell>
                                     </TableRow>
                                 );

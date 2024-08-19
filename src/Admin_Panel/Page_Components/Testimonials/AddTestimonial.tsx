@@ -1,33 +1,58 @@
-import  {useState} from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
-    Name : z.string().nonempty(" Name is required"),
-    Image : z.string().nonempty("image is required"),
-    Testimonial : z.string().nonempty("teatimonail is required"),
-    EnrollmentNo : z.string().nonempty("EnrollmentNo is required"),
-    TestimonialID : z.string().nonempty("TestimonialID is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
+  TestimonialDescription: z.string().nonempty("Testimonial is required"),
+  EnrollmentNo: z.string().nonempty("EnrollmentNo is required"),
+  TestimonialID: z.number(),
+  SocietyID: z.number(),
 })
 
+// type TestimonialType={
+//   TestimonialID : number ,
+//   SocietyID : number ,
+//   EnrollmentNo : number ,
+//   TestimonialDescription : string ,
+// }
+
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CreateTestimonial = () => {
 
-    const [_ , setSubmit] = useState(false)
-    type formData = z.infer<typeof schema>
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+  type formData = z.infer<typeof schema>
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+    console.log('in submit')
+    console.log(data)
+    axios.post(`${BACKEND_URL}/testimonials`, data).then((response) => {
+      console.log(response)
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      setTimeout(() => {
+        navigate('/admin/testimonials/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
 
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
-    }
-
+  }
 
   return (
     <>
@@ -45,41 +70,19 @@ const CreateTestimonial = () => {
       </div>
       <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
-            Create Testimonial Form
+          Create Testimonial Form
         </h2>
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all testimonials page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="mb-4">
-            <label className="block text-md font-medium">Enrollment No</label>
-            <input
-              className={`${classes}`}
-              type="text"
-              {...register("EnrollmentNo")}
-              placeholder="Enter Student's Enrollment No"
-            />
-            {errors.EnrollmentNo && (
-              <span className="text-red-500">{errors.EnrollmentNo.message}</span>
-            )}
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-md font-medium">Testimonial ID</label>
-            <input
-              className={`${classes}`}
-              type="text"
-              {...register("TestimonialID")}
-              placeholder="Enter Testimonial ID"
-            />
-            {errors.TestimonialID && (
-              <span className="text-red-500">{errors.TestimonialID.message}</span>
-            )}
-          </div>
           <div className="mb-4">
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
@@ -88,14 +91,40 @@ const CreateTestimonial = () => {
           </div>
 
           <div className="mb-4">
+            <label className="block text-md font-medium">Testimonial ID</label>
+            <input
+              className={`${classes}`}
+              type="number"
+              {...register("TestimonialID", { valueAsNumber: true })}
+              placeholder="Enter Testimonial ID"
+            />
+            {errors.TestimonialID && (
+              <span className="text-red-500">{errors.TestimonialID.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-md font-medium">Enrollment No</label>
+            <input
+              className={`${classes}`}
+              type="number"
+              {...register("EnrollmentNo", { valueAsNumber: true })}
+              placeholder="Enter Student's Enrollment No"
+            />
+            {errors.EnrollmentNo && (
+              <span className="text-red-500">{errors.EnrollmentNo.message}</span>
+            )}
+          </div>
+
+          <div className="mb-4">
             <label className="block text-md font-medium">Testimonial Description</label>
             <textarea
               placeholder="Enter your reviews"
-              {...register("Testimonial")}
+              {...register("TestimonialDescription")}
               className={`${classes}`}
             ></textarea>
-            {errors.Testimonial && (
-              <span className="text-red-500">{errors.Testimonial.message}</span>
+            {errors.TestimonialDescription && (
+              <span className="text-red-500">{errors.TestimonialDescription.message}</span>
             )}
           </div>
 
