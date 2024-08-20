@@ -1,16 +1,17 @@
-import  {useState} from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
-  Description : z.string().nonempty(" News description is required"),
-  DateOfNews : z.date(),
-  Author : z.string().nonempty("Author is required"),
-  SocietyID : z.number(),
-  NewsID : z.number(),
-  Title : z.string().nonempty("News Title is required"),
+  Description: z.string().nonempty(" News description is required"),
+  DateOfNews: z.date(),
+  Author: z.string().nonempty("Author is required"),
+  SocietyID: z.number(),
+  NewsID: z.number(),
+  Title: z.string().nonempty("News Title is required"),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -18,26 +19,40 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddNews = () => {
 
-    const [_ , setSubmit] = useState(false)
-    type formData = z.infer<typeof schema>
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+  type formData = z.infer<typeof schema>
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+    // const formattedData = {
+    //   ...data,
+    //   SocietyID: parseInt(data.SocietyID, 10),
+    //   NewsID: parseInt(data.NewsID, 10),
+    //   DateOfNews: new Date(data.DateOfNews),}
+    console.log('in submit')
+    console.log(data)
+    axios.post(`${BACKEND_URL}/news`, data).then((response) => {
+      console.log(response)
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      setTimeout(() => {
+        navigate('/admin/news/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
 
-    const onSubmit =  (data : formData) => {
-         axios.post(`${BACKEND_URL}/admin/news`,data).then((response)=>{
-           console.log(response)
-           setSubmit(true)
-           console.log(data)
-         }).catch((error)=>{
-          setSubmit(false)
-            console.log(error)
-
-         })
-       
-    }
-
+  }
 
   return (
     <>
@@ -57,6 +72,10 @@ const AddNews = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
           Add News Form
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all news page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
@@ -64,7 +83,7 @@ const AddNews = () => {
             <input
               className={`${classes}`}
               type='number'
-              {...register("SocietyID")}
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID" required
             />
             {errors.SocietyID && (
@@ -77,14 +96,14 @@ const AddNews = () => {
             <input
               className={`${classes}`}
               type='number'
-              {...register("NewsID")}
-              placeholder="Enter a unique NewsID"  required
+              {...register("NewsID", { valueAsNumber: true })}
+              placeholder="Enter a unique NewsID" required
             />
             {errors.NewsID && (
               <span className="text-red-500">{errors.NewsID.message}</span>
             )}
           </div>
-          
+
           <div className="mb-4">
             <label className="block text-md font-medium">News Title</label>
             <textarea
@@ -111,12 +130,12 @@ const AddNews = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">
-            Date of News
+              Date of News
             </label>
             <input
               className={`${classes}`}
               type="date"
-              {...register("DateOfNews")}
+              {...register("DateOfNews", { valueAsDate: true })}
               placeholder="Enter Date of the news"
             />
             {errors.DateOfNews && (
@@ -145,7 +164,6 @@ const AddNews = () => {
           >
             Submit
           </button>
-          
         </form>
       </div>
     </>

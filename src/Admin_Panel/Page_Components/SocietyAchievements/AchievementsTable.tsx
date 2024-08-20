@@ -12,17 +12,17 @@ import {
 import { Card, CardContent } from "../../../components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 
 type AchievementType = {
-    SocietyID : number ,
-    SocietyAchievementID : number ,
-    Title : string ,
-    Description : string ,
-    DateAchieved : Date 
+    SocietyID: number,
+    SocietyAchievementID: number,
+    Title: string,
+    Description: string,
+    DateAchieved: Date
 }
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -59,30 +59,44 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Achievemnts_table = () => {
 
-    const [achievemnts , setAchievements] = useState([])
+    const [achievemnts, setAchievements] = useState([])
     const params = useParams()
     console.log(params)
-  
-    let fetchAllAchievements ;
-    useEffect(()=>{
-         fetchAllAchievements = async()=>{
-          let res ;
-          if(params.societyID){
-            res =  await axios.get(`${BACKEND_URL}/admin/achievements/${params.societyID}`)
-          }else{
-            res =  await axios.get(`${BACKEND_URL}/admin/achievements`)
-          }
-           
-          console.log('data',res.data)
-          setAchievements(res.data)
+
+    let fetchAllAchievements;
+    useEffect(() => {
+        fetchAllAchievements = async () => {
+            let res;
+            if (params.societyID) {
+                res = await axios.get(`${BACKEND_URL}/admin/achievements/${params.societyID}`)
+            } else {
+                res = await axios.get(`${BACKEND_URL}/admin/achievements`)
+            }
+
+            console.log('data', res.data)
+            setAchievements(res.data)
         }
         fetchAllAchievements()
-    },[])
-  
-    if(achievemnts.length<=0){
-     return (
-      <div className="text-3xl font-bold">Loading data</div>
-     ) 
+    }, [])
+
+    if (achievemnts.length <= 0) {
+        return (
+            <div className="text-3xl font-bold">Loading data</div>
+        )
+    }
+
+    const handleDelete = async (achievementID: number) => {
+
+        await axios.delete(`${BACKEND_URL}/news/${achievementID}`).then(
+            res => {
+                console.log(res)
+                setAchievements(achievemnts.filter((achievemnt: AchievementType) => achievemnt.SocietyAchievementID !== achievementID))
+            }
+        ).catch(
+            err => {
+                console.log(err)
+            }
+        )
     }
 
     return (
@@ -123,12 +137,12 @@ const Achievemnts_table = () => {
                                     Date Achieved
                                 </TableHead>
                                 <TableHead className="font-bold text-center text-xl">
-                                    Actions            
+                                    Actions
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {achievemnts.map((achievemnt : AchievementType, index) => {
+                            {achievemnts.map((achievemnt: AchievementType, index) => {
                                 return (
                                     <TableRow key={index} className="border-none">
                                         <TableCell className="text-center">{achievemnt.SocietyID}</TableCell>
@@ -139,10 +153,10 @@ const Achievemnts_table = () => {
                                         <TableCell className="text-center">{achievemnt.Description}</TableCell>
                                         <TableCell className="text-center">{format(new Date(achievemnt.DateAchieved), "MMMM dd, yyyy")}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to='/admin/societyAchievements/update'>
+                                            <Link to={`/admin/SocietyAchievements/update/${achievemnt.SocietyAchievementID}`}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
-                                            <Button className="text-red-700"><Trash /></Button>
+                                            <Button className="text-red-700" onClick={() => handleDelete(achievemnt.SocietyAchievementID)}><Trash /></Button>
                                         </TableCell>
                                     </TableRow>
                                 );

@@ -2,20 +2,34 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
-    Date : z.string().nonempty("Date is required"),
-    Achievement : z.string().nonempty("Achievement is required"),
-    AchievementID : z.string().nonempty("AchievementID is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
+  DateAchieved : z.date(),
+    SocietyAchievementID :  z.number(),
+    SocietyID: z.number(),
+    Title : z.string().nonempty("Title is required"),
     Description : z.string().nonempty("Description is required"),
 })
+
+// type AchievementType = {
+//   SocietyID : number ,
+//   SocietyAchievementID : number ,
+//   Title : string ,
+//   Description : string ,
+//   DateAchieved : Date 
+// }
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
 const CreateAchievement = () => {
 
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -23,8 +37,22 @@ const CreateAchievement = () => {
     })
 
     const onSubmit = (data : formData) => {
+      console.log('in submit')
+      console.log(data)
+      axios.post(`${BACKEND_URL}/achievements`, data).then((response) => {
+        console.log(response)
         setSubmit(true)
-        console.log(data)
+        setIsError(false)
+        setError('')
+        setTimeout(() => {
+          navigate('/admin/societyAchievements/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
     }
 
 
@@ -46,27 +74,30 @@ const CreateAchievement = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
             Create Society Achievement Form
         </h2>
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all achievements page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
             <label className="block text-md font-medium">Achievement ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("AchievementID")}
+              type="number"
+              {...register("SocietyAchievementID", { valueAsNumber: true })}
               placeholder="Enter Testimonial ID"
             />
-            {errors.AchievementID && (
-              <span className="text-red-500">{errors.AchievementID.message}</span>
+            {errors.SocietyAchievementID && (
+              <span className="text-red-500">{errors.SocietyAchievementID.message}</span>
             )}
           </div>
-
+       
           <div className="mb-4">
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
@@ -75,14 +106,15 @@ const CreateAchievement = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Achievement Title</label>
-            <textarea
-              placeholder="Enter the achievement title"
-              {...register("Achievement")}
+            <label className="block text-md font-medium">Society ID</label>
+            <input
               className={`${classes}`}
-            ></textarea>
-            {errors.AchievementID && (
-              <span className="text-red-500">{errors.AchievementID.message}</span>
+              type="text"
+              {...register("Title")}
+              placeholder="Enter Society ID"
+            />
+            {errors.Title && (
+              <span className="text-red-500">{errors.Title.message}</span>
             )}
           </div>
 
@@ -105,12 +137,12 @@ const CreateAchievement = () => {
             <input
               className={`${classes}`}
               type="date"
-              {...register("Date")}
+              {...register("DateAchieved", { valueAsDate: true })}
               placeholder="Enter Date of the achievement"
             />
-            {errors.Date && (
+            {errors.DateAchieved && (
               <span className="text-red-500">
-                {errors.Date.message}
+                {errors.DateAchieved.message}
               </span>
             )}
           </div>

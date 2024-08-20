@@ -94,6 +94,20 @@ const Coordinator_Table = () => {
    ) 
   }
 
+  const handleDelete = async(coordinatorID : number)=>{
+    
+    await axios.delete(`${BACKEND_URL}/coordinator/${coordinatorID}`).then(
+      res => {
+        console.log(res)
+        setCoordinators(coordinators.filter((coordinator : CoordinatorType)=>coordinator.CoordinatorID !== coordinatorID))
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+}
+
   return (
     <>  
       <Card className="m-4 mt-7">
@@ -151,10 +165,10 @@ const Coordinator_Table = () => {
                       </div>
                     </TableCell>
                     <TableCell className="flex justify-center gap-5">
-                      <Link to='/admin/coordinators/update'>
+                      <Link to={`/admin/coordinators/update/${coordinator.CoordinatorID}`}>
                       <Button className="text-blue-700"><Edit /></Button>
                       </Link>
-                      <Button className="text-red-700"><Trash /></Button>
+                      <Button className="text-red-700" onClick={()=>handleDelete(coordinator.CoordinatorID)}><Trash /></Button>
                     </TableCell>
                   </TableRow>
                 );

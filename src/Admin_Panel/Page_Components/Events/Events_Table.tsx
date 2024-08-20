@@ -87,6 +87,21 @@ const Events_Table = () => {
     <div className="text-3xl font-bold">Loading data</div>
    ) 
   }
+
+  const handleDelete = async(eventID : number)=>{
+    
+    await axios.delete(`${BACKEND_URL}/events/${eventID}`).then(
+      res => {
+        console.log(res)
+        setEvents(events.filter((event : EventType)=> event.EventId !== eventID))
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+}
+
   return (
     <Card className="m-7 p-0 h-screen md:h-96 w-10/12 overflow-y-auto">
       <Table className="border-none">
@@ -137,12 +152,12 @@ const Events_Table = () => {
                 </TableCell>
 
                 <TableCell className="flex justify-center gap-5">
-                  <Link to="/admin/events/update">
+                  <Link to={`/admin/events/update/${data.EventId}`}>
                     <Button className="text-blue-700">
                       <Edit />
                     </Button>
                   </Link>
-                  <Button className="text-red-700">
+                  <Button className="text-red-700" onClick={()=>handleDelete(data.EventId)}>
                     <Trash />
                   </Button>
                 </TableCell>

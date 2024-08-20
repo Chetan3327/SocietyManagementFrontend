@@ -2,25 +2,42 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+// type EventType = {
+//   SocietyId : number,
+//   EventId : number,
+//   Title : string,
+//   Description : string,
+//   EventType : string,
+//   ModeOfEvent : string,
+//   Location : string,
+//   LinkToEvent : string,
+//   EventDateTime : Date
+// }
 
 const schema = z.object({
-    Events : z.string().nonempty("Events is required"),
-    Date : z.string().nonempty("Date is required"),
-    Society : z.string().nonempty("society is required"),
-    SocietyID : z.string().nonempty("societyID is required"),
-    EventID : z.string().nonempty("EventID is required"),
-    title : z.string().nonempty("title is required"),
-    EventType : z.string().nonempty("EventType is required"),
-    EventMode : z.string().nonempty("EventMode is required"),
-    EventLocation : z.string().nonempty("EventLocation is required"),
-    Link : z.string().nonempty("Link is required"),
+  SocietyId : z.number(),
+  EventId : z.number(),
+  Title : z.string().nonempty('Title is required'),
+  Description :  z.string().nonempty('Description is required'),
+  EventType :  z.string().nonempty('Event type is required'),
+  ModeOfEvent :  z.string().nonempty('Mode of event is required'),
+  Location :  z.string().nonempty('Location is required'),
+  LinkToEvent :  z.string().nonempty('Link of event is required'),
+  EventDateTime : z.date(),
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddEvents = () => {
 
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -28,8 +45,22 @@ const AddEvents = () => {
     })
 
     const onSubmit = (data : formData) => {
+      console.log('in submit')
+      console.log(data)
+      axios.post(`${BACKEND_URL}/events`, data).then((response) => {
+        console.log(response)
         setSubmit(true)
-        console.log(data)
+        setIsError(false)
+        setError('')
+        setTimeout(() => {
+          navigate('/admin/events/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
     }
 
 
@@ -51,18 +82,23 @@ const AddEvents = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
           New Event Form
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Event Form submitted successfully ! Redirecting to all news page</div>}
+
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="mb-4">
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyId"), { valueAsNumber: true }}
               placeholder="Enter Society ID"
             />
-            {errors.SocietyID && (
-              <span className="text-red-500">{errors.SocietyID.message}</span>
+            {errors.SocietyId && (
+              <span className="text-red-500">{errors.SocietyId.message}</span>
             )}
           </div>
 
@@ -70,12 +106,12 @@ const AddEvents = () => {
             <label className="block text-md font-medium">Event ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("EventID")}
+              type="number"
+              {...register("EventId", { valueAsNumber: true })}
               placeholder="Enter a unique EventID"
             />
-            {errors.EventID && (
-              <span className="text-red-500">{errors.EventID.message}</span>
+            {errors.EventId && (
+              <span className="text-red-500">{errors.EventId.message}</span>
             )}
           </div>
           
@@ -83,11 +119,11 @@ const AddEvents = () => {
             <label className="block text-md font-medium">Event Title</label>
             <textarea
               className={`${classes}`}
-              {...register("title")}
+              {...register("Title")}
               placeholder="Enter Event's Title"
             ></textarea>
-            {errors.title && (
-              <span className="text-red-500">{errors.title.message}</span>
+            {errors.Title && (
+              <span className="text-red-500">{errors.Title.message}</span>
             )}
           </div>
 
@@ -95,11 +131,11 @@ const AddEvents = () => {
             <label className="block text-md font-medium">Event Description</label>
             <textarea
               className={`${classes}`}
-              {...register("Events")}
+              {...register("Description")}
               placeholder="Enter Event's description"
             ></textarea>
-            {errors.Events && (
-              <span className="text-red-500">{errors.Events.message}</span>
+            {errors.Description && (
+              <span className="text-red-500">{errors.Description.message}</span>
             )}
           </div>
 
@@ -121,11 +157,11 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("EventMode")}
+              {...register("ModeOfEvent")}
               placeholder="Online, Offline,..."
             />
-            {errors.EventMode && (
-              <span className="text-red-500">{errors.EventMode.message}</span>
+            {errors.ModeOfEvent && (
+              <span className="text-red-500">{errors.ModeOfEvent.message}</span>
             )}
           </div>
 
@@ -134,11 +170,11 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("EventLocation")}
+              {...register("Location")}
               placeholder="Seminar Hall, Google Meet,..."
             />
-            {errors.EventLocation && (
-              <span className="text-red-500">{errors.EventLocation.message}</span>
+            {errors.Location && (
+              <span className="text-red-500">{errors.Location.message}</span>
             )}
           </div>
 
@@ -147,11 +183,11 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("Link")}
+              {...register("LinkToEvent")}
               placeholder="Enter the Event's Link, if any"
             />
-            {errors.Link && (
-              <span className="text-red-500">{errors.Link.message}</span>
+            {errors.LinkToEvent && (
+              <span className="text-red-500">{errors.LinkToEvent.message}</span>
             )}
           </div>
 
@@ -162,12 +198,12 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="date"
-              {...register("Date")}
+              {...register("EventDateTime", { valueAsDate: true })}
               placeholder="Enter Date"
             />
-            {errors.Date && (
+            {errors.EventDateTime && (
               <span className="text-red-500">
-                {errors.Date.message}
+                {errors.EventDateTime.message}
               </span>
             )}
           </div>
