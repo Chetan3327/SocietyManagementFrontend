@@ -88,7 +88,7 @@ const UpdateNews = () => {
             <input
               className={`${classes}`}
               type='number'
-              {...register("SocietyID"), { valueAsNumber: true }}
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID" required
             />
             {errors.SocietyID && (
@@ -101,7 +101,7 @@ const UpdateNews = () => {
             <input
               className={`${classes}`}
               type='number'
-              {...register("NewsID"), { valueAsNumber: true }}
+              {...register("NewsID", { valueAsNumber: true })}
               value={NEWSID}
               placeholder="Enter a unique NewsID" readOnly
             />

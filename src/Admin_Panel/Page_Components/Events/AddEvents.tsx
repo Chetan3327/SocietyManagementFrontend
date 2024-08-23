@@ -94,7 +94,7 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="number"
-              {...register("SocietyId"), { valueAsNumber: true }}
+              {...register("SocietyId", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyId && (
