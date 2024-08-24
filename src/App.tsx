@@ -101,10 +101,9 @@ const App = () => {
         <Route path="/admin/events/:societyID" element={<Admin_Events />} />
         <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/events/update/:eventsID" element={<UpdateEvents/>} />
-        <Route path="/admin/society/update" element={<UpdateSociety/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
         <Route path="/admin/members/add" element={<AddMembers />} />
-        <Route path="/admin/members/update" element={<UpdateMembers />} />
+        <Route path="/admin/members/update/:memberid" element={<UpdateMembers />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
         <Route path="/admin/coordinators" element={<Admin_Coordinators />} />
         <Route path="/admin/coordinators/:societyID" element={<Admin_Coordinators />} />
@@ -112,6 +111,7 @@ const App = () => {
         <Route path="/admin/coordinators/update/:coordinatorID" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+        <Route path="/admin/society/update/:societyId" element={<UpdateSociety/>}/>
 
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
         <Route path="/admin/testimonials/:societyID" element={<Admin_Testimonials />} />
@@ -126,11 +126,11 @@ const App = () => {
         <Route path="/admin/gallery" element={<Admin_Gallery />} />
         <Route path="/admin/gallery/:societyID" element={<Admin_Gallery />} />
         <Route path="/admin/gallery/add" element={<AddGallery />} />
-        <Route path="/admin/gallery/update/:societyID" element={<UpdateGallery />} />
+        <Route path="/admin/gallery/update/:galleryid" element={<UpdateGallery />} />
 
         <Route path="/admin/roles" element={<Admin_Roles />} />
         <Route path="/admin/roles/add" element={<AddRoles />} />
-        <Route path="/admin/roles/update" element={<UpdateRoles />} />
+        <Route path="/admin/roles/update/:roleid" element={<UpdateRoles />} />
 
         <Route path="/admin/home" element={<Activity_Feed />} />
       </Routes>

@@ -2,8 +2,8 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const schema = z.object({
   Image : z.string().nonempty("image is required"),
@@ -20,28 +20,30 @@ const CreateGallery = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
-    type formData = z.infer<typeof schema>
+  type formData = z.infer<typeof schema>
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+    console.log(data)
+    axios.post(`${BACKEND_URL}/admin/gallery`, data).then((response) => {
+      console.log(response)
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      setTimeout(() => {
+        navigate('/admin/gallery/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
 
-    const onSubmit = (data : formData) => {
-      axios.post(`${BACKEND_URL}/galleries`, data).then((response) => {
-        console.log(response)
-        setSubmit(true)
-        setIsError(false)
-        setError('')
-        setTimeout(() => {
-          navigate('/admin/gallery/')
-        }, 3000)
-      }).catch((error) => {
-        console.log(error)
-        setSubmit(false)
-        setIsError(true)
-        setError(error)
-      })
-    }
+  }
 
 
   return (
@@ -64,9 +66,7 @@ const CreateGallery = () => {
         </h2>
 
         {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
-        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all galleries page</div>}
-
-
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all members page</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">

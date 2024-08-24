@@ -1,6 +1,6 @@
 import { Edit, Trash, UserRoundPlus } from "lucide-react";
 // import student from '../../../assets/studentpic.jpeg'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
     Table,
     TableBody,
@@ -12,34 +12,83 @@ import {
 import { Card, CardContent } from "../../../components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const roles = [
-    {
-        id: '1',
-        societyName: 'Anveshan',
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        id: '2',
-        societyName: 'Anveshan',
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        id: '2',
-        societyName: 'Anveshan',
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-    {
-        id: '4',
-        societyName: 'Anveshan',
-        title: 'John Doe',
-        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
-    },
-]
+// const roles = [
+//     {
+//         id: '1',
+//         societyName: 'Anveshan',
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         id: '2',
+//         societyName: 'Anveshan',
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         id: '2',
+//         societyName: 'Anveshan',
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+//     {
+//         id: '4',
+//         societyName: 'Anveshan',
+//         title: 'John Doe',
+//         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore repellendus numquam unde exercitationem veniam corporis quisquam, optio neque voluptate officiis'
+//     },
+// ]
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+type RoleType={
+    RoleID:number,
+    SocietyName:string,
+    Rolename:string,
+    RoleDescription:string
+}
 const Roles_table = () => {
+    const [roles , setroles] = useState([])
+    const params = useParams()
+    console.log(params)
+  
+    let fetchAllRoles;
+    useEffect(()=>{
+         fetchAllRoles = async()=>{
+          let res ;
+          if(params.RoleId){
+            res =  await axios.get(`${BACKEND_URL}/admin/roles/${params.RoleId}`)
+          }else{
+            res =  await axios.get(`${BACKEND_URL}/admin/roles`)
+          }
+           
+          console.log('data',res.data)
+          setroles(res.data)
+        }
+        fetchAllRoles()
+    },[])
+  
+    if(roles.length<=0){
+     return (
+      <div className="text-3xl font-bold">Loading data</div>
+     ) 
+    }
+  
+    const handleDelete = async (RoleId: number) => {
+  
+      await axios.delete(`${BACKEND_URL}/roles/${RoleId}`).then(
+        res => {
+          console.log(res)
+          setroles(roles.filter((role: RoleType) => role.RoleID !== RoleId))
+        }
+      ).catch(
+        err => {
+          console.log(err)
+        }
+      )
+    }
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -80,20 +129,20 @@ const Roles_table = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {roles.map((testimonial, index) => {
+                            {roles.map((role:RoleType, index:number) => {
                                 return (
                                     <TableRow key={index} className="border-none">
-                                        <TableCell className="text-center">{index + 1}</TableCell>
+                                        <TableCell className="text-center">{role.RoleID}</TableCell>
                                         <TableCell className="text-center">
-                                            <h1 className="font-bold">{testimonial.societyName}</h1>
+                                            <h1 className="font-bold">{role.SocietyName}</h1>
                                         </TableCell>
-                                        <TableCell className="text-center">{testimonial.title}</TableCell>
-                                        <TableCell className="text-center">{testimonial.description}</TableCell>
+                                        <TableCell className="text-center">{role.Rolename}</TableCell>
+                                        <TableCell className="text-center">{role.RoleDescription}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to='/admin/roles/update'>
+                                            <Link to={`/admin/roles/update/${role.RoleID}`}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
-                                            <Button className="text-red-700"><Trash /></Button>
+                                            <Button className="text-red-700" onClick={() => handleDelete(role.RoleID)}><Trash /></Button>
                                         </TableCell>
                                     </TableRow>
                                 );

@@ -13,31 +13,30 @@ const schema = z.object({
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-
-const UpdateGallery = () => {
-
+const CreateGallery = () => {
   const [submit, setSubmit] = useState(false)
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  let { societyID } = useParams()
-  const SOCIETYID: number | null = societyID ? parseInt(societyID, 10) : null;
+  let { galleryid } = useParams()
+  const GALLERYID: number | null = galleryid ? parseInt(galleryid, 10) : null;
  
-  if (SOCIETYID === null) {
+  if (GALLERYID === null) {
     return (
-      <div className="text-2xl font-semibold">Invalid  id</div>
+      <div className="text-2xl font-semibold">Invalid gallery id</div>
     )
   }
-    type formData = z.infer<typeof schema>
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)  
-    })
+  type formData = z.infer<typeof schema>
 
-    const onSubmit = (data : formData) => {
-        
-    axios.put(`${BACKEND_URL}/galleries/${SOCIETYID}`, data).then((response) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+
+    axios.put(`${BACKEND_URL}/admin/gallery/${GALLERYID}`, data).then((response) => {
       setSubmit(true)
       setIsError(false)
       setError('')
@@ -52,7 +51,8 @@ const UpdateGallery = () => {
       setIsError(true)
       setError(error)
     })
-    }
+
+  }
 
 
   return (
@@ -73,9 +73,9 @@ const UpdateGallery = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
             Update Society Gallery Form
         </h2>
-        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
-        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Gallery updated successfully ! Redirecting to all galleries page</div>}
 
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Gallery updated successfully ! Redirecting to all gallery page</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="mb-4">

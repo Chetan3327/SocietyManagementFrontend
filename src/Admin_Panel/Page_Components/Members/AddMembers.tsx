@@ -1,25 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const schema = z.object({
     EnrollmentNo : z.string().nonempty(" Enrollment No is required"),
-    Name : z.string().nonempty(" Name is required"),
-    // Branch : z.string().nonempty("Branch is required"),
-    Contact : z.string().nonempty("Contact is required"),
+    FirstName : z.string().nonempty(" Name is required"),
+    LastName : z.string().nonempty(" Name is required"),
     Email : z.string().nonempty("Email is required"),
-    StudentBatch: z.string().nonempty("Invalid batch"),
+    BatchYear: z.string().nonempty("Invalid batch"),
     Branch: z.string().nonempty("Branch name is must"), 
-    profilePicture: z.string().nonempty("Profile Pictture Link ,if any"), 
-    societyID: z.string().nonempty("SocietyID is must"), 
-    societyPosition: z.string().nonempty("Society Position is must"), 
-    studentContributions: z.string().nonempty("Society Contribution if any"), 
-    studentDomain: z.string().nonempty("Student's Domain if any"), 
-    memberType: z.string().nonempty("Member's Type if any"), 
-    github: z.string().nonempty("Member's github profile if any"), 
-    linkedin: z.string().nonempty("Member's LinkedIn profile if any"), 
-    twitter: z.string().nonempty("Member's Twitter profile if any"), 
+    ProfilePicture: z.string().nonempty("Profile Pictture Link ,if any"), 
+    
+    
 })
 
 const Branch = ["CSE", "IT", "CSE-DS", "ECE", "EEE"];
@@ -33,20 +28,44 @@ const Batch = [
 ];
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddMembers = () => {
 
-    const [_ , setSubmit] = useState(false)
-    type formData = z.infer<typeof schema>
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+  type formData = z.infer<typeof schema>
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+    // const formattedData = {
+    //   ...data,
+    //   SocietyID: parseInt(data.SocietyID, 10),
+    //   NewsID: parseInt(data.NewsID, 10),
+    //   DateOfNews: new Date(data.DateOfNews),}
+    console.log('in submit')
+    console.log(data)
+    axios.post(`${BACKEND_URL}/admin/members`, data).then((response) => {
+      console.log(response)
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      setTimeout(() => {
+        navigate('/admin/members/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
 
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
-    }
+  }
 
 
   return (
@@ -67,6 +86,9 @@ const AddMembers = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
           New Member Form
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all members page</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
@@ -87,11 +109,11 @@ const AddMembers = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("Name")}
+              {...register("FirstName")}
               placeholder="Enter FirstName of the Student"
             />
-            {errors.Name && (
-              <span className="text-red-500">{errors.Name.message}</span>
+            {errors.FirstName && (
+              <span className="text-red-500">{errors.FirstName.message}</span>
             )}
           </div>
 
@@ -100,11 +122,11 @@ const AddMembers = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("Name")}
+              {...register("LastName")}
               placeholder="Enter LastName of the Student"
             />
-            {errors.Name && (
-              <span className="text-red-500">{errors.Name.message}</span>
+            {errors.LastName && (
+              <span className="text-red-500">{errors.LastName.message}</span>
             )}
           </div>
 
@@ -114,7 +136,7 @@ const AddMembers = () => {
             >
               Batch
             </label>
-            <select {...register("StudentBatch")} className={`${classes}`}>
+            <select {...register("BatchYear")} className={`${classes}`}>
               {Batch.map((soc, index) => (
                 <option value={soc} key={index}>
                   {soc}
@@ -122,8 +144,8 @@ const AddMembers = () => {
               ))}
             </select>
           </div>
-          {errors.StudentBatch && (
-            <span className="text-red-500">{errors.StudentBatch.message}</span>
+          {errors.BatchYear && (
+            <span className="text-red-500">{errors.BatchYear.message}</span>
           )}
 
           <div className="mb-4">
@@ -144,18 +166,7 @@ const AddMembers = () => {
             <span className="text-red-500">{errors.Branch.message}</span>
           )}
 
-          <div className="mb-4">
-            <label className="block text-md font-medium">Mobile No</label>
-            <input
-              placeholder="Enter Mobile number"
-              {...register("Contact")}
-              type="text"
-              className={`${classes}`}
-            />
-            {errors.Contact && (
-              <span className="text-red-500">{errors.Contact.message}</span>
-            )}
-          </div>
+        
 
           
           <div className="mb-4">
@@ -180,17 +191,17 @@ const AddMembers = () => {
               <input
               className={`${classes}`}
               type="text"
-              {...register("profilePicture")}
+              {...register("ProfilePicture")}
               placeholder="Give the Link for the Profile Picture"
               />
-              {errors.profilePicture && (
+              {errors.ProfilePicture && (
               <span className="text-red-500">
-                {errors.profilePicture.message}
+                {errors.ProfilePicture.message}
               </span>
             )}
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Society ID:</label>
               <input
               className={`${classes}`}
@@ -308,7 +319,7 @@ const AddMembers = () => {
                 {errors.twitter.message}
               </span>
             )}
-          </div>
+          </div> */}
 
           <button
             type="submit"
