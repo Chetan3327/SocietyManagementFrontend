@@ -2,34 +2,65 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const schema = z.object({
-    Name : z.string().nonempty("Name is required"),
-    Establishment : z.string().nonempty("Date of Establishment is required"),
-    Description : z.string().nonempty("Describe about your Scoiety is required"),
-    Head : z.string().nonempty("Society Head Name is required"),
-    Coordinators : z.string().nonempty("Coordinators Name is required"),
-    NoMembers : z.string().nonempty("No of members is required"),
-    Category : z.string().nonempty("Category is required"),
+    SocietyID:z.string(),
+    SocietyName : z.string().nonempty("Name is required"),
+    DateOfRegistration : z.string().nonempty("Date of Establishment is required"),
+    SocietyDescription : z.string().nonempty("Describe about your Scoiety is required"),
+    SocietyHead : z.string().nonempty("Society Head Name is required"),
+    SocietyType : z.string().nonempty("Category is required"),
 
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UpdateSociety = () => {
 
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+    let { societyId } = useParams()
+    console.log(societyId)
+    const SOCIETYID: number | null = societyId ? parseInt(societyId, 10) : null;
+   
+    if (SOCIETYID === null) {
+      return (
+        <div className="text-2xl font-semibold">Invalid society id</div>
+      )
+    }
+
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
         resolver: zodResolver(schema)
     })
 
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
-    }
 
+    const onSubmit = (data: formData) => {
+
+      axios.put(`${BACKEND_URL}/societies/${SOCIETYID}`, data).then((response) => {
+        setSubmit(true)
+        setIsError(false)
+        setError('')
+        console.log('data given : ', data)
+        console.log('response back : ', response)
+        setTimeout(() => {
+          navigate('/admin/societies/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
+  
+    }
 
   return (
     <>
@@ -49,17 +80,33 @@ const UpdateSociety = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
           Update Details
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Society Data updated successfully</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-4">
+            <label className="block text-md font-medium">Society ID</label>
+            <input
+              className={`${classes}`}
+              type='number'
+              value={SOCIETYID}
+              {...register("SocietyID", { valueAsNumber: true })}
+              placeholder="Enter Society ID" required
+            />
+            {errors.SocietyID && (
+              <span className="text-red-500">{errors.SocietyID.message}</span>
+            )}
+          </div>
           <div className="mb-4">
             <label className="block text-md font-medium">Name of Society</label>
             <input
               type="text"
               className={`${classes}`}
-              {...register("Name")}
+              {...register("SocietyName")}
               placeholder="Enter Name of the Society"
             />
-            {errors.Name && (
-              <span className="text-red-500">{errors.Name.message}</span>
+            {errors.SocietyName && (
+              <span className="text-red-500">{errors.SocietyName.message}</span>
             )}
           </div>
 
@@ -70,12 +117,12 @@ const UpdateSociety = () => {
             <input
               className={`${classes}`}
               type="date"
-              {...register("Establishment")}
+              {...register("DateOfRegistration")}
               placeholder="Enter Date"
             />
-            {errors.Establishment && (
+            {errors.DateOfRegistration && (
               <span className="text-red-500">
-                {errors.Establishment.message}
+                {errors.DateOfRegistration.message}
               </span>
             )}
           </div>
@@ -83,11 +130,11 @@ const UpdateSociety = () => {
             <label className="block text-md font-medium">Describe Your Society</label>
             <textarea
               className={`${classes}`}
-              {...register("Description")}
+              {...register("SocietyDescription")}
               placeholder="Enter Society description"
             ></textarea>
-            {errors.Description && (
-              <span className="text-red-500">{errors.Description.message}</span>
+            {errors.SocietyDescription && (
+              <span className="text-red-500">{errors.SocietyDescription.message}</span>
             )}
           </div>
 
@@ -95,15 +142,15 @@ const UpdateSociety = () => {
             <label className="block text-md font-medium">Society Head Name</label>
             <input
               placeholder="Enter Society Head Name"
-              {...register("Head")}
+              {...register("SocietyHead")}
               type="text"
               className={`${classes}`}
             />
-            {errors.Head && (
-              <span className="text-red-500">{errors.Head.message}</span>
+            {errors.SocietyHead && (
+              <span className="text-red-500">{errors.SocietyHead.message}</span>
             )}
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Society coordinators Name</label>
             <input
               placeholder="Enter Society Coordinators Name"
@@ -126,17 +173,17 @@ const UpdateSociety = () => {
             {errors.NoMembers && (
               <span className="text-red-500">{errors.NoMembers.message}</span>
             )}
-          </div>
+          </div> */}
           <div className="mb-4">
             <label className="block text-md font-medium">Category of Society</label>
             <input
               placeholder="Enter Category of Society"
-              {...register("Category")}
+              {...register("SocietyType")}
               type="text"
               className={`${classes}`}
             />
-            {errors.Category && (
-              <span className="text-red-500">{errors.Category.message}</span>
+            {errors.SocietyType && (
+              <span className="text-red-500">{errors.SocietyType.message}</span>
             )}
           </div>
 

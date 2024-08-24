@@ -1,6 +1,6 @@
 import { Edit,Trash, UserRoundPlus } from "lucide-react";
 import { Card, CardContent } from "../../../components/ui/card";
-import student from '../../../assets/studentpic.jpeg'
+// import student from '../../../assets/studentpic.jpeg'
 import { Link } from "react-router-dom";
 import {
   Table,
@@ -18,102 +18,121 @@ import { useParams } from "react-router-dom";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-// type MemberType = {
+type MemberType = {
+    ProfilePicture:string,
+    FirstName:string,
+    LastName:string,
+    Branch:string,
+    BatchYear:number,
+    EnrollmentNo:number,
+    Email:string
+}
 
-// }
-
-const member=[
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2022-26",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"ECE",
-    batch:"2023-27",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2021-25",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2022-26",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2023-27",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2022-26",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-  {
-    img:student,
-    name:"John Doe",
-    branch:"CSE",
-    batch:"2022-26",
-    enrollment:"0115897556",
-    email:"shivani_1234@gmail.com",
-    societyID: "anveshan089"
-  },
-]
+// const member=[
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2022-26",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"ECE",
+//     batch:"2023-27",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2021-25",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2022-26",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2023-27",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2022-26",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+//   {
+//     img:student,
+//     name:"John Doe",
+//     branch:"CSE",
+//     batch:"2022-26",
+//     enrollment:"0115897556",
+//     email:"shivani_1234@gmail.com",
+//     societyID: "anveshan089"
+//   },
+// ]
 const Member_Table = () => {
-  const [news , setNews] = useState([])
+  const [members , setmembers] = useState([])
   const params = useParams()
   console.log(params)
 
-  let fetchAllNews ;
+  let fetchAllMembers ;
   useEffect(()=>{
-       fetchAllNews = async()=>{
+       fetchAllMembers = async()=>{
         let res ;
-        if(params.societyID){
-          res =  await axios.get(`${BACKEND_URL}/admin/news/${params.societyID}`)
+        if(params.EnrollmentNo){
+          res =  await axios.get(`${BACKEND_URL}/admin/members/${params.EnrollmentNo}`)
         }else{
-          res =  await axios.get(`${BACKEND_URL}/admin/news`)
+          res =  await axios.get(`${BACKEND_URL}/admin/members`)
         }
          
         console.log('data',res.data)
-        setNews(res.data)
+        setmembers(res.data)
       }
-      fetchAllNews()
+      fetchAllMembers()
   },[])
 
-  if(news.length<=0){
+  if(members.length<=0){
    return (
     <div className="text-3xl font-bold">Loading data</div>
    ) 
   }
 
+  const handleDelete = async (EnrollmentNo: number) => {
+
+    await axios.delete(`${BACKEND_URL}/members/${EnrollmentNo}`).then(
+      res => {
+        console.log(res)
+        setmembers(members.filter((member: MemberType) => member.EnrollmentNo !== EnrollmentNo))
+      }
+    ).catch(
+      err => {
+        console.log(err)
+      }
+    )
+  }
   return (
     <>
       <Card className=" mt-7">
@@ -153,47 +172,47 @@ const Member_Table = () => {
                 <TableHead className="font-bold text-center text-xl">
                   Email
                 </TableHead>
-                <TableHead className="font-bold text-center text-xl">
+                {/* <TableHead className="font-bold text-center text-xl">
                   SocietyID
                 </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Student's Contribution
-                </TableHead>
+                </TableHead> */}
                 <TableHead className="font-bold text-center text-xl">
                   Edit/Delete
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {member.map((member, index: number) => {
+              {members.map((members:MemberType, index: number) => {
                 return (
                   <TableRow key={index} className="border-none">
                     <TableCell>
                       <div className="flex gap-1 items-center justify-end">
                         <img
-                          src={member.img}
+                          src={members.ProfilePicture}
                           alt="student"
                           className="h-8 w-8 rounded-full"
                         />
-                        <h1 className="font-bold">{member.name}</h1>
+                        <h1 className="font-bold">{`${members.FirstName} ${members.LastName}`}</h1>
                       </div>
                     </TableCell>
                     
-                    <TableCell className="text-center">{member.branch}</TableCell>
-                    <TableCell className="text-center">{member.batch}</TableCell>
-                    <TableCell className="text-center">{member.enrollment}</TableCell>
-                    <TableCell className="text-center">{member.email}</TableCell>
-                    <TableCell className="text-center">{member.societyID}</TableCell>
+                    <TableCell className="text-center">{members.Branch}</TableCell>
+                    <TableCell className="text-center">{members.BatchYear}</TableCell>
+                    <TableCell className="text-center">{members.EnrollmentNo}</TableCell>
+                    <TableCell className="text-center">{members.Email}</TableCell>
+                    {/* <TableCell className="text-center">{members.societyID}</TableCell> */}
                     <TableCell >
                       <Button className="border-2 w-fit px-5 py-1 rounded-full">
-                        <Link to="/members/:id">View Details</Link>
+                        <Link to={`/members/${members.EnrollmentNo}`}>View Details</Link>
                       </Button>
                     </TableCell>
                     <TableCell className="flex justify-center gap-5">
-                      <Link to="/admin/members/update">
+                      <Link to={`/admin/members/update/${members.EnrollmentNo}`}>
                          <Button className="text-blue-700"><Edit /></Button>
                       </Link>
-                      <Button className="text-red-700"><Trash /></Button>
+                      <Button className="text-red-700" onClick={() => handleDelete(members.EnrollmentNo)}><Trash /></Button>
                     </TableCell>
                   </TableRow>
                 );
