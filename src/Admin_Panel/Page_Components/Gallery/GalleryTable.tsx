@@ -90,7 +90,19 @@ const Gallery_table = () => {
       <div className="text-3xl font-bold">Loading data</div>
      ) 
     }
-    
+    const handleDelete = async (GalleryId: number) => {
+
+        await axios.delete(`${BACKEND_URL}/admin/gallery/${GalleryId}`).then(
+          res => {
+            console.log(res)
+            setGalleries(galleries.filter((gallery: GalleryType) => gallery.GalleryID !== GalleryId))
+          }
+        ).catch(
+          err => {
+            console.log(err)
+          }
+        )
+      }
     return (
         <div className='flex flex-col'>
             <Card className="m-4 mt-7">
@@ -139,10 +151,10 @@ const Gallery_table = () => {
                                             <a href={`${galleries.Image}`}>View Image</a>
                                         </TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to='/admin/gallery/update'>
+                                            <Link to={`/admin/gallery/update/${galleries.GalleryID}`}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
-                                            <Button className="text-red-700"><Trash /></Button>
+                                            <Button className="text-red-700" onClick={() => handleDelete(galleries.GalleryID)}><Trash /></Button>
                                         </TableCell>
                                     </TableRow>
                                 );

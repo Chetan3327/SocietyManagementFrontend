@@ -2,6 +2,8 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const schema = z.object({
   Image : z.string().nonempty("image is required"),
@@ -10,20 +12,47 @@ const schema = z.object({
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const CreateGallery = () => {
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
 
-    const [_ , setSubmit] = useState(false)
-    type formData = z.infer<typeof schema>
+  let { galleryid } = useParams()
+  const GALLERYID: number | null = galleryid ? parseInt(galleryid, 10) : null;
+ 
+  if (GALLERYID === null) {
+    return (
+      <div className="text-2xl font-semibold">Invalid gallery id</div>
+    )
+  }
 
-    const {register , handleSubmit , formState : {errors} }= useForm<formData>({
-        resolver: zodResolver(schema)  
+  type formData = z.infer<typeof schema>
+
+  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = (data: formData) => {
+
+    axios.put(`${BACKEND_URL}/admin/gallery/${GALLERYID}`, data).then((response) => {
+      setSubmit(true)
+      setIsError(false)
+      setError('')
+      console.log('data given : ', data)
+      console.log('response back : ', response)
+      setTimeout(() => {
+        navigate('/admin/gallery/')
+      }, 3000)
+    }).catch((error) => {
+      console.log(error)
+      setSubmit(false)
+      setIsError(true)
+      setError(error)
     })
 
-    const onSubmit = (data : formData) => {
-        setSubmit(true)
-        console.log(data)
-    }
+  }
 
 
   return (
@@ -44,6 +73,9 @@ const CreateGallery = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
             Update Society Gallery Form
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Gallery updated successfully ! Redirecting to all gallery page</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="mb-4">
