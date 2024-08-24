@@ -127,4 +127,4 @@ const CreateGallery = () => {
   )
 }
 
-export default UpdateGallery
+export default CreateGallery
