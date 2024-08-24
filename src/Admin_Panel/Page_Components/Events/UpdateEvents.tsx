@@ -18,8 +18,8 @@ import { useNavigate , useParams } from "react-router-dom";
 // }
 
 const schema = z.object({
-  SocietyId : z.number(),
-  EventId : z.number(),
+  SocietyName : z.string().nonempty('Society name is required'),
+  EventID : z.number(),
   Title : z.string().nonempty('Title is required'),
   Description :  z.string().nonempty('Description is required'),
   EventType :  z.string().nonempty('Event type is required'),
@@ -57,7 +57,7 @@ const UpdateEvents = () => {
     const onSubmit = (data : formData) => {
       console.log('in submit')
       console.log(data)
-      axios.put(`${BACKEND_URL}/events${EVENTSID}`, data).then((response) => {
+      axios.put(`${BACKEND_URL}/events/${EVENTSID}`, data).then((response) => {
         console.log(response)
         setSubmit(true)
         setIsError(false)
@@ -94,21 +94,21 @@ const UpdateEvents = () => {
         </h2>
 
         {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
-        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Event updated successfully ! Redirecting to all news page</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Event updated successfully ! Redirecting to all events page</div>}
 
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="mb-4">
-            <label className="block text-md font-medium">Society ID</label>
+            <label className="block text-md font-medium">Society name</label>
             <input
               className={`${classes}`}
-              type="number"
-              {...register("SocietyId", { valueAsNumber: true })}
+              type="text"
+              {...register("SocietyName")}
               placeholder="Enter Society ID"
             />
-            {errors.SocietyId && (
-              <span className="text-red-500">{errors.SocietyId.message}</span>
+            {errors.SocietyName && (
+              <span className="text-red-500">{errors.SocietyName.message}</span>
             )}
           </div>
 
@@ -116,12 +116,12 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event ID</label>
             <input
               className={`${classes}`}
-              type="number"
-              {...register("EventId", { valueAsNumber: true })}
+              type="number" value={EVENTSID} readOnly
+              {...register("EventID", { valueAsNumber: true })}
               placeholder="Enter a unique EventID"
             />
-            {errors.EventId && (
-              <span className="text-red-500">{errors.EventId.message}</span>
+            {errors.EventID && (
+              <span className="text-red-500">{errors.EventID.message}</span>
             )}
           </div>
           

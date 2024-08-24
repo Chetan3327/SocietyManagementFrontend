@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const schema = z.object({
-    Image : z.string().nonempty("image is required"),
-    GalleryID : z.string().nonempty("GalleryID is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
+  Image : z.string().nonempty("image is required"),
+  GalleryID : z.number(),
+  SocietyID : z.number()
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
@@ -73,8 +73,8 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Gallery ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("GalleryID")}
+              type="number"
+              {...register("GalleryID", { valueAsNumber: true })}
               placeholder="Enter Gallery ID"
             />
             {errors.GalleryID && (
@@ -85,8 +85,8 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
