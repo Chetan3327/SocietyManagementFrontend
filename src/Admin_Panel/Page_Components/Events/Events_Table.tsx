@@ -16,8 +16,8 @@ import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 
 type EventType = {
-  SocietyId : number,
-  EventId : number,
+  SocietyName : string,
+  EventID: number,
   Title : string,
   Description : string,
   EventType : string,
@@ -70,12 +70,12 @@ const Events_Table = () => {
   useEffect(()=>{
        fetchAllEvents = async()=>{
         let res ;
-        if(params.societyID){
-          res =  await axios.get(`${BACKEND_URL}/admin/events/${params.societyID}`)
-        }else{
-          res =  await axios.get(`${BACKEND_URL}/admin/events`)
-        }
-         
+        // if(params.societyID){
+        //   res =  await axios.get(`${BACKEND_URL}/admin/events/${params.SocietyName}`)
+        // }else{
+        //   res =  await axios.get(`${BACKEND_URL}/admin/events`)
+        // }
+        res =  await axios.get(`${BACKEND_URL}/admin/events`)
         console.log('data',res.data)
         setEvents(res.data)
       }
@@ -93,7 +93,7 @@ const Events_Table = () => {
     await axios.delete(`${BACKEND_URL}/events/${eventID}`).then(
       res => {
         console.log(res)
-        setEvents(events.filter((event : EventType)=> event.EventId !== eventID))
+        setEvents(events.filter((event : EventType)=> event.EventID!== eventID))
       }
     ).catch(
       err => {
@@ -111,7 +111,7 @@ const Events_Table = () => {
               Event ID
             </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
-              SocietyID
+              Society Name
             </TableHead>
             <TableHead className="font-bold text-center text-xl border-muted border-2">
               Title
@@ -132,11 +132,12 @@ const Events_Table = () => {
         </TableHeader>
         <TableBody>
           {events.map((data : EventType, index: number) => {
+            {console.log(data)}
             return (
               <TableRow key={index}>
-                <TableCell className="border-muted border-2">{data.EventId}</TableCell>
+                <TableCell className="border-muted border-2">{data.EventID}</TableCell>
                 <TableCell className="text-center border-muted border-2">
-                  {data.SocietyId}
+                  {data.SocietyName}
                 </TableCell>
                 <TableCell className="text-center border-muted border-2">
                   {data.Title}
@@ -152,12 +153,12 @@ const Events_Table = () => {
                 </TableCell>
 
                 <TableCell className="flex justify-center gap-5">
-                  <Link to={`/admin/events/update/${data.EventId}`}>
+                  <Link to={`/admin/events/update/${data.EventID}`}>
                     <Button className="text-blue-700">
                       <Edit />
                     </Button>
                   </Link>
-                  <Button className="text-red-700" onClick={()=>handleDelete(data.EventId)}>
+                  <Button className="text-red-700" onClick={()=>handleDelete(data.EventID)}>
                     <Trash />
                   </Button>
                 </TableCell>

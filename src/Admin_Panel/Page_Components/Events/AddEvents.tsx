@@ -6,8 +6,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // type EventType = {
-//   SocietyId : number,
-//   EventId : number,
+//   SocietyName : number,
+//   EventID : number,
 //   Title : string,
 //   Description : string,
 //   EventType : string,
@@ -18,8 +18,8 @@ import { useNavigate } from "react-router-dom";
 // }
 
 const schema = z.object({
-  SocietyId : z.number(),
-  EventId : z.number(),
+  SocietyName : z.string().nonempty('Society name is required'),
+  EventID : z.number(),
   Title : z.string().nonempty('Title is required'),
   Description :  z.string().nonempty('Description is required'),
   EventType :  z.string().nonempty('Event type is required'),
@@ -84,21 +84,21 @@ const AddEvents = () => {
         </h2>
 
         {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
-        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Event Form submitted successfully ! Redirecting to all news page</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Event Form submitted successfully ! Redirecting to all events page</div>}
 
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
         <div className="mb-4">
-            <label className="block text-md font-medium">Society ID</label>
+            <label className="block text-md font-medium">Society Name</label>
             <input
               className={`${classes}`}
-              type="number"
-              {...register("SocietyId", { valueAsNumber: true })}
-              placeholder="Enter Society ID"
+              type="text"
+              {...register("SocietyName")}
+              placeholder="Enter Society name"
             />
-            {errors.SocietyId && (
-              <span className="text-red-500">{errors.SocietyId.message}</span>
+            {errors.SocietyName && (
+              <span className="text-red-500">{errors.SocietyName.message}</span>
             )}
           </div>
 
@@ -107,11 +107,11 @@ const AddEvents = () => {
             <input
               className={`${classes}`}
               type="number"
-              {...register("EventId", { valueAsNumber: true })}
+              {...register("EventID", { valueAsNumber: true })}
               placeholder="Enter a unique EventID"
             />
-            {errors.EventId && (
-              <span className="text-red-500">{errors.EventId.message}</span>
+            {errors.EventID && (
+              <span className="text-red-500">{errors.EventID.message}</span>
             )}
           </div>
           

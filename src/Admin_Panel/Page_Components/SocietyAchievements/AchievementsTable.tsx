@@ -87,7 +87,7 @@ const Achievemnts_table = () => {
 
     const handleDelete = async (achievementID: number) => {
 
-        await axios.delete(`${BACKEND_URL}/news/${achievementID}`).then(
+        await axios.delete(`${BACKEND_URL}/achievements/${achievementID}`).then(
             res => {
                 console.log(res)
                 setAchievements(achievemnts.filter((achievemnt: AchievementType) => achievemnt.SocietyAchievementID !== achievementID))

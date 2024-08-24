@@ -126,7 +126,7 @@ const App = () => {
         <Route path="/admin/gallery" element={<Admin_Gallery />} />
         <Route path="/admin/gallery/:societyID" element={<Admin_Gallery />} />
         <Route path="/admin/gallery/add" element={<AddGallery />} />
-        <Route path="/admin/gallery/update" element={<UpdateGallery />} />
+        <Route path="/admin/gallery/update/:societyID" element={<UpdateGallery />} />
 
         <Route path="/admin/roles" element={<Admin_Roles />} />
         <Route path="/admin/roles/add" element={<AddRoles />} />

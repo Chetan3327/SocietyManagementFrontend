@@ -76,13 +76,13 @@ const UpdateAchievement = () => {
         />
         <div className="absolute inset-0 py-20 lg:py-28">
           <h2 className="text-white text-center text-4xl font-bold">
-            Create Society Achievement
+            Update Society Achievement
           </h2>
         </div>
       </div>
       <div className="max-w-xl mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
-          Create Society Achievement Form
+          Update Society Achievement Form
         </h2>
         {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
         {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Achievement updated successfully ! Redirecting to all achievements page</div>}
@@ -94,6 +94,7 @@ const UpdateAchievement = () => {
             <input
               className={`${classes}`}
               type="number"
+              value={ACHIEVEMENTID} readOnly
               {...register("SocietyAchievementID", { valueAsNumber: true })}
               placeholder="Enter Testimonial ID"
             />
@@ -115,7 +116,7 @@ const UpdateAchievement = () => {
             )}
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
@@ -126,7 +127,7 @@ const UpdateAchievement = () => {
             {errors.Title && (
               <span className="text-red-500">{errors.Title.message}</span>
             )}
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <label className="block text-md font-medium">Achievement Description</label>

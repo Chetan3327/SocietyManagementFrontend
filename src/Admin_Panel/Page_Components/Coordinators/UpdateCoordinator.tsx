@@ -2,6 +2,8 @@ import {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const schema = z.object({
   CoordinatorName : z.string().nonempty("Coordinator name is required"),
@@ -14,10 +16,23 @@ const schema = z.object({
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const UpdateCoordinatorForm = () => {
 
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  let { coordinatorID } = useParams()
+  const COORDINATORID: number | null = coordinatorID ? parseInt(coordinatorID, 10) : null;
+ 
+  if (COORDINATORID === null) {
+    return (
+      <div className="text-2xl font-semibold">Invalid  id</div>
+    )
+  }
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -25,8 +40,21 @@ const UpdateCoordinatorForm = () => {
     })
 
     const onSubmit = (data : formData) => {
+      axios.put(`${BACKEND_URL}/coordinator/${COORDINATORID}`, data).then((response) => {
         setSubmit(true)
-        console.log(data)
+        setIsError(false)
+        setError('')
+        console.log('data given : ', data)
+        console.log('response back : ', response)
+        setTimeout(() => {
+          navigate('/admin/coordinators/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
     }
 
 
@@ -48,6 +76,9 @@ const UpdateCoordinatorForm = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
            Coordinator Details Update Form
         </h2>
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Coordinator details updated successfully ! Redirecting to all coordinators page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
@@ -55,7 +86,7 @@ const UpdateCoordinatorForm = () => {
             <input
               className={`${classes}`}
               type="text"
-              {...register("SocietyID")}
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
@@ -67,8 +98,8 @@ const UpdateCoordinatorForm = () => {
             <label className="block text-md font-medium">Coordinator ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("CoordinatorID")}
+              type="text" value={COORDINATORID} readOnly
+              {...register("CoordinatorID", { valueAsNumber: true })}
               placeholder="Enter Coordinator ID"
             />
             {errors.CoordinatorID && (

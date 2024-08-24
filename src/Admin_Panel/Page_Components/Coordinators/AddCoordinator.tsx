@@ -2,8 +2,8 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
     CoordinatorName : z.string().nonempty("Coordinator name is required"),
@@ -16,9 +16,13 @@ const schema = z.object({
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const AddCoordinator = () => {
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -26,8 +30,24 @@ const AddCoordinator = () => {
     })
 
     const onSubmit = (data : formData) => {
+      console.log('in submit')
+      console.log(data)
+      axios.post(`${BACKEND_URL}/coordinator`, data).then((response) => {
+        console.log(response)
         setSubmit(true)
-        console.log(data)
+        setIsError(false)
+        setError('')
+        setTimeout(() => {
+          navigate('/admin/coordinators/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
+  
+
     }
 
 
@@ -49,6 +69,9 @@ const AddCoordinator = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
           New Coordinator Form
         </h2>
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all coordinators page</div>}
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">

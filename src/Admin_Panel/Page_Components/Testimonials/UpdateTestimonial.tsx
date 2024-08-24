@@ -45,7 +45,7 @@ const CreateTestimonial = () => {
   })
 
   const onSubmit = (data: formData) => {
-    axios.put(`${BACKEND_URL}/news/${TESTMONIALID}`, data).then((response) => {
+    axios.put(`${BACKEND_URL}/testimonials/${TESTMONIALID}`, data).then((response) => {
       setSubmit(true)
       setIsError(false)
       setError('')

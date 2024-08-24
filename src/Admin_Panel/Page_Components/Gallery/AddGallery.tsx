@@ -2,18 +2,24 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
-    Image : z.string().nonempty("image is required"),
-    GalleryID : z.string().nonempty("GalleryID is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
+  Image : z.string().nonempty("image is required"),
+  GalleryID : z.number(),
+  SocietyID : z.number()
 })
 
 const classes = "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const CreateGallery = () => {
 
-    const [_ , setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(false)
+  const [iserror, setIsError] = useState(false)
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
     type formData = z.infer<typeof schema>
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
@@ -21,8 +27,20 @@ const CreateGallery = () => {
     })
 
     const onSubmit = (data : formData) => {
+      axios.post(`${BACKEND_URL}/galleries`, data).then((response) => {
+        console.log(response)
         setSubmit(true)
-        console.log(data)
+        setIsError(false)
+        setError('')
+        setTimeout(() => {
+          navigate('/admin/gallery/')
+        }, 3000)
+      }).catch((error) => {
+        console.log(error)
+        setSubmit(false)
+        setIsError(true)
+        setError(error)
+      })
     }
 
 
@@ -44,14 +62,19 @@ const CreateGallery = () => {
         <h2 className="text-3xl font-semibold text-center mb-6">
             Create Society Gallery Form
         </h2>
+
+        {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Form submitted successfully ! Redirecting to all galleries page</div>}
+
+
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
             <label className="block text-md font-medium">Gallery ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("GalleryID")}
+              type="number"
+              {...register("GalleryID", { valueAsNumber: true })}
               placeholder="Enter Gallery ID"
             />
             {errors.GalleryID && (
@@ -62,8 +85,8 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
