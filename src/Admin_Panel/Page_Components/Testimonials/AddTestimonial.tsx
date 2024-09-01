@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   TestimonialDescription: z.string().nonempty("Testimonial is required"),
-  EnrollmentNo: z.string().nonempty("EnrollmentNo is required"),
+  EnrollmentNo: z.number(),
   TestimonialID: z.number(),
   SocietyID: z.number(),
 })

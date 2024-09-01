@@ -82,7 +82,7 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Gallery ID</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number" value={GALLERYID} readOnly
               {...register("GalleryID", { valueAsNumber: true })}
               placeholder="Enter gallery ID"
             />
@@ -105,11 +105,11 @@ const CreateGallery = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">Image Link</label>
-            <textarea
+            <input
               placeholder="Enter link of the image"
               {...register("Image")}
               className={`${classes}`}
-            ></textarea>
+            />
             {errors.Image && (
               <span className="text-red-500">{errors.Image.message}</span>
             )}
