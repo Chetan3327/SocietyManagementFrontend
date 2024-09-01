@@ -106,12 +106,12 @@ const CreateAchievement = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-md font-medium">Society ID</label>
+            <label className="block text-md font-medium">Title</label>
             <input
               className={`${classes}`}
               type="text"
               {...register("Title")}
-              placeholder="Enter Society ID"
+              placeholder="Enter title"
             />
             {errors.Title && (
               <span className="text-red-500">{errors.Title.message}</span>

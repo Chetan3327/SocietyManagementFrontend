@@ -10,8 +10,8 @@ const schema = z.object({
     CoordinatorPosition : z.string().nonempty("Coordinator position is required"),
     CoordinatorDescription : z.string().nonempty("This field is required"),
     Image : z.string().nonempty("Coordinator Image is required"),
-    SocietyID : z.string().nonempty("SocietyID is required"),
-    CoordinatorID : z.string().nonempty("CoordinatorID is required"),
+    SocietyID : z.number(),
+    CoordinatorID : z.number(),
     CoordinatorEmail : z.string().nonempty("CoordinatorEmail is required"),
 })
 
@@ -78,8 +78,8 @@ const AddCoordinator = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("SocietyID")}
+              type="number"
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
             {errors.SocietyID && (
@@ -91,8 +91,8 @@ const AddCoordinator = () => {
             <label className="block text-md font-medium">Coordinator ID</label>
             <input
               className={`${classes}`}
-              type="text"
-              {...register("CoordinatorID")}
+              type="number"
+              {...register("CoordinatorID", { valueAsNumber: true })}
               placeholder="Enter Coordinator ID"
             />
             {errors.CoordinatorID && (
