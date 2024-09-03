@@ -36,7 +36,7 @@ const CreateGallery = () => {
 
   const onSubmit = (data: formData) => {
 
-    axios.put(`${BACKEND_URL}/admin/gallery/${GALLERYID}`, data).then((response) => {
+    axios.put(`${BACKEND_URL}galleries/${GALLERYID}`, data).then((response) => {
       setSubmit(true)
       setIsError(false)
       setError('')

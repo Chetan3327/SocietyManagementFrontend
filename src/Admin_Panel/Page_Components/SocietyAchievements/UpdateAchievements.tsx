@@ -116,8 +116,8 @@ const UpdateAchievement = () => {
             )}
           </div>
 
-          {/* <div className="mb-4">
-            <label className="block text-md font-medium">Society ID</label>
+          <div className="mb-4">
+            <label className="block text-md font-medium">Title</label>
             <input
               className={`${classes}`}
               type="text"
@@ -127,7 +127,7 @@ const UpdateAchievement = () => {
             {errors.Title && (
               <span className="text-red-500">{errors.Title.message}</span>
             )}
-          </div> */}
+          </div>
 
           <div className="mb-4">
             <label className="block text-md font-medium">Achievement Description</label>
