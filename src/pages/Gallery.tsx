@@ -16,71 +16,27 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
-import anveshan from "../assets/Society_Img/anveshan.jpg";
-import avaran from "../assets/Society_Img/avaran.jpg";
-import chromavita from "../assets/Society_Img/chromavita.jpg";
-import gdsc from "../assets/Society_Img/gdsc.jpg";
-import hash_define from "../assets/Society_Img/hash_define.jpg";
-import ieee from "../assets/Society_Img/ieee.jpg";
-import ieee_wie from "../assets/Society_Img/ieee_wie.jpg";
-import kalam from "../assets/Society_Img/kalam.jpg";
-import namespace from "../assets/Society_Img/namespace.jpg";
-import opticlick from "../assets/Society_Img/opticlick.jpg";
-import women from "../assets/Society_Img/wibd.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+type GalleryType = {
+  SocietyID : number ,
+  GalleryID : number ,
+  Image : string
+}
 
-type Events = {
-  image: string;
-  society: string;
-};
 
-const event: Events[] = [
-  {
-    image: women,
-    society: "WIBD",
-  },
-  {
-    image: namespace,
-    society: "Namespace",
-  },
-  {
-    image: opticlick,
-    society: "OptiClick",
-  },
-  {
-    image: avaran,
-    society: "Avaran",
-  },
-  {
-    image: gdsc,
-    society: "GDSC",
-  },
-  {
-    image: ieee,
-    society: "IEEE",
-  },
-  {
-    image: hash_define,
-    society: "3Define",
-  },
-  {
-    image: ieee_wie,
-    society: "WIE",
-  },
-  {
-    image: kalam,
-    society: "Kalam",
-  },
-  {
-    image: chromavita,
-    society: "Chromavita",
-  },
-  {
-    image: anveshan,
-    society: "Anveshan",
-  },
-];
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 function Gallery() {
+  const [gallery, setgallery] = useState<GalleryType[]>([])
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res=await axios.get(`${BACKEND_URL}/admin/gallery`)
+      console.log('data', res.data)
+      setgallery(res.data)
+    }
+    fetchsociety()
+  }, [])
   return (
     <div>
       <header className="text-2xl bg-slate-100 p-2 flex gap-4 justify-center items-center">
@@ -98,9 +54,9 @@ function Gallery() {
         >
           <CarouselPrevious />
           <CarouselContent>
-            {event.map(({ image, society }, index: number) => (
+            {gallery.map(({ Image, SocietyID }, index: number) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <Link to="/societygallery">
+                <Link to={`/societygallery/${SocietyID}`}>
                   <Card className="border-none shadow-sm">
                     <CardHeader className="p-3">
                       <CardTitle>Latest Posts</CardTitle>
@@ -112,7 +68,7 @@ function Gallery() {
                       <Card className="border-none shadow-md">
                         <CardHeader className="p-0">
                           <img
-                            src={image}
+                            src={Image}
                             alt="societyimg"
                             className="rounded-t-lg h-36 object-cover object-center"
                           />
@@ -135,7 +91,7 @@ function Gallery() {
                               {" "}
                             </span>
                             <span className="text-black font-semibold">
-                              {society}
+                              {SocietyID}
                             </span>
                           </div>
                           <div className="flex items-center gap-5 mt-2 px-1">

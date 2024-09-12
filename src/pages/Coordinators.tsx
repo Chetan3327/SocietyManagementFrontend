@@ -48,7 +48,13 @@ const Coordinators = () => {
   const [coordinators, setCoordinators] = useState<Coordinator[]>([])
   useEffect(() => {
     const fetchsociety = async () => {
-      const res = await axios.get(`${BACKEND_URL}/coordinator/${id}`)
+      let res;
+      if(id){
+        res = await axios.get(`${BACKEND_URL}/coordinator/${id}`)
+      }else{
+        res = await axios.get(`${BACKEND_URL}/admin/coordinator`)
+      }
+     
       console.log('data', res.data)
       setCoordinators(res.data)
     }

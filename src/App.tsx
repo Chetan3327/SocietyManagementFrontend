@@ -57,7 +57,7 @@ import AddNews from "./Admin_Panel/Page_Components/News/AddNews";
 import CreateTestimonial from "./components/Page-Components/CreateTestimonial";
 import Admin_Events from "./Admin_Panel/Page/Events";
 import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
-
+import Achievements from "./pages/Achievements";
 import UpdateEvents from "./Admin_Panel/Page_Components/Events/UpdateEvents";
 import UpdateSociety from "./Admin_Panel/Page_Components/Socities/UpdateSociety";
 
@@ -81,6 +81,7 @@ import AddRoles from './Admin_Panel/Page_Components/Roles/AddRoles'
 import UpdateRoles from './Admin_Panel/Page_Components/Roles/UpdateRoles'
 
 import Admin_Login from "./Admin_Panel/Page/Admin_Login";
+
 
 
 const App = () => {
@@ -168,6 +169,7 @@ const App = () => {
           {/* <Route path="/openings/:id" element={<Openings />} /> */}
           <Route path="/roles" element={<Roles />} />
           <Route path="/coordinators" element={<Coordinators />} />
+          <Route path="/achievements" element={<Achievements/>} />
           {/* <Route path="/testimonials/:id" element={<Testimonials />} /> */}
           <Route path="/create" element={<SocietyForm />} />
           <Route path="/createtestimonial" element={<CreateTestimonial />} />
@@ -181,7 +183,7 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/allgallery" element={<AllGallery />} />
           {/* <Route path="/society/:id" element={<Society />}  */}
-          <Route path="/societygallery" element={<SocietyGallery />} />
+          <Route path="/societygallery/:id" element={<SocietyGallery />} />
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />

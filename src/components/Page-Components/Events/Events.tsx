@@ -30,7 +30,13 @@ const Events = () => {
 
   useEffect(() => {
     const fetchSociety = async () => {
-      const res = await axios.get(`${BACKEND_URL}/events/society/${id}`);
+      let res;
+      if(id){
+         res = await axios.get(`${BACKEND_URL}/events/society/${id}`);
+      }else{
+         res = await axios.get(`${BACKEND_URL}/events`);
+      }
+      
       console.log('data', res.data);
       setEvents(res.data);
 
