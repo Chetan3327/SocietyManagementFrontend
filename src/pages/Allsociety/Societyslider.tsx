@@ -6,14 +6,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Society } from "./Allsocities";
+import {  SocietyIntro } from "./Allsocities";
 import { Link } from "react-router-dom";
 
 
-function Societyslider({title,arr}:{title:string,arr:Society[]}) {
+function Societyslider({title,arr}:{title:string,arr:SocietyIntro[]}) {
   return (
     <div>
-      <h1 className="text-3xl text-black font-semibold px-6 mx-6">{title}</h1>
+      <h1 className="text-3xl text-black font-semibold px-6 mx-6 pt-10">{title}</h1>
       <div className="flex justify-center py-6">
         <Carousel
           className="lg:w-11/12 md:w-10/12 w-4/6 border-none"
