@@ -2,6 +2,51 @@ import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 // import axios, { AxiosResponse } from "axios";
 
+// College societies data
+const technicalSocieties = [
+  { society: "nameSpace", SocietyID: 1 },
+  { society: "Hash Define", SocietyID: 2 },
+  { society: "Anveshan", SocietyID: 3 },
+  { society: "WIBD", SocietyID: 4 },
+  { society: "GDSC", SocietyID: 5 },
+  { society: "IEEE", SocietyID: 6 },
+  { society: "IEEE_WIE", SocietyID: 7 },
+  { society: "Electronauts", SocietyID: 8 },
+];
+
+const nonTechnicalSocieties = [
+  { society: "Avaran", SocietyID: 9 },
+  { society: "Chromavita", SocietyID: 10 },
+  { society: "Drishti", SocietyID: 11 },
+  { society: "Kalam", SocietyID: 12 },
+  { society: "Mavericks", SocietyID: 13 },
+  { society: "Octave", SocietyID: 14 },
+  { society: "Opticlick", SocietyID: 15 },
+  { society: "Panache", SocietyID: 16 },
+];
+
+const allSocieties = [...technicalSocieties, ...nonTechnicalSocieties];
+
+// Passwords for each society (in a real-world application, these would be securely stored in a database)
+const societyPasswords: { [key: number]: string } = {
+  1: "namespacePass123",
+  2: "hashdefinePass456",
+  3: "anveshanPass789",
+  4: "wibdPassABC",
+  5: "gdscPassDEF",
+  6: "ieeePassGHI",
+  7: "ieeewiePassJKL",
+  8: "electronautsPassMNO",
+  9: "avaranPassPQR",
+  10: "chromavitaPassSTU",
+  11: "drishtiPassVWX",
+  12: "kalamPassYZA",
+  13: "mavericksPassBCD",
+  14: "octavePassEFG",
+  15: "opticlickPassHIJ",
+  16: "panachePassKLM",
+};
+
 const styles = {
     container: {
       display: "flex",
@@ -119,143 +164,115 @@ const styles = {
   };
   
   const Admin_Login: React.FC = () => {
-    const [userName , setUserName] = useState<string>("")
-    const [password , setPassword] = useState<string>("")
+    const [selectedSocietyID, setSelectedSocietyID] = useState<number | null>(null);
+    const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<string>("");
     const navigate = useNavigate();
-    const [role, setRole] = useState('');
-    
-    const RoleSelector = () => {
-    
-      return (
-        <div style={styles.fieldContainer}>
-          <div style={styles.inputContainer}>
-            <i className="fas fa-lock" style={styles.icon}></i>
-            <select
-              id="role"
-              name="role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              // style={styles.select}
-              required
-            >
-              <option value="">Select your role</option>
-              <option value="society-head">Society Head</option>
-              <option value="college-admin">College Admin</option>
-            </select>
-          </div>
-        </div>
-      );
-    };
-
-    const handleSubmit =  (e: FormEvent) => {
-        e.preventDefault();
-        setSuccess("")
-        navigate('/admin/home')
-        // Check if role is either 'society-head' or 'college-admin'
-    if (role === 'Society Head' || role === 'College Admin') {
-      // Simulate login check
-      if (userName === 'user' && password === 'pass') {
-        navigate('/admin/home');
-      } else {
-        setError('Login unsuccessful. Please try again.');
+    const [role, setRole] = useState("");
+  
+    const handleSubmit = (e: FormEvent) => {
+      e.preventDefault();
+      setSuccess("");
+      setError("");
+  
+      if (!selectedSocietyID) {
+        setError("Please select a society.");
+        return;
       }
-    } else {
-      setError('Invalid role. Please select a valid role.');
-    }
-      };
-
-
-      return (
-        <>
-         
-            <div style={styles.container} className="flex-col md:flex-row">
-              <div style={styles.leftSide}>
-                <div style={styles.formWrapper}>
-                  <img
-                    src="https://bpitindia.com/wp-content/uploads/2023/04/logo1-1.png" // Replace with your logo URL
-                    alt="Logo"
-                    style={styles.logo}
-                  />
-                  <h1 style={styles.title}>Log In</h1>
-    
-                  {error && (
-                    <p style={{ ...styles.message, ...styles.error }}>{error}</p>
-                  )}
-                  {success && (
-                    <p style={{ ...styles.message, ...styles.success }}>
-                      {success}
-                    </p>
-                  )}
-    
-                  <form style={styles.form} onSubmit={handleSubmit}>
-
-                    <div style={styles.fieldContainer}>
-                      <div style={styles.inputContainer}>
-                        <i className="fas fa-user" style={styles.icon}></i>
-                        <input
-                          type="text"
-                          id="userName"
-                          name="userName"
-                          value={userName}
-                          onChange={(e) => setUserName(e.target.value)}
-                          placeholder="Enter your user name"
-                          style={styles.input}
-                          required
-                        />
-                      </div>
-                    </div>
-    
-                    <div style={styles.fieldContainer}>
-                      <div style={styles.inputContainer}>
-                        <i className="fas fa-lock" style={styles.icon}></i>
-                        <input
-                          type="password"
-                          id="password"
-                          name="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter your password"
-                          style={styles.input}
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <RoleSelector />
-                    </div>
-    
-                    <button
-                      type="submit"
-                      style={styles.button}
-                      
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          styles.buttonHover.backgroundColor)
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          styles.button.backgroundColor)
-                      }
-                    >
-                      Log In
-                    </button>
-                  </form>
+  
+      // Check if role is valid and credentials match
+      if (role === "Society Head" || role === "College Admin") {
+        // Get the correct password for the selected society
+        const correctPassword = societyPasswords[selectedSocietyID];
+  
+        // Validate entered password
+        if (password === correctPassword) {
+          // Password is correct, navigate to the admin panel
+          navigate(`/admin/home?societyId=${selectedSocietyID}`);
+        } else {
+          setError("Incorrect password. Please try again.");
+        }
+      } else {
+        setError("Invalid role. Please select a valid role.");
+      }
+    };
+  
+    return (
+      <div style={styles.container}>
+        <div style={styles.leftSide}>
+          <div style={styles.formWrapper}>
+            <h1 style={styles.title}>Log In</h1>
+            {error && <p style={{ ...styles.message, ...styles.error }}>{error}</p>}
+            {success && <p style={{ ...styles.message, ...styles.success }}>{success}</p>}
+  
+            <form style={styles.form} onSubmit={handleSubmit}>
+              {/* Society Dropdown */}
+              <div style={styles.fieldContainer}>
+                <div style={styles.inputContainer}>
+                  <select
+                    value={selectedSocietyID || ""}
+                    onChange={(e) => setSelectedSocietyID(Number(e.target.value))}
+                    required
+                    style={styles.input}
+                  >
+                    <option value="">Select your society</option>
+                    {allSocieties.map((society) => (
+                      <option key={society.SocietyID} value={society.SocietyID}>
+                        {society.society}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
-              <div style={styles.rightSide}>
-                <img
-                  src="https://img.freepik.com/premium-vector/3d-account-login-password-form_165488-4522.jpg"
-                  alt="Signup Background"
-                  style={styles.image}
-                />
+  
+              {/* Password Field */}
+              <div style={styles.fieldContainer}>
+                <div style={styles.inputContainer}>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    style={styles.input}
+                    required
+                  />
+                </div>
               </div>
-            </div>
-        
-        </>
-      );
-  }
-
-  export default Admin_Login
+  
+              {/* Role Selector */}
+              <div style={styles.fieldContainer}>
+                <select
+                  id="role"
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  required
+                  style={styles.input}
+                >
+                  <option value="">Select your role</option>
+                  <option value="Society Head">Society Head</option>
+                  <option value="College Admin">College Admin</option>
+                </select>
+              </div>
+  
+              <button type="submit" style={styles.button}>
+                Log In
+              </button>
+            </form>
+          </div>
+        </div>
+  
+        <div style={styles.rightSide}>
+          <img
+            src="https://img.freepik.com/premium-vector/3d-account-login-password-form_165488-4522.jpg"
+            alt="Signup Background"
+            style={styles.image}
+          />
+        </div>
+      </div>
+    );
+  };
+  
+  export default Admin_Login;
