@@ -1,5 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import {
   Table,
   TableBody,
@@ -11,52 +14,67 @@ import {
 import { Button } from "@/components/ui/button"; // Adjust import based on your button library
 
 interface SocietyRole {
-  roleID: number;
-  roleType: string;
-  roleName: string;
-  roleDescription: string;
-  lastDateToApply: string;
-  responsibilities: string;
-  linkBySociety: string;
-  societyID: number;
+  RoleID: number;
+  RoleType: string;
+  Rolename: string;
+  RoleDescription: string;
+  LastDateToApply: string;
+  Responsibilities: string;
+  LinkBySociety: string;
+  SocietyID: number;
 }
 
-const roles: SocietyRole[] = [
-  {
-    roleID: 1,
-    roleType: "Executive",
-    roleName: "President",
-    roleDescription: "Leads the society and oversees all operations.",
-    lastDateToApply: "2024-08-01",
-    responsibilities:
-      "Chair meetings, represent the society, make strategic decisions.",
-    linkBySociety: "https://example.com/president",
-    societyID: 101,
-  },
-  // Add more role objects as needed
-];
+// const roles: SocietyRole[] = [
+//   {
+//     roleID: 1,
+//     roleType: "Executive",
+//     roleName: "President",
+//     roleDescription: "Leads the society and oversees all operations.",
+//     lastDateToApply: "2024-08-01",
+//     responsibilities:
+//       "Chair meetings, represent the society, make strategic decisions.",
+//     linkBySociety: "https://example.com/president",
+//     societyID: 101,
+//   },
+//   // Add more role objects as needed
+// ];
 
 const tableClass = "text-center text-gray-800 text-xl border-x";
 
 const RoleCard: React.FC<{ role: SocietyRole }> = ({ role }) => {
   return (
     <div className="flex flex-col space-y-2">
-      <h3 className="text-lg font-semibold">{role.roleName}</h3>
-      <p className="text-sm text-gray-600">{role.roleDescription}</p>
+      <h3 className="text-lg font-semibold">{role.Rolename}</h3>
+      <p className="text-sm text-gray-600">{role.RoleDescription}</p>
       <p className="text-sm text-gray-600">
-        Responsibilities: {role.responsibilities}
+        Responsibilities: {role.Responsibilities}
       </p>
       <p className="text-sm text-gray-600">
-        Last Date to Apply: {role.lastDateToApply}
+        Last Date to Apply: {role.LastDateToApply}
       </p>
-      <a href={role.linkBySociety} className="text-blue-500 hover:underline">
+      <a href={role.LinkBySociety} className="text-blue-500 hover:underline">
         More Info
       </a>
     </div>
   );
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const SocietyRoles: React.FC = () => {
+  const [Roles, setRoles] = useState([])
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/roles/society/${id}`)
+      console.log('data', res.data)
+      setRoles(res.data)
+    }
+    fetchsociety()
+  }, [])
+
+  if (!Roles) return <div>Loading...</div>;
+
   return (
     <div>
       <div className="py-8 px-6 lg:px-20 bg-white mt-10">
@@ -75,9 +93,9 @@ const SocietyRoles: React.FC = () => {
                 <TableHead rowSpan={2} className={tableClass}>
                   S No.
                 </TableHead>
-                <TableHead rowSpan={2} className={tableClass}>
+                {/* <TableHead rowSpan={2} className={tableClass}>
                   Society Roles
-                </TableHead>
+                </TableHead> */}
                 <TableHead colSpan={4} className={tableClass}>
                   Role Details
                 </TableHead>
@@ -91,8 +109,8 @@ const SocietyRoles: React.FC = () => {
             </TableHeader>
 
             <TableBody>
-              {roles.map((role, index) => (
-                <TableRow key={role.roleID}>
+              {Roles.map((role: SocietyRole, index) => (
+                <TableRow key={role.RoleID}>
                   <TableCell className="text-center border-x text-gray-800">
                     {index + 1}.
                   </TableCell>
@@ -100,16 +118,16 @@ const SocietyRoles: React.FC = () => {
                     <RoleCard role={role} />
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {role.roleType}
+                    {role.RoleType}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {role.roleName}
+                    {role.Rolename}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {role.lastDateToApply}
+                    {role.LastDateToApply}
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
-                    {role.responsibilities}
+                    {role.Responsibilities}
                   </TableCell>
                 </TableRow>
               ))}
