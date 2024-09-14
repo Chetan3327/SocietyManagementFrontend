@@ -2,11 +2,12 @@ import axios from "axios";
 import { Calendar } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { format } from "date-fns";
 
 type newsItem = {
   title: string;
   description: string;
-  date: Date; 
+  date: Date;
   author: string;
 };
 
@@ -29,42 +30,42 @@ let latestNews: newsItem[] = [
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
 ];
@@ -74,38 +75,38 @@ let filteredNews: newsItem[] = [
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
   {
     title: "hello there , testing purpose heading ",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure dolorem natus laboriosam quam at, laudantium cupiditate quis! Nihil accusantium nulla illo, quae sint libero vero veniam quas reiciendis molestiae minus!",
-      date: new Date(),
+    date: new Date(),
     author: "author name ",
   },
 ];
 type NewsFetchedType = {
-  NewsID : string ,
+  NewsID: string,
   Title: string;
   Description: string,
   DateOfNews: Date,
-Author: string,
-SocietyID : string
+  Author: string,
+  SocietyID: string
 }
 
 latestNews = latestNews.length > 3 ? latestNews.slice(0, 3) : latestNews;
@@ -115,7 +116,7 @@ filteredNews =
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const News = () => {
   const { id } = useParams();
-  const [_ , setFilteredDate] = useState<Date | null>(null);
+  const [_, setFilteredDate] = useState<Date | null>(null);
   const [news, setNews] = useState([])
   useEffect(() => {
     const fetchsociety = async () => {
@@ -134,7 +135,7 @@ const News = () => {
   // const filteredNewsItems = filteredDate
   //   ? filteredNews.filter((news) => news.date >= filteredDate)
   //   : filteredNews;
- // const emptyFilteredNews = filteredNewsItems.length === 0;
+  // const emptyFilteredNews = filteredNewsItems.length === 0;
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -189,14 +190,14 @@ const News = () => {
           <div className="flex flex-col justify-center">
             <div className=" lg:mr-4 mb-4 lg:mb-0">
               <h3 className="text-2xl font-bold mb-4">Latest news </h3>
-              {news.map((newsItem : NewsFetchedType) => (
+              {news.map((newsItem: NewsFetchedType) => (
                 <div key={newsItem.NewsID} className="flex items-start mb-4">
                   <Calendar />
                   <div className="ml-2 mr-2">
                     <h4 className="font-bold">{newsItem.Title}</h4>
                     <p className="text-sm mb-2">{newsItem.Description}</p>
                     <p className="text-sm font-semibold opacity-85">
-                      {(newsItem.DateOfNews).toISOString()}
+                      {format(new Date(newsItem.DateOfNews), 'yyyy-MM-dd HH:mm:ss')}
                     </p>
                     <p className="text-gray-500 text-sm">{newsItem.Author}</p>
                   </div>

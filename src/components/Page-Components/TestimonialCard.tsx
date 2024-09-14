@@ -1,5 +1,5 @@
 import React from "react";
-import TestimonialSlider from "./TestimonialSlider";
+// import TestimonialSlider from "./TestimonialSlider";
 // import '@import url("https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css")';
 
 // Define the type for a single testimonial
@@ -10,7 +10,7 @@ import TestimonialSlider from "./TestimonialSlider";
 // }
 
 // Define the component
-const TestimonialCard: React.FC<any> = ({Testimonials}) => {
+const TestimonialCard: React.FC<any> = ({ Testimonials }) => {
   // Array of testimonials
   // const testimonials: Testimonial[] = [
   //   {
@@ -51,16 +51,45 @@ const TestimonialCard: React.FC<any> = ({Testimonials}) => {
         <div className="w-full max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto">
             <h1 className="text-6xl md:text-7xl font-bold mb-5 text-gray-600">
-              What people <br />
+              Know what people <br />
               are saying.
             </h1>
-            <h3 className="text-xl mb-5 font-light">
+            {/* <h3 className="text-xl mb-5 font-light">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </h3>
+            </h3> */}
           </div>
-          <TestimonialSlider />
+          {/* <TestimonialSlider /> */}
+
+          {/* BatchYear
+: 
+2022
+Branch
+: 
+"Computer Science and Engineering (CSE)"
+EnrollmentNo
+: 
+0
+FirstName
+: 
+"Naman"
+LastName
+: 
+"Garg"
+ProfilePicture
+: 
+"https://th.bing.com/th/id/R.0301819f445a8855c4a577a6763fb62d?rik=TT%2fgaYZuz1YEig&riu=http%3a%2f%2fanhede.se%2fwp-content%2fuploads%2f2014%2f01%2f130221-2528.jpg&ehk=LToqkipED3KxGj7CVuMoQrvi487RY2HN6IPZ59FCWNQ%3d&risl=&pid=ImgRaw&r=0"
+SocietyID
+: 
+2
+SocietyPosition
+: 
+"Senior Council Member"
+TestimonialDescription
+: 
+"Naman  */}
           <div className="">
-            {Testimonials.map(({ FirstName, ProfilePicture, TestimonialDescription }:{FirstName:string, ProfilePicture:string, TestimonialDescription:string}, index:number) => (
+            {Testimonials.map(({ FirstName, ProfilePicture, TestimonialDescription, SocietyPosition, BatchYear, Branch }
+              : { FirstName: string, ProfilePicture: string, TestimonialDescription: string, SocietyPosition: string, BatchYear: number, Branch: string }, index: number) => (
               <div key={index} className="">
                 <div className=" mx-auto rounded-lg bg-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
                   <div className=" flex mb-4 items-center">
@@ -82,6 +111,11 @@ const TestimonialCard: React.FC<any> = ({Testimonials}) => {
                       <span className="text-lg leading-none italic font-bold text-gray-400 ml-1">
                         "
                       </span>
+                    </p>
+                    <p className="text-md mr-1 text-black">
+                      - {SocietyPosition}
+                      <br />
+                      {Branch} , {BatchYear}
                     </p>
                   </div>
                 </div>
