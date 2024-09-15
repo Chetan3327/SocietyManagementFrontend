@@ -2,13 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import axios from "axios";
+import { useState } from "react";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const schema = z.object({
   StudentName: z.string().nonempty("Student name is required"),
   StudentEnrollmentNumber: z.string().length(11, "Invalid enrollment number"),
-  StudentBatch: z.string().nonempty("Invalid batch"),
+  Batch: z.string().nonempty("Invalid batch"),
   Branch: z.string().nonempty("Branch name is required"),
-  societyID: z.string().nonempty("Society is required"),
+  Society: z.string().nonempty("Society is required"),
   Query: z.string().nonempty("This field is required"),
 });
 
@@ -26,20 +30,20 @@ const batches = [
 const societyOptions = [
   { id: 1, name: "Namespace" },
   { id: 2, name: "Anveshan" },
-  { id: 3, name: "Hash Define" },
-  { id: 3, name: "WIBD" },
-  { id: 3, name: "GDSC" },
-  { id: 3, name: "WIE" },
-  { id: 3, name: "IEEE" },
-  { id: 3, name: "Electonauts" },
-  { id: 3, name: "Dhrishti" },
-  { id: 3, name: "Opti Click" },
-  { id: 3, name: "Avaran" },
-  { id: 3, name: "Octave" },
-  { id: 3, name: "Panache" },
-  { id: 3, name: "Mavericks" },
-  { id: 3, name: "Kalam" },
-  { id: 3, name: "Chromavita" },
+  { id: 4, name: "Hash Define" },
+  { id: 5, name: "WIBD" },
+  { id: 6, name: "GDSC" },
+  { id: 7, name: "WIE" },
+  { id: 8, name: "IEEE" },
+  { id: 9, name: "Electonauts" },
+  { id: 10, name: "Dhrishti" },
+  { id: 11, name: "Opti Click" },
+  { id: 12, name: "Avaran" },
+  { id: 13, name: "Octave" },
+  { id: 14, name: "Panache" },
+  { id: 15, name: "Mavericks" },
+  { id: 16, name: "Kalam" },
+  { id: 17, name: "Chromavita" },
   // Add more societies as needed
 ];
 
@@ -47,13 +51,49 @@ const classes =
   "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded";
 
 const SocietyQueryForm: React.FC = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   type formData = z.infer<typeof schema>
-  const { register, handleSubmit, formState: { errors } } = useForm<formData>({
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<formData>({
       resolver: zodResolver(schema)
   })
-  const onSubmit = (data: formData) => {
-      console.log(data)
-  }
+
+  const onSubmit = async (data: formData) => {
+    try {
+      // Find the selected society by its ID
+      const selectedSociety = societyOptions.find(
+        (society) => society.id.toString() === data.Society
+      );
+      if (!selectedSociety) {
+        throw new Error("Invalid society selected");
+      }
+  
+      // Prepare the submission data, converting StudentEnrollmentNumber to integer
+      const submissionData = {
+        ...data,
+        StudentEnrollmentNumber: parseInt(data.StudentEnrollmentNumber, 10), // Convert to integer
+        Society: selectedSociety.name, // Send the society name
+      };
+  
+      const response = await axios.post(`${BACKEND_URL}/societies/${selectedSociety.id}/contact`, submissionData, {
+      // const response = await axios.post(`http://localhost:8000/api/v1/societies/${selectedSociety.id}/contact`, submissionData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      console.log("Success:", response.data);
+      setIsSubmitted(true);
+      reset();
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error("Error:", error.response?.data || error.message);
+      } else {
+        console.error("Unexpected Error:", error);
+      }
+    }
+  };
+  
   return (
     <>
       <div className="relative mt-0 mx-auto w-full">
@@ -72,10 +112,21 @@ const SocietyQueryForm: React.FC = () => {
           </p>
         </div>
       </div>
+
       <div className="max-w-lg mx-auto mt-8 p-4 border rounded-md">
         <h2 className="text-3xl font-semibold text-center mb-6">
           Society Query Form
         </h2>
+        {isSubmitted ? (
+          <div className="bg-green-100 p-6 rounded-lg shadow-lg w-full max-w-screen-md flex flex-col items-center gap-y-4">
+            <h2 className="text-3xl font-bold text-center text-green-800">
+              Thank you!
+            </h2>
+            <p className="text-center text-green-700 mb-4">
+              Your enquiry has been submitted. We will get back to you soon.
+            </p>
+          </div>
+        ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-md font-medium">Student Name</label>
@@ -107,16 +158,16 @@ const SocietyQueryForm: React.FC = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">Batch</label>
-            <select {...register("StudentBatch")} className={`${classes}`}>
+            <select {...register("Batch")} className={`${classes}`}>
               {batches.map((batch, index) => (
                 <option value={batch} key={index}>
                   {batch}
                 </option>
               ))}
             </select>
-            {errors.StudentBatch && (
+            {errors.Batch && (
               <span className="text-red-500">
-                {errors.StudentBatch.message}
+                {errors.Batch.message}
               </span>
             )}
           </div>
@@ -137,7 +188,7 @@ const SocietyQueryForm: React.FC = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">Society</label>
-            <select {...register("societyID")} className="border p-2 w-full">
+            <select {...register("Society")} className="border p-2 w-full">
               <option value="">Select a Society</option>
               {societyOptions.map((society) => (
                 <option key={society.id} value={society.id}>
@@ -145,8 +196,8 @@ const SocietyQueryForm: React.FC = () => {
                 </option>
               ))}
             </select>
-            {errors.societyID && (
-              <span className="text-red-500">{errors.societyID.message}</span>
+            {errors.Society && (
+              <span className="text-red-500">{errors.Society.message}</span>
             )}
           </div>
 
@@ -167,6 +218,7 @@ const SocietyQueryForm: React.FC = () => {
             Submit
           </button>
         </form>
+        )}
       </div>
     </>
   );

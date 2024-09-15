@@ -1,16 +1,20 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
+import { useState } from "react";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const schema = z.object({
-  name: z.string().nonempty("Name is required"),
-  email: z.string().nonempty("Email is required"),
-  message: z.string().nonempty("Message is required"),
-  contact: z.string().nonempty("Contact is required"),
-  subject: z.string().nonempty("Subject is required"),
-  StudentSociety: z.string().nonempty("Invalid Society"),
-  StudentBatch: z.string().nonempty("Invalid batch"),
-  Branch: z.string().nonempty("Branch name is must"),
+  Name: z.string().nonempty("Name is required"),
+  Email: z.string().email("Invalid email address").nonempty("Email is required"),
+  Message: z.string().nonempty("Message is required"),
+  ContactNo: z.string().nonempty("Contact is required"),
+  Subject: z.string().nonempty("Subject is required"),
+  Society: z.string().nonempty("Invalid Society"),
+  Batch: z.string().nonempty("Invalid batch"),
+  Branch: z.string().nonempty("Branch name is required"),
 });
 
 const Branch = ["CSE", "IT", "CSE-DS", "ECE", "EEE"];
@@ -43,27 +47,49 @@ const society = [
   "Dhrishti",
   "Chromavita",
 ];
+
 const classes =
   "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded bg-gray-200";
 
 const ContactUs = () => {
   type formData = z.infer<typeof schema>;
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<formData>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: formData) => {
-    console.log(data);
+  const onSubmit = async (data: formData) => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/contact`, data, {
+      // const response = await axios.post(`http://localhost:8000/api/v1/contact`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      console.log('Success:', response.data);
+      setIsSubmitted(true);
+      reset();
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // Handle Axios error
+        console.error('Error:', error.response?.data || error.message);
+      } else {
+        // Handle non-Axios error
+        console.error('Unexpected Error:', error);
+      }
+    }
   };
 
   return (
     <>
-    <div className="relative mt-0 mx-auto w-full">
+      <div className="relative mt-0 mx-auto w-full">
         <img
           className="w-full h-80 blur-sm"
           src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
@@ -78,8 +104,20 @@ const ContactUs = () => {
             THRIVE
           </p>
         </div>
-    </div>
+      </div>
       <div className="h-full w-full flex items-center justify-center flex-col bg-white py-10 sm:py-20 px-4">
+
+      {isSubmitted ? (
+          <div className="bg-green-100 p-6 rounded-lg shadow-lg w-full max-w-screen-md flex flex-col items-center gap-y-4">
+            <h2 className="text-3xl font-bold text-center text-green-800">
+              Thank you!
+            </h2>
+            <p className="text-center text-green-700 mb-4">
+              Your enquiry has been submitted. We will get back to you soon.
+            </p>
+          </div>
+        ) : (
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white p-6 rounded-lg shadow-lg w-full max-w-screen-md flex flex-col gap-y-4"
@@ -88,8 +126,7 @@ const ContactUs = () => {
             Contact Form
           </h2>
           <p className="text-center text-gray-900 mb-4">
-            Fill out the form below, and we will get back to you as soon as
-            possible.{" "}
+            Fill out the form below, and we will get back to you as soon as possible.
           </p>
 
           <div className="flex flex-col sm:flex-row mb-2">
@@ -100,15 +137,15 @@ const ContactUs = () => {
               Name
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right"
               type="text"
               id="name"
-              {...register("name")}
+              {...register("Name")}
               placeholder="Enter your Name"
             />
           </div>
-          {errors.name && (
-            <span className="text-red-500 ">{errors.name.message}</span>
+          {errors.Name && (
+            <span className="text-red-500">{errors.Name.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
@@ -119,15 +156,15 @@ const ContactUs = () => {
               Email
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right"
               type="email"
               id="email"
-              {...register("email")}
+              {...register("Email")}
               placeholder="Enter your Email-id"
             />
           </div>
-          {errors.email && (
-            <span className="text-red-500">{errors.email.message}</span>
+          {errors.Email && (
+            <span className="text-red-500">{errors.Email.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
@@ -138,68 +175,63 @@ const ContactUs = () => {
               Contact No.
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right"
               type="text"
               id="contact"
-              {...register("contact")}
+              {...register("ContactNo")}
               placeholder="Enter your Contact No."
             />
           </div>
-          {errors.contact && (
-            <span className="text-red-500">{errors.contact.message}</span>
+          {errors.ContactNo && (
+            <span className="text-red-500">{errors.ContactNo.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
             <label
               className="block text-gray-700 pt-2 font-bold md:text-left mb-1 sm:w-1/3 sm:pr-4"
-              htmlFor="subject"
+              htmlFor="StudentBatch"
             >
               Batch
             </label>
-            <select {...register("StudentBatch")} className={`${classes}`}>
-              {Batch.map((soc, index) => (
-                <option value={soc} key={index}>
-                  {soc}
+            <select {...register("Batch")} className={`${classes}`}>
+              {Batch.map((batch, index) => (
+                <option value={batch} key={index}>
+                  {batch}
                 </option>
               ))}
             </select>
           </div>
-          {errors.subject && (
-            <span className="text-red-500">{errors.subject.message}</span>
+          {errors.Batch && (
+            <span className="text-red-500">{errors.Batch.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
             <label
               className="block text-gray-700 pt-2 font-bold md:text-left mb-1 sm:w-1/3 sm:pr-4"
-              htmlFor="subject"
+              htmlFor="Branch"
             >
               Branch
             </label>
             <select {...register("Branch")} className={`${classes}`}>
-              {Branch.map((soc, index) => (
-                <option value={soc} key={index}>
-                  {soc}
+              {Branch.map((branch, index) => (
+                <option value={branch} key={index}>
+                  {branch}
                 </option>
               ))}
             </select>
           </div>
-          {errors.subject && (
-            <span className="text-red-500">{errors.subject.message}</span>
+          {errors.Branch && (
+            <span className="text-red-500">{errors.Branch.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
             <label
               className="block text-gray-700 pt-2 font-bold md:text-left mb-1 sm:w-1/3 sm:pr-4"
-              htmlFor="subject"
+              htmlFor="StudentSociety"
             >
               Enter your Society
             </label>
-            {/* <input
-                className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right '
-                 type='text' id='subject'
-                 {...register('subject')} placeholder='From which Society you are?'
-                /> */}
-            <select {...register("StudentSociety")} className={`${classes}`}>
+            <select {...register("Society")} className={`${classes}`}>
               {society.map((soc, index) => (
                 <option value={soc} key={index}>
                   {soc}
@@ -207,8 +239,8 @@ const ContactUs = () => {
               ))}
             </select>
           </div>
-          {errors.subject && (
-            <span className="text-red-500">{errors.subject.message}</span>
+          {errors.Society && (
+            <span className="text-red-500">{errors.Society.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
@@ -219,15 +251,15 @@ const ContactUs = () => {
               Subject
             </label>
             <input
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right"
               type="text"
               id="subject"
-              {...register("subject")}
-              placeholder="Enter the Subject of your query"
+              {...register("Subject")}
+              placeholder="Enter the Subject"
             />
           </div>
-          {errors.subject && (
-            <span className="text-red-500">{errors.subject.message}</span>
+          {errors.Subject && (
+            <span className="text-red-500">{errors.Subject.message}</span>
           )}
 
           <div className="flex flex-col sm:flex-row mb-2">
@@ -238,24 +270,24 @@ const ContactUs = () => {
               Message
             </label>
             <textarea
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right "
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-right"
               id="message"
-              rows={4}
-              {...register("message")}
+              {...register("Message")}
               placeholder="Enter your message"
-            ></textarea>
+            />
           </div>
-          {errors.message && (
-            <span className="text-red-500">{errors.message.message}</span>
+          {errors.Message && (
+            <span className="text-red-500">{errors.Message.message}</span>
           )}
 
           <button
             type="submit"
-            className="w-full px-2 py-3 mb-4 mt-4 text-xl bg-gray-800 text-white"
+            className="w-full py-3 px-4 bg-blue-500 text-white rounded-lg font-bold mt-4 transform transition-transform duration-200 ease-out hover:scale-105"
           >
-            Submit
+            Send Message
           </button>
         </form>
+        )}
       </div>
     </>
   );
