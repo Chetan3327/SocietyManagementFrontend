@@ -50,14 +50,12 @@ const News_Table = () => {
   }
 
   const handleDelete = async (newsID: number) => {
-    await axios
-      .delete(`${BACKEND_URL}/news/${newsID}`)
-      .then((res) => {
-        setNews(news.filter((newsItem: newsType) => newsItem.NewsID !== newsID));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await axios.delete(`${BACKEND_URL}/news/${newsID}`);
+      setNews(news.filter((newsItem: newsType) => newsItem.NewsID !== newsID));
+    } catch (err) {
+      console.error("Error deleting news:", err);
+    }
   };
 
   return (
