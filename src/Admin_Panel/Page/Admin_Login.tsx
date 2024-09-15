@@ -2,7 +2,6 @@ import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 // import axios, { AxiosResponse } from "axios";
 
-// College societies data
 const technicalSocieties = [
   { society: "nameSpace", SocietyID: 1 },
   { society: "Hash Define", SocietyID: 2 },
@@ -25,10 +24,11 @@ const nonTechnicalSocieties = [
   { society: "Panache", SocietyID: 16 },
 ];
 
-const allSocieties = [...technicalSocieties, ...nonTechnicalSocieties];
+const adminOption = { society: "College Admin", SocietyID: 0 };
+const allSocieties = [...technicalSocieties, ...nonTechnicalSocieties, adminOption];
 
-// Passwords for each society (in a real-world application, these would be securely stored in a database)
 const societyPasswords: { [key: number]: string } = {
+  0: "adminPass2024",   // COLLEGE ADMIN PASSWORD
   1: "namespacePass123",
   2: "hashdefinePass456",
   3: "anveshanPass789",
@@ -164,37 +164,39 @@ const styles = {
   };
   
   const Admin_Login: React.FC = () => {
-    const [selectedSocietyID, setSelectedSocietyID] = useState<number | null>(null);
+    const [selectedSocietyID, setSelectedSocietyID] = useState<string>(""); // Keep it as a string to handle "0" properly
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
     const [success, setSuccess] = useState<string>("");
     const navigate = useNavigate();
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState<string>("");
   
     const handleSubmit = (e: FormEvent) => {
       e.preventDefault();
       setSuccess("");
       setError("");
   
-      if (!selectedSocietyID) {
+      if (selectedSocietyID === "") {
         setError("Please select a society.");
         return;
       }
   
-      // Check if role is valid and credentials match
-      if (role === "Society Head" || role === "College Admin") {
-        // Get the correct password for the selected society
-        const correctPassword = societyPasswords[selectedSocietyID];
+      const societyID = Number(selectedSocietyID); // Convert selectedSocietyID back to a number for comparison
+      const correctPassword = societyPasswords[societyID];
   
-        // Validate entered password
-        if (password === correctPassword) {
-          // Password is correct, navigate to the admin panel
-          navigate(`/admin/home?societyId=${selectedSocietyID}`);
+      if (password === correctPassword) {
+        if (societyID === 0 && role === "College Admin") {
+          navigate(`/admin/home`);
+        } 
+        else if(societyID === 0 && role === "Society Head"){
+          setError("Invalid role. Please select a valid role.");
+        } else if (role === "Society Head") {
+          navigate(`/admin/home?societyId=${societyID}`);
         } else {
-          setError("Incorrect password. Please try again.");
+          setError("Invalid role. Please select a valid role.");
         }
       } else {
-        setError("Invalid role. Please select a valid role.");
+        setError("Incorrect password. Please try again.");
       }
     };
   
@@ -211,14 +213,14 @@ const styles = {
               <div style={styles.fieldContainer}>
                 <div style={styles.inputContainer}>
                   <select
-                    value={selectedSocietyID || ""}
-                    onChange={(e) => setSelectedSocietyID(Number(e.target.value))}
+                    value={selectedSocietyID}
+                    onChange={(e) => setSelectedSocietyID(e.target.value)}
                     required
                     style={styles.input}
                   >
                     <option value="">Select your society</option>
                     {allSocieties.map((society) => (
-                      <option key={society.SocietyID} value={society.SocietyID}>
+                      <option key={society.SocietyID} value={society.SocietyID.toString()}>
                         {society.society}
                       </option>
                     ))}
