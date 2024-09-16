@@ -8,7 +8,9 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CoreTeamCard, MemberCard } from "./SocietyMembersCard";
+import { CoreTeamCard, 
+ // MemberCard
+ } from "./SocietyMembersCard";
 
 type MemberType = {
   BatchYear: number;
@@ -138,17 +140,17 @@ const SocietyMembers = () => {
             <CarouselContent>
               {juniorCouncil.map((member, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <MemberCard
+                  <CoreTeamCard
                     props={{
                       name: `${member.FirstName} ${member.LastName}`,
-                      image: member.ProfilePicture,
+                      position: member.SocietyPosition,
+                      domain: member.DomainExpertise,
+                      github: member.GithubProfile,
                       linkedin: member.LinkedInProfile,
                       x: member.TwitterProfile,
                       email: member.Email,
-                      batch: member.BatchYear.toString(),
-                      enrollmentNumber: member.EnrollmentNo.toString(),
-                      branch: member.Branch,
-                      skills: member.DomainExpertise,
+                      about: member.StudentContributions,
+                      image: member.ProfilePicture,
                     }}
                   />
                 </CarouselItem>
@@ -163,3 +165,17 @@ const SocietyMembers = () => {
 };
 
 export default SocietyMembers;
+
+// <MemberCard
+// props={{
+//   name: `${member.FirstName} ${member.LastName}`,
+//   image: member.ProfilePicture,
+//   linkedin: member.LinkedInProfile,
+//   x: member.TwitterProfile,
+//   email: member.Email,
+//   batch: member.BatchYear.toString(),
+//   enrollmentNumber: member.EnrollmentNo.toString(),
+//   branch: member.Branch,
+//   skills: member.DomainExpertise,
+// }}
+// />
