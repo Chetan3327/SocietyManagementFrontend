@@ -66,11 +66,13 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const SocietyGallery = () => {
   const { id } = useParams();
   const [gallery, setGallery] = useState([])
+  const [SocietyName , setSocietyName]  = useState('')
   useEffect(() => {
     const fetchsociety = async () => {
-      const res = await axios.get(`${BACKEND_URL}/galleries/${id}`)
-      console.log('data', res.data)
-      setGallery(res.data)
+      const res = await axios.get(`${BACKEND_URL}/societies/${id}`)
+      console.log('data', res.data[0])
+      setGallery(res.data[0].Galleries)
+      setSocietyName(res.data[0].SocietyName)
     }
     fetchsociety()
   }, [])
@@ -78,7 +80,7 @@ const SocietyGallery = () => {
   if (!gallery) return <div>Loading...</div>;
   return (
     <>
-      <h1 className="text-center text-2xl bg-violet-100 p-3">Namespace</h1>
+      <h1 className="text-center text-2xl bg-violet-100 p-3">{SocietyName}</h1>
       <div className="flex flex-col justify-center items-center mt-6">
         <Carousel
           className="w-8/12 md:w-10/12"
