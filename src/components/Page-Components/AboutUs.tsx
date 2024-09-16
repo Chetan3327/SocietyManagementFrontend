@@ -1,20 +1,54 @@
 import { Link } from "react-router-dom"
 import about_us from '../../assets/about_us_bg.jpg'
+import { useState,useEffect } from "react";
+
+const TypewriterText = ({ text, speed }: { text: string; speed: number }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const type = () => {
+      if (index < text.length) {
+        setDisplayedText((prev) => prev + text[index]);
+        setIndex((prevIndex) => prevIndex + 1);
+      } else {
+        setTimeout(() => {
+          setDisplayedText('');
+          setIndex(0);
+        }, 2000);
+      }
+    };
+    const timer = setTimeout(type, speed);
+    return () => clearTimeout(timer);
+  }, [index, text, speed]);
+
+  return <span>{displayedText}</span>;
+};
+
 const AboutUs = () => {
+
+  const headingText = 'BRIDGING AMBITIONS WITH INNOVATION';
+  const paragraphText = 'WE ARE HERE TO CONNECT STUDENTS WITH OPPORTUNITIES THAT SPARK GROWTH AND COLLABORATION';
     return (
       <>
       <div className="relative mt-0 mx-auto w-full">
-                <img
-                    className="w-full h-80 blur-sm"
-                    src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                    alt="Member spotlight intro"
-                />
-                <div className="absolute inset-0 py-20 lg:py-28 ">
+      <img
+        className="w-full h-80 blur-sm"
+        src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+        alt="Member spotlight intro"
+      />
+      <div className="absolute inset-0 py-20 lg:py-28 flex flex-col items-center text-center">
+        {/* Typing effect for the heading */}
+        <h2 className="text-white text-center text-4xl font-bold mb-4">
+          <TypewriterText text={headingText} speed={100} />
+        </h2>
 
-                    <h2 className="text-black text-center text-4xl font-extrabold">BRIDGING AMBITIONS WITH INNOVATION </h2>
-                    <p className="text-white text-center my-5 text-xl font-extrabold">WE'RE HERE TO CONNECT STUDENTS WITH OPPORTUNITIES THAT SPARK GROWTH AND COLLABORATION.</p>
-                </div>
-        </div>
+        {/* Typing effect for the paragraph */}
+        <p className="text-black font-extrabold text-center my-5 text-xl">
+          <TypewriterText text={paragraphText} speed={100} />
+        </p>
+      </div>
+    </div>
 
       <div className="relative min-h-screen flex items-center justify-center">
           <div className=" absolute inset-0 bg-no-repeat bg-cover bg-center blur-sm"
@@ -55,7 +89,7 @@ const AboutUs = () => {
                      <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mt-5">
                         {/* <Link to="/" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">View more
                         </Link> */}
-                        <Link to="/vision" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">Vision & Mission
+                        <Link to="/vision" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base transform transition-transform duration-200 ease-out hover:scale-105">Vision & Mission
                         </Link>
                     </div>
                </div>
