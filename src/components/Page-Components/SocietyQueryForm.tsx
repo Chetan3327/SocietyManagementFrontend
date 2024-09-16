@@ -30,20 +30,20 @@ const batches = [
 const societyOptions = [
   { id: 1, name: "Namespace" },
   { id: 2, name: "Anveshan" },
-  { id: 4, name: "Hash Define" },
-  { id: 5, name: "WIBD" },
-  { id: 6, name: "GDSC" },
-  { id: 7, name: "WIE" },
-  { id: 8, name: "IEEE" },
-  { id: 9, name: "Electonauts" },
-  { id: 10, name: "Dhrishti" },
-  { id: 11, name: "Opti Click" },
-  { id: 12, name: "Avaran" },
-  { id: 13, name: "Octave" },
-  { id: 14, name: "Panache" },
-  { id: 15, name: "Mavericks" },
-  { id: 16, name: "Kalam" },
-  { id: 17, name: "Chromavita" },
+  { id: 3, name: "Hash Define" },
+  { id: 4, name: "WIBD" },
+  { id: 5, name: "GDSC" },
+  { id: 6, name: "WIE" },
+  { id: 7, name: "IEEE" },
+  { id: 8, name: "Electonauts" },
+  { id: 9, name: "Dhrishti" },
+  { id: 10, name: "Opti Click" },
+  { id: 11, name: "Avaran" },
+  { id: 12, name: "Octave" },
+  { id: 13, name: "Panache" },
+  { id: 14, name: "Mavericks" },
+  { id: 15, name: "Kalam" },
+  { id: 16, name: "Chromavita" },
   // Add more societies as needed
 ];
 
@@ -123,7 +123,7 @@ const SocietyQueryForm: React.FC = () => {
               Thank you!
             </h2>
             <p className="text-center text-green-700 mb-4">
-              Your enquiry has been submitted. We will get back to you soon.
+              Your query has been submitted. We will get back to you soon.
             </p>
           </div>
         ) : (
@@ -213,7 +213,7 @@ const SocietyQueryForm: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full px-2 py-3 mb-4 text-xl bg-gray-800 text-white"
+            className="w-full px-2 py-3 mb-4 text-xl bg-gray-800 text-white transform transition-transform duration-200 ease-out hover:scale-105"
           >
             Submit
           </button>

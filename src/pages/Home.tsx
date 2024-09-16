@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import bpit from "../assets/bpit.jpeg";
+import { useEffect, useState } from 'react';
 
 import {
   Carousel,
@@ -12,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+
 
 type Review = {
   desc: string;
@@ -27,55 +29,83 @@ const reviews: Review[] = [
   },
   {
     desc: "Namespace Society was instrumental in my personal and professional growth during my college years. The mentorship from senior members and guidance from industry experts introduced me to new technologies and inspired me to pursue a career in tech. The collaborative environment fostered by the society encouraged me to take on leadership roles, and the friendships I made have lasted beyond graduation. Namespace Society truly embodies the spirit of innovation and learning.",
-    name: "Rishabh Kumar",
-    batch: "IT-B,2019-2023",
+    name: "Ronak Singh",
+    batch: "CSE-A,2020-2024",
   },
   {
     desc: "As a freshman, I was initially intimidated by the fast-paced world of technology, but joining the Namespace Society was the best decision I made. The welcoming atmosphere and the supportive community made it easy to dive in and start exploring. From participating in coding competitions to attending insightful talks by industry leaders, every experience has been incredibly enriching. Namespace Society has ignited my passion for tech and motivated me to push my boundaries",
-    name: "Rishabh Kumar",
-    batch: "IT-B,2019-2023",
+    name: "Vivek Sharma",
+    batch: "ECE-B,2021-2025",
   },
 ];
 
+const TypewriterText = ({ text, speed }: { text: string; speed: number }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [index, setIndex] = useState(0); // Track index for each character
+
+  useEffect(() => {
+    const type = () => {
+      if (index < text.length) {
+        setDisplayedText((prev) => prev + text[index]);
+        setIndex((prevIndex) => prevIndex + 1);
+      } else {
+        // Reset the text after it finishes typing
+        setTimeout(() => {
+          setDisplayedText('');
+          setIndex(0);
+        }, 2000); // Pause for 2 seconds before restarting
+      }
+    };
+    const timer = setTimeout(type, speed);
+    return () => clearTimeout(timer);
+  }, [index, text, speed]);
+
+  return <span>{displayedText}</span>;
+};
+
+
 const Home = () => {
+
+  const firstLine = 'Welcome To The Society Management Portal';
+  const secondLine = 'A unified platform for Managing Societies';
+  const thirdLine = 'Tracking contributions and fostering growth';
+  
   return (
     <div className ="w-full overflow-x-hidden">
       <div className="relative w-full mx-auto">
         <img
-          className="h-screen md:h-80 w-full"
+          className="h-screen md:h-80 w-full object-cover"
           src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
           alt="BPIT img"
         />
-        <div className="absolute inset-0 py-10 bg-black opacity-80 px-10 lg:px-16">
-          <div className="flex flex-col  md:flex-row md:justify-around">
-            <div>
-              <h2 className="font-bold text-4xl lg:text-5xl text-white ">
-                Welcome To The
-              </h2>
-              <h2 className="font-bold text-4xl lg:text-5xl text-red-500 mx-auto">
-                Society Management
-              </h2>
-              <h2 className="font-bold text-4xl lg:text-5xl text-white mb-4 mx-auto">
-                Portal
-              </h2>
-              <p className="text-zinc-300 text-lg lg:text-xl  mx-auto ">
-                A unified platform for{" "}
-                <span className="font-bold">Managing Socities</span>
+        <div className="absolute inset-0 py-10 bg-black opacity-80 px-10 lg:px-16 flex items-center justify-center">
+          <div className="flex flex-col items-center text-center space-y-6">
+            {/* Typing effect for the first line */}
+            <h2 className="font-bold text-4xl lg:text-5xl text-white">
+              <TypewriterText text={firstLine} speed={100} />
+            </h2>
+      
+            {/* Typing effect for the second and third lines */}
+            <div className="mt-2 space-y-2">
+              <p className="text-zinc-300 text-lg lg:text-xl">
+                <TypewriterText text={secondLine} speed={100} />
               </p>
-              <p className="text-zinc-300 text-lg lg:text-xl  mx-auto ">
-                tracking contributions and fostering growth
+              <p className="text-zinc-300 text-lg lg:text-xl">
+                <TypewriterText text={thirdLine} speed={100} />
               </p>
             </div>
-            <div className="mt-14 flex flex-col gap-3">
+      
+            {/* Buttons */}
+            <div className="mt-8 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
               <Link
                 to="/societies"
-                className="text-white text-xl bg-yellow-500 rounded-full px-4 py-1 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110"
+                className="text-white text-xl bg-yellow-500 rounded-full px-6 py-2 transition transform duration-500 ease-in-out hover:scale-110"
               >
-                View Existing Socities
+                View Existing Societies
               </Link>
               <Link
                 to="/create"
-                className="bg-yellow-500 text-white text-xl rounded-full px-4 py-1 mt-4 lg:ml-8 text-center transition transform duration-500 ease-in-out hover:scale-110"
+                className="text-white text-xl bg-yellow-500 rounded-full px-6 py-2 transition transform duration-500 ease-in-out hover:scale-110"
               >
                 Create Society
               </Link>
