@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import axios from "axios";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -51,6 +51,30 @@ const society = [
 const classes =
   "w-full px-3 py-1 block mt-2 border border-black-900 border-md text-gray-900 rounded bg-gray-200";
 
+const TypewriterText = ({ text, speed }: { text: string; speed: number }) => {
+    const [displayedText, setDisplayedText] = useState('');
+    const [index, setIndex] = useState(0);
+  
+    useEffect(() => {
+      const type = () => {
+        if (index < text.length) {
+          setDisplayedText((prev) => prev + text[index]);
+          setIndex((prevIndex) => prevIndex + 1);
+        } else {
+          setTimeout(() => {
+            setDisplayedText('');
+            setIndex(0);
+          }, 2000);
+        }
+      };
+      const timer = setTimeout(type, speed);
+      return () => clearTimeout(timer);
+    }, [index, text, speed]);
+  
+    return <span>{displayedText}</span>;
+};
+
+
 const ContactUs = () => {
   type formData = z.infer<typeof schema>;
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -87,25 +111,33 @@ const ContactUs = () => {
     }
   };
 
+  const headingText = 'ENGAGE WITH YOUR COLLEGE SOCIETY MANAGEMENT PORTAL';
+  const paragraphText =
+    'Your feedback and questions are important to us - drop us a line! CONNECT AND THRIVE';
+
+
   return (
     <>
       <div className="relative mt-0 mx-auto w-full">
-        <img
-          className="w-full h-80 blur-sm"
-          src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-          alt="Member spotlight intro"
-        />
-        <div className="absolute inset-0 py-20 lg:py-28">
-          <h2 className="text-white text-center text-4xl text-bold">
-            ENGAGE WITH YOUR COLLEGE SOCIETY MANAGEMENT PORTAL
-          </h2>
-          <p className="text-black font-bold text-center my-5 text-xl">
-            Your feedback and questions are important to us - drop us a line! <br /> CONNECT AND
-            THRIVE
-          </p>
-        </div>
+      <img
+        className="w-full h-80 blur-sm"
+        src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+        alt="Member spotlight intro"
+      />
+      <div className="absolute inset-0 py-20 lg:py-28 flex flex-col items-center text-center">
+        {/* Typing effect for the heading */}
+        <h2 className="text-white text-center text-4xl font-bold mb-4">
+          <TypewriterText text={headingText} speed={100} />
+        </h2>
+
+        {/* Typing effect for the paragraph */}
+        <p className="text-black font-bold text-center my-5 text-xl">
+          <TypewriterText text={paragraphText} speed={100} />
+        </p>
       </div>
-      <div className="h-full w-full flex items-center justify-center flex-col bg-white py-10 sm:py-20 px-4">
+    </div>
+
+      <div className="h-full w-full flex items-center justify-center flex-col bg-gray-100 py-10 sm:py-20 px-4">
 
       {isSubmitted ? (
           <div className="bg-green-100 p-6 rounded-lg shadow-lg w-full max-w-screen-md flex flex-col items-center gap-y-4">
