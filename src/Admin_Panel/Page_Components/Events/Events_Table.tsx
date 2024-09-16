@@ -70,12 +70,12 @@ const Events_Table = () => {
   useEffect(()=>{
        fetchAllEvents = async()=>{
         let res ;
-        // if(params.societyID){
-        //   res =  await axios.get(`${BACKEND_URL}/admin/events/${params.SocietyName}`)
-        // }else{
-        //   res =  await axios.get(`${BACKEND_URL}/admin/events`)
-        // }
-        res =  await axios.get(`${BACKEND_URL}/admin/events`)
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/events/${params.societyID}`)
+        }else{
+          res =  await axios.get(`${BACKEND_URL}/admin/events`)
+        }
+      //  res =  await axios.get(`${BACKEND_URL}/admin/events`)
         console.log('data',res.data)
         setEvents(res.data)
       }

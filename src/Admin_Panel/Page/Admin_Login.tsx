@@ -191,7 +191,7 @@ const styles = {
         else if(societyID === 0 && role === "Society Head"){
           setError("Invalid role. Please select a valid role.");
         } else if (role === "Society Head") {
-          navigate(`/admin/home?societyId=${societyID}`);
+          navigate(`/admin/home/${societyID}`);
         } else {
           setError("Invalid role. Please select a valid role.");
         }

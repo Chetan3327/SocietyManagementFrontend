@@ -102,6 +102,7 @@ const App = () => {
         <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/events/update/:eventsID" element={<UpdateEvents/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
+        <Route path="/admin/members/:societyID" element={<Admin_Members />} />
         <Route path="/admin/members/add" element={<AddMembers />} />
         <Route path="/admin/members/update/:memberid" element={<UpdateMembers />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
@@ -111,6 +112,7 @@ const App = () => {
         <Route path="/admin/coordinators/update/:coordinatorID" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+        <Route path="/admin/society/:societyID" element={<Admin_Society />} />
         <Route path="/admin/society/update/:societyId" element={<UpdateSociety/>}/>
 
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
@@ -129,10 +131,12 @@ const App = () => {
         <Route path="/admin/gallery/update/:galleryid" element={<UpdateGallery />} />
 
         <Route path="/admin/roles" element={<Admin_Roles />} />
+        <Route path="/admin/roles/:societyID" element={<Admin_Roles />} />
         <Route path="/admin/roles/add" element={<AddRoles />} />
         <Route path="/admin/roles/update/:roleid" element={<UpdateRoles />} />
 
         <Route path="/admin/home" element={<Activity_Feed />} />
+        <Route path="/admin/home/:societyID" element={<Activity_Feed />} />
       </Routes>
     );
   }
