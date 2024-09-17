@@ -57,7 +57,7 @@ import AddNews from "./Admin_Panel/Page_Components/News/AddNews";
 import CreateTestimonial from "./components/Page-Components/CreateTestimonial";
 import Admin_Events from "./Admin_Panel/Page/Events";
 import AddEvents from "./Admin_Panel/Page_Components/Events/AddEvents";
-
+import Achievements from "./pages/Achievements";
 import UpdateEvents from "./Admin_Panel/Page_Components/Events/UpdateEvents";
 import UpdateSociety from "./Admin_Panel/Page_Components/Socities/UpdateSociety";
 
@@ -83,6 +83,7 @@ import UpdateRoles from './Admin_Panel/Page_Components/Roles/UpdateRoles'
 import Admin_Login from "./Admin_Panel/Page/Admin_Login";
 
 
+
 const App = () => {
   const location = useLocation();
   console.log(location);
@@ -102,6 +103,7 @@ const App = () => {
         <Route path="/admin/events/add" element={<AddEvents/>} />
         <Route path="/admin/events/update/:eventsID" element={<UpdateEvents/>} />
         <Route path="/admin/members" element={<Admin_Members />} />
+        <Route path="/admin/members/:societyID" element={<Admin_Members />} />
         <Route path="/admin/members/add" element={<AddMembers />} />
         <Route path="/admin/members/update/:memberid" element={<UpdateMembers />} />
         <Route path="/admin/queries" element={<Admin_Queries />} />
@@ -111,6 +113,7 @@ const App = () => {
         <Route path="/admin/coordinators/update/:coordinatorID" element={<UpdateCoordinator />} />
         <Route path="/admin/setting" element={<Admin_Setting />} />
         <Route path="/admin/society" element={<Admin_Society />} />
+        <Route path="/admin/society/:societyID" element={<Admin_Society />} />
         <Route path="/admin/society/update/:societyId" element={<UpdateSociety/>}/>
 
         <Route path="/admin/testimonials" element={<Admin_Testimonials />} />
@@ -129,10 +132,12 @@ const App = () => {
         <Route path="/admin/gallery/update/:galleryid" element={<UpdateGallery />} />
 
         <Route path="/admin/roles" element={<Admin_Roles />} />
+        <Route path="/admin/roles/:societyID" element={<Admin_Roles />} />
         <Route path="/admin/roles/add" element={<AddRoles />} />
         <Route path="/admin/roles/update/:roleid" element={<UpdateRoles />} />
 
         <Route path="/admin/home" element={<Activity_Feed />} />
+        <Route path="/admin/home/:societyID" element={<Activity_Feed />} />
       </Routes>
     );
   }
@@ -164,6 +169,7 @@ const App = () => {
           {/* <Route path="/openings/:id" element={<Openings />} /> */}
           <Route path="/roles" element={<Roles />} />
           <Route path="/coordinators" element={<Coordinators />} />
+          <Route path="/achievements" element={<Achievements/>} />
           {/* <Route path="/testimonials/:id" element={<Testimonials />} /> */}
           <Route path="/create" element={<SocietyForm />} />
           <Route path="/createtestimonial" element={<CreateTestimonial />} />
@@ -177,7 +183,7 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/allgallery" element={<AllGallery />} />
           {/* <Route path="/society/:id" element={<Society />}  */}
-          <Route path="/societygallery" element={<SocietyGallery />} />
+          <Route path="/societygallery/:id" element={<SocietyGallery />} />
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />

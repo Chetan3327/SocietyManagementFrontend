@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useLocation , useParams } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Sidebar.css';
 import { Menu, X } from 'lucide-react';
 
 function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const searchParams=useParams()
+ let location = useLocation();
+ console.log('in search params',!searchParams.societyID)
+ console.log('in side bar',location.search)
+ //if(location.search)
   const showSidebar = () => setSidebar(!sidebar);
 
   return (
@@ -25,10 +29,17 @@ function Sidebar() {
             </li>
             {SidebarData.map((item, index) => (
               <li key={index} className={item.cName}>
-                <Link to={item.path}>
+                { !searchParams.societyID &&  <Link to={item.path}>
                   {item.icon}
                   <span>{item.title}</span>
-                </Link>
+                </Link>}
+                { searchParams.societyID &&  <Link to={`${item.path}/${searchParams.
+societyID
+}`}>
+                  {item.icon}
+                  <span>{item.title}</span>
+                </Link>}
+                
               </li>
             ))}
           </ul>
