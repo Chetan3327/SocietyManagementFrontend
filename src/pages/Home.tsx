@@ -235,7 +235,7 @@ const Home = () => {
                       </p>
                       <Link
                         className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg"
-                        to="/gallery"
+                        to="/achievements"
                       >
                         <ArrowRight className="inline-block text-muted-goreground text-xs" />
                         View More
@@ -283,7 +283,7 @@ const Home = () => {
                             </button> */}
                             <Link
                               className="w-36 text-center bg-gray-200 text-black mt-2 pt-2 transition transform duration-500 ease-in-out hover:scale-110"
-                              to="/society/:id/testimonials"
+                              to="/society/1/testimonials"
                             >
                             {/* <ArrowRight className="inline-block text-muted-goreground text-xs" /> */}
                               View More
