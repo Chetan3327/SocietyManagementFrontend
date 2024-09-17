@@ -8,7 +8,7 @@ function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
   const searchParams=useParams()
  let location = useLocation();
- console.log('in search params',searchParams)
+ console.log('in search params',!searchParams.societyID)
  console.log('in side bar',location.search)
  //if(location.search)
   const showSidebar = () => setSidebar(!sidebar);
@@ -29,11 +29,11 @@ function Sidebar() {
             </li>
             {SidebarData.map((item, index) => (
               <li key={index} className={item.cName}>
-                { !searchParams &&  <Link to={item.path}>
+                { !searchParams.societyID &&  <Link to={item.path}>
                   {item.icon}
                   <span>{item.title}</span>
                 </Link>}
-                { searchParams &&  <Link to={`${item.path}/${searchParams.
+                { searchParams.societyID &&  <Link to={`${item.path}/${searchParams.
 societyID
 }`}>
                   {item.icon}
