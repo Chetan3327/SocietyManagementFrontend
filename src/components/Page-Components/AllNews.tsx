@@ -33,13 +33,12 @@ const AllNews = () => {
           alt="Member spotlight intro"
         />
         <div className="absolute inset-0 py-20 lg:py-28">
-          <h2 className="text-black text-center text-4xl font-extrabold">
-            GUIDING HANDS: OUR FACULTY COORDINATORS
-          </h2>
-          <p className="text-white text-center my-5 text-xl font-extrabold">
-            Meet our dedicated faculty coordinators committed to guiding and
-            supporting our students.
-          </p>
+        <h2 className="text-black text-center text-4xl font-extrabold">
+          UPCOMING EVENTS: COLLEGE SOCIETIES
+        </h2>
+        <p className="text-white text-center my-5 text-xl font-extrabold">
+          Stay informed about exciting events and activities hosted by our vibrant college societies.
+        </p>
         </div>
       </div>
       <h2 className="text-3xl lg:text-5xl font-bold text-center pb-10">

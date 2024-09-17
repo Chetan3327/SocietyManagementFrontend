@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import bpit from "../assets/bpit.jpeg";
 import { useEffect, useState } from 'react';
+import axios from "axios";
 
 import {
   Carousel,
@@ -63,15 +64,39 @@ const TypewriterText = ({ text, speed }: { text: string; speed: number }) => {
   return <span>{displayedText}</span>;
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Home = () => {
+
+  const [news, setNews] = useState([])
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/news`)
+      // const res = await axios.get(`http://localhost:8000/api/v1/news`)
+      console.log('data', res.data)
+      setNews(res.data)
+    }
+    fetchsociety()
+  }, [])
 
   const firstLine = 'Welcome To The Society Management Portal';
   const secondLine = 'A unified platform for Managing Societies';
   const thirdLine = 'Tracking contributions and fostering growth';
+  // const breakingNews = "For the latest news and updates about the societies, visit";
   
   return (
     <div className ="w-full overflow-x-hidden">
+
+      <div className="bg-red-500 text-white p-4 overflow-hidden">
+        <div className="flex flex-row justify-start items-center space-x-16 whitespace-nowrap animate-marquee">
+          {news.map(({ Title }, index) => (
+            <p key={index} className="text-white text-center text-sm font-bold mb-2 min-w-max">
+              {Title}
+            </p>
+          ))}
+        </div>
+      </div>
+
       <div className="relative w-full mx-auto">
         <img
           className="h-screen md:h-80 w-full object-cover"
