@@ -181,7 +181,7 @@ const SignupPage: React.FC = () => {
         if (response.status === 200) {
           setSuccess("Signup Successful");
           setError("");
-          navigate("/ChangePassword");
+          navigate("/");
         }
       }
     } catch (error) {

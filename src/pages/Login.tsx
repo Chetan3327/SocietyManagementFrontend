@@ -203,9 +203,9 @@ const LoginPage: React.FC = () => {
             </button>
 
             <div style={styles.links}>
-              <Link to="/reset-password" style={styles.link}>
+              {/* <Link to="/reset-password" style={styles.link}>
                 Forgot password?
-              </Link>
+              </Link> */}
               <Link to="/signup" style={styles.link}>
                 Don’t have an account? Create one!
               </Link>
