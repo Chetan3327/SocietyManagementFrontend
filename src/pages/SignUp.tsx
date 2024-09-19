@@ -134,6 +134,7 @@ const SignupPage: React.FC = () => {
   const [OTPSent, setOTPsent] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
+  const [isLogin , setIsLogin]  = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e:React.SyntheticEvent) => {
@@ -180,8 +181,10 @@ const SignupPage: React.FC = () => {
 
         if (response.status === 200) {
           setSuccess("Signup Successful");
+          setIsLogin(true)
+          alert('User logged in sucessfully')
           setError("");
-          navigate("/ChangePassword");
+          navigate("/");
         }
       }
     } catch (error) {
@@ -194,9 +197,34 @@ const SignupPage: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleLogout = () => {
+    setIsLogin(false);
+    alert("You have been logged out.");
+  };
+
   return (
     <>
-      {!OTPSent ? (
+      {isLogin ? (
+        <div style={styles.container} className="flex justify-center items-center">
+          <div>
+            <h2>Welcome, {firstName}!</h2>
+            <button
+              style={styles.button}
+              onClick={handleLogout}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  styles.buttonHover.backgroundColor)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  styles.button.backgroundColor)
+              }
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      ) : !OTPSent ? (
         <div style={styles.container} className="flex-col md:flex-row">
           <div style={styles.leftSide}>
             <div style={styles.formWrapper}>
@@ -461,3 +489,5 @@ const SignupPage: React.FC = () => {
 };
 
 export default SignupPage;
+
+

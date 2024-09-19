@@ -102,8 +102,8 @@ const Member_Table = () => {
   useEffect(()=>{
        fetchAllMembers = async()=>{
         let res ;
-        if(params.EnrollmentNo){
-          res =  await axios.get(`${BACKEND_URL}/admin/members/${params.EnrollmentNo}`)
+        if(params.societyID){
+          res =  await axios.get(`${BACKEND_URL}/admin/members/${params.societyID}`)
         }else{
           res =  await axios.get(`${BACKEND_URL}/admin/members`)
         }

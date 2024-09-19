@@ -23,10 +23,10 @@ const navItems = [
     href: "Societymembers",
     label: "Members",
   },
-  {
-    href: "evaluation",
-    label: "Evalution",
-  },
+  // {
+  //   href: "evaluation",
+  //   label: "Evalution",
+  // },
   {
     href: "news",
     label: "News",
@@ -70,13 +70,13 @@ const SecondaryNavbar = () => {
   
             if(navItem.label==="Home"){
               return(
-                <NavigationMenuItem key={index}>
+                <NavigationMenuItem key={index}  className="hover:text-emerald-500 transition-transform duration-300 hover:transform  hover:scale-110">
                   <Link to={`/society/${id}`}>{navItem.label}</Link>
                 </NavigationMenuItem>
               )
             }else{
               return(
-                <NavigationMenuItem key={index}>
+                <NavigationMenuItem key={index} className="hover:text-emerald-500 transition-transform duration-300 hover:transform  hover:scale-110">
                   <Link to={`/society/${id}/${navItem.href}`}>{navItem.label}</Link>
                 </NavigationMenuItem>
               )
