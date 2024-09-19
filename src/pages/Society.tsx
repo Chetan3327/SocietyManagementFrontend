@@ -75,7 +75,7 @@ const Society = () => {
                 <hr className="h-[4px] text-black" />
               </CardHeader>
               <CardContent className="md:my-10">
-                <h1 className="text-xl font-medium">Guided by Excellence: {society.SocietyHead}</h1>
+                <h1 className="text-xl font-extrabold">Guided by Excellence: {society.SocietyHead}</h1>
                 <p>{society.SocietyDescription}</p>
               </CardContent>
               <CardFooter className="flex justify-center">

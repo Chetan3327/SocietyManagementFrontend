@@ -115,14 +115,14 @@ function Gallery() {
         </Carousel>
       </div>
 
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <Link
           to="/allgallery"
           className="p-3 bg-muted font-semibold rounded-lg shadow-sm"
         >
           View All
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
