@@ -23,10 +23,10 @@ const navItems = [
     href: "Societymembers",
     label: "Members",
   },
-  {
-    href: "evaluation",
-    label: "Evalution",
-  },
+  // {
+  //   href: "evaluation",
+  //   label: "Evalution",
+  // },
   {
     href: "news",
     label: "News",
