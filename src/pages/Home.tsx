@@ -306,13 +306,12 @@ const Home = () => {
                             {/* <button className="w-36 text-center bg-gray-200 text-black">
                               View More
                             </button> */}
-                            <Link
+                            {/* <Link
                               className="w-36 text-center bg-gray-200 text-black mt-2 pt-2 transition transform duration-500 ease-in-out hover:scale-110"
                               to="/society/1/testimonials"
                             >
-                            {/* <ArrowRight className="inline-block text-muted-goreground text-xs" /> */}
                               View More
-                            </Link>
+                            </Link> */}
                           </div>
                         </section>
                         <img
