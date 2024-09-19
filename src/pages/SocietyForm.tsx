@@ -1,34 +1,53 @@
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
+import { useState} from "react";
+
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const formval = z.object({
   SocietyName: z.string().nonempty("Field is required"),
   HeadName: z.string().nonempty("Name is required"),
-  Enrollment: z.string().length(11, "Invalid Input"),
-  Section: z.string().nonempty("Section is required"),
-  email: z.string().nonempty("Email is required"),
-  Branch: z.string().nonempty("Enter a branch"),
-  Describe: z.string().nonempty("About is required"),
-  Phone: z.string().nonempty("Phone no. is required"),
+  DateOfRegistration : z.string().nonempty("Select Date"),
+  SocietyImage: z.string().url("Invalid URL for society image"),
   Category: z.string().nonempty("Select any one category"),
-  dateOfRegistration : z.string().nonempty("Select Date"),
+  MobileNo: z.string().nonempty("MobileNo is required"),
+  Email: z.string().nonempty("Email is required"),
+  Website: z.string().url("Enter the Society's website URL"),
+  Describe: z.string().nonempty("About is required"),
 });
 
-const SocietyForm = () => {
+const SocietyForm: React.FC = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   type formData = z.infer<typeof formval>;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<formData>({
-    resolver: zodResolver(formval),
-  });
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<formData>({
+    resolver: zodResolver(formval)
+  })
 
-  const onSubmit = (data: formData) => {
-    console.log(data);
+  const onSubmit = async (data: formData) => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/createSociety`, data, {
+      // const response = await axios.post(`http://localhost:8000/api/v1/createSociety`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      console.log("Success:", response.data);
+      setIsSubmitted(true);
+      reset();
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error("Error:", error.response?.data || error.message);
+      } else {
+        console.error("Unexpected Error:", error);
+      }
+    }
   };
 
   return (
@@ -75,11 +94,22 @@ const SocietyForm = () => {
             </h1>
             <Card>
               <CardContent>
+                {isSubmitted ? (
+                  <div className="bg-green-100 p-6 rounded-lg shadow-lg w-full max-w-screen-md flex flex-col items-center gap-y-4">
+                    <h2 className="text-3xl font-bold text-center text-green-800">
+                      Thank you!
+                    </h2>
+                    <p className="text-center text-green-700 mb-4">
+                      Your Joining Request has been submitted. The Requested Society will get back to you soon.
+                    </p>
+                  </div>
+                ) : (
                 <form
                   onSubmit={handleSubmit(onSubmit)}
                   className="mt-6 flex flex-col space-y-4"
                 >
                   <div className="flex flex-col space-y-4">
+
                     <div>
                       <label htmlFor="name" className="mb-2 font-bold block">
                         Society Name
@@ -96,6 +126,7 @@ const SocietyForm = () => {
                         </span>
                       )}
                     </div>
+
                     <div>
                       <label
                         htmlFor="headname"
@@ -115,38 +146,41 @@ const SocietyForm = () => {
                         </span>
                       )}
                     </div>
+
                     <div>
                       <label htmlFor="dateOfRegistration" className="mb-2 font-bold block">
                         Date of Registration
                       </label>
                       <input
                         type="date"
-                        {...register("dateOfRegistration")}
+                        {...register("DateOfRegistration")}
                         className="w-full border py-1 px-2 block rounded-lg"
                         placeholder="Select Date"
                       />
-                      {errors.dateOfRegistration && (
+                      {errors.DateOfRegistration && (
                         <span className="text-red-500 block">
-                          {errors.dateOfRegistration.message}
+                          {errors.DateOfRegistration.message}
                         </span>
                       )}
                     </div>
+
                     <div>
-                      <label htmlFor="email" className="mb-2 font-bold block">
+                      <label htmlFor="SocietyImage" className="mb-2 font-bold block">
                         Society Image
                       </label>
                       <input
                         type="text"
-                        {...register("email")}
+                        {...register("SocietyImage")}
                         className="w-full border py-1 px-2 block rounded-lg"
                         placeholder="Enter Society's image link..."
                       />
-                      {errors.email && (
+                      {errors.SocietyImage && (
                         <span className="text-red-500 block">
-                          {errors.email.message}
+                          {errors.SocietyImage.message}
                         </span>
                       )}
                     </div>
+
                     <div>
                       <label
                         htmlFor="category"
@@ -169,6 +203,7 @@ const SocietyForm = () => {
                         </span>
                       )}
                     </div>
+
                     {/* <div>
                       <label
                         htmlFor="enrollmentno"
@@ -194,48 +229,51 @@ const SocietyForm = () => {
                       </label>
                       <input
                         type="text"
-                        {...register("Phone")}
+                        {...register("MobileNo")}
                         className="w-full border py-1 px-2 block rounded-lg"
                         placeholder="Enter Phone No...."
                       />
-                      {errors.Phone && (
+                      {errors.MobileNo && (
                         <span className="text-red-500 block">
-                          {errors.Phone.message}
+                          {errors.MobileNo.message}
                         </span>
                       )}
                     </div>
+
                     <div>
-                      <label htmlFor="phone" className="mb-2 font-bold block">
+                      <label htmlFor="email" className="mb-2 font-bold block">
                         Society Email
                       </label>
                       <input
                         type="text"
-                        {...register("Phone")}
+                        {...register("Email")}
                         className="w-full border py-1 px-2 block rounded-lg"
                         placeholder="Enter Phone No...."
                       />
-                      {errors.Phone && (
+                      {errors.Email && (
                         <span className="text-red-500 block">
-                          {errors.Phone.message}
+                          {errors.Email.message}
                         </span>
                       )}
                     </div>
+
                     <div>
                       <label htmlFor="phone" className="mb-2 font-bold block">
                         Society Website
                       </label>
                       <input
                         type="text"
-                        {...register("Phone")}
+                        {...register("Website")}
                         className="w-full border py-1 px-2 block rounded-lg"
                         placeholder="Enter Society Website...."
                       />
-                      {errors.Phone && (
+                      {errors.Website && (
                         <span className="text-red-500 block">
-                          {errors.Phone.message}
+                          {errors.Website.message}
                         </span>
                       )}
                     </div>
+
                     <div className="flex-1">
                       <label htmlFor="about" className="mb-2 font-bold block">
                         Description of Society
@@ -252,15 +290,17 @@ const SocietyForm = () => {
                       )}
                     </div>
                   </div>
+
                   <div className="flex justify-center mt-4">
                     <button
                       type="submit"
-                      className="my-2 bg-orange-600 text-white font-bold w-40 rounded-full text-center py-1"
+                      className="my-2 bg-orange-600 text-white font-bold w-40 rounded-full text-center py-1 transform transition-transform duration-200 ease-out hover:scale-105"
                     >
                       Submit
                     </button>
                   </div>
                 </form>
+              )}
               </CardContent>
             </Card>
           </div>
