@@ -101,7 +101,7 @@ const Dashboard = () => {
       }, []);
     
       if (news.length <= 0) {
-        return <div className="text-3xl font-bold">Loading data...</div>;
+        return <div className="text-xl font-bold">Loading data...</div>;
       }
     return (
         <div className='md:flex md:gap-3 w-screen overflow-x-hidden'>
@@ -118,16 +118,16 @@ const Dashboard = () => {
                 } */}
 
                         <div  className="bg-gray-200 px-2 lg:px-4 py-8 rounded-lg">
-                            <h3 className="text-4xl font-bold text-black">Total Registered Socities</h3>
-                            <h5 className="text-gray-700">16</h5>
+                            <h3 className="text-2xl font-bold text-black">Total Registered Socities</h3>
+                            <h5 className="text-gray-700 text-2xl">16</h5>
                         </div>
                         <div  className="bg-gray-200 px-2 lg:px-4 py-8 rounded-lg">
-                            <h3 className="text-4xl font-bold text-black">Total Registered Members</h3>
-                            <h5 className="text-gray-700">{members}</h5>
+                            <h3 className="text-2xl font-bold text-black">Total Registered Members</h3>
+                            <h5 className="text-gray-700 text-2xl">{members}</h5>
                         </div>
                         <div  className="bg-gray-200 px-2 lg:px-4 py-8 rounded-lg">
-                            <h3 className="text-4xl font-bold text-black">Total Events Till Date</h3>
-                            <h5 className="text-gray-700">{events}</h5>
+                            <h3 className="text-2xl font-bold text-black">Total Events Till Date</h3>
+                            <h5 className="text-gray-700 text-2xl">{events}</h5>
                         </div>
 
             </div>
