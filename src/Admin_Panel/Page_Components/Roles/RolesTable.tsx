@@ -47,7 +47,8 @@ type RoleType={
     RoleID:number,
     SocietyName:string,
     Rolename:string,
-    RoleDescription:string
+    RoleDescription:string,
+    SocietyID: number
 }
 const Roles_table = () => {
     const [roles , setroles] = useState([])
@@ -56,10 +57,10 @@ const Roles_table = () => {
   
     let fetchAllRoles;
     useEffect(()=>{
-         fetchAllRoles = async()=>{
+         fetchAllRoles = async() => {
           let res ;
-          if(params.RoleId){
-            res =  await axios.get(`${BACKEND_URL}/admin/roles/${params.RoleId}`)
+          if(params.societyID){
+            res =  await axios.get(`${BACKEND_URL}/admin/roles/${params.societyID}`)
           }else{
             res =  await axios.get(`${BACKEND_URL}/admin/roles`)
           }
