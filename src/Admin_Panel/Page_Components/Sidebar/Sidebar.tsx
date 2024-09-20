@@ -112,16 +112,17 @@ import { Menu, X } from 'lucide-react';
 function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
   const searchParams = useParams();
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const navigate = useNavigate(); // For navigation
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  // Function to handle logout
   const handleLogout = () => {
-    // Clear session or token (if using any authentication)
-    // For example: localStorage.removeItem('authToken');
+    // Clear user session data if applicable (e.g., localStorage, sessionStorage, etc.)
+    // sessionStorage.clear(); // Example: Clear session storage
 
-    // Navigate to the login page and replace history so the back button is disabled
-    navigate('/', { replace: true });
+    // Navigate to login page and disable going back
+    navigate('/', { replace: true }); // replace: true removes the current page from history
   };
 
   return (
@@ -139,20 +140,18 @@ function Sidebar() {
             </Link>
           </li>
           {SidebarData.map((item, index) => {
-            // Special case for 'Logout' - we want to handle this with a function
+            // Special case for 'Logout'
             if (item.title === 'Logout') {
               return (
-                <li key={index} className={item.cName}>
-                  <div onClick={handleLogout} className="nav-text logout-link">
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </div>
+                <li key={index} className={item.cName} onClick={handleLogout}>
+                  {item.icon}
+                  <span>{item.title}</span>
                 </li>
               );
             }
 
-            // Set the path for all other sidebar items
-            const path = (item.title === 'Contact Us')
+            // For other items, dynamically build the path
+            const path = (item.title === 'Contact Us' || item.title === 'Logout')
               ? item.path
               : (searchParams.societyID ? `${item.path}/${searchParams.societyID}` : item.path);
 
@@ -172,4 +171,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
