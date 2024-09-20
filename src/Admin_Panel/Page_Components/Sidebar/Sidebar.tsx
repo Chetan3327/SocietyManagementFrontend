@@ -143,17 +143,17 @@ function Sidebar() {
             if (item.title === 'Logout') {
               return (
                 <li key={index} className={item.cName}>
-                  <button onClick={handleLogout} className="logout-button">
+                  <div onClick={handleLogout} className="nav-text logout-link">
                     {item.icon}
                     <span>{item.title}</span>
-                  </button>
+                  </div>
                 </li>
               );
             }
 
             // Set the path for all other sidebar items
-            const path = (item.title === 'Contact Us') 
-              ? item.path 
+            const path = (item.title === 'Contact Us')
+              ? item.path
               : (searchParams.societyID ? `${item.path}/${searchParams.societyID}` : item.path);
 
             return (
