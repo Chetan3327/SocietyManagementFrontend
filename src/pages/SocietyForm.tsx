@@ -100,7 +100,7 @@ const SocietyForm: React.FC = () => {
                       Thank you!
                     </h2>
                     <p className="text-center text-green-700 mb-4">
-                      Your Joining Request has been submitted. The Requested Society will get back to you soon.
+                      Your Request for Creating the Society has been submitted. The College Authorities will get back to you soon.
                     </p>
                   </div>
                 ) : (

@@ -67,7 +67,7 @@ const Achievemnts_table = () => {
     useEffect(() => {
         fetchAllAchievements = async () => {
             let res;
-            if (params.societyID !==  "undefined") {
+            if (params.societyID) {
                 res = await axios.get(`${BACKEND_URL}/admin/achievements/${params.societyID}`)
             } else {
                 res = await axios.get(`${BACKEND_URL}/admin/achievements`)
