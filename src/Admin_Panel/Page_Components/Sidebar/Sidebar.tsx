@@ -102,7 +102,7 @@
 
 
 
-//LOGOUT IN BLACK COLOUR BUT CORRECT
+// // LOGOUT IN BLACK COLOUR BUT CORRECT
 // import { useState } from 'react';
 // import { Link, useParams, useNavigate } from 'react-router-dom';
 // import { SidebarData } from './SidebarData';
@@ -178,13 +178,14 @@
 import { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
+import './Sidebar.css';
 import { Menu, X } from 'lucide-react';
 
 function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false); // State to show logout message
   const searchParams = useParams();
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -193,16 +194,16 @@ function Sidebar() {
     // Clear user session data if applicable (e.g., localStorage, sessionStorage, etc.)
     // sessionStorage.clear(); // Example: Clear session storage
 
-    // Set logout message to true
-    setLogoutMessage(true);
-
     // Navigate to login page and disable going back
     navigate('/', { replace: true }); // replace: true removes the current page from history
 
-    // Optionally, remove the logout message after a few seconds
+    // Show logout message
+    setLogoutMessage(true);
+
+    // Hide the message after 3 seconds
     setTimeout(() => {
       setLogoutMessage(false);
-    }, 3000); // 3 seconds delay
+    }, 3000); // 3 seconds
   };
 
   return (
@@ -216,7 +217,7 @@ function Sidebar() {
         <ul className='nav-menu-items' onClick={showSidebar}>
           <li className='navbar-toggle'>
             <Link to='#' className='menu-bars'>
-              <X className="text-white" />
+              <X color="white" />
             </Link>
           </li>
           {SidebarData.map((item, index) => {
@@ -225,7 +226,7 @@ function Sidebar() {
               return (
                 <li key={index} className={`${item.cName} text-white`} onClick={handleLogout}>
                   {item.icon}
-                  <span className="ml-2">{item.title}</span>
+                  <span>{item.title}</span>
                 </li>
               );
             }
@@ -239,7 +240,7 @@ function Sidebar() {
               <li key={index} className={item.cName}>
                 <Link to={path}>
                   {item.icon}
-                  <span className="ml-2">{item.title}</span>
+                  <span>{item.title}</span>
                 </Link>
               </li>
             );
@@ -247,10 +248,10 @@ function Sidebar() {
         </ul>
       </nav>
 
-      {/* Conditionally render the logout message */}
+      {/* Logout Message */}
       {logoutMessage && (
-        <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded shadow-lg">
-          You have been logged out successfully
+        <div className="logout-message fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+          You have been logged out successfully!
         </div>
       )}
     </>
@@ -258,3 +259,4 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
