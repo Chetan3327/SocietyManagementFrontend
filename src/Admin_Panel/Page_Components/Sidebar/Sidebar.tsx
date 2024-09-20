@@ -1,54 +1,4 @@
 // import { useState } from 'react';
-// import { Link , useLocation , useParams } from 'react-router-dom';
-// import { SidebarData } from './SidebarData';
-// import './Sidebar.css';
-// import { Menu, X } from 'lucide-react';
-
-// function Sidebar() {
-//   const [sidebar, setSidebar] = useState(false);
-//   const searchParams=useParams()
-//  let location = useLocation();
-//  console.log('in search params',!searchParams.societyID)
-//  console.log('in side bar',location.search)
-//  //if(location.search)
-//   const showSidebar = () => setSidebar(!sidebar);
-
-//   return (
-//     <>
-//         <div className='navbar dark:bg-black'>
-//           <Link to='#' className='menu-bars'>
-//             <Menu onClick={showSidebar} />
-//           </Link>
-//         </div>
-//         <nav className={sidebar ? 'nav-menu' : 'nav-menu active '}>
-//           <ul className='nav-menu-items' onClick={showSidebar}>
-//             <li className='navbar-toggle'>
-//               <Link to='#' className='menu-bars'>
-//                 <X color="white"/>
-//               </Link>
-//             </li>
-//             {SidebarData.map((item, index) => (
-//               <li key={index} className={item.cName}>
-//                 { !searchParams.societyID && 
-//                   <Link to={item.path}> {item.icon}
-//                     <span>{item.title}</span>
-//                   </Link>
-//                 }
-//                 { searchParams.societyID &&  <Link to={`${item.path}/${searchParams.societyID}`}>
-//                   {item.icon}
-//                   <span>{item.title}</span>
-//                 </Link>}               
-//               </li>
-//             ))}
-//           </ul>
-//         </nav>
-//     </>
-//   );
-// }
-
-// export default Sidebar;
-
-// import { useState } from 'react';
 // import { Link, useParams } from 'react-router-dom';
 // import { SidebarData } from './SidebarData';
 // import './Sidebar.css';
@@ -126,7 +76,8 @@ function Sidebar() {
 
     // Show the toast message
     setShowToast(true);
-
+    
+    console.log("showToast:", showToast);
     // Hide the toast after 3 seconds
     setTimeout(() => {
       setShowToast(false);
@@ -177,7 +128,7 @@ function Sidebar() {
 
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out">
+        <div className="fixed top-5 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out z-50">
           You have been logged out successfully!
         </div>
       )}
