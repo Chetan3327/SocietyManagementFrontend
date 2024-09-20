@@ -192,6 +192,7 @@ const SignupPage: React.FC = () => {
         if (response.status === 200) {
           setSuccess("Signup Successful");
           setIsLogin(true)
+          localStorage.setItem("isLoggedIn", "true");
           alert('User logged in sucessfully')
           setError("");
           navigate("/");

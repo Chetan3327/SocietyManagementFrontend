@@ -134,6 +134,8 @@ const LoginPage: React.FC = () => {
   // Handle redirection after showing success message
   React.useEffect(() => {
     if (success) {
+      localStorage.setItem("isLoggedIn", "true");
+      alert('User logged in sucessfully')
       setTimeout(() => {
         navigate('/'); // Navigate to the home page after 3 seconds
       }, 3000);

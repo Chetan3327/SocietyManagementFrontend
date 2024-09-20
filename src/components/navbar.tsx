@@ -15,10 +15,10 @@ import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { ModeToggle } from "./mode-toggle.jsx";
 import { buttonVariants } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 import msalInstance from "./msalConfig";
-import { AccountInfo } from "@azure/msal-browser";
+//import { AccountInfo } from "@azure/msal-browser";
 
 const routeList = [
   {
@@ -51,7 +51,9 @@ const routeList = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [account, setAccount] = useState<AccountInfo | null>(null);
+ // const [account, setAccount] = useState<AccountInfo | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate()
 
   async () => {
     try {
@@ -61,24 +63,34 @@ const Navbar = () => {
     }
   };
 
+  // const handleLogout = () => {
+  //   msalInstance.logoutPopup();
+  //   setAccount(null);
+  //   localStorage.removeItem("msalAccount");
+  // };
+
   const handleLogout = () => {
-    msalInstance.logoutPopup();
-    setAccount(null);
-    localStorage.removeItem("msalAccount");
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    navigate("/login"); 
   };
 
   // Check if user is already logged in
+  // useEffect(() => {
+  //   const storedAccount = localStorage.getItem("msalAccount");
+  //   if (storedAccount !== null) {
+  //     // storedAccount is guaranteed to be a string here
+  //     try {
+  //       const parsedAccount = JSON.parse(storedAccount);
+  //       setAccount(parsedAccount);
+  //     } catch (error) {
+  //       console.error("Error parsing stored account:", error);
+  //     }
+  //   }
+  // }, []);
   useEffect(() => {
-    const storedAccount = localStorage.getItem("msalAccount");
-    if (storedAccount !== null) {
-      // storedAccount is guaranteed to be a string here
-      try {
-        const parsedAccount = JSON.parse(storedAccount);
-        setAccount(parsedAccount);
-      } catch (error) {
-        console.error("Error parsing stored account:", error);
-      }
-    }
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
   }, []);
 
   return (
@@ -154,7 +166,7 @@ const Navbar = () => {
 
             <nav>
               <ul>
-                {account ? (
+                {isLoggedIn ? (
                   <li>
                     <button
                       type="button"
@@ -166,13 +178,11 @@ const Navbar = () => {
                   </li>
                 ) : (
                   <li>
-                    <button
-                      type="button"
-                      // onClick={handleLogin}
+                    <div
                       className="bg-gray-200 text-purple-800 px-4 py-2 rounded hover:text-red-500 hover:bg-black transition transform duration-500 ease-in-out hover:scale-125"
                     >
                       <Link to="/login">Login</Link>
-                    </button>
+                    </div>
                   </li>
                 )}
               </ul>
@@ -189,3 +199,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
