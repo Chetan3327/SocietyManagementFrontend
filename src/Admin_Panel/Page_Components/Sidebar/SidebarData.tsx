@@ -1,4 +1,4 @@
-import {  EarthLock, House, Newspaper, NotepadText, Users, Contact,GalleryThumbnails, Grab } from "lucide-react";
+import {  EarthLock, House, Newspaper, NotepadText, Users, Contact,GalleryThumbnails, Grab, LogOut } from "lucide-react";
 
 export const SidebarData = [
   {
@@ -73,10 +73,10 @@ export const SidebarData = [
     icon: <Contact />,
     cName: 'nav-text'
   },
-  // {
-  //   title: 'Login',
-  //   path: '/admin/login',
-  //   icon: <LogIn/>,
-  //   cName: 'nav-text'
-  // },
+  {
+    title: 'Logout',
+    path: '/',
+    icon: <LogOut/>,
+    cName: 'nav-text'
+  },
 ];

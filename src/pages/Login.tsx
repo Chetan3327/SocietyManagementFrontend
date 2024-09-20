@@ -1,6 +1,6 @@
 import React from "react";
 import useLogin from "@/hooks/UseLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 
 const styles = {
   container: {
@@ -52,14 +52,14 @@ const styles = {
     margin: "0 0 20px 0",
     fontSize: "24px",
     color: "#333",
-    textAlign: "center" as 'center',
+    textAlign: "center" as "center",
   },
   form: {
     display: "flex",
-    flexDirection: "column" as 'column',
+    flexDirection: "column" as "column",
   },
   fieldContainer: {
-    position: "relative" as "relative" ,
+    position: "relative" as "relative",
     marginBottom: "15px",
   },
   inputContainer: {
@@ -94,7 +94,7 @@ const styles = {
   },
   links: {
     display: "flex",
-    flexDirection: "column" as 'column',
+    flexDirection: "column" as "column",
     alignItems: "center",
     marginTop: "15px",
   },
@@ -128,6 +128,15 @@ const LoginPage: React.FC = () => {
     error,
     success,
   } = useLogin();
+
+  const navigate = useNavigate(); // Use navigate hook
+
+  // Handle redirection upon successful login
+  React.useEffect(() => {
+    if (success) {
+      navigate('/'); // Navigate to home page if login is successful
+    }
+  }, [success, navigate]);
 
   return (
     <div style={styles.container} className="flex-col md:flex-row">
@@ -203,9 +212,6 @@ const LoginPage: React.FC = () => {
             </button>
 
             <div style={styles.links}>
-              {/* <Link to="/reset-password" style={styles.link}>
-                Forgot password?
-              </Link> */}
               <Link to="/signup" style={styles.link}>
                 Don’t have an account? Create one!
               </Link>
