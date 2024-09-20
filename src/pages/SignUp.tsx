@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 // import OTP from "./OTP";
@@ -118,6 +118,15 @@ const styles = {
     color: "green",
   },
 };
+const branches = ["CSE", "IT", "CSE-DS", "ECE", "EEE", "AIDS"];
+
+const batches = [
+  "2020-2024",
+  "2021-2025",
+  "2022-2026",
+  "2023-2027",
+  "2024-2028",
+];
 
 const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState<string>("");
@@ -134,11 +143,12 @@ const SignupPage: React.FC = () => {
   const [OTPSent, setOTPsent] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
-  const [isLogin , setIsLogin]  = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e:React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    console.log('in singup', branch, batchYear)
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -212,12 +222,12 @@ const SignupPage: React.FC = () => {
               style={styles.button}
               onClick={handleLogout}
               onMouseOver={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  styles.buttonHover.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor)
               }
               onMouseOut={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  styles.button.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                styles.button.backgroundColor)
               }
             >
               Logout
@@ -307,9 +317,8 @@ const SignupPage: React.FC = () => {
                       required
                     />
                     <i
-                      className={`fas ${
-                        showPassword ? "fa-eye-slash" : "fa-eye"
-                      }`}
+                      className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"
+                        }`}
                       style={styles.icon}
                       onClick={togglePasswordVisibility}
                     ></i>
@@ -330,9 +339,8 @@ const SignupPage: React.FC = () => {
                       required
                     />
                     <i
-                      className={`fas ${
-                        showPassword ? "fa-eye-slash" : "fa-eye"
-                      }`}
+                      className={`fas ${showPassword ? "fa-eye-slash" : "fa-eye"
+                        }`}
                       style={styles.icon}
                       onClick={togglePasswordVisibility}
                     ></i>
@@ -342,7 +350,7 @@ const SignupPage: React.FC = () => {
                 <div style={styles.fieldContainer}>
                   <div style={styles.inputContainer}>
                     <i className="fas fa-building" style={styles.icon}></i>
-                    <input
+                    {/* <input
                       type="text"
                       id="branch"
                       name="branch"
@@ -351,14 +359,29 @@ const SignupPage: React.FC = () => {
                       placeholder="Enter your branch"
                       style={styles.input}
                       required
-                    />
+                    /> */}
+                    <select id="branch"
+                      name="branch"
+                      value={branch}
+                      onChange={(e) => setBranch(e.target.value)}
+                      style={styles.input}
+                      required>
+                      <option value="" disabled>
+                        Select your branch
+                      </option>
+                      {batches.map((batch, index) => (
+                        <option value={batch} key={index}>
+                          {batch}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
                 <div style={styles.fieldContainer}>
                   <div style={styles.inputContainer}>
                     <i className="fas fa-calendar" style={styles.icon}></i>
-                    <input
+                    {/* <input
                       type="text"
                       id="batchYear"
                       name="batchYear"
@@ -367,7 +390,20 @@ const SignupPage: React.FC = () => {
                       placeholder="Enter your batch year"
                       style={styles.input}
                       required
-                    />
+                    /> */}
+                    <select id="batchYear"
+                      name="batchYear"
+                      value={batchYear} style={styles.input}
+                      onChange={(e) => setBatchYear(e.target.value)}>
+                      <option value="" disabled>
+                        Select your batch
+                      </option>
+                      {branches.map((branch, index) => (
+                        <option value={branch} key={index}>
+                          {branch}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -392,12 +428,12 @@ const SignupPage: React.FC = () => {
                   style={styles.button}
                   onClick={handleSubmit}
                   onMouseOver={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.buttonHover.backgroundColor)
+                  (e.currentTarget.style.backgroundColor =
+                    styles.buttonHover.backgroundColor)
                   }
                   onMouseOut={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.button.backgroundColor)
+                  (e.currentTarget.style.backgroundColor =
+                    styles.button.backgroundColor)
                   }
                 >
                   Sign Up
@@ -462,12 +498,12 @@ const SignupPage: React.FC = () => {
                   style={styles.button}
                   onClick={handleSubmit}
                   onMouseOver={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.buttonHover.backgroundColor)
+                  (e.currentTarget.style.backgroundColor =
+                    styles.buttonHover.backgroundColor)
                   }
                   onMouseOut={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.button.backgroundColor)
+                  (e.currentTarget.style.backgroundColor =
+                    styles.button.backgroundColor)
                   }
                 >
                   Submit OTP
