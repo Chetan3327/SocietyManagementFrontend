@@ -49,7 +49,7 @@
 // export default Sidebar;
 
 import { useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Sidebar.css';
 import { Menu, X } from 'lucide-react';
@@ -57,7 +57,7 @@ import { Menu, X } from 'lucide-react';
 function Sidebar() {
   const [sidebar, setSidebar] = useState(false);
   const searchParams = useParams();
-  let location = useLocation();
+  // let location = useLocation();
 
   const showSidebar = () => setSidebar(!sidebar);
 
