@@ -17,7 +17,7 @@ const schema = z.object({
   Branch: z.string().nonempty("Branch name is required"),
 });
 
-const Branch = ["CSE", "IT", "CSE-DS", "ECE", "EEE"];
+const Branch = ["CSE", "IT", "CSE-DS", "ECE", "EEE", "AIDS"];
 
 const Batch = [
   "2020-2024",

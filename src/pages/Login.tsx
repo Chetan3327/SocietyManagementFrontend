@@ -131,10 +131,12 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate(); // Use navigate hook
 
-  // Handle redirection upon successful login
+  // Handle redirection after showing success message
   React.useEffect(() => {
     if (success) {
-      navigate('/'); // Navigate to home page if login is successful
+      setTimeout(() => {
+        navigate('/'); // Navigate to the home page after 3 seconds
+      }, 3000);
     }
   }, [success, navigate]);
 
@@ -155,7 +157,9 @@ const LoginPage: React.FC = () => {
             <p style={{ color: "red", textAlign: "center" }}>{error}</p>
           )}
           {success && (
-            <p style={{ color: "green", textAlign: "center" }}>{success}</p>
+            <p style={{ color: "green", textAlign: "center" }}>
+              Login successful! Redirecting to homepage...
+            </p>
           )}
           <form style={styles.form}>
             <div style={styles.fieldContainer}>

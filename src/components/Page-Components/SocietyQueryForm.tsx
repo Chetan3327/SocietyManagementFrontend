@@ -16,7 +16,7 @@ const schema = z.object({
   Query: z.string().nonempty("This field is required"),
 });
 
-const branches = ["CSE", "IT", "CSE-DS", "ECE", "EEE"];
+const branches = ["CSE", "IT", "CSE-DS", "ECE", "EEE", "AIDS"];
 
 const batches = [
   "2020-2024",
