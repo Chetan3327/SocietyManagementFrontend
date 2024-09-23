@@ -26,7 +26,7 @@ const EventCard = ({ props }: { props: EventCardType }) => {
     <Card className="bg-white text-gray-900">
       <CardHeader>
         <img
-          src={'latest_new'} // Replace with dynamic image if available
+          src={'https://th.bing.com/th/id/OIP.5xERkyi_1jSC0cvfS691MwHaEn?rs=1&pid=ImgDetMain'} // Replace with dynamic image if available
           className="rounded-xl h-20 w-80"
           alt="event image"
         />
