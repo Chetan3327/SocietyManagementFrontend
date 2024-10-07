@@ -287,7 +287,7 @@ const Home = () => {
           {/* <div className=" bottom-full lg:botton-96 left-1/4 bg-blue-800 text-white px-5 rounded-full text-xl relative py-2">
             <h1>Namespace(Formely NSCC)</h1>
           </div> */}
-          <div className=" text-2xl relative left-12 md:left-44 text-center mt-10">
+          <div className=" text-2xl text-center mt-10">
             Student<span className="text-red-700">Stories</span>
           </div>
           <Carousel

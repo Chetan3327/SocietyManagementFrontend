@@ -66,7 +66,7 @@ const Society = () => {
       <div className="w-full px-20 flex justify-center py-10 gap-7">
         <div className="flex justify-center gap-7 p-4 md:p-10 rounded-md border-4">
           <div>
-            <img src={latestnews} width={600} alt="" />
+            <img src='https://ipubuzz.com/wp-content/uploads/2021/03/gd-1024x576.jpg' width={600} alt="" className="transform duration-300 ease-in-out hover:scale-105"/>
           </div>
           <div>
             <Card className="rounded-lg md:space-y-3 border-0">
