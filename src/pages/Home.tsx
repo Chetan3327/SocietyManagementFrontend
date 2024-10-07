@@ -113,10 +113,12 @@ const Home = () => {
             {/* Typing effect for the second and third lines */}
             <div className="mt-2 space-y-2">
               <p className="text-zinc-300 text-lg lg:text-xl">
-                <TypewriterText text={secondLine} speed={100} />
+                {/* <TypewriterText text={secondLine} speed={100} /> */}
+                {secondLine}
               </p>
               <p className="text-zinc-300 text-lg lg:text-xl">
-                <TypewriterText text={thirdLine} speed={100} />
+                {/* <TypewriterText text={thirdLine} speed={100} /> */}
+                {thirdLine}
               </p>
             </div>
       
@@ -186,7 +188,8 @@ const Home = () => {
             {/* dummy image used */}
             <img
               className="rounded-lg h-auto lg:max-w-xl transform duration-300 ease-in-out hover:scale-105 shadow-cyan-800 shadow-lg"
-              src={news_img}
+              // src={news_img}
+              src= 'https://cse.bpitindia.ac.in/wp-content/uploads/2024/05/CSE-DPT-BPIT-2.jpg'
               alt="News"
             />
           </div>
@@ -226,26 +229,28 @@ const Home = () => {
                           alt="hackathon"
                           className="w-2/4 rounded-lg"
                         />
-                        <h1 className="text-white font-bold lg:text-lg text-xs ">
-                          <span className="font-extrabold lg:text-2xl text-xs">
+                        <h1 className="text-white font-bold lg:text-xl text-sm">
+                          <span className="font-extrabold lg:text-3xl text-base">
                             1st
                           </span>{" "}
-                          Prize in XXX Hackathon organized at BVCOE
+                          Place in the National Hackathon hosted by BVCOE
                         </h1>
                       </div>
+
                       <div className="flex gap-1 lg:gap-5 p-1 md:p-5 lg:p-9 border border-gray-100 h-1/2  border-t-none border-l-none">
                         <img
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh2UuRDGIGLIO544W9Fdef4mg3Gmk2LDA2Tg&s"
                           alt="hackathon"
                           className="w-2/4 rounded-lg"
                         />
-                        <h1 className="text-white font-bold  lg:text-lg text-xs">
+                        <h1 className="text-white font-bold lg:text-lg text-xs">
                           <span className="font-extrabold lg:text-2xl text-xs">
                             2nd
-                          </span>
-                          Prize in XXX Hackathon organized at BVCOE
+                          </span>{" "}
+                          Place in the Cultural Fest organized at MSIT
                         </h1>
                       </div>
+
                     </div>
                     <div className="flex lg:gap-10 flex-col hidden lg:block w-full lg:w-1/3 p-1 lg:p-7 ">
                       <img
@@ -262,7 +267,7 @@ const Home = () => {
                         className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg"
                         to="/achievements"
                       >
-                        <ArrowRight className="inline-block text-muted-goreground text-xs" />
+                        <ArrowRight className="inline-block text-muted-goreground text-xs transform duration-300 ease-in-out hover:scale-105" />
                         View More
                       </Link>
                     </div>
