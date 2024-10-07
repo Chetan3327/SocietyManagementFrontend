@@ -10,7 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import drishti from "../assets/drishti-hero.png";
-import latestnews from "../assets/latestnews.png";
+// import latestnews from "../assets/latestnews.png";
 
 
 type Society = {
