@@ -44,7 +44,7 @@ const AboutUs = () => {
         </h2>
 
         {/* Typing effect for the paragraph */}
-        <p className="text-black font-extrabold text-center my-5 text-xl">
+        <p className="text-black font-extrabold text-center my-5 text-4xl">
           <TypewriterText text={paragraphText} speed={100} />
         </p>
       </div>

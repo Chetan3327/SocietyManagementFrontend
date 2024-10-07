@@ -34,7 +34,7 @@ const reviews: Review[] = [
     desc: "Namespace Society was instrumental in my personal and professional growth during my college years. The mentorship from senior members and guidance from industry experts introduced me to new technologies and inspired me to pursue a career in tech. The collaborative environment fostered by the society encouraged me to take on leadership roles, and the friendships I made have lasted beyond graduation. Namespace Society truly embodies the spirit of innovation and learning.",
     name: "Ronak Singh",
     batch: "CSE-A, 2020-2024",
-    image: "https://img.freepik.com/premium-photo/college-student-holds-book-graduation-success-concept-professional-photoshoot_950002-3643.jpg", // Add image URL here
+    image: "https://img.freepik.com/premium-photo/college-student-holds-book-graduation-success-concept-professional-photoshoot_950002-3529.jpg", // Add image URL here
   },
   {
     desc: "As a fresher, I was initially intimidated by the fast-paced world of technology, but joining the Namespace Society was the best decision I made. The welcoming atmosphere and the supportive community made it easy to dive in and start exploring. From participating in coding competitions to attending insightful talks by industry leaders, every experience has been incredibly enriching. Namespace Society has ignited my passion for tech and motivated me to push my boundaries.",
@@ -269,10 +269,10 @@ const Home = () => {
                       supporters, and partners for your contributions and dedication.
                       </p>
                       <Link
-                        className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg"
+                        className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg transform duration-300 ease-in-out hover:scale-105"
                         to="/achievements"
                       >
-                        <ArrowRight className="inline-block text-muted-foreground text-xs transform duration-300 ease-in-out hover:scale-105" />
+                        <ArrowRight className="inline-block text-muted-foreground text-xs" />
                         View More
                       </Link>
                     </div>
@@ -283,11 +283,11 @@ const Home = () => {
           </Card>
         </div>
 
-        <div className="w-full bg-muted  flex flex-col justify-center items-center mt-12  ">
+        <div className="w-full bg-muted  flex flex-col justify-center items-center mt-12">
           {/* <div className=" bottom-full lg:botton-96 left-1/4 bg-blue-800 text-white px-5 rounded-full text-xl relative py-2">
             <h1>Namespace(Formely NSCC)</h1>
           </div> */}
-          <div className=" text-2xl self-start relative left-12 md:left-44 text-center">
+          <div className=" text-2xl relative left-12 md:left-44 text-center mt-10">
             Student<span className="text-red-700">Stories</span>
           </div>
           <Carousel
@@ -305,7 +305,7 @@ const Home = () => {
                     <CardContent className="p-5">
                       <div className="flex flex-col lg:flex-row items-center gap-9">
                         <section className="w-2/3">
-                          <p className="text-5xl font-bold">&quot;</p>
+                          {/* <p className="text-5xl font-bold">&quot;</p> */}
             
                           <p>{desc}.</p>
                           <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-3">
@@ -331,8 +331,8 @@ const Home = () => {
           </Carousel>
         </div>
 
-        <div className="w-full my-5 flex justify-center">
-          <Card className="w-9/12 shadow-md shadow-gray-300 border border-gray-300  border-4">
+        <div className="w-full my-5 flex justify-center transform duration-300 ease-in-out hover:scale-105">
+          <Card className="w-9/12 shadow-md shadow-gray-300 border-gray-300 border-4">
             <CardTitle className="text-center py-5">
               <h1>You can also search for</h1>
             </CardTitle>
