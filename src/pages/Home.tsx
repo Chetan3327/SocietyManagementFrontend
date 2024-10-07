@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import news_img from "../assets/news_bg.jpg";
+// import news_img from "../assets/news_bg.jpg";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
@@ -20,23 +20,27 @@ type Review = {
   desc: string;
   name: string;
   batch: string;
+  image: string;
 };
 
 const reviews: Review[] = [
   {
     desc: "Being part of the Namespace Society has been a transformative experience for me. It provided me with hands-on opportunities to work on cutting-edge tech projects and collaborate with like-minded peers who share my passion for technology. The workshops and hackathons organized by the society have equipped me with invaluable skills and insights, preparing me for a successful career in the tech industry. Namespace is more than just a society; it's a family where innovation and creativity thrive.",
     name: "Rishabh Kumar",
-    batch: "IT-B,2019-2023",
+    batch: "IT-B, 2019-2023",
+    image: "https://media.istockphoto.com/id/1448069480/photo/happy-young-indian-student-boy-working-on-laptop-and-studying-in-college-library-with.webp?b=1&s=170667a&w=0&k=20&c=5t956TDdrYeVbBpMnfzr0-RZK-ZaWpzMR2mcvCH5Nh8=", // Add image URL here
   },
   {
     desc: "Namespace Society was instrumental in my personal and professional growth during my college years. The mentorship from senior members and guidance from industry experts introduced me to new technologies and inspired me to pursue a career in tech. The collaborative environment fostered by the society encouraged me to take on leadership roles, and the friendships I made have lasted beyond graduation. Namespace Society truly embodies the spirit of innovation and learning.",
     name: "Ronak Singh",
-    batch: "CSE-A,2020-2024",
+    batch: "CSE-A, 2020-2024",
+    image: "https://img.freepik.com/premium-photo/college-student-holds-book-graduation-success-concept-professional-photoshoot_950002-3643.jpg", // Add image URL here
   },
   {
-    desc: "As a freshman, I was initially intimidated by the fast-paced world of technology, but joining the Namespace Society was the best decision I made. The welcoming atmosphere and the supportive community made it easy to dive in and start exploring. From participating in coding competitions to attending insightful talks by industry leaders, every experience has been incredibly enriching. Namespace Society has ignited my passion for tech and motivated me to push my boundaries",
-    name: "Vivek Sharma",
-    batch: "ECE-B,2021-2025",
+    desc: "As a fresher, I was initially intimidated by the fast-paced world of technology, but joining the Namespace Society was the best decision I made. The welcoming atmosphere and the supportive community made it easy to dive in and start exploring. From participating in coding competitions to attending insightful talks by industry leaders, every experience has been incredibly enriching. Namespace Society has ignited my passion for tech and motivated me to push my boundaries.",
+    name: "Riya Mishra",
+    batch: "ECE-B, 2021-2025",
+    image: "https://img.freepik.com/premium-photo/college-student-holds-book-graduation-success-concept-professional-photoshoot_950002-3720.jpg", // Add image URL here
   },
 ];
 
@@ -146,7 +150,8 @@ const Home = () => {
           <div>
             <img
               className="rounded-lg lg:h-auto  lg:max-w-xl transform duration-300 ease-in-out hover:scale-105 shadow-cyan-800 shadow-lg"
-              src={news_img}
+              // src={news_img}
+              src='https://th.bing.com/th/id/R.b10f5e8fc9d73cf72cfab57b5d1a77a2?rik=HGEfcf1Lwhrr5w&riu=http%3a%2f%2fnparo.fr%2fwp-content%2fuploads%2f2020%2f03%2fnuage-de-mots-media.png&ehk=5fJaf%2btiq2CZMBvWFnA2TBuaCnWudKazAznwtllfZkk%3d&risl=&pid=ImgRaw&r=0'
               alt="News"
             />
           </div>
@@ -173,7 +178,7 @@ const Home = () => {
           <div className="order-2 lg:order-1">
             <div className="text-center bg-gray-200 py-2 transform duration-300 ease-in-out hover:scale-105">
               <h2 className="text-4xl font-semibold text-black">Faculty Coordinators</h2>
-              <p className="text-lg text-black">Our dedicated faculty coordinators</p>
+              <p className="text-lg text-black">Our dedicated Faculties</p>
             </div>
             <p className="mt-14 text-xl">
             The Faculty Coordinators of our society play a pivotal role in bridging the gap between students and the academic world, providing guidance, mentorship, and support to ensure the smooth functioning of our activities. They bring a wealth of experience and expertise, enriching our society with valuable insights and innovative ideas. 
@@ -267,7 +272,7 @@ const Home = () => {
                         className="bg-muted px-1 py-1 w-fit font-bold mt-5 inline-block rounded-lg"
                         to="/achievements"
                       >
-                        <ArrowRight className="inline-block text-muted-goreground text-xs transform duration-300 ease-in-out hover:scale-105" />
+                        <ArrowRight className="inline-block text-muted-foreground text-xs transform duration-300 ease-in-out hover:scale-105" />
                         View More
                       </Link>
                     </div>
@@ -279,11 +284,11 @@ const Home = () => {
         </div>
 
         <div className="w-full bg-muted  flex flex-col justify-center items-center mt-12  ">
-          <div className=" bottom-full lg:botton-96 left-1/4 bg-blue-800 text-white px-5 rounded-full text-xl relative py-2">
+          {/* <div className=" bottom-full lg:botton-96 left-1/4 bg-blue-800 text-white px-5 rounded-full text-xl relative py-2">
             <h1>Namespace(Formely NSCC)</h1>
-          </div>
-          <div className=" text-2xl self-start relative left-12 md:left-44">
-            Student <span className="text-red-700">Stories</span>
+          </div> */}
+          <div className=" text-2xl self-start relative left-12 md:left-44 text-center">
+            Student<span className="text-red-700">Stories</span>
           </div>
           <Carousel
             className="lg:w-10/12 md:w-8/12 w-4/6  border-none"
@@ -294,34 +299,25 @@ const Home = () => {
           >
             <CarouselPrevious />
             <CarouselContent>
-              {reviews.map(({ desc, name, batch }, index: number) => (
+              {reviews.map(({ desc, name, batch, image }, index: number) => (
                 <CarouselItem key={index}>
                   <Card className="border-none bg-muted">
                     <CardContent className="p-5">
                       <div className="flex flex-col lg:flex-row items-center gap-9">
                         <section className="w-2/3">
                           <p className="text-5xl font-bold">&quot;</p>
-
+            
                           <p>{desc}.</p>
-                          <div className="flex flex-col md:flex-row gap-4 md;gap-0 justify-between mt-3">
+                          <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-3">
                             <div>
                               <h1>{name}</h1>
                               <h1>{batch}</h1>
                             </div>
-                            {/* <button className="w-36 text-center bg-gray-200 text-black">
-                              View More
-                            </button> */}
-                            {/* <Link
-                              className="w-36 text-center bg-gray-200 text-black mt-2 pt-2 transition transform duration-500 ease-in-out hover:scale-110"
-                              to="/society/1/testimonials"
-                            >
-                              View More
-                            </Link> */}
                           </div>
                         </section>
                         <img
-                          src="https://media.istockphoto.com/id/1448069480/photo/happy-young-indian-student-boy-working-on-laptop-and-studying-in-college-library-with.webp?b=1&s=170667a&w=0&k=20&c=5t956TDdrYeVbBpMnfzr0-RZK-ZaWpzMR2mcvCH5Nh8="
-                          alt="image"
+                          src={image} // Dynamically display the image
+                          alt={name}
                           className="w-2/3 lg:w-1/3 rounded-lg"
                         />
                       </div>
@@ -329,7 +325,7 @@ const Home = () => {
                   </Card>
                 </CarouselItem>
               ))}
-            </CarouselContent>
+           </CarouselContent>
 
             <CarouselNext />
           </Carousel>
