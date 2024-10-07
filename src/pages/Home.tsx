@@ -202,7 +202,7 @@ const Home = () => {
       </div>
 
       <div>
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center transform duration-300 ease-in-out hover:scale-105">
           <div className="w-3/6 text-center py-2 bg-gray-100 mb-2 rounded-lg font-bold text-xl text-black">
             Achievements
           </div>
@@ -340,21 +340,21 @@ const Home = () => {
               {/* <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Upcoming Events</button>
             <button className="px-5 py-1 rounded-full bg-blue-800 text-white">Core Members</button> */}
               <Link
-                className="px-5 py-1 rounded-full bg-blue-800 text-white"
+                className="px-5 py-1 rounded-full bg-blue-800 text-white transform duration-300 ease-in-out hover:scale-105"
                 to="/events"
               >
                 Upcoming Events
               </Link>
           
               <Link
-                className="px-5 py-1 rounded-full bg-blue-800 text-white"
+                className="px-5 py-1 rounded-full bg-blue-800 text-white transform duration-300 ease-in-out hover:scale-105"
                 to="/query"
               >
                 Inquire with the Society
               </Link>
               
               <Link
-                className="px-5 py-1 rounded-full bg-blue-800 text-white"
+                className="px-5 py-1 rounded-full bg-blue-800 text-white transform duration-300 ease-in-out hover:scale-105"
                 to="/Gallery"
               >
                 Gallery
