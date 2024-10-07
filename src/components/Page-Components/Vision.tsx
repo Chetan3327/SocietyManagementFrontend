@@ -65,10 +65,10 @@ const Vision = () => {
             </h2>
     
             {/* Typing effect for the paragraph */}
-            <p className="text-black font-extrabold text-center my-5 text-xl">
+            <p className="text-black font-extrabold text-center my-5 text-2xl">
               <TypewriterText text={paragraphText1} speed={100} />
             </p>
-            <p className="text-black font-extrabold text-center my-5 text-xl">
+            <p className="text-black font-extrabold text-center my-5 text-2xl">
               <TypewriterText text={paragraphText2} speed={100} />
             </p>
           </div>

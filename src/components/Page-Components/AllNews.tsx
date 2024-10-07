@@ -33,11 +33,11 @@ const AllNews = () => {
           alt="Member spotlight intro"
         />
         <div className="absolute inset-0 py-20 lg:py-28">
-        <h2 className="text-black text-center text-4xl font-extrabold">
-          UPCOMING EVENTS: COLLEGE SOCIETIES
+        <h2 className="text-black text-center text-4xl font-extrabold capitalize">
+          Stay Informed: The Latest Updates from College Societies!
         </h2>
         <p className="text-white text-center my-5 text-xl font-extrabold">
-          Stay informed about exciting events and activities hosted by our vibrant college societies.
+          Stay in the loop with the buzzworthy events and exciting activities from our vibrant college societies !
         </p>
         </div>
       </div>

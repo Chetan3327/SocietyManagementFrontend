@@ -39,12 +39,12 @@ const AboutUs = () => {
       />
       <div className="absolute inset-0 py-20 lg:py-28 flex flex-col items-center text-center">
         {/* Typing effect for the heading */}
-        <h2 className="text-white text-center text-4xl font-bold mb-4">
+        <h2 className="text-white text-center text-2xl font-bold mb-4">
           <TypewriterText text={headingText} speed={100} />
         </h2>
 
         {/* Typing effect for the paragraph */}
-        <p className="text-black font-extrabold text-center my-5 text-xl">
+        <p className="text-black font-extrabold text-center my-5 text-2xl">
           <TypewriterText text={paragraphText} speed={100} />
         </p>
       </div>
