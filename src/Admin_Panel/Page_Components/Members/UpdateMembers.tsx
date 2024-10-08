@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation } from "react-router-dom";
 
 const schema = z.object({
   EnrollmentNo : z.string().nonempty(" Enrollment No is required"),
@@ -36,6 +36,7 @@ const UpdateMembers = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
   let { memberid } = useParams()
+  const location = useLocation()
   const MemberId: number | null = memberid ? parseInt(memberid, 10) : null;
  
   if (MemberId === null) {
@@ -50,16 +51,19 @@ const UpdateMembers = () => {
     resolver: zodResolver(schema)
   })
 
+  const {member} = location.state || {}
+  console.log('in member',location.state)
+
   const onSubmit = (data: formData) => {
 
-    axios.put(`${BACKEND_URL}/admin/members/${MemberId}`, data).then((response) => {
+    axios.put(`${BACKEND_URL}/students/${MemberId}`, data).then((response) => {
       setSubmit(true)
       setIsError(false)
       setError('')
       console.log('data given : ', data)
       console.log('response back : ', response)
       setTimeout(() => {
-        navigate('/admin/members/')
+        navigate('/admin/member/')
       }, 3000)
     }).catch((error) => {
       console.log(error)
@@ -90,14 +94,14 @@ const UpdateMembers = () => {
         </h2>
 
         {iserror && <div className="mt-4 p-4 text-red-500 text-lg font-semibold">{error}</div>}
-        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Details updated successfully ! Redirecting to all members page</div>}
+        {submit && <div className="mt-4 p-4 text-green-500 text-lg font-semibold">Details updated successfully ! Redirecting to all member page</div>}
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <div className="mb-4">
             <label className="block text-md font-medium">Enrollment No</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"   defaultValue={member.MemberId}
               value={MemberId}
               {...register("EnrollmentNo")}
               placeholder="Enter Enrollment No"
@@ -111,7 +115,7 @@ const UpdateMembers = () => {
             <label className="block text-md font-medium">FirstName</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"    defaultValue={member.FirstName}
               {...register("FirstName")}
               placeholder="Enter FirstName of the Student"
             />
@@ -124,7 +128,7 @@ const UpdateMembers = () => {
             <label className="block text-md font-medium">LastName</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"   defaultValue={member.LastName}
               {...register("LastName")}
               placeholder="Enter LastName of the Student"
             />
@@ -189,7 +193,7 @@ const UpdateMembers = () => {
             </label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"   defaultValue={member.Email}
               {...register("Email")}
               placeholder="Enter Email"
             />
@@ -204,7 +208,7 @@ const UpdateMembers = () => {
             <label className="block text-md font-medium">Profile Picture:</label>
               <input
               className={`${classes}`}
-              type="text"
+              type="text"    defaultValue={member.ProfilePicture}
               {...register("ProfilePicture")}
               placeholder="Give the Link for the Profile Picture"
               />

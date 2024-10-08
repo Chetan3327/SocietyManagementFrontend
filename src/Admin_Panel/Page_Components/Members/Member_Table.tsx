@@ -122,7 +122,7 @@ const Member_Table = () => {
 
   const handleDelete = async (EnrollmentNo: number) => {
 
-    await axios.delete(`${BACKEND_URL}/members/${EnrollmentNo}`).then(
+    await axios.delete(`${BACKEND_URL}/student/${EnrollmentNo}`).then(
       res => {
         console.log(res)
         setmembers(members.filter((member: MemberType) => member.EnrollmentNo !== EnrollmentNo))
@@ -184,35 +184,35 @@ const Member_Table = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {members.map((members:MemberType, index: number) => {
+              {members.map((member:MemberType, index: number) => {
                 return (
                   <TableRow key={index} className="border-none">
                     <TableCell>
                       <div className="flex gap-1 items-center justify-end">
                         <img
-                          src={members.ProfilePicture}
+                          src={member.ProfilePicture}
                           alt="student"
                           className="h-8 w-8 rounded-full"
                         />
-                        <h1 className="font-bold">{`${members.FirstName} ${members.LastName}`}</h1>
+                        <h1 className="font-bold">{`${member.FirstName} ${member.LastName}`}</h1>
                       </div>
                     </TableCell>
                     
-                    <TableCell className="text-center">{members.Branch}</TableCell>
-                    <TableCell className="text-center">{members.BatchYear}</TableCell>
-                    <TableCell className="text-center">{members.EnrollmentNo}</TableCell>
-                    <TableCell className="text-center">{members.Email}</TableCell>
+                    <TableCell className="text-center">{member.Branch}</TableCell>
+                    <TableCell className="text-center">{member.BatchYear}</TableCell>
+                    <TableCell className="text-center">{member.EnrollmentNo}</TableCell>
+                    <TableCell className="text-center">{member.Email}</TableCell>
                     {/* <TableCell className="text-center">{members.societyID}</TableCell> */}
                     <TableCell >
                       <Button className="border-2 w-fit px-5 py-1 rounded-full">
-                        <Link to={`/members/${members.EnrollmentNo}`}>View Details</Link>
+                        <Link to={`/members/${member.EnrollmentNo}`} >View Details</Link>
                       </Button>
                     </TableCell>
                     <TableCell className="flex justify-center gap-5">
-                      <Link to={`/admin/members/update/${members.EnrollmentNo}`}>
+                      <Link to={`/admin/members/update/${member.EnrollmentNo}`} state={{member}}>
                          <Button className="text-blue-700"><Edit /></Button>
                       </Link>
-                      <Button className="text-red-700" onClick={() => handleDelete(members.EnrollmentNo)}><Trash /></Button>
+                      <Button className="text-red-700" onClick={() => handleDelete(member.EnrollmentNo)}><Trash /></Button>
                     </TableCell>
                   </TableRow>
                 );

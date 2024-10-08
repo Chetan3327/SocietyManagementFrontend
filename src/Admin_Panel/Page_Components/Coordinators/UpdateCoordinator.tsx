@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation } from "react-router-dom";
 
 const schema = z.object({
   CoordinatorName : z.string().nonempty("Coordinator name is required"),
@@ -24,6 +24,7 @@ const UpdateCoordinatorForm = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   let { coordinatorID } = useParams()
   const COORDINATORID: number | null = coordinatorID ? parseInt(coordinatorID, 10) : null;
@@ -34,6 +35,8 @@ const UpdateCoordinatorForm = () => {
     )
   }
     type formData = z.infer<typeof schema>
+    const {coordinator } = location.state || {}
+    console.log('in coordinator',coordinator)
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
         resolver: zodResolver(schema)
@@ -85,7 +88,7 @@ const UpdateCoordinatorForm = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number"  value={coordinator.SocietyID} readOnly
               {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
@@ -111,7 +114,7 @@ const UpdateCoordinatorForm = () => {
             <label className="block text-md font-medium">Coordinator Name</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={coordinator.CoordinatorName}
               {...register("CoordinatorName")}
               placeholder="Enter coordinator name"
             />
@@ -126,7 +129,7 @@ const UpdateCoordinatorForm = () => {
             </label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={coordinator.CoordinatorDesignation}
               {...register("CoordinatorPosition")}
               placeholder="Enter coordinator position"
             />
@@ -143,7 +146,7 @@ const UpdateCoordinatorForm = () => {
             </label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={coordinator.CoordinatorEmail}
               {...register("CoordinatorEmail")}
               placeholder="Enter Coordinator Email"
             />
@@ -158,7 +161,7 @@ const UpdateCoordinatorForm = () => {
             <label className="block text-md font-medium">Coordinator Description</label>
             <textarea
               placeholder="Write the coordinator description  here"
-              {...register("CoordinatorDescription")}
+              {...register("CoordinatorDescription")}  defaultValue={coordinator.CoordinatorDetails}
               className={`${classes}`}
             ></textarea>
             {errors.CoordinatorDescription && (
@@ -171,7 +174,7 @@ const UpdateCoordinatorForm = () => {
             <label className="block text-md font-medium">
             Coordinator Image
             </label>
-            <input
+            <input  defaultValue={coordinator.Image}
               className={`${classes}`}
               type="text"
               {...register("Image")}

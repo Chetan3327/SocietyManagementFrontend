@@ -165,7 +165,7 @@ const Coordinator_Table = () => {
                       </div>
                     </TableCell>
                     <TableCell className="flex justify-center gap-5">
-                      <Link to={`/admin/coordinators/update/${coordinator.CoordinatorID}`}>
+                      <Link to={`/admin/coordinators/update/${coordinator.CoordinatorID}`} state={{coordinator}}>
                       <Button className="text-blue-700"><Edit /></Button>
                       </Link>
                       <Button className="text-red-700" onClick={()=>handleDelete(coordinator.CoordinatorID)}><Trash /></Button>

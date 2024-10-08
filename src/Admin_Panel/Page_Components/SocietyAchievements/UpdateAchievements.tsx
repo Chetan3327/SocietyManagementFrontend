@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation } from "react-router-dom";
 
 const schema = z.object({
   DateAchieved: z.date(),
@@ -30,6 +30,10 @@ const UpdateAchievement = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
+
+  console.log('in achivement ', location.state)
+  const {achievemnt} = location.state || {}
 
   let { achievementID } = useParams()
   const ACHIEVEMENTID: number | null = achievementID ? parseInt(achievementID, 10) : null;
@@ -41,7 +45,7 @@ const UpdateAchievement = () => {
   }
 
   type formData = z.infer<typeof schema>
-
+  
   const { register, handleSubmit, formState: { errors } } = useForm<formData>({
     resolver: zodResolver(schema)
   })
@@ -107,7 +111,7 @@ const UpdateAchievement = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number"  defaultValue={achievemnt.SocietyID}
               {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
@@ -120,7 +124,7 @@ const UpdateAchievement = () => {
             <label className="block text-md font-medium">Title</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={achievemnt.Title}
               {...register("Title")}
               placeholder="Enter Society ID"
             />
@@ -133,7 +137,7 @@ const UpdateAchievement = () => {
             <label className="block text-md font-medium">Achievement Description</label>
             <textarea
               placeholder="More about the achievement"
-              {...register("Description")}
+              {...register("Description")}  defaultValue={achievemnt.Description}
               className={`${classes}`}
             ></textarea>
             {errors.Description && (

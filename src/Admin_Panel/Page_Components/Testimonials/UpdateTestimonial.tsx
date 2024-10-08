@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams ,useLocation} from "react-router-dom";
 
 const schema = z.object({
   TestimonialDescription: z.string().nonempty("Testimonial is required"),
@@ -28,8 +28,11 @@ const CreateTestimonial = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation();
 
   let { testimonialID } = useParams()
+  const {testimonial}= location.state || {};
+  console.log('in testimonial',testimonial)
   const TESTMONIALID: number | null = testimonialID ? parseInt(testimonialID, 10) : null;
 
   if (TESTMONIALID === null) {
@@ -89,7 +92,7 @@ const CreateTestimonial = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number" defaultValue={testimonial.SocietyID} readOnly
               {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
@@ -116,7 +119,7 @@ const CreateTestimonial = () => {
             <label className="block text-md font-medium">Enrollment No</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number" defaultValue={testimonial.EnrollmentNo}
               {...register("EnrollmentNo", { valueAsNumber: true })}
               placeholder="Enter Student's Enrollment No"
             />
@@ -128,7 +131,7 @@ const CreateTestimonial = () => {
           <div className="mb-4">
             <label className="block text-md font-medium">Testimonial Description</label>
             <textarea
-              placeholder="Enter your reviews"
+              placeholder="Enter your reviews"  defaultValue={testimonial.TestimonialDescription}
               {...register("TestimonialDescription")}
               className={`${classes}`}
             ></textarea>

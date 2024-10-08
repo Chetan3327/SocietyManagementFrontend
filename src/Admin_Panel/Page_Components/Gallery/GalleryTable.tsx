@@ -151,7 +151,7 @@ const Gallery_table = () => {
                                             <a href={`${galleries.Image}`}>View Image</a>
                                         </TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to={`/admin/gallery/update/${galleries.GalleryID}`}>
+                                            <Link to={`/admin/gallery/update/${galleries.GalleryID}`} state={{galleries}}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
                                             <Button className="text-red-700" onClick={() => handleDelete(galleries.GalleryID)}><Trash /></Button>
