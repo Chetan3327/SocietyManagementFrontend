@@ -48,120 +48,124 @@ const societyPasswords: { [key: number]: string } = {
 };
 
 const styles = {
-    container: {
-      display: "flex",
-      height: "100vh",
-    },
-    leftSide: {
-      flex: "1",
-      display: "flex",
-      flexDirection: "column" as 'column',
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "rgba(255, 255, 255, 0.9)",
-      padding: "20px",
-      boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
-    },
-    rightSide: {
-      flex: "1",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#f0f0f0",
-    },
-    image: {
-      maxWidth: "80%",
-      maxHeight: "80%",
-      borderRadius: "15px",
-      boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    },
-    formWrapper: {
-      width: "100%",
-      maxWidth: "400px",
-      padding: "20px",
-      borderRadius: "8px",
-      boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)",
-      backgroundColor: "#fff",
-      position: "relative" as "relative",
-      display: "flex",
-      flexDirection: "column" as "column",
-      alignItems: "center",
-    },
-    logo: {
-      position: "absolute" as "absolute",
-      top: "10px",
-      left: "10px",
-      width: "50px",
-      height: "50px",
-      objectFit: "contain" as "contain",
-    },
-    title: {
-      margin: "0",
-      fontSize: "24px",
-      color: "#333",
-      textAlign: "center" as "center",
-      marginBottom: "20px",
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column" as "column",
-      width: "100%",
-    },
-    fieldContainer: {
-      position: "relative" as "relative",
-      marginBottom: "15px",
-    },
-    inputContainer: {
-      display: "flex",
-      alignItems: "center",
-      border: "1px solid #ccc",
-      borderRadius: "4px",
-      padding: "0 10px",
-    },
-    input: {
-      width: "100%",
-      padding: "10px",
-      border: "none",
-      borderRadius: "4px",
-    },
-    icon: {
-      color: "#0078d4",
-      marginRight: "10px",
-    },
-    button: {
-      padding: "10px",
-      border: "none",
-      borderRadius: "4px",
-      backgroundColor: "#0078d4",
-      color: "#fff",
-      fontSize: "16px",
-      cursor: "pointer",
-      marginTop: "10px",
-    },
-    buttonHover: {
-      backgroundColor: "#005a9e",
-    },
-    links: {
-      display: "flex",
-      flexDirection: "column" as "column",
-      alignItems: "center",
-    },
-    link: {
-      color: "#0078d4",
-      textDecoration: "none",
-      marginTop: "10px",
-    },
-    message: {
-      textAlign: "center" as "center",
-      marginBottom: "20px",
-    },
-    error: {
-      color: "red",
-    },
-    success: {
-      color: "green",
-    },
-  };
+  container: {
+    display: "flex",
+    height: "100vh",
+  },
+  leftSide: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column" as const, // Explicitly define it as "column"
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    padding: "20px",
+    boxShadow: "inset 0 0 10px rgba(0, 0, 0, 0.1)",
+  },
+  rightSide: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
+  },
+  image: {
+    maxWidth: "80%",
+    maxHeight: "80%",
+    borderRadius: "15px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+  },
+  formWrapper: {
+    width: "100%",
+    maxWidth: "400px",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 0 15px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#fff",
+    position: "relative" as const,
+    display: "flex",
+    flexDirection: "column" as const, // Explicitly define as "column"
+    alignItems: "center",
+  },
+  logo: {
+    position: "absolute" as const,
+    top: "10px",
+    left: "10px",
+    width: "50px",
+    height: "50px",
+    objectFit: "contain" as const,
+  },
+  title: {
+    margin: "0",
+    fontSize: "24px",
+    color: "#333",
+    textAlign: "center" as const,
+    marginBottom: "20px",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column" as const, // Correct type
+    width: "100%",
+  },
+  fieldContainer: {
+    position: "relative" as const,
+    marginBottom: "15px",
+  },
+  inputContainer: {
+    display: "flex",
+    alignItems: "center",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    padding: "0 10px",
+  },
+  input: {
+    width: "100%",
+    padding: "10px",
+    border: "none",
+    borderRadius: "4px",
+  },
+  icon: {
+    color: "#0078d4",
+    marginRight: "10px",
+  },
+  button: {
+    padding: "10px",
+    border: "none",
+    borderRadius: "4px",
+    backgroundColor: "#0078d4",
+    color: "#fff",
+    fontSize: "16px",
+    cursor: "pointer",
+    marginTop: "10px",
+    transition: "transform 0.3s ease-in-out, background-color 0.3s ease-in-out",
+  },
+  buttonHover: {
+    backgroundColor: "#005a9e",
+    transform: "scale(1.05)",
+  },
+  links: {
+    display: "flex",
+    flexDirection: "column" as const, // Correct type
+    alignItems: "center",
+  },
+  link: {
+    color: "#0078d4",
+    textDecoration: "none",
+    marginTop: "10px",
+  },
+  message: {
+    textAlign: "center" as const,
+    marginBottom: "20px",
+  },
+  error: {
+    color: "red",
+  },
+  success: {
+    color: "green",
+  },
+};
+
+
   
   const Admin_Login: React.FC = () => {
     const [selectedSocietyID, setSelectedSocietyID] = useState<string>(""); // Keep it as a string to handle "0" properly
@@ -209,6 +213,7 @@ const styles = {
             {success && <p style={{ ...styles.message, ...styles.success }}>{success}</p>}
   
             <form style={styles.form} onSubmit={handleSubmit}>
+
               {/* Society Dropdown */}
               <div style={styles.fieldContainer}>
                 <div style={styles.inputContainer}>
@@ -246,6 +251,7 @@ const styles = {
   
               {/* Role Selector */}
               <div style={styles.fieldContainer}>
+                <div style={styles.inputContainer}>
                 <select
                   id="role"
                   value={role}
@@ -257,9 +263,20 @@ const styles = {
                   <option value="Society Head">Society Head</option>
                   <option value="College Admin">College Admin</option>
                 </select>
+                </div>
               </div>
   
-              <button type="submit" style={styles.button}>
+              <button type="submit" 
+                  style={styles.button}  
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                    styles.buttonHover.backgroundColor)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.button.backgroundColor)
+                  }
+              >
                 Log In
               </button>
             </form>
