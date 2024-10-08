@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useLogin from "@/hooks/UseLogin";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 
@@ -114,6 +114,24 @@ const styles = {
   rememberMeLabel: {
     color: "#333",
   },
+  selectRole: {
+    width: "100%",
+    padding: "15px",
+    paddingLeft: 26, // Apply padding only on the left
+    marginBottom: "15px",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
+  },
+  adminButton: {
+    padding: "10px",
+    border: "none",
+    borderRadius: "4px",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    fontSize: "16px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
 };
 
 const LoginPage: React.FC = () => {
@@ -129,18 +147,24 @@ const LoginPage: React.FC = () => {
     success,
   } = useLogin();
 
+  const [role, setRole] = useState(""); // New state for the role
   const navigate = useNavigate(); // Use navigate hook
 
   // Handle redirection after showing success message
   React.useEffect(() => {
     if (success) {
       localStorage.setItem("isLoggedIn", "true");
-      alert('User logged in sucessfully')
+      alert('User logged in successfully');
       setTimeout(() => {
         navigate('/'); // Navigate to the home page after 3 seconds
       }, 3000);
     }
   }, [success, navigate]);
+
+  const handleAdminRedirect = () => {
+    // Redirect to the admin login page when the button is clicked
+    navigate('/admin');
+  };
 
   return (
     <div style={styles.container} className="flex-col md:flex-row">
@@ -201,6 +225,22 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Dropdown for role selection */}
+            <div style={styles.fieldContainer}>
+              <select
+                style={styles.selectRole}
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                required
+              >
+                <option value="">Select Role</option>
+                <option value="College Admin">College Admin</option>
+                <option value="Society Head">Society Head</option>
+                <option value="Student">Student</option>
+                <option value="College Faculty">College Faculty</option>
+              </select>
+            </div>
+
             <button
               type="submit"
               style={styles.button}
@@ -216,6 +256,23 @@ const LoginPage: React.FC = () => {
             >
               Login
             </button>
+
+
+            {/* Conditional text and button for admin panel access */}
+            {(role === "College Admin" || role === "Society Head") && (
+              <div className="mt-10">
+                <p className="text-gray-700">
+                  Want to explore more? Visit Admin Panel for our website...
+                </p>
+                <button
+                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transform duration-300 ease-in-out hover:scale-105"
+                  onClick={handleAdminRedirect}
+                >
+                  Admin Panel
+                </button>
+              </div>
+            )}
+            
 
             <div style={styles.links}>
               <Link to="/signup" style={styles.link}>
