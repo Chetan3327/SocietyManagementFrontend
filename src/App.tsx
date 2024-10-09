@@ -82,7 +82,7 @@ import UpdateRoles from './Admin_Panel/Page_Components/Roles/UpdateRoles'
 
 import Admin_Login from "./Admin_Panel/Page/Admin_Login";
 
-import ProtectedRoute from "./protectedRoute";
+// import ProtectedRoute from "./protectedRoute";
 
 const App = () => {
   const location = useLocation();
@@ -164,8 +164,8 @@ const App = () => {
         {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/BecomeMember" element={<ProtectedRoute><Become_Member_Form /></ProtectedRoute>} />
-          <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+          <Route path="/BecomeMember" element={<Become_Member_Form />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           {/* <Route path="/openings/:id" element={<Openings />} /> */}
           <Route path="/roles" element={<Roles />} />
           <Route path="/coordinators" element={<Coordinators />} />
@@ -205,7 +205,7 @@ const App = () => {
             path="/create-event/:societyid/:eventid"
             element={<CreateEventForm />}
           />
-          <Route path="/about-us" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
+          <Route path="/about-us" element={<AboutUs />} />
 
           <Route path="/society/:id" element={<Society />}>
             <Route path="Societymembers" element={<SocietyMembers />} />
