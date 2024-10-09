@@ -16,7 +16,7 @@ const useLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://societybackend-go.onrender.com/login",
+        "https://societybackend-go.onrender.com/api/v1/login",
         {
           Email: email,
           Password: password,
