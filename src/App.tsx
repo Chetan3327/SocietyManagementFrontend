@@ -205,7 +205,7 @@ const App = () => {
             path="/create-event/:societyid/:eventid"
             element={<CreateEventForm />}
           />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/about-us" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
 
           <Route path="/society/:id" element={<Society />}>
             <Route path="Societymembers" element={<SocietyMembers />} />
