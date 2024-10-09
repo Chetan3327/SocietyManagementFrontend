@@ -150,6 +150,39 @@ const LoginPage: React.FC = () => {
   const [role, setRole] = useState(""); // New state for the role
   const navigate = useNavigate(); // Use navigate hook
 
+  // Inactivity Timer
+  let timeoutId: NodeJS.Timeout;
+
+  const resetTimer = () => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      handleLogout();
+    }, 3600000); // 1 hour in milliseconds
+  };
+
+  const handleLogout = () => {
+    // Clear user data and navigate to login page
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
+    alert("You have been logged out due to inactivity.");
+  };
+
+  // Reset timer on user activity
+  React.useEffect(() => {
+    resetTimer();
+    
+    // Add event listeners for mouse and keyboard events
+    window.addEventListener("mousemove", resetTimer);
+    window.addEventListener("keydown", resetTimer);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keydown", resetTimer);
+    };
+  }, []);
+
+
   // Handle redirection after showing success message
   React.useEffect(() => {
     if (success) {
@@ -265,10 +298,11 @@ const LoginPage: React.FC = () => {
           </form>
         </div>
       </div>
+
       <div style={styles.rightSide}>
         <img
-          src="https://static.vecteezy.com/system/resources/previews/027/205/841/original/login-and-password-concept-3d-illustration-computer-and-account-login-and-password-form-on-computer-screen-flat-illustration-free-vector.jpg"
-          alt="Login"
+          src="https://static.vecteezy.com/system/resources/previews/027/205/841/original/login-and-password-concept-3d-illustration-computer-and-account-login-and-password-form-page-on-screen-3d-illustration-png.png"
+          alt="Login Background"
           style={styles.image}
         />
       </div>
