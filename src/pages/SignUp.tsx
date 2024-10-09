@@ -157,7 +157,7 @@ const SignupPage: React.FC = () => {
     try {
       if (!OTPSent) {
         const response: AxiosResponse = await axios.post(
-          "https://societybackend-go.onrender.com/signup",
+          "https://societybackend-go.onrender.com/api/v1/signup",
           {
             FirstName: firstName,
             LastName: lastName,
@@ -176,7 +176,7 @@ const SignupPage: React.FC = () => {
         }
       } else {
         const response: AxiosResponse = await axios.post(
-          "https://societybackend-go.onrender.com/signup",
+          "https://societybackend-go.onrender.com/api/v1/signup",
           {
             FirstName: firstName,
             LastName: lastName,
