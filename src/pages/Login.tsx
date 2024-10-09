@@ -401,6 +401,17 @@ const styles = {
     textDecoration: "none",
     margin: "5px 0",
   },
+  rememberMeContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "15px",
+  },
+  rememberMeCheckbox: {
+    marginRight: "10px",
+  },
+  rememberMeLabel: {
+    color: "#333",
+  },
   selectRole: {
     width: "100%",
     padding: "15px",
@@ -429,17 +440,18 @@ const LoginPage: React.FC = () => {
     setPassword,
     showPassword,
     togglePasswordVisibility,
+    // handleSubmit,
     error,
     success,
   } = useLogin();
 
   const [role, setRole] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Simple email format validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
@@ -448,7 +460,7 @@ const LoginPage: React.FC = () => {
 
     // Simulating storing an auth token
     localStorage.setItem("authToken", "your-auth-token");
-    setIsLoggedIn(true); // Update login state
+
     const redirectTo = location.state?.from || "/";
     navigate(redirectTo);
   };
@@ -456,19 +468,13 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (success) {
       localStorage.setItem("isLoggedIn", "true");
+      // Using a toast notification or alert to inform the user
       alert("User logged in successfully");
       setTimeout(() => {
         navigate("/"); // Navigate to the home page after 2 seconds
       }, 2000);
     }
   }, [success, navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken"); // Clear auth token
-    setIsLoggedIn(false); // Update login state
-    alert("You have logged out successfully.");
-    navigate("/login"); // Redirect to login page
-  };
 
   const handleAdminRedirect = () => {
     navigate("/admin");
@@ -543,7 +549,7 @@ const LoginPage: React.FC = () => {
             </div>
 
             <button
-              type="submit" // Keep this as submit type for form submission
+              type="submit"
               style={styles.button}
               onMouseOver={(e) => (e.currentTarget.style.backgroundColor = styles.buttonHover.backgroundColor)}
               onMouseOut={(e) => (e.currentTarget.style.backgroundColor = styles.button.backgroundColor)}
@@ -552,38 +558,27 @@ const LoginPage: React.FC = () => {
               Login
             </button>
 
-            <button
-              type="button" // Change this to button type for logout
-              onClick={handleLogout}
-              style={styles.button}
-              aria-label="Logout Button"
-              disabled={!isLoggedIn} // Disable if not logged in
-            >
-              Logout
-            </button>
-
             {(role === "College Admin" || role === "Society Head") && (
-              <button
-                type="button" // Change to button type for admin redirect
-                style={styles.adminButton}
-                onClick={handleAdminRedirect}
-                aria-label="Admin Redirect Button"
-              >
-                Go to Admin Panel
-              </button>
+              <div className="mt-10">
+                <p className="text-gray-700">Want to explore more? Visit Admin Panel for our website...</p>
+                <button
+                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transform duration-300 ease-in-out hover:scale-105"
+                  onClick={handleAdminRedirect}
+                >
+                  Admin Panel
+                </button>
+              </div>
             )}
-          </form>
 
-          <div style={styles.links}>
-            <Link to="/forgot-password" style={styles.link}>
-              Forgot Password?
-            </Link>
-            <Link to="/register" style={styles.link}>
-              Don't have an account? Sign Up
-            </Link>
-          </div>
+            <div style={styles.links}>
+              <Link to="/signup" style={styles.link}>
+                Don’t have an account? Create one!
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
+
       <div style={styles.rightSide}>
         <img
           src="https://static.vecteezy.com/system/resources/previews/027/205/841/original/login-and-password-concept-3d-illustration-computer-and-account-login-and-password-form-page-on-screen-3d-illustration-png.png"
@@ -596,6 +591,5 @@ const LoginPage: React.FC = () => {
 };
 
 export default LoginPage;
-
 
 
