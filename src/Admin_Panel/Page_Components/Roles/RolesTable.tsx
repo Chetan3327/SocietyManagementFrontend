@@ -140,7 +140,7 @@ const Roles_table = () => {
                                         <TableCell className="text-center">{role.Rolename}</TableCell>
                                         <TableCell className="text-center">{role.RoleDescription}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to={`/admin/roles/update/${role.RoleID}`}>
+                                            <Link to={`/admin/roles/update/${role.RoleID}`} state={{role}}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
                                             <Button className="text-red-700" onClick={() => handleDelete(role.RoleID)}><Trash /></Button>

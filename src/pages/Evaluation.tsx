@@ -1,8 +1,10 @@
 // src/components/TabComponentStudent.tsx
 
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./Tab_Component_student.css";
+import { useLocation , useParams } from "react-router-dom";
 import EvaluationCard from "@/components/Page-Components/EvaluationCard";
+import axios from "axios";
 // import Testimonials from "./Testimonials";
 // import TestimonialCard from "@/components/Page-Components/Testimonials";
 
@@ -30,79 +32,121 @@ import EvaluationCard from "@/components/Page-Components/EvaluationCard";
 //   githubLink: string;
 // }
 export type Data = {
-  heading: string;
-  date: string;
-  points: string[];
+  EnrollmentNo : number,
+  SocietyID: number,
+  AchievementID: number
+  Title: string,
+  Description: string,
+  DateAchieved: string
 };
+
+// const achievements: Data[] = [
+//   {
+//     heading: "Project Leadership: AI Chatbot Development",
+//     date: "January 2022",
+//     points: [
+//       "Led a team to develop a chatbot for campus information dissemination, resulting in a 20% increase in user engagement.",
+//       "Led multiple projects in the AI society and aims to pursue a career in research.",
+//     ],
+//   },
+// ];
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const TabComponentStudent: React.FC = () => {
-
-
-  const achievements: Data[] = [
-    {
-      heading: "Project Leadership: AI Chatbot Development",
-      date: "January 2022",
-      points: [
-        "Led a team to develop a chatbot for campus information dissemination, resulting in a 20% increase in user engagement.",
-        "Led multiple projects in the AI society and aims to pursue a career in research.",
-      ],
-    },
-    // You can add more achievement entries if needed
-  ];
 
   // const [activeTab, setActiveTab] = useState<
   //   "personal" | "Work Experience" | "achievements" | "projects"
   // >("personal");
 
-  const [fullName, setFullName] = useState<string>("");
+  //const [fullName, setFullName] = useState<string>("");
  // const [dob, setDob] = useState<string>("");
  // const [gender, setGender] = useState<string>("");
-  const [enrollmentNumber, setEnrollmentNumber] = useState<string>("");
-  const [batch, setBatch] = useState<string>("");
-  const [branch, setBranch] = useState<string>("");
-  const [contact, setContact] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [societyPosition, setSocietyPosition] = useState<string>("");
-  const [linkedIn, setLinkedIn] = useState<string>("");
-  const [github, setGithub] = useState<string>("");
-  const [twitter, setTwitter] = useState<string>("");
+  // const [enrollmentNumber, setEnrollmentNumber] = useState<string>("");
+  // const [batch, setBatch] = useState<string>("");
+  // const [branch, setBranch] = useState<string>("");
+  // const [contact, setContact] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
+  // const [societyPosition, setSocietyPosition] = useState<string>("");
+  // const [linkedIn, setLinkedIn] = useState<string>("");
+  // const [github, setGithub] = useState<string>("");
+  // const [twitter, setTwitter] = useState<string>("");
 
+  const [achievement,setAchievement] = useState([])
+
+  const location = useLocation()
+
+  let {enrollmentNo } = useParams()
+  const EnrollmentNo: number | null = enrollmentNo ? parseInt(enrollmentNo, 10) : null;
+ 
+  if (EnrollmentNo === null) {
+    return (
+      <div className="text-2xl font-semibold m-4">Invalid enrollment number </div>
+    )
+  }
+
+  const {member} = location.state || {}
+  console.log('in member',member)
+
+  useEffect(() => {
+    const fetchAchievement = async () => {
+      let res;
+      if (EnrollmentNo) {
+        res = await axios.get(`${BACKEND_URL}/studentachievements/${enrollmentNo}`);
+      } else {
+        res = await axios.get(`${BACKEND_URL}/studentachievements`);
+      }
+      setAchievement(res.data);
+    };
+
+    fetchAchievement();
+  }, [EnrollmentNo]);
+
+  if (achievement.length <= 0) {
+    return <div className="text-3xl font-bold">Loading data...</div>;
+  }
+
+  
   return (
     <div className="tab-container flex flex-col text-black">
       <div className="content-wrapper w-10/12 mx-auto">
         <div className="content-container w-full">
           <img
             className="w-32 h-32 rounded-full mx-auto"
-            src="https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp"
-            alt="John Doe"
+            src={member.ProfilePicture}
+            alt="profile picture"
           />
 
           <div className="content mt-8">
             <div className="form-group">
-              <label>Full Name</label>
+              <label>First Name</label>
               <input
                 className="w-full p-2 bg-gray-100 border  border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
-                placeholder="Enter full name"
-                value={fullName} onChange={(e)=>{setFullName(e.target.value)}}
+                type="text" readOnly
+                placeholder="Enter first name"
+                value={member.FirstName} 
+                //onChange={(e)=>{setFullName(e.target.value)}}
               />
             </div>
-            {/* <div className="form-group">
+            <div className="form-group">
               <label>Last Name</label>
               <input
-                disabled
+                readOnly
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
-                placeholder="Loading ..."
-                value={fullName}  onChange={(e)=>{setFullName(e.target.value)}}
+                placeholder="Enter last name"
+                value={member.LastName} 
+                  // onChange={(e)=>{setFullName(e.target.value)}}
               />
-            </div> */}
+            </div>
             <div className="form-group">
               <label>Enrollment Number</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter Enrollment Number"
-                value={enrollmentNumber}   onChange={(e)=>{setEnrollmentNumber(e.target.value)}}
+                value={EnrollmentNo}   
+                //onChange={(e)=>{setEnrollmentNumber(e.target.value)}}
               />
             </div>
             {/* <div className="form-group">
@@ -119,45 +163,50 @@ const TabComponentStudent: React.FC = () => {
               <label>Batch Year</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter Batch Year"
-                value={batch}  onChange={(e)=>{setBatch(e.target.value)}}
+                value={member.BatchYear}  
+                //onChange={(e)=>{setBatch(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Branch</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter Branch Year"
-                value={branch}  onChange={(e)=>{setBranch(e.target.value)}}
+                value={member.Branch}  
+                //onChange={(e)=>{setBranch(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Contact</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter contact"
-                value={contact}  onChange={(e)=>{setContact(e.target.value)}}
+                value={member.MobileNo}  
+                //  onChange={(e)=>{setContact(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Email</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="email"
+                type="email" readOnly
                 placeholder="Enter Email"
-                value={email}  onChange={(e)=>{setEmail(e.target.value)}}
+                value={member.Email}  
+                //onChange={(e)=>{setEmail(e.target.value)}}
               />
             </div>
             <div className="form-group">
               <label>Society Position</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter Your Society Position"
-                value={societyPosition}  onChange={(e)=>{setSocietyPosition(e.target.value)}}
+                value={member.SocietyPosition}  
+                // onChange={(e)=>{setSocietyPosition(e.target.value)}}
               />
             </div>
             <div className="form-group">
@@ -165,19 +214,20 @@ const TabComponentStudent: React.FC = () => {
               <input
 
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter linkedin profile"
-                value={linkedIn}
-                onChange={(e) => setLinkedIn(e.target.value)}
+                value={member.LinkedInProfile}
+               // onChange={(e) => setLinkedIn(e.target.value)}
               />
             </div>
             <div className="form-group">
               <label>GitHub</label>
               <input
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
-                type="text"
+                type="text" readOnly
                 placeholder="Enter github profile"
-                value={github} onChange={(e)=>{setGithub(e.target.value)}}
+                value={member.GithubProfile} 
+                //onChange={(e)=>{setGithub(e.target.value)}}
               />
             </div>
             <div className="form-group">
@@ -186,15 +236,16 @@ const TabComponentStudent: React.FC = () => {
                 className="w-full p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-500 placeholder-gray-400"
                 type="text"
                 placeholder="Enter twitter profile"
-                value={twitter} onChange={(e)=>{setTwitter(e.target.value)}}
+                value={member.TwitterProfile}  
+                //onChange={(e)=>{setTwitter(e.target.value)}}
               />
             </div>
           </div>
         </div>
       </div>
       <div className="w-full flex justify-center flex-col">
-        <EvaluationCard arr={achievements} head={"Achievements"} />
-        <EvaluationCard arr={achievements} head={"Contributions"} />
+        <EvaluationCard arr={achievement} head={"Achievements"} />
+        <EvaluationCard arr={member.StudentContributions} head={"Contributions"} />
       </div>
     </div>
   );

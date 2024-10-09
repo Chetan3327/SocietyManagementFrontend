@@ -2,7 +2,7 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation} from "react-router-dom";
 import axios from "axios";
 
 const schema = z.object({
@@ -24,10 +24,14 @@ const UpdateSociety = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
     let { societyId } = useParams()
     console.log(societyId)
     const SOCIETYID: number | null = societyId ? parseInt(societyId, 10) : null;
+
+    const {society} = location.state || {};
+    console.log('in society',society)
    
     if (SOCIETYID === null) {
       return (
@@ -102,7 +106,7 @@ const UpdateSociety = () => {
             <input
               type="text"
               className={`${classes}`}
-              {...register("SocietyName")}
+              {...register("SocietyName")} defaultValue={society?.SocietyName}
               placeholder="Enter Name of the Society"
             />
             {errors.SocietyName && (
@@ -130,7 +134,7 @@ const UpdateSociety = () => {
             <label className="block text-md font-medium">Describe Your Society</label>
             <textarea
               className={`${classes}`}
-              {...register("SocietyDescription")}
+              {...register("SocietyDescription")}  defaultValue={society.SocietyDescription}
               placeholder="Enter Society description"
             ></textarea>
             {errors.SocietyDescription && (
@@ -143,7 +147,7 @@ const UpdateSociety = () => {
             <input
               placeholder="Enter Society Head Name"
               {...register("SocietyHead")}
-              type="text"
+              type="text"      defaultValue={society.SocietyHead}
               className={`${classes}`}
             />
             {errors.SocietyHead && (

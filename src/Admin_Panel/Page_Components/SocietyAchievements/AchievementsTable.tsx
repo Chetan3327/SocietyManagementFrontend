@@ -153,7 +153,7 @@ const Achievemnts_table = () => {
                                         <TableCell className="text-center">{achievemnt.Description}</TableCell>
                                         <TableCell className="text-center">{format(new Date(achievemnt.DateAchieved), "MMMM dd, yyyy")}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to={`/admin/SocietyAchievements/update/${achievemnt.SocietyAchievementID}`}>
+                                            <Link to={`/admin/SocietyAchievements/update/${achievemnt.SocietyAchievementID}`} state={{achievemnt}}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
                                             <Button className="text-red-700" onClick={() => handleDelete(achievemnt.SocietyAchievementID)}><Trash /></Button>

@@ -82,7 +82,8 @@ const News_Table = () => {
               <TableCell className="text-center">{newsItem.Description}</TableCell>
               <TableCell className="text-center">{newsItem.Author}</TableCell>
               <TableCell className="flex justify-center items-center gap-4">
-                <Link to={`/admin/news/update/${newsItem.NewsID}`}>
+                
+                <Link to={ `/admin/news/update/${newsItem.NewsID}`} state={{newsItem}}>
                   <Button className="text-blue-700"><Edit /></Button>
                 </Link>
                 <Button className="text-red-700" onClick={() => handleDelete(newsItem.NewsID)}><Trash /></Button>

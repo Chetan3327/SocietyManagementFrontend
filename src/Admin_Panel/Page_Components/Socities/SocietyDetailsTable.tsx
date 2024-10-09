@@ -208,7 +208,7 @@ const SocietyDetailsTable = () => {
                   {society.SocietyType}
                 </TableCell>
                 <TableCell className="flex justify-center gap-5">
-                  <Link to={`/admin/society/update/${society.SocietyID}`}>
+                  <Link to={`/admin/society/update/${society.SocietyID}`} state={{society}}>
                     <Button className="text-blue-700">
                       <Edit />
                     </Button>

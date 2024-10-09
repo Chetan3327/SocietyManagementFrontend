@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation} from "react-router-dom";
 
 const schema = z.object({
   Description: z.string().nonempty(" News description is required"),
@@ -23,9 +23,12 @@ const UpdateNews = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   let { newsID } = useParams()
   const NEWSID: number | null = newsID ? parseInt(newsID, 10) : null;
+
+  const { newsItem } = location.state || {};
  
   if (NEWSID === null) {
     return (
@@ -87,7 +90,7 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type='number'
+              type='number' value={newsItem.SocietyID} readOnly
               {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID" required
             />
@@ -112,11 +115,11 @@ const UpdateNews = () => {
 
           <div className="mb-4">
             <label className="block text-md font-medium">News Title</label>
-            <textarea
+            <input
               className={`${classes}`}
-              {...register("Title")}
+              {...register("Title")} defaultValue={newsItem.Title}
               placeholder="Enter News Title"
-            ></textarea>
+            />
             {errors.Title && (
               <span className="text-red-500">{errors.Title.message}</span>
             )}
@@ -125,7 +128,7 @@ const UpdateNews = () => {
           <div className="mb-4">
             <label className="block text-md font-medium">News Description</label>
             <textarea
-              className={`${classes}`}
+              className={`${classes}`} defaultValue={newsItem.Description}
               {...register("Description")}
               placeholder="Enter News description"
             ></textarea>
@@ -140,7 +143,7 @@ const UpdateNews = () => {
             </label>
             <input
               className={`${classes}`}
-              type="date"
+              type="date"  defaultValue={newsItem.DateOfNews}
               {...register("DateOfNews", { valueAsDate: true })}
               placeholder="Enter Date of the news"
             />
@@ -155,7 +158,7 @@ const UpdateNews = () => {
             <label className="block text-md font-medium">Author Name</label>
             <input
               placeholder="Author/Society of the News"
-              {...register("Author")}
+              {...register("Author")} defaultValue={newsItem.Author}
               type="text"
               className={`${classes}`}
             />
