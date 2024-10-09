@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate , useParams } from "react-router-dom";
+import { useNavigate , useParams , useLocation} from "react-router-dom";
 
 // type EventType = {
 //   SocietyId : number,
@@ -38,6 +38,7 @@ const UpdateEvents = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   let { eventsID }  = useParams()
     const EVENTSID : number | null = eventsID ? parseInt(eventsID,10) : null ;
@@ -49,6 +50,7 @@ const UpdateEvents = () => {
     }
 
     type formData = z.infer<typeof schema>
+    const {eventItem} = location.state || {}
 
     const {register , handleSubmit , formState : {errors} }= useForm<formData>({
         resolver: zodResolver(schema)
@@ -103,7 +105,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Society name</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={eventItem.SocietyName}
               {...register("SocietyName")}
               placeholder="Enter Society ID"
             />
@@ -129,7 +131,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event Title</label>
             <textarea
               className={`${classes}`}
-              {...register("Title")}
+              {...register("Title")}  defaultValue={eventItem.Title}
               placeholder="Enter Event's Title"
             ></textarea>
             {errors.Title && (
@@ -141,7 +143,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event Description</label>
             <textarea
               className={`${classes}`}
-              {...register("Description")}
+              {...register("Description")}  defaultValue={eventItem.Description}
               placeholder="Enter Event's description"
             ></textarea>
             {errors.Description && (
@@ -153,7 +155,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event Type</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={eventItem.EventType}
               {...register("EventType")}
               placeholder="Enter the Event's Type, ex, competition,.. "
             />
@@ -166,7 +168,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Mode Of Event</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={eventItem.ModeOfEvent}
               {...register("ModeOfEvent")}
               placeholder="Online, Offline,..."
             />
@@ -179,7 +181,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event Location</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={eventItem.Location}
               {...register("Location")}
               placeholder="Seminar Hall, Google Meet,..."
             />
@@ -192,7 +194,7 @@ const UpdateEvents = () => {
             <label className="block text-md font-medium">Event's Link</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"  defaultValue={eventItem.LinkToEvent}
               {...register("LinkToEvent")}
               placeholder="Enter the Event's Link, if any"
             />

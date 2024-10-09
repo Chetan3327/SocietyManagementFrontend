@@ -2,7 +2,7 @@ import  {useState} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation} from "react-router-dom";
 import axios from "axios";
 
 const schema = z.object({
@@ -28,6 +28,7 @@ const CreateRole = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
   let { roleid } = useParams()
+  const location = useLocation()
   const RoleId: number | null = roleid ? parseInt(roleid, 10) : null;
  
   if (RoleId === null) {
@@ -36,6 +37,8 @@ const CreateRole = () => {
     )
   }
 
+  const {role } = location.state || {}
+  console.log('in role',role)
   type formData = z.infer<typeof schema>
 
   const { register, handleSubmit, formState: { errors } } = useForm<formData>({
@@ -91,7 +94,7 @@ const CreateRole = () => {
               className={`${classes}`}
               type="text"
               {...register("RoleID")}
-              placeholder="Enter Role ID"
+              placeholder="Enter Role ID"  defaultValue={role.RoleID}
             />
             {errors.RoleID && (
               <span className="text-red-500">{errors.RoleID.message}</span>
@@ -102,7 +105,7 @@ const CreateRole = () => {
             <label className="block text-md font-medium">Society Name</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"   defaultValue={role.SocietyName}
               {...register("SocietyName")}
               placeholder="Enter Society Name"
             />
@@ -115,7 +118,7 @@ const CreateRole = () => {
             <label className="block text-md font-medium">Role Name</label>
             <input
               className={`${classes}`}
-              type="text"
+              type="text"    defaultValue={role.Rolename}
               {...register("Rolename")}
               placeholder="Enter Role Name"
             />
@@ -124,7 +127,7 @@ const CreateRole = () => {
             )}
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Role Type</label>
             <input
               className={`${classes}`}
@@ -135,21 +138,21 @@ const CreateRole = () => {
             {errors.RoleType && (
               <span className="text-red-500">{errors.RoleType.message}</span>
             )}
-          </div>
+          </div> */}
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Role Description</label>
             <textarea
               placeholder="Enter your reviews"
-              {...register("Role")}
+              {...register("Role")}  defaultValue={role.RoleDescription}
               className={`${classes}`}
             ></textarea>
             {errors.Role && (
               <span className="text-red-500">{errors.Role.message}</span>
             )}
-          </div>
+          </div> */}
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Last Date for Application</label>
             <input
               className={`${classes}`}
@@ -162,13 +165,13 @@ const CreateRole = () => {
                 {errors.Date.message}
               </span>
             )}
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <label className="block text-md font-medium">Role Description</label>
             <textarea
               placeholder="Description of the role"
-              {...register("Roledescription")}
+              {...register("Roledescription")}  defaultValue={role.RoleDescription}
               className={`${classes}`}
             ></textarea>
             {errors.Roledescription && (
@@ -176,17 +179,17 @@ const CreateRole = () => {
             )}
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-md font-medium">Role Link</label>
             <input
               placeholder="Link to apply for the role"
-              {...register("Link")}
+              {...register("Link")}   defaultValue={role.Link}
               className={`${classes}`}
             ></input>
             {errors.Link && (
               <span className="text-red-500">{errors.Link.message}</span>
             )}
-          </div>
+          </div> */}
 
           <button
             type="submit"

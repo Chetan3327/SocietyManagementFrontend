@@ -140,7 +140,7 @@ const Testimonial_table = () => {
                                         </TableCell>
                                         <TableCell className="text-center">{testimonial.TestimonialDescription}</TableCell>
                                         <TableCell className="flex justify-center gap-5">
-                                            <Link to={`/admin/testimonials/update/${testimonial.TestimonialID}`}>
+                                            <Link to={`/admin/testimonials/update/${testimonial.TestimonialID}`} state={{testimonial}}>
                                                 <Button className="text-blue-700"><Edit /></Button>
                                             </Link>
                                             <Button className="text-red-700"  onClick={()=>handleDelete(testimonial.TestimonialID)}><Trash /></Button>

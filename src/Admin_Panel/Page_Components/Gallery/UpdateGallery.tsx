@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams , useLocation } from "react-router-dom";
 
 const schema = z.object({
   Image : z.string().nonempty("image is required"),
@@ -18,6 +18,7 @@ const CreateGallery = () => {
   const [iserror, setIsError] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   let { galleryid } = useParams()
   const GALLERYID: number | null = galleryid ? parseInt(galleryid, 10) : null;
@@ -29,6 +30,8 @@ const CreateGallery = () => {
   }
 
   type formData = z.infer<typeof schema>
+
+  const {galleries} = location.state || {}
 
   const { register, handleSubmit, formState: { errors } } = useForm<formData>({
     resolver: zodResolver(schema)
@@ -94,7 +97,7 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Society ID</label>
             <input
               className={`${classes}`}
-              type="number"
+              type="number" value={galleries.SocietyID} readOnly
               {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society ID"
             />
@@ -107,7 +110,7 @@ const CreateGallery = () => {
             <label className="block text-md font-medium">Image Link</label>
             <input
               placeholder="Enter link of the image"
-              {...register("Image")}
+              {...register("Image")}  defaultValue={galleries.Image}
               className={`${classes}`}
             />
             {errors.Image && (

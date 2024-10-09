@@ -130,7 +130,7 @@ const SocietyMembers: React.FC = () => {
                   </TableCell>
                   <TableCell className="text-center border-x text-lg text-gray-800">
                     <Button className="bg-blue-500 text-white py-1 px-3 rounded">
-                      <Link to="/members/:id">View Profile</Link>
+                      <Link to={`/members/${member.EnrollmentNo}`}  state={{member}}>View Profile</Link>
                     </Button>
                   </TableCell>
                 </TableRow>

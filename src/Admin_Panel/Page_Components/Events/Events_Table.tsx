@@ -153,7 +153,7 @@ const Events_Table = () => {
                 </TableCell>
 
                 <TableCell className="flex justify-center gap-5">
-                  <Link to={`/admin/events/update/${data.EventID}`}>
+                  <Link to={`/admin/events/update/${data.EventID}`} state={{data}}>
                     <Button className="text-blue-700">
                       <Edit />
                     </Button>

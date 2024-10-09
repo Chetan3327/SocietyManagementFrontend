@@ -187,7 +187,7 @@ const App = () => {
           <Route path="/slogin" element={<StudentLogin />} />
           <Route path="/events" element={<Events />} />
           <Route path="/societyjoinform" element={<Societyjoiningform />} />
-          <Route path="/members/:id" element={<Evaluation />} />
+          <Route path="/members/:enrollmentNo" element={<Evaluation />} />
           {/* <Route path="/Societymembers/:id" element={<SocietyMembers />} /> */}
           <Route path="/gallery/:Societyid/:ImageId" element={<ViewPhoto />} />
           <Route path="/ChangePassword" element={<ChangePassword />} />
