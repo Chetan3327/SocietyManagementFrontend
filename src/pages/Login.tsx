@@ -300,6 +300,8 @@ import React, { useState, useEffect } from "react";
 import useLogin from "@/hooks/UseLogin";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
+const AUTO_LOGOUT_TIME = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+
 const styles = {
   container: {
     display: "flex",
@@ -401,17 +403,6 @@ const styles = {
     textDecoration: "none",
     margin: "5px 0",
   },
-  rememberMeContainer: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: "15px",
-  },
-  rememberMeCheckbox: {
-    marginRight: "10px",
-  },
-  rememberMeLabel: {
-    color: "#333",
-  },
   selectRole: {
     width: "100%",
     padding: "15px",
@@ -446,20 +437,68 @@ const LoginPage: React.FC = () => {
   } = useLogin();
 
   const [role, setRole] = useState<string>("");
+  const [roleError, setRoleError] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Timeout reference
+  let logoutTimer: NodeJS.Timeout | null = null;
+
+  const resetLogoutTimer = () => {
+    if (logoutTimer) {
+      clearTimeout(logoutTimer);
+    }
+    // Set timeout to log the user out after 2 hours
+    logoutTimer = setTimeout(() => {
+      handleLogout();
+    }, AUTO_LOGOUT_TIME);
+  };
+
+  const handleActivity = () => {
+    resetLogoutTimer(); // Reset logout timer on any user activity
+  };
+
+  useEffect(() => {
+    // Add event listeners to track user activity
+    window.addEventListener("mousemove", handleActivity);
+    window.addEventListener("keydown", handleActivity);
+
+    return () => {
+      // Cleanup event listeners on unmount
+      window.removeEventListener("mousemove", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    // Clear localStorage and other session data
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userRole");
+    alert("You have been logged out due to inactivity.");
+    navigate("/login");
+  };
+
+
+
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Simple email format validation
+
+    // Email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
       return;
     }
 
-    // Simulating storing an auth token
+    // Role validation
+    if (!role) {
+      setRoleError("Please select a role.");
+      return;
+    }
+
+    // Simulate storing an auth token and navigating based on role
     localStorage.setItem("authToken", "your-auth-token");
+    localStorage.setItem("userRole", role);
 
     const redirectTo = location.state?.from || "/";
     navigate(redirectTo);
@@ -468,10 +507,9 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (success) {
       localStorage.setItem("isLoggedIn", "true");
-      // Using a toast notification or alert to inform the user
       alert("User logged in successfully");
       setTimeout(() => {
-        navigate("/"); // Navigate to the home page after 2 seconds
+        navigate("/"); // Navigate to home page after 2 seconds
       }, 2000);
     }
   }, [success, navigate]);
@@ -536,7 +574,10 @@ const LoginPage: React.FC = () => {
               <select
                 style={styles.selectRole}
                 value={role}
-                onChange={(e) => setRole(e.target.value)}
+                onChange={(e) => {
+                  setRole(e.target.value);
+                  setRoleError(""); // Clear error when selecting a role
+                }}
                 required
                 aria-label="Select Role"
               >
@@ -546,6 +587,7 @@ const LoginPage: React.FC = () => {
                 <option value="Student">Student</option>
                 <option value="College Faculty">College Faculty</option>
               </select>
+              {roleError && <p style={{ color: "red" }}>{roleError}</p>}
             </div>
 
             <button
@@ -561,22 +603,24 @@ const LoginPage: React.FC = () => {
 
             {(role === "College Admin" || role === "Society Head") && (
               <div className="mt-10">
-                <p className="text-gray-700">Want to explore more? Visit Admin Panel for our website...</p>
+                <p className="text-gray-700">Want to access admin panel?</p>
                 <button
-                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transform duration-300 ease-in-out hover:scale-105"
+                  style={styles.adminButton}
                   onClick={handleAdminRedirect}
+                  aria-label="Admin Button"
                 >
-                  Admin Panel
+                  Go to Admin Panel
                 </button>
               </div>
             )}
-
-            <div style={styles.links}>
-              <Link to="/signup" style={styles.link}>
-                Don’t have an account? Create one!
-              </Link>
-            </div>
           </form>
+
+          <div style={styles.links}>
+            <Link to="/signup" style={styles.link}>
+              Don't have an account? Sign Up
+            </Link>
+          </div>
+          
         </div>
       </div>
 

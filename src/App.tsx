@@ -165,7 +165,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/BecomeMember" element={<ProtectedRoute><Become_Member_Form /></ProtectedRoute>} />
-          <Route path="/contact-us" element={<ProtectedRoute><ContactUs /></ProtectedRoute>} />
+          <Route path="/contact-us" element={<ContactUs />} />
           {/* <Route path="/openings/:id" element={<Openings />} /> */}
           <Route path="/roles" element={<Roles />} />
           <Route path="/coordinators" element={<Coordinators />} />
@@ -205,7 +205,7 @@ const App = () => {
             path="/create-event/:societyid/:eventid"
             element={<CreateEventForm />}
           />
-          <Route path="/about-us" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
+          <Route path="/about-us" element={<AboutUs />} />
 
           <Route path="/society/:id" element={<Society />}>
             <Route path="Societymembers" element={<SocietyMembers />} />
