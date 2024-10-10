@@ -1,4 +1,4 @@
-import {  EarthLock, House, Newspaper, NotepadText, Users, Contact,GalleryThumbnails, Grab, LogOut } from "lucide-react";
+import {  EarthLock, House, Newspaper, NotepadText, Users, Contact,GalleryThumbnails, Grab } from "lucide-react";
 
 export const SidebarData = [
   {

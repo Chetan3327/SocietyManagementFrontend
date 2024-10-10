@@ -114,6 +114,16 @@ const Member_Table = () => {
       fetchAllMembers()
   },[])
 
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchsociety = async () => {
+      const res = await axios.get(`${BACKEND_URL}/societies/members/${id}`)
+      console.log('data', res.data)
+      setmembers(res.data)
+    }
+    fetchsociety()
+  }, [])
+
   if(members.length<=0){
    return (
     <div className="text-3xl font-bold">Loading data</div>
@@ -122,7 +132,7 @@ const Member_Table = () => {
 
   const handleDelete = async (EnrollmentNo: number) => {
 
-    await axios.delete(`${BACKEND_URL}/student/${EnrollmentNo}`).then(
+    await axios.delete(`${BACKEND_URL}/students/${EnrollmentNo}`).then(
       res => {
         console.log(res)
         setmembers(members.filter((member: MemberType) => member.EnrollmentNo !== EnrollmentNo))
@@ -174,10 +184,10 @@ const Member_Table = () => {
                 </TableHead>
                 {/* <TableHead className="font-bold text-center text-xl">
                   SocietyID
-                </TableHead>
-                <TableHead className="font-bold text-center text-xl">
-                  Student's Contribution
                 </TableHead> */}
+                <TableHead className="font-bold text-center text-xl">
+                  Details
+                </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Edit/Delete
                 </TableHead>
@@ -205,10 +215,10 @@ const Member_Table = () => {
                     {/* <TableCell className="text-center">{members.societyID}</TableCell> */}
                     <TableCell >
                       <Button className="border-2 w-fit px-5 py-1 rounded-full">
-                        <Link to={`/members/${member.EnrollmentNo}`} >View Details</Link>
+                        <Link to={`/members/${member.EnrollmentNo}`} state={{member}}>View Details</Link>
                       </Button>
                     </TableCell>
-                    <TableCell className="flex justify-center gap-5">
+                    <TableCell className="flex justify-center gap-5"> 
                       <Link to={`/admin/members/update/${member.EnrollmentNo}`} state={{member}}>
                          <Button className="text-blue-700"><Edit /></Button>
                       </Link>
