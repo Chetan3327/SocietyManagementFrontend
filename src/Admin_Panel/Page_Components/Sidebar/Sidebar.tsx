@@ -85,7 +85,7 @@ function Sidebar() {
   };
 
   return (
-    <>
+    <div className='h-[800px] relative'>
       <div className='navbar dark:bg-black'>
         <Link to='#' className='menu-bars'>
           <Menu onClick={showSidebar} />
@@ -104,7 +104,7 @@ function Sidebar() {
               return (
                 <li key={index} className={`${item.cName} text-white`} onClick={handleLogout}>
                   {item.icon}
-                  <span>{item.title}</span>
+                  <span className={sidebar ? 'linktext' : 'linktext active'}> {item.title} </span>
                 </li>
               );
             }
@@ -118,7 +118,7 @@ function Sidebar() {
               <li key={index} className={item.cName}>
                 <Link to={path}>
                   {item.icon}
-                  <span>{item.title}</span>
+                  <span className={sidebar ? 'linktext' : 'linktext active'}>{item.title}</span>
                 </Link>
               </li>
             );
@@ -132,7 +132,7 @@ function Sidebar() {
           You have been logged out successfully!
         </div>
       )}
-    </>
+    </div>
   );
 }
 

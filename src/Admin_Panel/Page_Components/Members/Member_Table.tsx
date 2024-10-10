@@ -135,7 +135,7 @@ const Member_Table = () => {
   }
   return (
     <>
-      <Card className=" mt-7">
+      <Card className=" mt-7 w-11/12">
         <CardContent className="p-2">
           <div className="flex gap-2 justify-around items-center px-3 w-full flex-wrap md:flex-nowrap">
             <input
@@ -152,7 +152,7 @@ const Member_Table = () => {
           </div>
         </CardContent>
       </Card>
-      <Card className="p-0 -m-20 mt-7 h-96 overflow-y-auto">
+      <Card className="p-0 mt-7 h-96  overflow-y-auto w-11/12">
         <CardContent className="p-0 overflow-y-auto">
           <Table>
             <TableHeader>
