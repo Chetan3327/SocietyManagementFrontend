@@ -55,13 +55,18 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
+    transition: background-color 0.3s ease;
   }
   
-  .nav-text a:hover{
-    background-color: #1a83ff;
+  .nav-text a:hover, .nav-text a.active {
+    background-color: #1a83ff; /* Keep the hover effect */
   }
   
-  
+  /* Optional: Change text color or other styles when active */
+.nav-text a.active {
+  color: #fff;
+}
+
   .nav-menu-items {
     width: 100%;
   }
