@@ -174,10 +174,10 @@ const Member_Table = () => {
                 </TableHead>
                 {/* <TableHead className="font-bold text-center text-xl">
                   SocietyID
-                </TableHead>
-                <TableHead className="font-bold text-center text-xl">
-                  Student's Contribution
                 </TableHead> */}
+                <TableHead className="font-bold text-center text-xl">
+                  Details
+                </TableHead>
                 <TableHead className="font-bold text-center text-xl">
                   Edit/Delete
                 </TableHead>
@@ -208,7 +208,7 @@ const Member_Table = () => {
                         <Link to={`/members/${member.EnrollmentNo}`} >View Details</Link>
                       </Button>
                     </TableCell>
-                    <TableCell className="flex justify-center gap-5">
+                    <TableCell className="flex justify-center gap-5"> 
                       <Link to={`/admin/members/update/${member.EnrollmentNo}`} state={{member}}>
                          <Button className="text-blue-700"><Edit /></Button>
                       </Link>
