@@ -16,7 +16,7 @@ const Header = () => {
     sessionStorage.clear(); // or localStorage.clear();
 
     // Navigate to the login page and disable back navigation
-    navigate('/', { replace: true });
+    navigate('/admin', { replace: true });
 
     // Prevent navigating back to the previous page
   window.history.replaceState(null, '', window.location.href || '/');
@@ -40,13 +40,13 @@ const Header = () => {
         <div className={show ? 'options absolute top-10 right-0 w-48' : 'options active'}>
           <ul className="flex flex-col justify-between items-center text-lg font-bold text-gray-600">
             <li>
-              <Link to="/contact-us" className="flex justify-between p-2">
+              <Link to="/contact-us" className="flex justify-between p-2 hover:bg-slate-400">
                 <Contact />
                 <span>Contact-Us</span>
               </Link>
             </li>
             <li>
-              <button onClick={handleLogout} className="flex justify-between p-2 w-full">
+              <button onClick={handleLogout} className="flex justify-between p-2 w-full hover:bg-slate-400">
                 <LogOut />
                 <span>Logout</span>
               </button>
