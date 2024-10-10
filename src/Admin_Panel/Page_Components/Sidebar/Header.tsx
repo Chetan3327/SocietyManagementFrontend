@@ -14,12 +14,17 @@ const Header = () => {
   const handleLogout = () => {
     // Clear session or any other necessary cleanup
     sessionStorage.clear(); // or localStorage.clear();
-
-    // Navigate to the login page and disable back navigation
+  
+    // Push a new state into the history stack before navigating
     navigate('/admin', { replace: true });
-
-    // Prevent navigating back to the previous page
-  window.history.replaceState(null, '', window.location.href || '/');
+  
+    // Add an extra history state to block back button navigation
+    window.history.pushState(null, '', window.location.href);
+  
+    // Listen for the back button and prevent navigation
+    window.onpopstate = function () {
+      window.history.pushState(null, '', window.location.href);
+    };
   };
 
   return (
