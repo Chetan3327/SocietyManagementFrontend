@@ -8,7 +8,7 @@ import member from "../../../assets/mem.jpeg";
 const Member_Cards = () => {
   return (
     <>
-      <Card className="p-2 mt-0 md:mt-5 w-full overflow-x-hidden">
+      <Card className="pt-2 mt-0 md:mt-5 w-full overflow-x-hidden w-11/12">
         <CardContent className="p-3 w-full md:w-full flex flex-col md:flex-row gap-2 justify-center md:gap-10">
           <Card className="p-6 bg-blue-800 w-full md:w-4/12 text-white flex flex-col gap-8 ">
             <div className="p-2 flex justify-between gap-10 ">

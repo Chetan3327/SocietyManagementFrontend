@@ -4,6 +4,7 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    position:absolute;
   }
   
   .menu-bars {
@@ -14,21 +15,27 @@
   
   .nav-menu {
     background-color: #060b26;
-    width: 300px;
-    height: 180vh;
+    height:100%;
     display: flex;
     justify-content: center;
     position: relative;
     top: 0;
-    left: -100%;
+    left:-10px;
     transition: 850ms;
   }
   
   .nav-menu.active {
-    left: -70px;
+    width:250px;
+    left: 0px;
     transition: 350ms;
+
   }
-  
+  .linktext{
+    display:none;
+  }
+  .linktext.active{
+    display: inline;
+  }
   .nav-text {
     display: flex;
     justify-content: start;
@@ -50,9 +57,10 @@
     border-radius: 4px;
   }
   
-  .nav-text a:hover {
+  .nav-text a:hover{
     background-color: #1a83ff;
   }
+  
   
   .nav-menu-items {
     width: 100%;

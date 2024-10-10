@@ -104,8 +104,8 @@ const Gallery_table = () => {
         )
       }
     return (
-        <div className='flex flex-col'>
-            <Card className="m-4 mt-7">
+        <div className='flex flex-col w-full'>
+            <Card className="m-4 mt-7 w-11/12">
                 <CardContent className="p-2">
                     <div className="flex flex-wrap gap-2 justify-between items-center px-3 w-full ">
                         <Input
@@ -120,7 +120,7 @@ const Gallery_table = () => {
                     </div>
                 </CardContent>
             </Card>
-            <Card className="p-0 m-4 mt-7 h-96 overflow-y-auto">
+            <Card className="p-0 m-4 mt-7 h-96 w-11/12 overflow-y-auto">
                 <CardContent className="p-0 overflow-y-auto">
                     <Table>
                         <TableHeader>
