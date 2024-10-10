@@ -62,11 +62,6 @@
     background-color: #1a83ff; /* Keep the hover effect */
   }
   
-  /* Optional: Change text color or other styles when active */
-.nav-text a.active {
-  color: #fff;
-}
-
   .nav-menu-items {
     width: 100%;
   }
