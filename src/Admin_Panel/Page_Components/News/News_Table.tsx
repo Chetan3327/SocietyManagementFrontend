@@ -59,7 +59,7 @@ const News_Table = () => {
   };
 
   return (
-    <Card className="m-7 p-0 h-screen md:h-96 w-10/12 overflow-y-auto">
+    <Card className="m-7 p-0 h-screen md:h-96 overflow-y-auto">
       <Table className="border-none">
         <TableHeader>
           <TableRow className="text-blue-700">

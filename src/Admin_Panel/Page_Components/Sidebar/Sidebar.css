@@ -92,3 +92,12 @@
     left:0px;
   }
 }
+.options.active{
+  display: none;
+  
+}
+
+.options{
+  background-color: #e2e2e2;
+  z-index:1;
+}

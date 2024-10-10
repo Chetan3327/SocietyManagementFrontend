@@ -85,7 +85,7 @@ function Sidebar() {
   };
 
   return (
-    <div className='h-screen relative'>
+    <div className='h-[800px] relative'>
       <div className='navbar dark:bg-black'>
         <Link to='#' className='menu-bars'>
           <Menu onClick={showSidebar} />
