@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between bg-slate-300">
       <div>
         <Link to="/admin/home" className="ml-2 font-bold text-xl flex items-center">
           <img
