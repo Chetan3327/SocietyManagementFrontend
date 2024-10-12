@@ -81,7 +81,8 @@ import AddRoles from './Admin_Panel/Page_Components/Roles/AddRoles'
 import UpdateRoles from './Admin_Panel/Page_Components/Roles/UpdateRoles'
 
 import Admin_Login from "./Admin_Panel/Page/Admin_Login";
-
+import ScrollTop from "./scrollUp";
+import ProgressBar from "./loadBar";
 // import ProtectedRoute from "./protectedRoute";
 
 const App = () => {
@@ -92,6 +93,9 @@ const App = () => {
 
   if (Locations[1].toLowerCase() === "admin") {
     return (
+    <>
+      <ScrollTop />
+      <ProgressBar />
       <Routes>
         <Route path="/admin" element={<Admin_Login />} />
         <Route path="/admin/news" element={<Admin_News />} />
@@ -139,6 +143,7 @@ const App = () => {
         <Route path="/admin/home" element={<Activity_Feed />} />
         <Route path="/admin/home/:societyID" element={<Activity_Feed />} />
       </Routes>
+    </>
     );
   }
 
@@ -152,14 +157,9 @@ const App = () => {
 
   return (
     <>
-      {/* {Locations[1].toLowerCase() !== "login" &&
-        Locations[1].toLowerCase() !== "signup" &&
-        Locations[1].toLowerCase() !== "reset-password" &&
-        Locations[1].toLowerCase() !== "verify-email" &&
-        Locations[1].toLowerCase() !== "changepassword" && <Navbar />} */}
-        {
-          showNavFooterFeedback && <Navbar />
-        }
+      <ScrollTop />
+      <ProgressBar />
+      {showNavFooterFeedback && <Navbar />}
       <div className="font-mono transition-colors duration-300">
         {showSecondaryNavbar && <Secondary_navbar />}
         <Routes>
