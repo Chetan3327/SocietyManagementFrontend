@@ -18,7 +18,7 @@ import { useNavigate , useParams , useLocation} from "react-router-dom";
 // }
 
 const schema = z.object({
-  SocietyName : z.string().nonempty('Society name is required'),
+  // SocietyName : z.string().nonempty('Society name is required'),
   EventID : z.number(),
   Title : z.string().nonempty('Title is required'),
   Description :  z.string().nonempty('Description is required'),
@@ -101,7 +101,7 @@ const UpdateEvents = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
             <label className="block text-md font-medium">Society name</label>
             <input
               className={`${classes}`}
@@ -112,7 +112,7 @@ const UpdateEvents = () => {
             {errors.SocietyName && (
               <span className="text-red-500">{errors.SocietyName.message}</span>
             )}
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <label className="block text-md font-medium">Event ID</label>
