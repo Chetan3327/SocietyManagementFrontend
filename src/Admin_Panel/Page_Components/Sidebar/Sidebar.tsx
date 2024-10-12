@@ -91,7 +91,14 @@ function Sidebar() {
 
             return (
               <li key={index} className={item.cName}>
-                <Link to={path} className={location.pathname === item.path ? 'active' : ''}>
+                {/* <Link to={path} className={location.pathname === item.path ? 'active' : ''}>
+                  {item.icon}
+                  <span className={sidebar ? 'linktext' : 'linktext active'}>{item.title}</span>
+                </Link> */}
+                <Link
+                  to={path}
+                  className={location.pathname.startsWith(item.path) ? 'active' : ''}
+                >                
                   {item.icon}
                   <span className={sidebar ? 'linktext' : 'linktext active'}>{item.title}</span>
                 </Link>
