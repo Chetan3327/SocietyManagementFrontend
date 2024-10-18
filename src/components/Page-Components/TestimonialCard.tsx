@@ -124,7 +124,7 @@ TestimonialDescription
           </div>
         </div>
       </div>
-      <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
+      {/* <div className="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
         <div>
           <a
             title="Buy me a beer"
@@ -140,7 +140,7 @@ TestimonialDescription
             />
           </a>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

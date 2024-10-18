@@ -168,25 +168,30 @@ const Society = () => {
           <div className="w-full px-5 md:px-20 flex justify-center py-10 gap-7">
             <div className="flex flex-col md:flex-row justify-center gap-7 p-4 md:p-10 rounded-md border-4">
               {/* Society Image */}
-              <div className="flex justify-center">
+              <div className="flex-shrink-0 w-full md:w-[400px]">
                 <img
                   src="https://ipubuzz.com/wp-content/uploads/2021/03/gd-1024x576.jpg"
-                  width={600}
-                  className="transform duration-300 ease-in-out hover:scale-105 object-cover h-64 md:h-80"
+                  width={400}
+                  height={300}
+                  className="object-cover h-64 md:h-80 rounded-lg"
                   alt="society activity"
                 />
               </div>
 
               {/* Society Details Card */}
-              <div className="flex flex-col justify-between">
+              <div className="flex-grow">
                 <Card className="rounded-lg border-0">
                   <CardHeader className="text-center">
                     <h2 className="font-bold text-2xl md:text-4xl">Who We Are</h2>
                     <hr className="h-[4px] bg-black mt-2" />
                   </CardHeader>
                   <CardContent className="md:my-10 text-center md:text-left">
-                    <h1 className="text-xl font-extrabold">Guided by Excellence: {society.SocietyHead}</h1>
-                    <p className="mt-3 text-gray-600">{society.SocietyDescription}</p>
+                    <h1 className="text-xl font-extrabold">
+                      Guided by Excellence: {society.SocietyHead}
+                    </h1>
+                    <p className="mt-3 text-gray-600">
+                      {society.SocietyDescription}
+                    </p>
                   </CardContent>
                   <CardFooter className="flex justify-center md:justify-start"></CardFooter>
                 </Card>
