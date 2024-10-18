@@ -343,7 +343,7 @@ const Home = () => {
                 className="px-5 py-1 rounded-full bg-blue-800 text-white transform duration-300 ease-in-out hover:scale-105"
                 to="/events"
               >
-                Upcoming Events
+                View Events
               </Link>
           
               <Link
