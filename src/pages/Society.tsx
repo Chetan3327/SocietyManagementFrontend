@@ -105,7 +105,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useParams } from "react-router-dom";
-import drishti from "../assets/drishti-hero.png";
+// import drishti from "../assets/drishti-hero.png";
 
 type Society = {
   SocietyName: string;
@@ -155,20 +155,20 @@ const Society = () => {
                 Building a Legacy Since {formatDate(society.DateOfRegistration)}
               </p>
             </div>
-            <div className="mt-5 md:mt-0">
+            {/* <div className="mt-5 md:mt-0">
               <img
                 src={drishti}
                 alt="society"
                 className="md:h-80 h-60 w-full md:w-80 object-cover"
               />
-            </div>
+            </div> */}
           </div>
 
           {/* Who We Are Section */}
           <div className="w-full px-5 md:px-20 flex justify-center py-10 gap-7">
             <div className="flex flex-col md:flex-row justify-center gap-7 p-4 md:p-10 rounded-md border-4">
               {/* Society Image */}
-              {/* <div className="flex-shrink-0 w-full md:w-[400px]">
+              <div className="flex-shrink-0 w-full md:w-[400px]">
                 <img
                   src="https://ipubuzz.com/wp-content/uploads/2021/03/gd-1024x576.jpg"
                   width={400}
@@ -176,7 +176,7 @@ const Society = () => {
                   className="object-cover h-64 md:h-80 rounded-lg transform duration-300 ease-in-out hover:scale-105"
                   alt="society activity"
                 />
-              </div> */}
+              </div>
 
               {/* Society Details Card */}
               <div className="flex-grow">
