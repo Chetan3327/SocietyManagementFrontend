@@ -60,7 +60,7 @@ const Testimonials = () => {
   return (
     <>
       <div className="container py-24 sm:py-0 space-y-20">
-        <div className="relative mx-auto w-full">
+        {/* <div className="relative mx-auto w-full">
           <img
             className="w-full h-80 blur-sm"
             src="https://th.bing.com/th/id/OIP.xxSQ2fPtgcP8x4k8aD-ujgHaDt?w=331&h=174&c=7&r=0&o=5&dpr=1.3&pid=1.7"
@@ -75,7 +75,7 @@ const Testimonials = () => {
               Successes.
             </p>
           </div>
-        </div>
+        </div> */}
 
         <TestimonialCard Testimonials={Testimonials} />
       </div>
