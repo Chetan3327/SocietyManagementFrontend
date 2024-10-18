@@ -146,7 +146,7 @@ const Society = () => {
       {path && (
         <div>
           {/* Hero Section */}
-          <div className="w-full overflow-x-hidden flex flex-col md:flex-row items-center ml-10 justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
+          <div className="w-full overflow-x-hidden flex flex-col md:flex-row items-center pl-10 justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
             <div className="md:ml-20 pl-5 md:pl-1 py-10 md:py-20 md:max-w-[50%] text-center">
               <h3 className="text-3xl md:text-4xl text-purple-700 font-bold">
                 Welcome to {society.SocietyName}: {society.SocietyType} Society
