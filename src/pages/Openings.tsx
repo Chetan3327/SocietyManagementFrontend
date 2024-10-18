@@ -196,7 +196,7 @@ const SocietyRoles: React.FC = () => {
                 </TableHead>
                 <TableHead className={tableClass}>Role Type</TableHead>
                 <TableHead className={tableClass}>Role Name</TableHead>
-                <TableHead className={tableClass}>Last Date to Apply</TableHead>
+                <TableHead className={`${tableClass} w-[200px]`}>Last Date to Apply</TableHead>
                 <TableHead className={tableClass}>Responsibilities</TableHead>
               </TableRow>
             </TableHeader>
