@@ -146,8 +146,8 @@ const Society = () => {
       {path && (
         <div>
           {/* Hero Section */}
-          <div className="w-full overflow-x-hidden flex flex-col md:flex-row items-center pl-10 justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
-            <div className="md:ml-20 pl-5 md:pl-1 py-10 md:py-20 md:max-w-[50%] text-center">
+          <div className="w-full min-h-screen overflow-x-hidden flex flex-col md:flex-row items-center justify-center bg-gradient-to-tr from-purple-200 to-gray-300">
+            <div className="text-center md:max-w-[50%] p-5 md:py-20">
               <h3 className="text-3xl md:text-4xl text-purple-700 font-bold">
                 Welcome to {society.SocietyName}: {society.SocietyType} Society
               </h3>
@@ -163,6 +163,7 @@ const Society = () => {
               />
             </div> */}
           </div>
+
 
           {/* Who We Are Section */}
           <div className="w-full px-5 md:px-20 flex justify-center py-10 gap-7">
