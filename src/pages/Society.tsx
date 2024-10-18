@@ -147,7 +147,7 @@ const Society = () => {
         <div>
           {/* Hero Section */}
           <div className="w-full overflow-x-hidden flex flex-col md:flex-row justify-between bg-gradient-to-tr from-purple-200 to-gray-300">
-            <div className="md:ml-20 pl-5 md:pl-1 pt-10 md:pt-20 md:max-w-[50%]">
+            <div className="md:ml-20 pl-5 md:pl-1 pt-10 md:pt-20 md:max-w-[50%] text-center">
               <h3 className="text-3xl md:text-4xl text-purple-700 font-bold">
                 Welcome to {society.SocietyName}: {society.SocietyType} Society
               </h3>
@@ -168,15 +168,15 @@ const Society = () => {
           <div className="w-full px-5 md:px-20 flex justify-center py-10 gap-7">
             <div className="flex flex-col md:flex-row justify-center gap-7 p-4 md:p-10 rounded-md border-4">
               {/* Society Image */}
-              <div className="flex-shrink-0 w-full md:w-[400px]">
+              {/* <div className="flex-shrink-0 w-full md:w-[400px]">
                 <img
                   src="https://ipubuzz.com/wp-content/uploads/2021/03/gd-1024x576.jpg"
                   width={400}
                   height={300}
-                  className="object-cover h-64 md:h-80 rounded-lg"
+                  className="object-cover h-64 md:h-80 rounded-lg transform duration-300 ease-in-out hover:scale-105"
                   alt="society activity"
                 />
-              </div>
+              </div> */}
 
               {/* Society Details Card */}
               <div className="flex-grow">
