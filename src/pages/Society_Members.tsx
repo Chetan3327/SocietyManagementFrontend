@@ -232,7 +232,7 @@ const SocietyMembers: React.FC = () => {
                 <TableHead rowSpan={2} className={tableClass}>
                   S No.
                 </TableHead>
-                <TableHead rowSpan={2} className={`${tableClass} w-[200px]`}>
+                <TableHead rowSpan={2} className={`${tableClass} w-[400px]`}>
                   Society Members
                 </TableHead>
                 <TableHead colSpan={4} className={tableClass}>
