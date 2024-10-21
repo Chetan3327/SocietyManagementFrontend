@@ -1,4 +1,4 @@
-import { Camera, ThumbsUp } from "lucide-react";
+import { Camera } from "lucide-react";
 
 import {
   Card,
