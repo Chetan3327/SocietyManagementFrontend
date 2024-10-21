@@ -221,13 +221,13 @@ const Coordinators = () => {
                   <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                     {CoordinatorDesignation}
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-300">
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
                     {SocietyName}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {CoordinatorDetails}
                   </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 flex justify-center items-center gap-3">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 flex justify-center items-center gap-3">
                     <Mail size={20} /> {CoordinatorEmail}
                   </p>
                 </CardContent>
