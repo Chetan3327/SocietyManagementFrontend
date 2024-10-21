@@ -280,6 +280,22 @@ const styles = {
                 Log In
               </button>
             </form>
+
+            {/* New button to navigate to home page */}
+            <button 
+              style={{ ...styles.button, marginTop: "20px" }} 
+              onClick={() => navigate("/")}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor)
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  styles.button.backgroundColor)
+              }
+            >
+              Go to Home Page
+            </button>
           </div>
         </div>
   

@@ -52,7 +52,7 @@ const Coordinators = () => {
       if(id){
         res = await axios.get(`${BACKEND_URL}/coordinator/${id}`)
       }else{
-        res = await axios.get(`${BACKEND_URL}/admin/coordinator`)
+        res = await axios.get(`${BACKEND_URL}/coordinator`)
       }
      
       console.log('data', res.data)
