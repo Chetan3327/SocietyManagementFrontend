@@ -283,7 +283,13 @@ const styles = {
 
             {/* New button to navigate to home page */}
             <button 
-              style={{ ...styles.button, marginTop: "20px" }} 
+              style={{ 
+                ...styles.button,
+                padding: "8px 16px", // Decrease the size of the button
+                fontSize: "14px",    // Decrease font size
+                alignSelf: "flex-start", // Align to the left
+                marginTop: "20px"
+               }} 
               onClick={() => navigate("/")}
               onMouseOver={(e) =>
                 (e.currentTarget.style.backgroundColor =
