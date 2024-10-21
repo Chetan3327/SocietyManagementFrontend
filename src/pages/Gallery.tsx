@@ -75,15 +75,17 @@ function Gallery() {
                         </CardHeader>
                         <CardContent className="px-2 py-2 text-xs font-semibold text-black">
                           <p>
-                            Had a great time at the event organized by our
-                            society. Looking forward to more such events
+                            Relive the unforgettable moments from our recent event! From engaging activities 
+                            to inspiring sessions, our society brought together passionate individuals for 
+                            a day full of learning, collaboration, and fun. Check out the highlights and 
+                            get excited for more events like these in the future!
                           </p>
-                          <span className="p-2 border rounded-lg border-2 border-slate-50 inline-block bg-muted mr-2">
+                          {/* <span className="p-2 border rounded-lg border-2 border-slate-50 inline-block bg-muted mr-2">
                             Event
                           </span>
                           <span className="px-3 py-2 rounded-lg border border-2 border-slate-50 inline-block  bg-muted ">
                             Fun
-                          </span>
+                          </span> */}
                         </CardContent>
                         <CardFooter className="flex flex-col justify-center items-start px-3">
                           <div className="flex items-center">
@@ -94,14 +96,14 @@ function Gallery() {
                               {SocietyID}
                             </span>
                           </div>
-                          <div className="flex items-center gap-5 mt-2 px-1">
+                          {/* <div className="flex items-center gap-5 mt-2 px-1">
                             <span>
                               <Camera fill="black" size={24} />
                             </span>
                             <span>
                               <ThumbsUp fill="yellow" size={20} />
                             </span>
-                          </div>
+                          </div> */}
                         </CardFooter>
                       </Card>
                     </CardContent>
