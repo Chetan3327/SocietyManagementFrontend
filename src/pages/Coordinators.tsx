@@ -206,11 +206,18 @@ const Coordinators = () => {
                 key={CoordinatorDesignation}
                 className="text-center bg-[#e6e6e6] dark:bg-[#3f3f3f]"
               >
-                <CardHeader>
+                {/* <CardHeader>
                   <img
                     src={Image}
                     alt="Coordinator"
                     className="w-[100px] lg:w-[140px] mx-auto rounded-full shadow-2xl"
+                  />
+                </CardHeader> */}
+                <CardHeader>
+                  <img
+                    src={Image}
+                    alt="Coordinator"
+                    className="w-[100px] h-[100px] lg:w-[140px] lg:h-[140px] mx-auto rounded-full shadow-2xl object-cover"
                   />
                 </CardHeader>
 

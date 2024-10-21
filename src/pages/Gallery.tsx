@@ -221,7 +221,7 @@ function Gallery() {
 
                     <CardFooter className="flex justify-between items-center px-4 py-2">
                       <div className="flex items-center">
-                        <span className="rounded-full w-8 h-8 bg-gray-300 inline-block mr-2"></span>
+                        {/* <span className="rounded-full w-8 h-8 bg-gray-300 inline-block mr-2"></span> */}
                         <span className="text-sm font-semibold text-black">
                           Society ID: {SocietyID}
                         </span>
