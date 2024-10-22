@@ -101,6 +101,7 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export type EventCardType = {
+  SocietyName: string;
   Title: string;
   EventDateTime: string;
   EventID: number;
@@ -126,6 +127,7 @@ const EventCard = ({ props }: { props: EventCardType }) => {
       </CardHeader>
       <CardContent className="flex-1">
         <h2 className="text-center mt-4 text-lg font-bold">{props.Title}</h2>
+        <p className="text-center text-sm text-gray-500 mt-2">{props.SocietyName}</p> {/* Society Name */}
         <div className="flex flex-col items-center mt-4 space-y-2">
           <div className="flex items-center">
             <Calendar className="mr-2" />
@@ -160,6 +162,7 @@ const PastEventCard = ({ props }: { props: EventCardType }) => {
   return (
     <div className="w-full rounded border border-md border-gray-700 py-4 px-4 my-4 h-full flex flex-col justify-between">
       <h2 className="text-2xl font-bold">{props.Title}</h2>
+      <p className="text-center text-sm text-gray-500 mt-2">{props.SocietyName}</p> {/* Society Name */}
       <p className="mt-2">{props.Description}</p>
       <div className="flex flex-col lg:flex-row lg:justify-between mt-2 space-y-2 lg:space-y-0">
         <div className="flex items-center">
