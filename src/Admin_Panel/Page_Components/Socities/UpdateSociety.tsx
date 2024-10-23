@@ -6,7 +6,7 @@ import { useNavigate, useParams , useLocation} from "react-router-dom";
 import axios from "axios";
 
 const schema = z.object({
-    SocietyID:z.string(),
+    SocietyID:z.number(),
     SocietyName : z.string().nonempty("Name is required"),
     DateOfRegistration : z.string().nonempty("Date of Establishment is required"),
     SocietyDescription : z.string().nonempty("Describe about your Scoiety is required"),

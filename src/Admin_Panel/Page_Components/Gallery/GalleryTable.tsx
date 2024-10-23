@@ -92,7 +92,7 @@ const Gallery_table = () => {
     }
     const handleDelete = async (GalleryId: number) => {
 
-        await axios.delete(`${BACKEND_URL}/admin/gallery/${GalleryId}`).then(
+        await axios.delete(`${BACKEND_URL}/galleries/${GalleryId}`).then(
           res => {
             console.log(res)
             setGalleries(galleries.filter((gallery: GalleryType) => gallery.GalleryID !== GalleryId))

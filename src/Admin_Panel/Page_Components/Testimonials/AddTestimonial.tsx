@@ -46,10 +46,10 @@ const CreateTestimonial = () => {
         navigate('/admin/testimonials/')
       }, 3000)
     }).catch((error) => {
-      console.log(error)
+      console.log('in testimonial error',error)
       setSubmit(false)
       setIsError(true)
-      setError(error)
+      setError(error.message)
     })
 
   }
