@@ -107,7 +107,7 @@ const Testimonial_table = () => {
                     </div>
                 </CardContent>
             </Card>
-            <Card className="p-0 m-4 mt-7  overflow-y-auto">
+            <Card className="p-0 m-4 mt-7 h-96 w-11/12 overflow-y-auto">
                 <CardContent className="p-0 overflow-y-auto">
                     <Table>
                         <TableHeader>

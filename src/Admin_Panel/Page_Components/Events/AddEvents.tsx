@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
-  SocietyName: z.string().nonempty('Society name is required'),
+  SocietyID: z.number(),
   EventID: z.number(),
   Title: z.string().nonempty('Title is required'),
   Description: z.string().nonempty('Description is required'),
@@ -76,14 +76,14 @@ const AddEvents = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           
           <div className="mb-4">
-            <label className="block text-md font-medium">Society Name</label>
+            <label className="block text-md font-medium">Society ID</label>
             <input
               className={classes}
               type="text"
-              {...register("SocietyName")}
+              {...register("SocietyID", { valueAsNumber: true })}
               placeholder="Enter Society name"
             />
-            {errors.SocietyName && <span className="text-red-500">{errors.SocietyName.message}</span>}
+            {errors.SocietyID && <span className="text-red-500">{errors.SocietyID.message}</span>}
           </div>
 
           <div className="mb-4">
