@@ -19,6 +19,7 @@ import { exportEventsToExcel } from "./excel";
 // const schema = z.object({
 //   title: z.string().optional(),
 // });
+// import {EventCardType} from "./EventCard";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
