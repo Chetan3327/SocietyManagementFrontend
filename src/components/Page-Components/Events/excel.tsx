@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
 import {EventCardType} from "./EventCard";
+
 export const exportEventsToExcel = (
   pastEvents: EventCardType[] | null,
   upcomingEvents: EventCardType[] | null
@@ -33,7 +34,7 @@ export const exportEventsToExcel = (
     alignment: { horizontal: "center" }, // Center alignment
   };
 
-  // Apply the style to each header
+  // Apply the style to each header cell (row 0)
   const range = XLSX.utils.decode_range(worksheet['!ref']!); // Get the range of the worksheet
   for (let col = range.s.c; col <= range.e.c; col++) {
     const headerCell = worksheet[XLSX.utils.encode_cell({ r: 0, c: col })];
@@ -42,7 +43,7 @@ export const exportEventsToExcel = (
     }
   }
 
-  // Define a type for column widths: { [columnLetter: string]: number }
+  // Define column widths
   const columnWidths: { [key: string]: number } = {};
 
   // Adjust column widths based on the longest content
@@ -53,7 +54,7 @@ export const exportEventsToExcel = (
     columnWidths[col] = Math.max(columnWidths[col], cellValue.toString().length);
   });
 
-  // Set column widths (adjust multiplier as needed for better width control)
+  // Set column widths
   const wscols = Object.keys(columnWidths).map((col) => ({
     wpx: columnWidths[col] * 10, // Adjust multiplier for desired width
   }));
