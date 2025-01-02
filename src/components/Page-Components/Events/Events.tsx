@@ -15,9 +15,11 @@ import {
   EventCardType,
 } from "./EventCard";
 
+import { exportEventsToExcel } from "./excel";
 // const schema = z.object({
 //   title: z.string().optional(),
 // });
+// import {EventCardType} from "./EventCard";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -137,6 +139,16 @@ const Events = () => {
             <PastEventCard props={event} key={index} />
           ))}
         </div>
+      </div>
+
+      {/* Add Export Button */}
+      <div className="py-8 px-4 sm:px-6 lg:px-8 mx-6 md:mx-20 mt-20 rounded">
+        <button
+          onClick={() => exportEventsToExcel(pastEvents, upcomingEvents)}
+          className="bg-green-500 text-white px-6 py-2 rounded"
+        >
+          Export Events to Excel
+        </button>
       </div>
     </div>
   );
