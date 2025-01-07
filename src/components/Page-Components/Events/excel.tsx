@@ -30,17 +30,22 @@ export const exportEventsToExcel = (
   // Style: Bold headers with yellow background
   const headerCellStyle = {
     font: { bold: true },
-    fill: { fgColor: { rgb: "FFFF00" } }, // Yellow background
+    // fill: { fgColor: { rgb: "FFFF00" } }, // Yellow background
     alignment: { horizontal: "center" }, // Center alignment
   };
 
   // Apply the style to each header cell (row 0)
   const range = XLSX.utils.decode_range(worksheet['!ref']!); // Get the range of the worksheet
+  console.log("in excel ",range)
   for (let col = range.s.c; col <= range.e.c; col++) {
-    const headerCell = worksheet[XLSX.utils.encode_cell({ r: 0, c: col })];
-    if (headerCell) {
-      headerCell.s = headerCellStyle; // Apply style to the header cell
+    const cellAddress = XLSX.utils.encode_cell({ r: 0, c: col });
+    const headerCell = worksheet[cellAddress];
+    if (!headerCell) {
+      console.warn(`Header cell at ${cellAddress} is undefined.`);
+      continue;
     }
+    headerCell.s = headerCellStyle;
+    console.log("Styled header cell:", headerCell);
   }
 
   // Define column widths
